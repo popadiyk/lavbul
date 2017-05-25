@@ -1,0 +1,12 @@
+.logo{
+    display: inline-block;
+    margin: 15px;
+    height: 150px;
+    width: 150px !important;
+    background: orangered;
+}
+
+.header{
+    height: 300px;
+    background: orange;
+}
