@@ -19,13 +19,6 @@ class CreateUsersTable extends Migration
             $table->string('email')->unique();
             $table->string('phone', 13)->default('+380970000000');
             $table->string('password');
-            $table->enum('role', [
-                'user',
-                'admin',
-                'accountant',
-                'cashier',
-                'super_user'
-            ])->default('user');
             $table->rememberToken();
             $table->timestamps();
         });
