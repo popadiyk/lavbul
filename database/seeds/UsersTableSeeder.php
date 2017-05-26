@@ -16,15 +16,14 @@ class UsersTableSeeder extends Seeder
             'name' => 'valet',
             'email' => 'valet@gmail.com',
             'phone' => '+380977005020',
-            'role_id' => 1,
             'password' => bcrypt('qwerty'),
         ]);
 
         DB::table('users')->insert([
+            'role_id' => 1,
             'name' => 'admin',
             'email' => 'admin@gmail.com',
-            'phone' => '+380977000000',
-            'role_id' => 2,
+            'phone' => '+380977005020',
             'password' => bcrypt('qwerty'),
         ]);
     }
