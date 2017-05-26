@@ -36,7 +36,7 @@
     <a href="{{ url('/contacts') }}" type="button" class="col-xs-12 col-sm-4 col-md-2 mybtn btn btn-default">
         Контакти
     </a>
-    <a href="{{ url('/feedback') }}" type="button" class="col-xs-12 col-sm-4 col-md-2 mybtn btn btn-info">
+    <a href="{{ url('/feedbacks') }}" type="button" class="col-xs-12 col-sm-4 col-md-2 mybtn btn btn-info">
         Відгуки
     </a>
 
