@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="{{ config('app.locale') }}">
+<html onmousemove="parallax()" lang="{{ config('app.locale') }}">
 <head>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -13,20 +13,31 @@
     <!-- Styles -->
     <link href="{{ asset('css/app.css') }}" rel="stylesheet">
     <link href="{{ asset('css/header.css') }}" rel="stylesheet">
+    <link href="{{ asset('css/footer.css') }}" rel="stylesheet">
 
     <!-- bootstrap -->
     <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet">
-    <script src="{{ asset('js/bootstrap.js') }}"></script>
+    {{--<script src="{{ asset('js/bootstrap.js') }}"></script>--}}
+
+    <!-- jQuery -->
+    <script type="text/javascript" src={{asset('js/jquery.js')}}></script>
+
+
+    <!-- Project Script -->
+    <script type="text/javascript" src={{asset('js/header.js')}}></script>
+
 
 </head>
 <body>
         @yield('Header')
 
-        @yield('Left_Sidebar')
+        <div class="row">
+            @yield('Left_Sidebar')
 
-        @yield('Content')
+            @yield('Content')
 
-        @yield('Right_Sidebar')
+            @yield('Right_Sidebar')
+        </div>
 
         @yield('Footer')
 </body>
