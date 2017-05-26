@@ -1,3 +1,7 @@
-<div class="col-xs-12" style="height: 150px; background: greenyellow;">
-    Footer
-</div>
+<footer>
+    <p>Лавка-Булавка 2017</p>
+    <a href="#">Контакти</a> |
+    <a href="#">Відгуки</a> |
+    <a href="#">Розробникам</a> |
+    <a href="#">Оптові закупки</a>
+</footer>
