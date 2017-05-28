@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Http\Controllers\ManufactureTypeController;
 use Illuminate\Support\ServiceProvider;
+use TCG\Voyager\Http\Controllers\VoyagerBreadController;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,6 +25,6 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
-        //
+       /* $this->app->bind(VoyagerBreadController::class, ManufactureTypeController::class);*/
     }
 }
