@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Carbon\Carbon;
 
 class InvoiceTypesSeeder extends Seeder
 {
@@ -11,6 +12,10 @@ class InvoiceTypesSeeder extends Seeder
      */
     public function run()
     {
-        //
+        DB::table('invoice_types')->insert([
+            'type' => 'надходження',
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+        ]);
     }
 }

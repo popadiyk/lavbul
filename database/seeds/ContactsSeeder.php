@@ -3,7 +3,7 @@
 use Illuminate\Database\Seeder;
 use Carbon\Carbon;
 
-class PayTypesSeeder extends Seeder
+class ContactsSeeder extends Seeder
 {
     /**
      * Run the database seeds.
@@ -12,8 +12,9 @@ class PayTypesSeeder extends Seeder
      */
     public function run()
     {
-        DB::table('pay_types')->insert([
-            'type' => 'При получении',
+        DB::table('contacts')->insert([
+            'title' => 'Facebook',
+            'description' => 'www.facebook.com',
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
