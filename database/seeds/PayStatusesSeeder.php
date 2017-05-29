@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Database\Seeder;
+use Carbon\Carbon;
 
 class PayStatusesSeeder extends Seeder
 {
@@ -11,6 +12,10 @@ class PayStatusesSeeder extends Seeder
      */
     public function run()
     {
-        //
+        DB::table('pay_statuses')->insert([
+            'status' => 'оплачено',
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+        ]);
     }
 }
