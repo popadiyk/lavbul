@@ -1,0 +1,123 @@
+.header{
+    height: 157px;
+    border-bottom: #fbdcf6 solid 3px;
+    background: linear-gradient(45deg, rgba(0, 0, 0, 0) 1%, rgba(0, 0, 0, 0.05) 50%, rgba(0, 0, 0, 0) 1%);
+    background-size: 1em 1em ;
+    background-color: cornsilk;
+    position: relative;
+}
+
+.logo1{
+    background: url(/img/logoheader.png) center top no-repeat;
+    height: 100px;
+}
+
+header{
+    border-bottom: #fbdcf6 solid 3px;
+    position: relative;
+}
+
+.parallax-1{
+    width: 100%;
+    background: url(/img/parallax_3.png) cornsilk;
+    height: 400px;
+}
+
+.parallax-2{
+    width: 100%;
+    background: url(/img/parallax_5.png) center top no-repeat;
+    height: 400px;
+}
+
+.parallax-3{
+    width: 100%;
+    /*background: url(/img/parallax_6.png) center top no-repeat;*/
+    height: 400px;
+}
+
+.logo{
+    background: url(/img/logo.png) center top no-repeat;
+    height: 400px;
+}
+
+.menu a{
+    border: none;
+    border-radius: 0px;
+    font-size: 20px;
+}
+
+.menu{
+    border-bottom: #fbdcf6 solid 3px;
+}
+
+.soc-network{
+    position: absolute;
+    right: 0px;
+    bottom: 30px;
+    height: 155px;
+    width: 53px;
+    background-color: #5bc0de;
+    border-bottom-left-radius: 15px;
+    border-top-left-radius: 15px;
+    border-top: #fbdcf6 solid 3px;
+    border-left: #fbdcf6 solid 3px;
+    border-bottom: #fbdcf6 solid 3px;
+}
+
+.login{
+    color: white;
+    position: absolute;
+    padding: 5px 10px;
+    top: 0px;
+    right: 30px;
+    height: 35px;
+    width: 160px;
+    background-color: #5bc0de;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    border-right: #fbdcf6 solid 3px;
+    border-left: #fbdcf6 solid 3px;
+    border-bottom: #fbdcf6 solid 3px;
+}
+
+.basket{
+    text-align: center;
+    color: white;
+    position: absolute;
+    padding: 5px 10px;
+    top: 0px;
+    left: 30px;
+    height: 35px;
+    width: 175px;
+    background-color: #5bc0de;
+    border-bottom-left-radius: 15px;
+    border-bottom-right-radius: 15px;
+    border-right: #fbdcf6 solid 3px;
+    border-left: #fbdcf6 solid 3px;
+    border-bottom: #fbdcf6 solid 3px;
+}
+
+.basket a{
+    color: white;
+}
+
+.login a{
+    color: white;
+}
+
+.vk{
+    cursor: pointer;
+    height: 50px;
+    width: 50px;
+}
+
+.soc-network p {
+    width: 10px;
+    line-height: 14px;
+    text-align: center;
+    color: white;
+}
+
+.btn-info{
+    color: blue;
+}

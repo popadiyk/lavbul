@@ -11,8 +11,11 @@
 |
 */
 
+Route::get('/test', 'TestController@index');
+
+
 Route::get('/', function () {
-    return view('welcome');
+    return view('main_page');
 });
 
 Auth::routes();
@@ -20,8 +23,16 @@ Auth::routes();
 Route::get('/home', 'HomeController@index')->name('home');
 
 
+Route::get('/contacts', function (){
+    return view('contacts_page');
+});
+
+Route::get('/feedbacks', 'FeedbacksController@index');
+
+
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
 });
 
 Route::get('/test', 'TestController@index');
+
