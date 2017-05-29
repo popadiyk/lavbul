@@ -2,7 +2,9 @@
 
 namespace App\Providers;
 
+use App\Http\Controllers\ManufactureTypeController;
 use Illuminate\Support\ServiceProvider;
+use TCG\Voyager\Http\Controllers\VoyagerBreadController;
 
 class AppServiceProvider extends ServiceProvider
 {
@@ -23,8 +25,12 @@ class AppServiceProvider extends ServiceProvider
      */
     public function register()
     {
+
         if ($this->app->environment() !== 'production') {
             $this->app->register(\Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class);
         }
+
+       /* $this->app->bind(VoyagerBreadController::class, ManufactureTypeController::class);*/
+
     }
 }
