@@ -1,15 +1,18 @@
 <?php
 
 namespace App\Http\Controllers;
-use App\Manufacture;
+
+use App\Product;
 use Illuminate\Http\Request;
 
 class TestController extends Controller
 {
    public function index()
    {
-       $mun = Manufacture::find(1);
+       $products = Product::all();
 
-       dd($mun->typeId);
+       foreach($products as $product) {
+           dump($product->group->title);
+       }
    }
 }
