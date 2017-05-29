@@ -13,7 +13,15 @@ class CreateCommentsTable extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('comments', function(Blueprint $table) {
+            $table->increments('id');
+            $table->text('text');
+            $table->string('name');
+            $table->string('email');
+            $table->integer('user_id')->unsigned()->nullable();
+            $table->integer('product_id')->unsigned()->nullable();
+            $table->timestamps();
+        });
     }
 
     /**
@@ -23,6 +31,6 @@ class CreateCommentsTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('comments');
     }
 }

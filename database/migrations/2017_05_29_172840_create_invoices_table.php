@@ -13,7 +13,17 @@ class CreateInvoicesTable extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('invoices', function(Blueprint $table) {
+            $table->increments('id');
+            $table->integer('autor_id')->unsigned()->nullable();
+            $table->integer('user_id')->unsigned()->nullable();
+            $table->integer('manufacturer_id')->unsigned()->nullable();
+            $table->integer('pay_status_id')->unsigned()->nullable();
+            $table->integer('type_id')->unsigned()->nullable();
+            $table->text('description');
+            $table->integer('total_sum');
+            $table->timestamps();
+        });
     }
 
     /**
@@ -23,6 +33,6 @@ class CreateInvoicesTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('invoices');
     }
 }

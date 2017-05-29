@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreatePercentsTable extends Migration
+class CreateProductMovesTable extends Migration
 {
     /**
      * Run the migrations.
@@ -13,9 +13,12 @@ class CreatePercentsTable extends Migration
      */
     public function up()
     {
-        Schema::create('percents', function(Blueprint $table) {
+        Schema::create('product_moves', function(Blueprint $table) {
             $table->increments('id');
-            $table->string('percent')->unique();
+            $table->integer('product_id')->unsigned()->nullable();
+            $table->integer('invoice_id')->unsigned()->nullable();
+            $table->integer('quantity');
+            $table->integer('sum');
             $table->timestamps();
         });
     }
@@ -27,6 +30,6 @@ class CreatePercentsTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('percents');
+        Schema::dropIfExists('product_moves');
     }
 }

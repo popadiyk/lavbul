@@ -13,7 +13,11 @@ class CreatePayTypesTable extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('pay_types', function(Blueprint $table) {
+            $table->increments('id');
+            $table->string('type')->unique();
+            $table->timestamps();
+        });
     }
 
     /**
@@ -23,6 +27,6 @@ class CreatePayTypesTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('pay_types');
     }
 }

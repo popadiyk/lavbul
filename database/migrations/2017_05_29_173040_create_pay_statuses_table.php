@@ -13,7 +13,11 @@ class CreatePayStatusesTable extends Migration
      */
     public function up()
     {
-        //
+        Schema::create('pay_statuses', function(Blueprint $table) {
+            $table->increments('id');
+            $table->string('status')->unique();
+            $table->timestamps();
+        });
     }
 
     /**
@@ -23,6 +27,6 @@ class CreatePayStatusesTable extends Migration
      */
     public function down()
     {
-        //
+        Schema::dropIfExists('pay_statuses');
     }
 }
