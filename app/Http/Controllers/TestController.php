@@ -12,7 +12,7 @@ class TestController extends Controller
        $products = Product::all();
 
        foreach($products as $product) {
-           dump($product->group->title);
+           dump($product->group);
        }
    }
 }
