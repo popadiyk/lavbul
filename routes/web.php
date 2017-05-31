@@ -21,14 +21,13 @@ Route::get('/', function () {
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-
-
 Route::get('/contacts', function (){
     return view('contacts_page');
 });
-
 Route::get('/feedbacks', 'FeedbacksController@index');
 
+
+Route::resource('/products', 'ProductController');
 
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
@@ -36,6 +35,8 @@ Route::group(['prefix' => 'admin'], function () {
 
 Route::get('/test', 'TestController@index');
 
-Route::group(['prefix' => 'admin'], function () {
-    Voyager::routes();
-});
+
+Route::resource('shop', 'ProductController', ['only' => ['index', 'show']]);
+Route::resource('cart', 'CartController');
+Route::delete('emptyCart', 'CartController@emptyCart');
+Route::get('order', 'OrderController@execute')->name('order');
