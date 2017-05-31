@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Gloudemans\Shoppingcart\Contracts\Buyable;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -11,7 +12,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property Group $group
  * @property Manufacture $manufacture
  */
-class Product extends Model
+class Product extends Model implements Buyable
 {
     /**
      * @var string
@@ -49,4 +50,35 @@ class Product extends Model
     {
         return $this->belongsTo(Manufacture::class);
     }
+
+    /**
+     * Get the identifier of the Buyable item.
+     *
+     * @return int|string
+     */
+    public function getBuyableIdentifier($options = null)
+    {
+        dd('getBuyableIdentifier');
+    }
+
+    /**
+     * Get the description or title of the Buyable item.
+     *
+     * @return string
+     */
+    public function getBuyableDescription($options = null)
+    {
+        dd('getBuyableDescription');
+    }
+
+    /**
+     * Get the price of the Buyable item.
+     *
+     * @return float
+     */
+    public function getBuyablePrice($options = null)
+    {
+        dd('getBuyablePrice');
+    }
+
 }
