@@ -34,3 +34,11 @@ Route::group(['prefix' => 'admin'], function () {
 });
 
 Route::get('/test', 'TestController@index');
+
+
+
+Route::resource('shop', 'ProductController', ['only' => ['index', 'show']]);
+Route::resource('cart', 'CartController');
+Route::delete('emptyCart', 'CartController@emptyCart');
+Route::get('order', 'OrderController@execute')->name('order');
+

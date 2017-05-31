@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Order;
 use Illuminate\Http\Request;
+use \Cart as Cart;
 
 class OrderController extends Controller
 {

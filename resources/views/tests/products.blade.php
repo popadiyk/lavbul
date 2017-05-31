@@ -1,41 +1,42 @@
-<style>
-    table#t01 tr:nth-child(even) {
-        background-color: #eee;
-    }
-    table#t01 tr:nth-child(odd) {
-        background-color: #fff;
-    }
-    table#t01 th {
-        color: white;
-        background-color: black;
-    }
-</style>
+@extends('tests.master')
 
+@section('content')
 
-<table id="t01">
-    <tr>
-        <th>Id</th>
-        <th>Title</th>
-        <th>Group</th>
-        <th>Cost</th>
-        <th>Count</th>
-        <th>Description</th>
-        <th>Action</th>
-    </tr>
-    @foreach($products as $product)
-        <tr>
-            <td>{{ $product->id }}</td>
-            <td>{{ $product->title }}</td>
-            <td>{{ $product->group->title }}</td>
-            <td>{{ $product->price }}</td>
-            <td>{{ $product->quantity }}</td>
-            <td>{{ $product->description }}</td>
-            <td>
-                <a href="{{ route('products.show', ['id' => $product->id]) }} ">See</a>
-                <a href='#'>To cart</a>
-            </td>
-        </tr>
-    @endforeach
-</table>
-{{--for pagination link--}}
-{{  $products->links()}}
+    <div class="container">
+
+        @if (session()->has('success_message'))
+            <div class="alert alert-success">
+                {{ session()->get('success_message') }}
+            </div>
+        @endif
+
+        @if (session()->has('error_message'))
+            <div class="alert alert-danger">
+                {{ session()->get('error_message') }}
+            </div>
+        @endif
+
+        <div class="jumbotron text-center clearfix">
+            <h2>Laravel Shopping Cart Example</h2>
+            <p> shopping cart.</p>
+        </div> <!-- end jumbotron -->
+
+        @foreach ($products->chunk(4) as $items)
+            <div class="row">
+                @foreach ($items as $product)
+                    <div class="col-md-3">
+                        <div class="thumbnail">
+                            <div class="caption text-center">
+                                <a href="{{ url('shop', [$product->id]) }}"><img src="{{ asset('img/' . $product->image) }}" alt="product" class="img-responsive"></a>
+                                <a href="{{ url('shop', [$product->id]) }}"><h3>{{ $product->title }}</h3>
+                                    <p>{{ $product->price }}</p>
+                                </a>
+                            </div> <!-- end caption -->
+                        </div> <!-- end thumbnail -->
+                    </div> <!-- end col-md-3 -->
+                @endforeach
+            </div> <!-- end row -->
+        @endforeach
+
+    </div> <!-- end container -->
+@endsection
