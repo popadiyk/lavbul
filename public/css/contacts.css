@@ -1,0 +1,19 @@
+.contact {
+	font-family: 'Josefin Sans', sans-serif;
+}
+
+.number, .adress, .email {
+	font-family: 'ABeeZee';
+	font-size: 16px;
+	padding-left: 5px;
+}
+
+.vk, .fb {
+	width: 50px;
+	height: 50px;
+}
+.inst {width: 47px; height: 47px;}
+
+span.fa.fa-envelope-o, span.fa.fa-map-marker, span.fa.fa-phone {
+	font-size: 24px;
+}
