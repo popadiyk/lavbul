@@ -2,7 +2,7 @@
 
 </style>
 
-<div class="col-xs-3 ls">
+<!-- <div class="col-xs-3 ls">
     @if (Auth::check())
         <label style="margin: 15px;" for="usr">Ваш відгук:</label>
         <textarea class="form-control" rows="6" id="comment" style="margin: 15px;"></textarea>
@@ -23,4 +23,4 @@
             </div>
         </div>
     @endif
-</div>
+</div> -->

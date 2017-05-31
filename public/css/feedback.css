@@ -1,0 +1,27 @@
+.line {
+	height: 12px;
+    border: 0;
+    box-shadow: inset 0 12px 12px -12px rgba(0,0,0,0.5);
+}
+
+.userName {
+	padding-right: 10px;
+	font-size: 18px;
+	font-family: Tahoma;
+}
+
+.blockquote_opened {
+	padding-bottom: 10px;
+}
+
+.blockquote_closed {
+	-ms-transform: rotate(-180deg); /* IE 9 */
+    -webkit-transform: rotate(-180deg); /* Chrome, Safari, Opera */
+    transform: rotate(-180deg);
+}
+
+.pfblock-line {
+	background: rgba(135, 135, 135, 0.5);
+    width: 500px;
+    height: 1px; margin: 45px auto;
+}

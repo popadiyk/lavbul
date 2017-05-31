@@ -50,6 +50,7 @@ header{
     border-bottom: #fbdcf6 solid 3px;
 }
 
+
 .soc-network{
     position: absolute;
     right: 0px;
@@ -65,16 +66,19 @@ header{
 }
 
 .login{
+    text-align: center;
     color: white;
     position: absolute;
     padding: 5px 10px;
-    top: 0px;
+    top: 10px;
     right: 30px;
     height: 35px;
     width: 160px;
     background-color: #5bc0de;
-    border-bottom-left-radius: 15px;
-    border-bottom-right-radius: 15px;
+     border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
     border-right: #fbdcf6 solid 3px;
     border-left: #fbdcf6 solid 3px;
     border-bottom: #fbdcf6 solid 3px;
@@ -85,13 +89,15 @@ header{
     color: white;
     position: absolute;
     padding: 5px 10px;
-    top: 0px;
+    top: 10px;
     left: 30px;
-    height: 35px;
+    height: 37px;
     width: 175px;
     background-color: #5bc0de;
-    border-bottom-left-radius: 15px;
-    border-bottom-right-radius: 15px;
+    border-bottom-left-radius: 10px;
+    border-bottom-right-radius: 10px;
+    border-top-left-radius: 10px;
+    border-top-right-radius: 10px;
     border-right: #fbdcf6 solid 3px;
     border-left: #fbdcf6 solid 3px;
     border-bottom: #fbdcf6 solid 3px;
