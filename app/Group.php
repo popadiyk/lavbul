@@ -30,4 +30,12 @@ class Group extends Model
     {
         return $this->hasMany(Product::class);
     }
+
+    public function ProductCategory(){
+        return $this->hasMany($this, 'group_id');
+    }
+
+    public function rootCategories(){
+        return $this->where('group_id', 0)->with('ProductCategory')->get();
+    }
 }
