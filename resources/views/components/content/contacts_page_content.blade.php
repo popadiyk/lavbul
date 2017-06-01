@@ -1,30 +1,3 @@
-<div class="col-md-5">
-    <div id="sidebar-contact">
-    	<div class="col-md-offset-1">
-    		<h4>Наші контакти</h4>
-    	</div>
-    	<div class="col-md-11">
-    		<span><i class="fa fa-phone" aria-hidden="true"></i></span><span class="number">0-800-435-12; 067-129-54-97</span>
-    		<hr>
-    	</div>
-    	<div class="col-md-11">
-    		<span><i class="fa fa-map-marker" aria-hidden="true"></i></span><span class="adress"> вул. Михайла Коцюбинського, 70 ТЦ "Петроцентр", 2 поверх</span>
-    		<hr>
-    	</div>
-    	<div class="col-md-11">
-    		<span><i class="fa fa-envelope-o" aria-hidden="true"></i></span><span class="email">popadiuk@gmail.com</span>
-    		<hr>
-    	</div>
-    	<div class="col-md-11 col-md-offset-1">
-    		<div class="social">
-        		<img src="img/vk.png" class="vk">
-				<img src="img/fb.png" class="fb">
-        		<img src="img/insta.png" class="inst">
-    		</div>
-		</div>
-	</div>
-</div>
-
 
 <div class="col-md-8">
 	<form id="contact-form" role="form" style="padding-top: 20px;">
