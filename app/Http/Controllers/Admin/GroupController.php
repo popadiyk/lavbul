@@ -215,11 +215,11 @@ class GroupController extends Controller
         }
         $data = $data->destroy($id)
             ? [
-                'message'    => "Successfully Deleted {$dataType->display_name_singular}",
+                'message'    => "Успішно видалено із {$dataType->display_name_singular}",
                 'alert-type' => 'success',
             ]
             : [
-                'message'    => "Sorry it appears there was a problem deleting this {$dataType->display_name_singular}",
+                'message'    => "Вибачте але є деякі проблеми з видаленням з {$dataType->display_name_singular}",
                 'alert-type' => 'error',
             ];
         return redirect()->route("voyager.{$dataType->slug}.index")->with($data);

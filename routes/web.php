@@ -50,3 +50,8 @@ Route::group(['prefix' => 'admin'], function () {
 });
 
 
+
+
+Route::group(['prefix' => 'admin'], function () {
+    Voyager::routes();
+});
