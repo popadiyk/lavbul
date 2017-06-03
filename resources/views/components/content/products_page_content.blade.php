@@ -93,9 +93,13 @@
 					</div>
 				</div>
 				<div class="col-md-3">
-					<figure>
-						<img src="img/boxes.jpg" style="width: 170px; height: 170px;">
-					</figure>
+					<div class="boxes" style="width: 170px; height: 170px;">
+						<!-- <img src="img/boxes.jpg" style="width: 170px; height: 170px;"> -->
+						<div class="circle">
+							<img src="img/basket.png">
+						</div>
+						<img src="img/like.png">
+					</div>
 					<div class="products">
 						<span class="product_name">Product name</span><br>
 						<span class="after_price">180 грн.</span>
@@ -200,15 +204,32 @@
 						<span class="after_price">150 грн.</span>
 					</div>
 				</div>
-			</div>
 
-			<div class="row">
-				<div class="col-md-8">
-					<div class="paggination">
-						ghgfh
+				<div class="row" style="padding-top: 20px;">
+					<div class="col-md-12 text-center">
+						<nav aria-label="Page navigation example">
+						  <ul class="pagination">
+						    <li class="page-item">
+						      <a class="page-link" href="#" aria-label="Previous">
+						        <span aria-hidden="true">&laquo;</span>
+						        <span class="sr-only">Previous</span>
+						      </a>
+						    </li>
+						    <li class="page-item"><a class="page-link" href="#">1</a></li>
+						    <li class="page-item">
+						      <a class="page-link active" href="#">2 <span class="sr-only">(current)</span></a>
+						    </li>
+						    <li class="page-item"><a class="page-link" href="#">3</a></li>
+						    <li class="page-item">
+						      <a class="page-link" href="#" aria-label="Next">
+						        <span aria-hidden="true">&raquo;</span>
+						        <span class="sr-only">Next</span>
+						      </a>
+						    </li>
+						  </ul>
+						</nav>
 					</div>
 				</div>
-			</div>
 		</div>
 	</div>
 </div>
