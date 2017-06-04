@@ -167,6 +167,7 @@ return [
          * Package Service Providers...
          */
         Laravel\Tinker\TinkerServiceProvider::class,
+        Collective\Html\HtmlServiceProvider::class,
         TCG\Voyager\VoyagerServiceProvider::class,
         Gloudemans\Shoppingcart\ShoppingcartServiceProvider::class,
         /*Intervention\Image\ImageServiceProvider::class,*/
@@ -178,6 +179,8 @@ return [
         // App\Providers\BroadcastServiceProvider::class,
         App\Providers\EventServiceProvider::class,
         App\Providers\RouteServiceProvider::class,
+
+        App\Providers\OrderingServiceProvider::class,
 
     ],
 
@@ -227,8 +230,11 @@ return [
         'URL' => Illuminate\Support\Facades\URL::class,
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
-
         'Cart' => Gloudemans\Shoppingcart\Facades\Cart::class,
+
+        'MakerOrder' => App\Facades\OrderingFacade::class,
+        'Form' => Collective\Html\FormFacade::class,
+        'Html' => Collective\Html\HtmlFacade::class,
 
     ],
 

@@ -18,7 +18,7 @@ class ManufactureTypeController extends Controller
      */
     public function index(Request $request)
     {
-        
+
         // GET THE SLUG, ex. 'posts', 'pages', etc.
         $slug = $this->getSlug($request);
 
@@ -130,6 +130,7 @@ class ManufactureTypeController extends Controller
         if (!$request->ajax()) {
             $data = call_user_func([$dataType->model_name, 'findOrFail'], $id);
             $this->insertUpdateData($request, $slug, $dataType->editRows, $data);
+
             return redirect()
                 ->route("voyager.{$dataType->slug}.edit", ['id' => $id])
                 ->with([
