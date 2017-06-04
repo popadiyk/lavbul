@@ -1,53 +1,46 @@
-<!DOCTYPE html>
-<html onmousemove="parallax()" lang="{{ config('app.locale') }}">
-<head>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+@include('components.header.head')
 
-    <!-- CSRF Token -->
-    <meta name="csrf-token" content="{{ csrf_token() }}">
+<body >
+<div class="container-fluid header-block">
+    <div class="container">
+        <!-- <navigation> -->
+        @include('components.header.main_page.navigation')
+        <!-- </navigation> -->
+    </div>
+    <!-- Swiper -->
+    <div class="swiper-container">
+        @include('components.header.main_page.swiper')
+    </div>
+</div>
 
-    <title>{{ config('app.name', 'Laravel') }}</title>
+<!-- BEGIN CONTENT -->
+<div class="container-fluid advertise-block">
+    <div class="container">
+        <!-- begin advertise --> 
+        @include('components.content.main_page.advertise')
+        <!-- advertise --> 
+        <!-- LIST OF PRODUCTS -->    
+        @include('components.content.main_page.products')
+        <!-- LIST OF PRODUCTS -->
+    </div>
+</div>
 
-    <!-- Styles -->
-    <link href="{{ asset('css/app.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/header.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/footer.css') }}" rel="stylesheet">
-    <link href="{{ asset('css/feedback.css')}}" rel="stylesheet">
-    <link href="{{ asset('css/contacts.css')}}" rel="stylesheet">
-     <link href="{{ asset('css/main_page_content.css')}}" rel="stylesheet">
+<!-- part for partners -->
+<div class="container-fluid hidden-sm partners-block">
+    <div class="container">
+        @include('components.content.main_page.partners')
+    </div>
+</div>
+<!-- end of part for partners -->
 
-    <link href="https://fonts.googleapis.com/css?family=Raleway|Roboto+Condensed" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Montserrat" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=Josefin+Sans" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css?family=ABeeZee|Josefin+Sans" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <!-- bootstrap -->
-    <link href="{{ asset('css/bootstrap.css') }}" rel="stylesheet">
-    {{--<script src="{{ asset('js/bootstrap.js') }}"></script>--}}
+<!-- FOOTER -->
+<div class="container-fluid footer-block">
+    <div class="container">
+        @include('components.footer.main_page.footer')
+    </div>
+</div>
 
-    <!-- jQuery -->
-    <script type="text/javascript" src={{asset('js/jquery.js')}}></script>
-
-
-    <!-- Project Script -->
-    <script type="text/javascript" src={{asset('js/header.js')}}></script>
-
-
-</head>
-<body>
-        @yield('Header')
-
-        <div class="row">
-            @yield('Left_Sidebar')
-
-            @yield('Content')
-
-            @yield('Right_Sidebar')
-        </div>
-
-        @yield('Footer')
+<!-- END FOOTER -->
+@include('components.footer.main_page.scripts')
 </body>
 </html>

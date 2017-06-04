@@ -19,16 +19,6 @@ footer {
 	text-indent: -15px;
 }
 
-#contacts {
-	font-family: 'Montserrat';
-	color:  #393838;
-	font-size: 18px;/* Approximation due to font substitution */
-	font-weight: 400;
-	line-height: 40px;/* Approximation due to font substitution */
-	text-align: left;
-	text-indent: -15px;
-}
-
 #about, #info {
 	font-family: 'Montserrat';
 	color:  #393838;

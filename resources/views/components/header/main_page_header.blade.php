@@ -9,7 +9,7 @@
                              </figure>
                          </div>
                          <div class="menu">
-                           <div class="col-md-7" style="padding: 0">
+                           <div class="col-md-7" style="padding: 0;">
                                <a href="/">
                                    <strong>ГОЛОВНА</strong>
                                </a>

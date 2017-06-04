@@ -16,14 +16,21 @@
  */
 .menu a {
     font-family: Corbel;
-    color:  black !important;
     font-size: 14px;
     font-weight: 400;
     line-height: 60px;
     text-align: center;
     text-indent: -15px;
     padding-right: 7px;
+    color: white;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
 }
+.menu a:hover {
+    text-decoration: none;
+    color: white;
+    text-shadow: 2px 2px 4px #000000;
+}
+
 
 .menu {
 
