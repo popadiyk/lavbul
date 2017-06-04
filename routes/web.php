@@ -44,14 +44,3 @@ Route::get('order', 'OrderController@execute')->name('order');
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
 });
-
-Route::group(['prefix' => 'admin'], function () {
-    Voyager::routes();
-});
-
-
-
-
-Route::group(['prefix' => 'admin'], function () {
-    Voyager::routes();
-});
