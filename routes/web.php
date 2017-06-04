@@ -29,12 +29,9 @@ Route::get('/feedbacks', 'FeedbacksController@index');
 
 Route::resource('/products', 'ProductController');
 
-//Route::group(['prefix' => 'admin'], function () {
-//    Voyager::routes();
-//});
-
-Route::get('/test', 'TestController@index');
-
+Route::group(['prefix' => 'admin'], function () {
+   Voyager::routes();
+});
 
 Route::resource('shop', 'ProductController', ['only' => ['index', 'show']]);
 Route::resource('cart', 'CartController');
