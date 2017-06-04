@@ -48,7 +48,7 @@
                                 <option {{ $item->qty == 5 ? 'selected' : '' }}>5</option>
                             </select>
                         </td>
-                        <td>${{ $item->subtotal }}</td>
+                        <td>{{ $item->subtotal }}</td>
                         <td class=""></td>
                         <td>
                             <form action="{{ url('cart', [$item->rowId]) }}" method="POST" class="side-by-side">
@@ -64,24 +64,24 @@
                     <td class="table-image"></td>
                     <td></td>
                     <td class="small-caps table-bg" style="text-align: right">Subtotal</td>
-                    <td>${{ Cart::instance('default')->subtotal() }}</td>
+                    <td>{{ Cart::instance('default')->subtotal() }}</td>
                     <td></td>
                     <td></td>
                 </tr>
-                <tr>
+               {{-- <tr>
                     <td class="table-image"></td>
                     <td></td>
                     <td class="small-caps table-bg" style="text-align: right">Tax</td>
                     <td>${{ Cart::instance('default')->tax() }}</td>
                     <td></td>
                     <td></td>
-                </tr>
+                </tr>--}}
 
                 <tr class="border-bottom">
                     <td class="table-image"></td>
                     <td style="padding: 40px;"></td>
                     <td class="small-caps table-bg" style="text-align: right">Your Total</td>
-                    <td class="table-bg">${{ Cart::total() }}</td>
+                    <td class="table-bg">{{ Cart::total() }}</td>
                     <td class="column-spacer"></td>
                     <td></td>
                 </tr>
@@ -90,7 +90,7 @@
             </table>
 
             <a href="{{ url('/shop') }}" class="btn btn-primary btn-lg">Continue Shopping</a> &nbsp;
-            <a href="{{ url('/order') }}" class="btn btn-success btn-lg">Proceed to Checkout</a>
+            <a href="{{ route('order.create') }}" class="btn btn-success btn-lg">Proceed to Checkout</a>
 
             <div style="float:right">
                 <form action="{{ url('/emptyCart') }}" method="POST">
@@ -130,6 +130,10 @@
                         'quantity': this.value,
                     },
                     success: function(data) {
+                        window.location.href = '{{ url('/cart') }}';
+                    },
+
+                    error: function(data) {
                         window.location.href = '{{ url('/cart') }}';
                     }
                 });

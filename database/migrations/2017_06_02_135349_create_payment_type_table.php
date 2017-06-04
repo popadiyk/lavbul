@@ -4,19 +4,20 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class CreateInvoiceTypesTable extends Migration
+class CreatePaymentTypeTable extends Migration
 {
     /**
      * Run the migrations.
-     *
+     * @GOTO delete row of dropping pay_types
      * @return void
      */
     public function up()
     {
-        Schema::create('invoice_types', function(Blueprint $table) {
-            $table->increments('id');
-            $table->string('type')->unique();
-            $table->timestamps();
+        Schema::dropIfExists('pay_types');
+
+        Schema::create('payment_types', function(Blueprint $table) {
+           $table->increments('id');
+           $table->string('title')->unique();
         });
     }
 
@@ -27,6 +28,6 @@ class CreateInvoiceTypesTable extends Migration
      */
     public function down()
     {
-        Schema::dropIfExists('invoice_types');
+        Schema::dropIfExists('payment_types');
     }
 }
