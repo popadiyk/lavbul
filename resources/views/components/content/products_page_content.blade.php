@@ -88,7 +88,7 @@
 						<img src="img/hearts.jpg" style="width: 170px; height: 170px;">
 					</figure>
 					<div class="products">
-						<a href=""><span class="product_name">Product name</span></a><br>
+						<a href="{{ url('/one_product') }}"><span class="product_name">Product name</span></a><br>
 						<span class="before_price" "><del>150 грн.</del></span><span class="after_price">100 грн.</span>
 					</div>
 				</div>

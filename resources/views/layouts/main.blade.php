@@ -17,6 +17,7 @@
     <link href="{{ asset('css/feedback.css')}}" rel="stylesheet">
     <link href="{{ asset('css/contacts.css')}}" rel="stylesheet">
     <link href="{{ asset('css/products.css')}}" rel="stylesheet">
+     <link href="{{ asset('css/one_product.css')}}" rel="stylesheet">
      <link href="{{ asset('css/main_page_content.css')}}" rel="stylesheet">
 
     <link href="https://fonts.googleapis.com/css?family=Raleway|Roboto+Condensed" rel="stylesheet">

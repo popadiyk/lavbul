@@ -46,4 +46,8 @@ Route::get('/product', function() {
 	return view('products_page');
 });
 
+Route::get('/one_product', function() {
+	return view('one_product_page');
+});
+
 
