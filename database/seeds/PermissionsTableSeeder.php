@@ -35,5 +35,12 @@ class PermissionsTableSeeder extends Seeder
         Permission::generateFor('posts');
 
         Permission::generateFor('categories');
+
+        Permission::generateFor('aboutuses');
+
+        Permission::generateFor('groups');
+
+        Permission::generateFor('manufactures');
+
     }
 }

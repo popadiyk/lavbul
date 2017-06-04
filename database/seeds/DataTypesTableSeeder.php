@@ -93,6 +93,51 @@ class DataTypesTableSeeder extends Seeder
                 'description'           => '',
             ])->save();
         }
+
+        $dataType = $this->dataType('slug', 'aboutus');
+        if (!$dataType->exists) {
+            $dataType->fill([
+                'name'                  => 'aboutuses',
+                'display_name_singular' => 'Про магазин',
+                'display_name_plural'   => 'Налаштування магазину',
+                'icon'                  => 'voyager-shop',
+                'model_name'            => 'App\AboutUs',
+                'controller'            => 'AboutUsController',
+                'generate_permissions'  => 1,
+                'description'           => '',
+            ])->save();
+        }
+
+        $dataType = $this->dataType('slug', 'groups');
+        if (!$dataType->exists) {
+            $dataType->fill([
+                'name'                  => 'groups',
+                'display_name_singular' => 'Групи товарів',
+                'display_name_plural'   => 'Групи товарів',
+                'icon'                  => 'voyager-archive',
+                'model_name'            => 'App\Group',
+                'controller'            => 'Admin\GroupController',
+                'generate_permissions'  => 1,
+                'description'           => '',
+            ])->save();
+        }
+
+        $dataType = $this->dataType('slug', 'manufactures');
+        if (!$dataType->exists) {
+            $dataType->fill([
+                'name'                  => 'manufactures',
+                'display_name_singular' => 'Постачальники',
+                'display_name_plural'   => 'Постачальники',
+                'icon'                  => 'voyager-person',
+                'model_name'            => 'App\Manufacture',
+                'controller'            => 'Admin\ManufactureController',
+                'generate_permissions'  => 1,
+                'description'           => '',
+            ])->save();
+        }
+
+
+
     }
 
     /**
