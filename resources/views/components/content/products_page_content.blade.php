@@ -5,7 +5,7 @@
 				   @include('/components/header/main_page_header');
 				<div class="col-md-12 text-center">
 					<div class="our_prod">
-						<span>НАША ПРОДУКЦІЯ</span>
+						<span class=>НАША ПРОДУКЦІЯ</span>
 					</div>
 				</div>
 			</div>
@@ -65,7 +65,7 @@
 
 			<div class="col-md-2">
 				<div class="dropdown">
-				    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown">Сортувати за
+				    <button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" class="sort_by">Сортувати за
 				    <span class="caret"></span></button>
 				    <ul class="dropdown-menu">
 				      <li><a href="#">Normal</a></li>
@@ -79,8 +79,8 @@
 			 	<span class="showned">Показано 1-12 із 100 товарів</span>
 			 </div>
 			 <div class="col-md-1">
-			 	<span><i class="fa fa-th-large" aria-hidden="true" style="width: 39px; height: 39px;"></i></span><span><i class="fa fa-th-list" aria-hidden="true" style="width: 39px; height: 39px;"></i></span>
-			 </div>
+			 	<i class="fa fa-th-large" aria-hidden="true" style="padding-right: 5px;"></i><i class="fa fa-th-list" aria-hidden="true"></i>	 
+			 	</div>
 
 			<div class="col-md-7" style="padding-bottom: 30px;">
 				<div class="col-md-3">
@@ -88,7 +88,7 @@
 						<img src="img/hearts.jpg" style="width: 170px; height: 170px;">
 					</figure>
 					<div class="products">
-						<span class="product_name">Product name</span><br>
+						<a href=""><span class="product_name">Product name</span></a><br>
 						<span class="before_price" "><del>150 грн.</del></span><span class="after_price">100 грн.</span>
 					</div>
 				</div>
@@ -122,7 +122,7 @@
 						<img src="img/hearts.jpg" style="width: 170px; height: 170px;">
 					</figure>
 					<div class="products">
-						<span class="product_name">Product name</span><br>
+						<a href=""><span class="product_name">Product name</span></a><br>
 						<span class="before_price" "><del>150 грн.</del></span><span class="after_price">100 грн.</span>
 					</div>
 				</div>

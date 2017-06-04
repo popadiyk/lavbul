@@ -74,6 +74,16 @@ div.panel {
 	text-indent: -15px;
 }
 
+.sort_by {
+	font-family: 'Montserrat';
+	color:  #333333;
+	font-size: 18px;/* Approximation due to font substitution */
+	font-weight: 400;
+	line-height: 60px;/* Approximation due to font substitution */
+	text-align: center;
+	text-indent: -15px;
+}
+
 .main_photo {
 	background: url(../img/products_header.png) no-repeat;
 	max-width: 100%;
@@ -81,6 +91,7 @@ div.panel {
 }
 
 .our_prod {
+	font-family: 'Roboto Condensed', sans-serif;;
 	color:  #4c4b4a;
 	font-size: 60px;
 	font-weight: 700;
@@ -126,9 +137,7 @@ div.panel {
 	background: url(../img/boxes.jpg) 100% 100% no-repeat;
 }
 
-.circle {
-	background: url(../img/discount.png) 100% 100% no-repeat;
-	background-position: top right;
-	/* background: url(../img/basket.png); */
+i.fa.fa-th-large::before {
+	width: 39px;
+	height: 39px
 }
-
