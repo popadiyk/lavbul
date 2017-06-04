@@ -1,10 +1,7 @@
 <footer>
+   <div class="container" style="width: 1140px;">
       <div class="row">
-         <div class="col-md-2" style=" height: 436px; float: left;">
-            <div class="img_left"></div>
-         </div>
- 
-         <div class="col-md-8" id="information">
+         <div class="col-md-10">
                <div class="col-md-4" id="contacts">
                   <span class="contacts_header">Контакти</span><br>
                   <img src="img/telephone.png" style="width: 18px; height: 18px; padding-right: 3px;"><span>0954854396859</span><br>
@@ -30,8 +27,6 @@
 
                </div>
          </div>
-         <div class="col-md-2" id="img_1" style="height: 436px; float: right;">
-               <!--  <img src="img/parallax_4.png">  -->
-         </div>
       </div>
+ </div>  
 </footer> 
