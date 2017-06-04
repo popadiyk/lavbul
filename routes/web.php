@@ -41,17 +41,9 @@ Route::resource('cart', 'CartController');
 Route::delete('emptyCart', 'CartController@emptyCart');
 Route::get('order', 'OrderController@execute')->name('order');
 
-Route::group(['prefix' => 'admin'], function () {
-    Voyager::routes();
-});
 
-Route::group(['prefix' => 'admin'], function () {
-    Voyager::routes();
+Route::get('/product', function() {
+	return view('products_page');
 });
 
 
-
-
-Route::group(['prefix' => 'admin'], function () {
-    Voyager::routes();
-});

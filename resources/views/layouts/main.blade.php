@@ -16,6 +16,7 @@
     <link href="{{ asset('css/footer.css') }}" rel="stylesheet">
     <link href="{{ asset('css/feedback.css')}}" rel="stylesheet">
     <link href="{{ asset('css/contacts.css')}}" rel="stylesheet">
+    <link href="{{ asset('css/products.css')}}" rel="stylesheet">
      <link href="{{ asset('css/main_page_content.css')}}" rel="stylesheet">
 
     <link href="https://fonts.googleapis.com/css?family=Raleway|Roboto+Condensed" rel="stylesheet">
@@ -38,15 +39,13 @@
 
 </head>
 <body>
-        @yield('Header')
+       <!--  @yield('Header') -->
 
-        <div class="row">
             @yield('Left_Sidebar')
 
             @yield('Content')
 
             @yield('Right_Sidebar')
-        </div>
 
         @yield('Footer')
 </body>
