@@ -182,6 +182,53 @@ class MenuItemsTableSeeder extends Seeder
                     'order'      => 12,
                 ])->save();
             }
+
+            $menuItem = MenuItem::firstOrNew([
+                'menu_id'    => $menu->id,
+                'title'      => 'Налаштування магазину',
+                'url'        => '/admin/aboutus',
+            ]);
+            if (!$menuItem->exists) {
+                $menuItem->fill([
+                    'target'     => '_self',
+                    'icon_class' => 'voyager-shop',
+                    'color'      => null,
+                    'parent_id'  => null,
+                    'order'      => 13,
+                ])->save();
+            }
+
+            $menuItem = MenuItem::firstOrNew([
+                'menu_id'    => $menu->id,
+                'title'      => 'Групи товарів',
+                'url'        => '/admin/groups',
+            ]);
+            if (!$menuItem->exists) {
+                $menuItem->fill([
+                    'target'     => '_self',
+                    'icon_class' => 'voyager-archive',
+                    'color'      => null,
+                    'parent_id'  => null,
+                    'order'      => 14,
+                ])->save();
+            }
+
+            $menuItem = MenuItem::firstOrNew([
+                'menu_id'    => $menu->id,
+                'title'      => 'Постачальники',
+                'url'        => '/admin/manufactures',
+            ]);
+            if (!$menuItem->exists) {
+                $menuItem->fill([
+                    'target'     => '_self',
+                    'icon_class' => 'voyager-group',
+                    'color'      => null,
+                    'parent_id'  => null,
+                    'order'      => 15,
+                ])->save();
+            }
+
+
         }
     }
 }
