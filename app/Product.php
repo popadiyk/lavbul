@@ -9,6 +9,9 @@ use Illuminate\Database\Eloquent\Model;
  * Class Product
  * @package App
  *
+ * @property integer $id
+ * @property string description
+ * @property integer $price
  * @property Group $group
  * @property Manufacture $manufacture
  */
@@ -52,33 +55,35 @@ class Product extends Model implements Buyable
     }
 
     /**
-     * Get the identifier of the Buyable item.
+     * Get the identifier of Product
      *
-     * @return int|string
+     * @param null $options
+     * @return int
      */
     public function getBuyableIdentifier($options = null)
     {
-        dd('getBuyableIdentifier');
+       return $this->id;
     }
 
     /**
      * Get the description or title of the Buyable item.
      *
-     * @return string
+     * @param null $options
+     * @return mixed
      */
     public function getBuyableDescription($options = null)
     {
-        dd('getBuyableDescription');
+        return $this->description;
     }
 
     /**
      * Get the price of the Buyable item.
      *
-     * @return float
+     * @return integer
      */
     public function getBuyablePrice($options = null)
     {
-        dd('getBuyablePrice');
+      return $this->price / 100 ;
     }
 
 }

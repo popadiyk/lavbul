@@ -1,5 +1,4 @@
 @include('components.header.head')
-
 <body >
 <div class="container-fluid header-block">
     <div class="container">
