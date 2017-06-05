@@ -12,7 +12,11 @@ use App\PaymentType;
 use App\Facades\OrderingFacade as MakerOrder;
 use Illuminate\Support\Facades\Auth;
 
-
+/**
+ * Class OrderController
+ * @package App\Http\Controllers
+ *
+ */
 class OrderController extends Controller
 {
     /**
@@ -22,15 +26,14 @@ class OrderController extends Controller
      */
     public function index()
     {
-
-        $orders = Order::where('user_id', Auth::id())->get();
+        $orders = Order::isConfirmed()->where('user_id', Auth::id())->get();
 
         return view('cabinet.index', compact('orders'));
     }
 
     /**
      * Show the form for creating a new resource.
-     * @TODO To need checking all items of cart on quantity
+     *
      * @return \Illuminate\Http\Response
      */
     public function create()
@@ -57,10 +60,12 @@ class OrderController extends Controller
         }
 
         if( $request->input('delivery_id') == Delivery::SHOP) {
-            MakerOrder::makeOrderSaleWithInvoice($request);
+           if(! MakerOrder::makeOrderSaleWithInvoice($request)) {
+               return back()->with('error_message', 'Maybe the quantity isn\'t enough, try again!!');
+           }
         }
 
-        $orders = Order::where('user_id', Auth::id())->get();
+        $orders = Order::isConfirmed()->where('user_id', Auth::id())->get();
 
         return view('cabinet.index', compact('orders'));
     }
@@ -110,17 +115,17 @@ class OrderController extends Controller
         //
     }
 
+    /**
+     * for testing
+     * @TODO delete
+     * @param Request $request
+     */
     public function execute(Request $request)
     {
 
         MakerOrder::test();
 
-
        $cart = (Cart::content());
-
-
-
-
 
         foreach($cart as $item) {
             dump($item->id);

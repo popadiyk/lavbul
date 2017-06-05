@@ -31,10 +31,15 @@ class Invoice extends Model
     ];
 
 
-    const PURCHASE = 'purchase';
-    const SALES = 'sales';
-    const WRITE_OF = 'writeOf';
-    const REALISATION = 'realisation';
+    const TYPE_PURCHASE = 'purchase';
+    const TYPE_SALES = 'sales';
+    const TYPE_WRITE_OF = 'writeOf';
+    const TYPE_REALISATION = 'realisation';
+
+    const STATUS_UNCONFIRMED = 'unconfirmed';
+    const STATUS_CONFIRMED = 'confirmed';
+    const STATUS_CLOSED = 'closed';
+    const STATUS_FAILED = 'failed';
 
     /**
      * The relationship with orders
@@ -54,9 +59,9 @@ class Invoice extends Model
      */
     public function client()
     {
-        if($this->type === self::SALES) {
+        if($this->type === self::TYPE_SALES) {
             return $this->belongsTo(User::class, 'client_id', 'id');
-        }else if($this->type === self::PURCHASE || $this->type === self::REALISATION) {
+        }else if($this->type === self::TYPE_PURCHASE || $this->type === self::TYPE_REALISATION) {
             return $this->belongsTo(Manufacture::class, 'client_id', 'id');
         }else {
             return $this->belongsTo(User::class, 'client_id', 'id');
@@ -74,6 +79,23 @@ class Invoice extends Model
         return $this->belongsTo(User::class, 'author_id', 'id');
     }
 
+    /**
+     * @param $query
+     * @param $type
+     * @return mixed
+     */
+    public function scopeOfType($query, $type)
+    {
+        return $query->where('type', $type);
+    }
 
-
+    /**
+     * @param $query
+     * @param $status
+     * @return mixed
+     */
+    public function scopeOfStatus($query, $status)
+    {
+        return $query->where('status', $status);
+    }
 }

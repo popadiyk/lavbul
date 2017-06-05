@@ -4,6 +4,11 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class Order
+ * @package App
+ *
+ */
 class Order extends Model
 {
     /**
@@ -34,5 +39,23 @@ class Order extends Model
     public function user()
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * @param $query
+     * @return mixed
+     */
+    public function scopeIsConfirmed($query)
+    {
+        return $query->where('status_id', OrderStatus::CONFIRMED);
+    }
+
+    /**
+     * @param $query
+     * @return mixed
+     */
+    public function scopeIsUnconfirmed($query)
+    {
+        return $query->where('status_id', OrderStatus::UNCONFIRMED);
     }
 }
