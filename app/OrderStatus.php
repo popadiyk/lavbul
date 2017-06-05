@@ -15,6 +15,13 @@ class OrderStatus extends Model
      */
     protected $fillable = ['title'];
 
+    const UNCONFIRMED = 1;
+    const CONFIRMED = 2;
+    const DELIVERED = 3;
+    const FAILED = 4;
+    const CLOSED = 5;
+
+
     /**
      * @var bool
      */
