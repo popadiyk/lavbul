@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property integer $price
  * @property Group $group
  * @property Manufacture $manufacture
+ * @method bool function isEnoughQty($qty)
  */
 class Product extends Model implements Buyable
 {
@@ -83,7 +84,42 @@ class Product extends Model implements Buyable
      */
     public function getBuyablePrice($options = null)
     {
-      return $this->price / 100 ;
+      return $this->price;
     }
 
+    /**
+     * @param integer $delta
+     */
+    public function increaseQty($delta)
+    {
+        $this->quantity += $delta;
+        $this->save();
+    }
+
+    /**
+     * @param integer $delta
+     * @return bool
+     */
+    public function decreaseQty($delta)
+    {
+        $this->quantity -= $delta;
+
+        if($this->quantity < 0) {
+           return false;
+        }
+
+        $this->save();
+
+        return true;
+    }
+
+    /**
+     * Checking for enough quantity of the product
+     * @param $qty
+     * @return bool
+     */
+    public function isEnoughQty($qty)
+    {
+        return $this->quantity < $qty ? false : true;
+    }
 }
