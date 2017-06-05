@@ -82,4 +82,12 @@ class InvoiceController extends Controller
     {
         //
     }
+
+
+    public function generatePdf($id)
+    {
+        $invoice = Invoice::find($id);
+       
+        dd($invoice);
+    }
 }

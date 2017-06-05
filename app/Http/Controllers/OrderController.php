@@ -7,9 +7,11 @@ use App;
 use Illuminate\Http\Request;
 use \Cart as Cart;
 use App\Delivery;
+use App\OrderStatus;
 use App\PaymentType;
 use App\Facades\OrderingFacade as MakerOrder;
 use Illuminate\Support\Facades\Auth;
+
 
 class OrderController extends Controller
 {
@@ -20,7 +22,10 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+
+        $orders = Order::where('user_id', Auth::id())->get();
+
+        return view('cabinet.index', compact('orders'));
     }
 
     /**
@@ -47,16 +52,17 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-      if(!Auth::check()) {
-          return back()->with('error_message', 'You need checking in the shop');
-      }
+        if(!Auth::check()) {
+          return back()->with('error_message', 'You need to be authoriseted  in the shop');
+        }
 
-       $order = new Order($request->all());
+        if( $request->input('delivery_id') == Delivery::SHOP) {
+            MakerOrder::makeOrderSaleWithInvoice($request);
+        }
 
+        $orders = Order::where('user_id', Auth::id())->get();
 
-       $order->user_id = Auth::id();
-       $order->status_id = 1;
-       $order->save();
+        return view('cabinet.index', compact('orders'));
     }
 
     /**

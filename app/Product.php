@@ -83,7 +83,7 @@ class Product extends Model implements Buyable
      */
     public function getBuyablePrice($options = null)
     {
-      return $this->price / 100 ;
+      return $this->price;
     }
 
 }
