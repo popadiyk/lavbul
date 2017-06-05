@@ -110,6 +110,10 @@
 		<div class="feedback">
 			<div class="col-md-4">
 				<h3>ЗАЛИШИТИ ВІДГУК</h3>
+<div class="row">
+	<div class="col-md-10 col-md-offset-2">
+		<div class="feedback">
+			<div class="col-md-4">
 				<form id="contact-form" role="form" style="padding-top: 20px;">
 			        <div class="form-group wow fadeInUp">
 			            <label class="sr-only" for="c_name">Імʼя</label>
@@ -128,7 +132,6 @@
 	    </div>
 	</div>
 </div>
-
 
 
 <div class="row">

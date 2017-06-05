@@ -29,25 +29,29 @@ Route::get('/feedbacks', 'FeedbacksController@index');
 
 Route::resource('/products', 'ProductController');
 
-//Route::group(['prefix' => 'admin'], function () {
-//    Voyager::routes();
-//});
-
-Route::get('/test', 'TestController@index');
-
+Route::group(['prefix' => 'admin'], function () {
+   Voyager::routes();
+});
 
 Route::resource('shop', 'ProductController', ['only' => ['index', 'show']]);
 Route::resource('cart', 'CartController');
 Route::delete('emptyCart', 'CartController@emptyCart');
-Route::get('order', 'OrderController@execute')->name('order');
 
 
-Route::get('/product', function() {
-	return view('products_page');
+Route::group(['prefix' => 'admin'], function () {
+    Voyager::routes();
 });
+Route::resource('order', 'OrderController');
+
 
 Route::get('/one_product', function() {
 	return view('one_product_page');
 });
 
+Route::get('test_test', function(){
+    MakingOrder::test();
+});
 
+Route::get('/product', function() {
+	return view('products_page');
+});

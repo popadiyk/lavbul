@@ -5,6 +5,7 @@ use Illuminate\Http\Request;
 use App\Http\Requests;
 use \Cart as Cart;
 use Validator;
+use App\Facades\OrderingFacade as MakerOrder;
 
 class CartController extends Controller
 {
@@ -31,7 +32,10 @@ class CartController extends Controller
         if (!$duplicates->isEmpty()) {
             return redirect('cart')->withSuccessMessage('Item is already in your cart!');
         }
+
         Cart::add($request->id, $request->name, 1, $request->price)->associate('App\Product');
+
+
         return redirect('cart')->withSuccessMessage('Item was added to your cart!');
     }
     /**
@@ -51,8 +55,18 @@ class CartController extends Controller
             session()->flash('error_message', 'Quantity must be between 1 and 5.');
             return response()->json(['success' => false]);
         }
+
+        $checkQty = MakerOrder::checkQtyOne($id, $request->quantity);
+
+        if($checkQty !== null) {
+            session()->flash('error_message', 'Quantity was too much! Prefer is '.$checkQty );
+
+            return response()->json(['success' => false]);
+        }
+
         Cart::update($id, $request->quantity);
         session()->flash('success_message', 'Quantity was updated successfully!');
+
         return response()->json(['success' => true]);
     }
     /**
