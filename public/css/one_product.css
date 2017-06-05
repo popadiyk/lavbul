@@ -1,0 +1,31 @@
+.contant {
+	background: url(../img/backgr.png) no-repeat;
+	height: height: 939px;
+	max-width: 100%;
+}
+
+.plate {
+	width: 100%;
+	height: 572px;
+}
+
+button.basket {
+	border-radius: 10px !important;
+	background-color:  #b9f8a8 !important;
+	width: 315px;
+	height: 55px;
+}
+
+span.add {
+	font-family: 'Montserrat' !important;
+	color:  #666666 !important;
+	font-size: 24px !important;/* Approximation due to font substitution */
+	font-weight: 700 !important;
+	line-height: 30px !important;/* Approximation due to font substitution */
+}
+
+.recommended {
+	background-color:  rgba(252, 224, 215, 0.3);
+	width: 100%;
+	height: 518px;
+}

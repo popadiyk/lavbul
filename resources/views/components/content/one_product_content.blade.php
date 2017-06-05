@@ -53,6 +53,63 @@
 	</div>
 </div>
 
+<div class="row" style="padding-bottom: 30px;">
+	<div class="col-md-10 col-md-offset-2">
+		<div class="col-md-7">
+			<div class="list_of_feedbacks">
+			<h3>Відгуки</h3>
+				<div class="row" style="padding-bottom: 10px;">
+					<div class="col-md-3">
+						<figure>
+							<img src="img/vlada.png">
+						</figure>
+					</div>
+					<div class="col-md-7">
+						<div class="text_of_feedback">
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-3">
+						<figure>
+							<img src="img/vlada.png">
+						</figure>
+					</div>
+					<div class="col-md-7">
+						<div class="text_of_feedback">
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-3">
+						<figure>
+							<img src="img/vlada.png">
+						</figure>
+					</div>
+					<div class="col-md-7">
+						<div class="text_of_feedback">
+							Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris
+						</div>
+					</div>
+				</div>
+
+				<div class="row">
+					<div class="col-md-4 col-md-offset-6">
+						<div class="to_all_feedbacks">
+							<span style="float: right;">До всіх коментарів<i class="fa fa-long-arrow-right" aria-hidden="true" style="padding-left: 5px;"></i></span>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+
+		<div class="feedback">
+			<div class="col-md-4">
+				<h3>ЗАЛИШИТИ ВІДГУК</h3>
 <div class="row">
 	<div class="col-md-10 col-md-offset-2">
 		<div class="feedback">
@@ -74,8 +131,7 @@
 	    	</div>
 	    </div>
 	</div>
-</div
-
+</div>
 
 
 <div class="row">
