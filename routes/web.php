@@ -43,6 +43,11 @@ Route::group(['prefix' => 'admin'], function () {
 });
 Route::resource('order', 'OrderController');
 
+
+Route::get('/one_product', function() {
+	return view('one_product_page');
+});
+
 Route::get('test_test', function(){
     MakingOrder::test();
 });

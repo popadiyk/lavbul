@@ -41,5 +41,6 @@
 
 <!-- END FOOTER -->
 @include('components.footer.main_page.scripts')
+
 </body>
 </html>
