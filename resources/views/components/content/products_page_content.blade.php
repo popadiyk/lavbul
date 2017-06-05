@@ -88,7 +88,7 @@
 						<img src="img/hearts.jpg" style="width: 170px; height: 170px;">
 					</figure>
 					<div class="products">
-						<a href=""><span class="product_name">Product name</span></a><br>
+						<a href="{{ url('/one_product') }}"><span class="product_name">Product name</span></a><br>
 						<span class="before_price" "><del>150 грн.</del></span><span class="after_price">100 грн.</span>
 					</div>
 				</div>
@@ -101,17 +101,17 @@
 						<img src="img/like.png">
 					</div>
 					<div class="products">
-						<span class="product_name">Product name</span><br>
-						<span class="after_price">180 грн.</span>
+						<a href="{{ url('/one_product') }}"><span class="product_name">Product name</span></a><br>
+						<span class="before_price" "><del>150 грн.</del></span><span class="after_price">100 грн.</span>
 					</div>
 				</div>
 				<div class="col-md-3">
 					<figure>
 						<img src="img/earings.jpg" style="width: 170px; height: 170px;">
 					</figure>
-					<div class="products" style="text-align: center;">
-						<span class="product_name">Product name</span><br>
-						<span class="after_price">150 грн.</span>
+					<div class="products">
+						<a href="{{ url('/one_product') }}"><span class="product_name">Product name</span></a><br>
+						<span class="before_price" "><del>150 грн.</del></span><span class="after_price">100 грн.</span>
 					</div>
 				</div>
 			</div>
@@ -122,7 +122,7 @@
 						<img src="img/hearts.jpg" style="width: 170px; height: 170px;">
 					</figure>
 					<div class="products">
-						<a href=""><span class="product_name">Product name</span></a><br>
+						<a href="{{ url('/one_product') }}"><span class="product_name">Product name</span></a><br>
 						<span class="before_price" "><del>150 грн.</del></span><span class="after_price">100 грн.</span>
 					</div>
 				</div>
@@ -131,17 +131,17 @@
 						<img src="img/boxes.jpg" style="width: 170px; height: 170px;">
 					</figure>
 					<div class="products">
-						<span class="product_name">Product name</span><br>
-						<span class="after_price">180 грн.</span>
+						<a href="{{ url('/one_product') }}"><span class="product_name">Product name</span></a><br>
+						<span class="before_price" "><del>150 грн.</del></span><span class="after_price">100 грн.</span>
 					</div>
 				</div>
 				<div class="col-md-3">
 					<figure>
 						<img src="img/earings.jpg" style="width: 170px; height: 170px;">
 					</figure>
-					<div class="products" style="text-align: center;">
-						<span class="product_name">Product name</span><br>
-						<span class="after_price">150 грн.</span>
+					<div class="products">
+						<a href="{{ url('/one_product') }}"><span class="product_name">Product name</span></a><br>
+						<span class="before_price" "><del>150 грн.</del></span><span class="after_price">100 грн.</span>
 					</div>
 				</div>
 			</div>
