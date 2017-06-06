@@ -25,7 +25,7 @@
 				<span>01.06.2017</span>
 				<hr>
 				<p>Lorem ipsum — классическая панграмма, условный, зачастую бессмысленный текст-заполнитель, вставляемый в макет страницы. Является искажённым отрывком из философского трактата Марка Туллия Цицерона «О пределах добра и зла», написанного в 45 году до н. э. на латинском языке.</p>
-				<a href="#" class="btn btn-lg text-uppercase" style="background-color: #b9f8a8; text-decoration: none; color:black; ">email me</a>
+				<a href="one_news" class="btn btn-lg text-uppercase" style="background-color: #b9f8a8; text-decoration: none; color:black; ">Читати далі</a>
 			</div>
 		</div>
 		<div class="row" style="padding-bottom: 40px;">
@@ -37,7 +37,7 @@
 				<span>01.06.2017</span>
 				<hr>
 				<p>Lorem ipsum — классическая панграмма, условный, зачастую бессмысленный текст-заполнитель, вставляемый в макет страницы. Является искажённым отрывком из философского трактата Марка Туллия Цицерона «О пределах добра и зла», написанного в 45 году до н. э. на латинском языке.</p>
-				<a href="#" class="btn btn-lg text-uppercase" style="background-color: #b9f8a8; text-decoration: none; color:black; ">email me</a>
+				<a href="one_news" class="btn btn-lg text-uppercase" style="background-color: #b9f8a8; text-decoration: none; color:black; ">Читати далі</a>
 			</div>
 		</div>
 		<div class="row" style="padding-bottom: 40px;">
@@ -49,7 +49,7 @@
 				<span>01.06.2017</span>
 				<hr>
 				<p>Lorem ipsum — классическая панграмма, условный, зачастую бессмысленный текст-заполнитель, вставляемый в макет страницы. Является искажённым отрывком из философского трактата Марка Туллия Цицерона «О пределах добра и зла», написанного в 45 году до н. э. на латинском языке.</p>
-				<a href="#" class="btn btn-lg text-uppercase" style="background-color: #b9f8a8; text-decoration: none; color:black; ">email me</a>
+				<a href="one_news" class="btn btn-lg text-uppercase" style="background-color: #b9f8a8; text-decoration: none; color:black; ">Читати далі</a>
 			</div>
 		</div>
 		<div class="row" style="padding-bottom: 40px;">
@@ -61,7 +61,7 @@
 				<span>01.06.2017</span>
 				<hr>
 				<p>Lorem ipsum — классическая панграмма, условный, зачастую бессмысленный текст-заполнитель, вставляемый в макет страницы. Является искажённым отрывком из философского трактата Марка Туллия Цицерона «О пределах добра и зла», написанного в 45 году до н. э. на латинском языке.</p>
-				<a href="#" class="btn btn-lg text-uppercase" style="background-color: #b9f8a8; text-decoration: none; color:black; ">email me</a>
+				<a href="one_news" class="btn btn-lg text-uppercase" style="background-color: #b9f8a8; text-decoration: none; color:black; ">Читати далі</a>
 			</div>
 		</div>
 		<div class="row" style="padding-bottom: 40px;">
@@ -73,7 +73,7 @@
 				<span>01.06.2017</span>
 				<hr>
 				<p>Lorem ipsum — классическая панграмма, условный, зачастую бессмысленный текст-заполнитель, вставляемый в макет страницы. Является искажённым отрывком из философского трактата Марка Туллия Цицерона «О пределах добра и зла», написанного в 45 году до н. э. на латинском языке.</p>
-				<a href="#" class="btn btn-lg text-uppercase" style="background-color: #b9f8a8; text-decoration: none; color:black; ">email me</a>
+				<a href="one_news" class="btn btn-lg text-uppercase" style="background-color: #b9f8a8; text-decoration: none; color:black; ">Читати далі</a>
 			</div>
 		</div>
 		<div class="row" style="padding-top: 20px;">
