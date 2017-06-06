@@ -4,12 +4,18 @@ namespace App;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * Class Order
+ * @package App
+ *
+ */
 class Order extends Model
 {
     /**
      * @var array
      */
     protected $fillable = [
+        'invoice_id',
         'user_id',
         'name',
         'cart',
@@ -24,7 +30,7 @@ class Order extends Model
      */
     public function status()
     {
-        return $this->belongsTo(OrderStatus::class, 'id', 'status_id');
+        return $this->belongsTo(OrderStatus::class, 'status_id', 'id');
     }
 
     /**
@@ -35,5 +41,21 @@ class Order extends Model
         return $this->belongsTo(User::class);
     }
 
+    /**
+     * @param $query
+     * @return mixed
+     */
+    public function scopeIsConfirmed($query)
+    {
+        return $query->where('status_id', OrderStatus::CONFIRMED);
+    }
 
+    /**
+     * @param $query
+     * @return mixed
+     */
+    public function scopeIsUnconfirmed($query)
+    {
+        return $query->where('status_id', OrderStatus::UNCONFIRMED);
+    }
 }

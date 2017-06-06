@@ -3,7 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Invoice;
+use App\Product;
 use Illuminate\Http\Request;
+use PDF;
 
 class InvoiceController extends Controller
 {
@@ -81,5 +83,25 @@ class InvoiceController extends Controller
     public function destroy(Invoice $invoice)
     {
         //
+    }
+
+    /**
+     * Generate pdf of invoice
+     * @param $id
+     * @return mixed
+     */
+    public function generatePdf($id)
+    {
+        $invoice = Invoice::find($id);
+
+        //Collection prodacts = ProductsMove()->where('invoice_id, $id)
+        $products = Product::all();
+
+        PDF::setOptions(['dpi' => 150, 'defaultFont' => 'sans-serif']);
+
+        $pdf = PDF::loadView('invoices.index', compact('invoice', 'products'));
+
+        return $pdf->stream('invoice.pdf');
+
     }
 }
