@@ -141,3 +141,10 @@ i.fa.fa-th-large::before {
 	width: 39px;
 	height: 39px
 }
+
+.products_header_container{
+	height: 50vh; 
+	background: url('../img/products_header.png') 100% 100% no-repeat; 
+    background-size: cover;
+}
+
