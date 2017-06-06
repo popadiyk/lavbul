@@ -50,4 +50,7 @@ Route::group(['prefix' => '/'], function () {
 	Route::get('contacts', function (){
 	    return view('contacts.index');
 	});
+	Route::get('news', function (){
+	    return view('news.index');
+	});
 });

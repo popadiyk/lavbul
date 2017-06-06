@@ -110,8 +110,8 @@ div.panel {
 	font-family: 'Montserrat';
 	color:  #666666 !important;
 	font-size: 18px;
-	font-weight: 400;
-	line-height: 60px;
+	font-weight: bolder;
+	/* line-height: 60px; */
 	text-align: center;
 	padding: 19px 10px !important;
 	margin-left: 11px !important;
