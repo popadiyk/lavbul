@@ -4,7 +4,7 @@
             <li><img src="img/min_logo.png" width="88px"></li>
             <li class="active nav-text"><a href="{{ url('/') }}">ГОЛОВНА</a></li>
             <li class="nav-text"><a href="{{ url('/products') }}">ПРОДУКЦІЯ</a></li>
-            <li class="nav-text"><a href="#">МАЙСТЕР-КЛАСИ</a></li>
+            <li class="nav-text"><a href="{{ url('/master_classes') }}">МАЙСТЕР-КЛАСИ</a></li>
             <li class="nav-text"><a href="{{ url('/news') }}">НОВИНИ</a></li>
             <li class="nav-text"><a href="{{ url('/contacts') }}">КОНТАКТИ</a></li>
             <li><a href="#"><i class="fa fa-search fa-2x" aria-hidden="true"></i></a></li>
