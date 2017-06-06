@@ -13,25 +13,16 @@
 
 Route::get('/test', 'TestController@index');
 
-
-Route::get('/', function () {
-    return view('main_page');
-});
-
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/contacts', function (){
-    return view('contacts_page');
-});
-Route::get('/feedbacks', 'FeedbacksController@index');
 
+Route::get('/feedbacks', 'FeedbacksController@index');
 
 Route::resource('/products', 'ProductController');
 
 Route::resource('/invoices', 'InvoiceController');
 Route::get('/invoices/generatePdf/{id}', 'InvoiceController@generatePdf');
-
 
 Route::resource('shop', 'ProductController', ['only' => ['index', 'show']]);
 Route::resource('cart', 'CartController');
@@ -42,14 +33,21 @@ Route::group(['prefix' => 'admin'], function () {
 });
 Route::resource('order', 'OrderController');
 
-Route::get('/one_product', function() {
-	return view('one_product_page');
-});
-
 Route::get('test_test', function(){
     MakingOrder::test();
 });
 
-Route::get('/product', function() {
-	return view('products_page');
+Route::group(['prefix' => '/'], function () {
+	Route::get('/', function () {
+	    return view('main.index');
+	});
+	Route::get('products', function() {
+		return view('products.index');
+	});
+	Route::get('product', function() {
+		return view('products.product');
+	});
+	Route::get('contacts', function (){
+	    return view('contacts.index');
+	});
 });
