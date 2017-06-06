@@ -53,4 +53,7 @@ Route::group(['prefix' => '/'], function () {
 	Route::get('news', function (){
 	    return view('news.index');
 	});
+	Route::get('one_news', function (){
+	    return view('news.one_news');
+	});
 });
