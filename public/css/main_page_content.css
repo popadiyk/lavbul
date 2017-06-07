@@ -574,3 +574,14 @@ figcaption>h5{
         margin: 5px;
     }
 /* end footer part */
+
+.news_header_container{
+  height: 50vh; 
+  background: url('../img/news_header.png') 100% 100% no-repeat; 
+    background-size: cover;
+}
+.classes_header_container{
+  height: 50vh; 
+  background: url('../img/classes_header.png') 100% 100% no-repeat; 
+    background-size: cover;
+}
