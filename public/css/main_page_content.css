@@ -371,6 +371,113 @@ figcaption>h5{
     }
 /* end avigation part */
 
+/* styles for basket_modal */
+
+    .modal-backdrop {
+      background-color: snow !important;
+    }
+    .modal-backdrop.in {
+      opacity: -0.5 !important;
+    }
+    #info_basket {
+      font-family: CenturyGothic;
+  color:  #666666;
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 30px;
+  text-align: left;
+  text-shadow: none;
+  text-transform: none;
+  text-align: center;
+    }
+
+  #send_order {
+    border-radius: 10px;
+  background-color:  #b9f8a8;
+  width: 450px;
+  height: 52px;
+  }
+
+  #order {
+    color:  #333333;
+  font-size: 24px;
+  font-weight: 700;
+  line-height: 30px;
+  text-align: left;
+  }
+  #return_into_basket {
+  text-align: center;
+  }
+
+  #return {
+    color:  #aba8a8;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 30px;
+  }
+
+/* styles for basket_modal */
+
+/* styles for user_modal */
+#head {
+  color:  #000000;
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 30px;
+  text-align: left;
+  /* padding-bottom: 20px; */
+}
+
+#email, #pass {
+  color:  #000000;
+  font-size: 16px;
+  font-weight: 700;
+  line-height: 30px;
+  text-align: left !important;
+}
+
+#inputEmail, #inputPassword {
+  width: 260px;
+  height: 39px;
+  border-radius: 5px;
+  border: 1px solid grey;
+}
+
+#register {
+  border-radius: 7px;
+  background-color:  #b9f8a8;
+  width: 260px;
+  height: 39px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  
+}
+
+#to_reg {
+  color:  #333333;
+font-size: 18px;/* Approximation due to font substitution */
+font-weight: 700;
+line-height: 30px;/* Approximation due to font substitution */
+text-align: left;
+}
+
+#if {
+  color:  #999999;
+font-size: 13px;/* Approximation due to font substitution */
+font-weight: 700;
+line-height: 30px;/* Approximation due to font substitution */
+text-align: left;
+}
+
+#enter {
+  color: black;
+  text-decoration: underline;
+  font-weight: 400;
+}
+/* styles for user_modal */
+
+
+
 /* swiper styles */
     .swiper-container {
         width: 100%;
