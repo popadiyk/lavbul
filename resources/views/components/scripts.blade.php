@@ -1,11 +1,16 @@
-{{--<script src="{{ asset('js/bootstrap.js') }}"></script>--}}
+
 <script src={{ asset('js/jquery-3.2.1.min.js')}}></script>
+<script src={{ asset('js/bootstrap.js') }}></script>
+<script src={{ asset('js/datepicker.js') }}></script>
 <script src={{ asset('js/swiper.jquery.min.js')}}></script>
 <script src={{ asset('js/wow.js')}}></script>
 
 <script>
 
 $(document).ready(function(){
+
+$('[data-toggle="datepicker"]').datepicker();
+
 // slider
   var swiper = new Swiper('.swiper-container', {
         pagination: '.swiper-pagination',
