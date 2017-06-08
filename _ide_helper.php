@@ -1,7 +1,7 @@
 <?php
 /**
  * A helper file for Laravel 5, to provide autocomplete information to your IDE
- * Generated for Laravel 5.4.23 on 2017-05-25.
+ * Generated for Laravel 5.4.24 on 2017-06-07.
  *
  * @author Barry vd. Heuvel <barryvdh@gmail.com>
  * @see https://github.com/barryvdh/laravel-ide-helper
@@ -423,6 +423,21 @@ namespace Illuminate\Support\Facades {
         public static function registerDeferredProvider($provider, $service = null)
         {
             \Illuminate\Foundation\Application::registerDeferredProvider($provider, $service);
+        }
+        
+        /**
+         * Resolve the given type from the container.
+         * 
+         * (Overriding Container::makeWith)
+         *
+         * @param string $abstract
+         * @param array $parameters
+         * @return mixed 
+         * @static 
+         */
+        public static function makeWith($abstract, $parameters)
+        {
+            return \Illuminate\Foundation\Application::makeWith($abstract, $parameters);
         }
         
         /**
@@ -1091,20 +1106,6 @@ namespace Illuminate\Support\Facades {
         }
         
         /**
-         * Resolve the given type with the given parameter overrides.
-         *
-         * @param string $abstract
-         * @param array $parameters
-         * @return mixed 
-         * @static 
-         */
-        public static function makeWith($abstract, $parameters)
-        {
-            //Method inherited from \Illuminate\Container\Container            
-            return \Illuminate\Foundation\Application::makeWith($abstract, $parameters);
-        }
-        
-        /**
          * Instantiate a concrete instance of the given type.
          *
          * @param string $concrete
@@ -1170,6 +1171,19 @@ namespace Illuminate\Support\Facades {
         {
             //Method inherited from \Illuminate\Container\Container            
             return \Illuminate\Foundation\Application::getAlias($abstract);
+        }
+        
+        /**
+         * Remove all of the extender callbacks for a given type.
+         *
+         * @param string $abstract
+         * @return void 
+         * @static 
+         */
+        public static function forgetExtenders($abstract)
+        {
+            //Method inherited from \Illuminate\Container\Container            
+            \Illuminate\Foundation\Application::forgetExtenders($abstract);
         }
         
         /**
@@ -4228,6 +4242,18 @@ namespace Illuminate\Support\Facades {
         }
         
         /**
+         * Get the MD5 hash of the file at the given path.
+         *
+         * @param string $path
+         * @return string 
+         * @static 
+         */
+        public static function hash($path)
+        {
+            return \Illuminate\Filesystem\Filesystem::hash($path);
+        }
+        
+        /**
          * Write the contents of a file.
          *
          * @param string $path
@@ -4648,6 +4674,20 @@ namespace Illuminate\Support\Facades {
         public static function define($ability, $callback)
         {
             return \Illuminate\Auth\Access\Gate::define($ability, $callback);
+        }
+        
+        /**
+         * Define abilities for a resource.
+         *
+         * @param string $name
+         * @param string $class
+         * @param array $abilities
+         * @return $this 
+         * @static 
+         */
+        public static function resource($name, $class, $abilities = null)
+        {
+            return \Illuminate\Auth\Access\Gate::resource($name, $class, $abilities);
         }
         
         /**
@@ -6425,6 +6465,18 @@ namespace Illuminate\Support\Facades {
         }
         
         /**
+         * Check if the route name matches the given string.
+         *
+         * @param string $name
+         * @return bool 
+         * @static 
+         */
+        public static function routeIs($name)
+        {
+            return \Illuminate\Http\Request::routeIs($name);
+        }
+        
+        /**
          * Determine if the current request URL and query string matches a pattern.
          *
          * @return bool 
@@ -6824,6 +6876,8 @@ namespace Illuminate\Support\Facades {
          * You should only list the reverse proxies that you manage directly.
          *
          * @param array $proxies A list of trusted proxies
+         * @param int $trustedHeaderSet A bit field of Request::HEADER_*, to set which headers to trust from your proxies
+         * @throws \InvalidArgumentException When $trustedHeaderSet is invalid
          * @static 
          */
         public static function setTrustedProxies($proxies)
@@ -6842,6 +6896,18 @@ namespace Illuminate\Support\Facades {
         {
             //Method inherited from \Symfony\Component\HttpFoundation\Request            
             return \Illuminate\Http\Request::getTrustedProxies();
+        }
+        
+        /**
+         * Gets the set of trusted headers from trusted proxies.
+         *
+         * @return int A bit field of Request::HEADER_* that defines which headers are trusted from your proxies
+         * @static 
+         */
+        public static function getTrustedHeaderSet()
+        {
+            //Method inherited from \Symfony\Component\HttpFoundation\Request            
+            return \Illuminate\Http\Request::getTrustedHeaderSet();
         }
         
         /**
@@ -6886,6 +6952,7 @@ namespace Illuminate\Support\Facades {
          * @param string $key The header key
          * @param string $value The header name
          * @throws \InvalidArgumentException
+         * @deprecated since version 3.3, to be removed in 4.0. Use the $trustedHeaderSet argument of the Request::setTrustedProxies() method instead.
          * @static 
          */
         public static function setTrustedHeaderName($key, $value)
@@ -6900,6 +6967,7 @@ namespace Illuminate\Support\Facades {
          * @param string $key The header key
          * @return string The header name
          * @throws \InvalidArgumentException
+         * @deprecated since version 3.3, to be removed in 4.0. Use the Request::getTrustedHeaderSet() method instead.
          * @static 
          */
         public static function getTrustedHeaderName($key)
@@ -7057,8 +7125,8 @@ namespace Illuminate\Support\Facades {
          * adding the IP address where it received the request from.
          * 
          * If your reverse proxy uses a different header name than "X-Forwarded-For",
-         * ("Client-Ip" for instance), configure it via "setTrustedHeaderName()" with
-         * the "client-ip" key.
+         * ("Client-Ip" for instance), configure it via the $trustedHeaderSet
+         * argument of the Request::setTrustedProxies() method instead.
          *
          * @return string|null The client IP address
          * @see getClientIps()
@@ -7161,7 +7229,8 @@ namespace Illuminate\Support\Facades {
          * The "X-Forwarded-Port" header must contain the client port.
          * 
          * If your reverse proxy uses a different header name than "X-Forwarded-Port",
-         * configure it via "setTrustedHeaderName()" with the "client-port" key.
+         * configure it via via the $trustedHeaderSet argument of the
+         * Request::setTrustedProxies() method instead.
          *
          * @return int|string can be a string if fetched from the server bag
          * @static 
@@ -7324,8 +7393,8 @@ namespace Illuminate\Support\Facades {
          * The "X-Forwarded-Proto" header must contain the protocol: "https" or "http".
          * 
          * If your reverse proxy uses a different header name than "X-Forwarded-Proto"
-         * ("SSL_HTTPS" for instance), configure it via "setTrustedHeaderName()" with
-         * the "client-proto" key.
+         * ("SSL_HTTPS" for instance), configure it via the $trustedHeaderSet
+         * argument of the Request::setTrustedProxies() method instead.
          *
          * @return bool 
          * @static 
@@ -7345,10 +7414,11 @@ namespace Illuminate\Support\Facades {
          * The "X-Forwarded-Host" header must contain the client host name.
          * 
          * If your reverse proxy uses a different header name than "X-Forwarded-Host",
-         * configure it via "setTrustedHeaderName()" with the "client-host" key.
+         * configure it via the $trustedHeaderSet argument of the
+         * Request::setTrustedProxies() method instead.
          *
          * @return string 
-         * @throws \UnexpectedValueException when the host name is invalid
+         * @throws SuspiciousOperationException when the host name is invalid or not trusted
          * @static 
          */
         public static function getHost()
@@ -8462,6 +8532,20 @@ namespace Illuminate\Support\Facades {
         public static function resource($name, $controller, $options = array())
         {
             \Illuminate\Routing\Router::resource($name, $controller, $options);
+        }
+        
+        /**
+         * Route an api resource to a controller.
+         *
+         * @param string $name
+         * @param string $controller
+         * @param array $options
+         * @return void 
+         * @static 
+         */
+        public static function apiResource($name, $controller, $options = array())
+        {
+            \Illuminate\Routing\Router::apiResource($name, $controller, $options);
         }
         
         /**
@@ -10651,7 +10735,7 @@ namespace Illuminate\Support\Facades {
         }
         
         /**
-         * Register a custom implicit validator extension.
+         * Register a custom dependent validator extension.
          *
          * @param string $rule
          * @param \Closure|string $extension
@@ -10665,7 +10749,7 @@ namespace Illuminate\Support\Facades {
         }
         
         /**
-         * Register a custom implicit validator message replacer.
+         * Register a custom validator message replacer.
          *
          * @param string $rule
          * @param \Closure|string $replacer
@@ -11279,6 +11363,19 @@ namespace Illuminate\Support\Facades {
         }
         
         /**
+         * Get the contents of a section.
+         *
+         * @param string $name
+         * @param string $default
+         * @return mixed 
+         * @static 
+         */
+        public static function getSection($name, $default = null)
+        {
+            return \Illuminate\View\Factory::getSection($name, $default);
+        }
+        
+        /**
          * Get the entire array of sections.
          *
          * @return array 
@@ -11456,397 +11553,280 @@ namespace Illuminate\Support\Facades {
     }         
 }
     
-namespace Yajra\Datatables {
+namespace Gloudemans\Shoppingcart\Facades {
 
-    class Datatables {
+    class Cart {
+        
+        /**
+         * Set the current cart instance.
+         *
+         * @param string|null $instance
+         * @return \Gloudemans\Shoppingcart\Cart 
+         * @static 
+         */
+        public static function instance($instance = null)
+        {
+            return \Gloudemans\Shoppingcart\Cart::instance($instance);
+        }
+        
+        /**
+         * Get the current cart instance.
+         *
+         * @return string 
+         * @static 
+         */
+        public static function currentInstance()
+        {
+            return \Gloudemans\Shoppingcart\Cart::currentInstance();
+        }
+        
+        /**
+         * Add an item to the cart.
+         *
+         * @param mixed $id
+         * @param mixed $name
+         * @param int|float $qty
+         * @param float $price
+         * @param array $options
+         * @return \Gloudemans\Shoppingcart\CartItem 
+         * @static 
+         */
+        public static function add($id, $name = null, $qty = null, $price = null, $options = array())
+        {
+            return \Gloudemans\Shoppingcart\Cart::add($id, $name, $qty, $price, $options);
+        }
+        
+        /**
+         * Update the cart item with the given rowId.
+         *
+         * @param string $rowId
+         * @param mixed $qty
+         * @return \Gloudemans\Shoppingcart\CartItem 
+         * @static 
+         */
+        public static function update($rowId, $qty)
+        {
+            return \Gloudemans\Shoppingcart\Cart::update($rowId, $qty);
+        }
+        
+        /**
+         * Remove the cart item with the given rowId from the cart.
+         *
+         * @param string $rowId
+         * @return void 
+         * @static 
+         */
+        public static function remove($rowId)
+        {
+            \Gloudemans\Shoppingcart\Cart::remove($rowId);
+        }
+        
+        /**
+         * Get a cart item from the cart by its rowId.
+         *
+         * @param string $rowId
+         * @return \Gloudemans\Shoppingcart\CartItem 
+         * @static 
+         */
+        public static function get($rowId)
+        {
+            return \Gloudemans\Shoppingcart\Cart::get($rowId);
+        }
+        
+        /**
+         * Destroy the current cart instance.
+         *
+         * @return void 
+         * @static 
+         */
+        public static function destroy()
+        {
+            \Gloudemans\Shoppingcart\Cart::destroy();
+        }
+        
+        /**
+         * Get the content of the cart.
+         *
+         * @return \Illuminate\Support\Collection 
+         * @static 
+         */
+        public static function content()
+        {
+            return \Gloudemans\Shoppingcart\Cart::content();
+        }
+        
+        /**
+         * Get the number of items in the cart.
+         *
+         * @return int|float 
+         * @static 
+         */
+        public static function count()
+        {
+            return \Gloudemans\Shoppingcart\Cart::count();
+        }
+        
+        /**
+         * Get the total price of the items in the cart.
+         *
+         * @param int $decimals
+         * @param string $decimalPoint
+         * @param string $thousandSeperator
+         * @return string 
+         * @static 
+         */
+        public static function total($decimals = null, $decimalPoint = null, $thousandSeperator = null)
+        {
+            return \Gloudemans\Shoppingcart\Cart::total($decimals, $decimalPoint, $thousandSeperator);
+        }
+        
+        /**
+         * Get the total tax of the items in the cart.
+         *
+         * @param int $decimals
+         * @param string $decimalPoint
+         * @param string $thousandSeperator
+         * @return float 
+         * @static 
+         */
+        public static function tax($decimals = null, $decimalPoint = null, $thousandSeperator = null)
+        {
+            return \Gloudemans\Shoppingcart\Cart::tax($decimals, $decimalPoint, $thousandSeperator);
+        }
+        
+        /**
+         * Get the subtotal (total - tax) of the items in the cart.
+         *
+         * @param int $decimals
+         * @param string $decimalPoint
+         * @param string $thousandSeperator
+         * @return float 
+         * @static 
+         */
+        public static function subtotal($decimals = null, $decimalPoint = null, $thousandSeperator = null)
+        {
+            return \Gloudemans\Shoppingcart\Cart::subtotal($decimals, $decimalPoint, $thousandSeperator);
+        }
+        
+        /**
+         * Search the cart content for a cart item matching the given search closure.
+         *
+         * @param \Closure $search
+         * @return \Illuminate\Support\Collection 
+         * @static 
+         */
+        public static function search($search)
+        {
+            return \Gloudemans\Shoppingcart\Cart::search($search);
+        }
+        
+        /**
+         * Associate the cart item with the given rowId with the given model.
+         *
+         * @param string $rowId
+         * @param mixed $model
+         * @return void 
+         * @static 
+         */
+        public static function associate($rowId, $model)
+        {
+            \Gloudemans\Shoppingcart\Cart::associate($rowId, $model);
+        }
+        
+        /**
+         * Set the tax rate for the cart item with the given rowId.
+         *
+         * @param string $rowId
+         * @param int|float $taxRate
+         * @return void 
+         * @static 
+         */
+        public static function setTax($rowId, $taxRate)
+        {
+            \Gloudemans\Shoppingcart\Cart::setTax($rowId, $taxRate);
+        }
+        
+        /**
+         * Store an the current instance of the cart.
+         *
+         * @param mixed $identifier
+         * @return void 
+         * @static 
+         */
+        public static function store($identifier)
+        {
+            \Gloudemans\Shoppingcart\Cart::store($identifier);
+        }
+        
+        /**
+         * Restore the cart with the given identifier.
+         *
+         * @param mixed $identifier
+         * @return void 
+         * @static 
+         */
+        public static function restore($identifier)
+        {
+            \Gloudemans\Shoppingcart\Cart::restore($identifier);
+        }
+        
+    }         
+}
+    
+namespace App\Facades {
+
+    class OrderingFacade {
+        
+        /**
+         * Checking quantity of all products in the cart before beginning order
+         *
+         * @return array 
+         * @static 
+         */
+        public static function checkQty()
+        {
+            return \App\Services\Ordering::checkQty();
+        }
+        
+        /**
+         * Checking quantity of a product
+         *
+         * @param $id
+         * @param $quantity
+         * @return null 
+         * @static 
+         */
+        public static function checkQtyOne($id, $quantity)
+        {
+            return \App\Services\Ordering::checkQtyOne($id, $quantity);
+        }
+        
+        /**
+         * Make the order and generate invoice for sale from online-shop and delivery INSHOP
+         *
+         * @param \Request $request
+         * @return bool 
+         * @static 
+         */
+        public static function makeOrderSaleWithInvoice($request)
+        {
+            return \App\Services\Ordering::makeOrderSaleWithInvoice($request);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */
+        public static function returnedProductToBase($invoices)
+        {
+            return \App\Services\Ordering::returnedProductToBase($invoices);
+        }
         
     }         
 }
     
 namespace Collective\Html {
-
-    class HtmlFacade {
-        
-        /**
-         * Convert an HTML string to entities.
-         *
-         * @param string $value
-         * @return string 
-         * @static 
-         */
-        public static function entities($value)
-        {
-            return \Collective\Html\HtmlBuilder::entities($value);
-        }
-        
-        /**
-         * Convert entities to HTML characters.
-         *
-         * @param string $value
-         * @return string 
-         * @static 
-         */
-        public static function decode($value)
-        {
-            return \Collective\Html\HtmlBuilder::decode($value);
-        }
-        
-        /**
-         * Generate a link to a JavaScript file.
-         *
-         * @param string $url
-         * @param array $attributes
-         * @param bool $secure
-         * @return \Illuminate\Support\HtmlString 
-         * @static 
-         */
-        public static function script($url, $attributes = array(), $secure = null)
-        {
-            return \Collective\Html\HtmlBuilder::script($url, $attributes, $secure);
-        }
-        
-        /**
-         * Generate a link to a CSS file.
-         *
-         * @param string $url
-         * @param array $attributes
-         * @param bool $secure
-         * @return \Illuminate\Support\HtmlString 
-         * @static 
-         */
-        public static function style($url, $attributes = array(), $secure = null)
-        {
-            return \Collective\Html\HtmlBuilder::style($url, $attributes, $secure);
-        }
-        
-        /**
-         * Generate an HTML image element.
-         *
-         * @param string $url
-         * @param string $alt
-         * @param array $attributes
-         * @param bool $secure
-         * @return \Illuminate\Support\HtmlString 
-         * @static 
-         */
-        public static function image($url, $alt = null, $attributes = array(), $secure = null)
-        {
-            return \Collective\Html\HtmlBuilder::image($url, $alt, $attributes, $secure);
-        }
-        
-        /**
-         * Generate a link to a Favicon file.
-         *
-         * @param string $url
-         * @param array $attributes
-         * @param bool $secure
-         * @return \Illuminate\Support\HtmlString 
-         * @static 
-         */
-        public static function favicon($url, $attributes = array(), $secure = null)
-        {
-            return \Collective\Html\HtmlBuilder::favicon($url, $attributes, $secure);
-        }
-        
-        /**
-         * Generate a HTML link.
-         *
-         * @param string $url
-         * @param string $title
-         * @param array $attributes
-         * @param bool $secure
-         * @param bool $escape
-         * @return \Illuminate\Support\HtmlString 
-         * @static 
-         */
-        public static function link($url, $title = null, $attributes = array(), $secure = null, $escape = true)
-        {
-            return \Collective\Html\HtmlBuilder::link($url, $title, $attributes, $secure, $escape);
-        }
-        
-        /**
-         * Generate a HTTPS HTML link.
-         *
-         * @param string $url
-         * @param string $title
-         * @param array $attributes
-         * @return \Illuminate\Support\HtmlString 
-         * @static 
-         */
-        public static function secureLink($url, $title = null, $attributes = array())
-        {
-            return \Collective\Html\HtmlBuilder::secureLink($url, $title, $attributes);
-        }
-        
-        /**
-         * Generate a HTML link to an asset.
-         *
-         * @param string $url
-         * @param string $title
-         * @param array $attributes
-         * @param bool $secure
-         * @return \Illuminate\Support\HtmlString 
-         * @static 
-         */
-        public static function linkAsset($url, $title = null, $attributes = array(), $secure = null)
-        {
-            return \Collective\Html\HtmlBuilder::linkAsset($url, $title, $attributes, $secure);
-        }
-        
-        /**
-         * Generate a HTTPS HTML link to an asset.
-         *
-         * @param string $url
-         * @param string $title
-         * @param array $attributes
-         * @return \Illuminate\Support\HtmlString 
-         * @static 
-         */
-        public static function linkSecureAsset($url, $title = null, $attributes = array())
-        {
-            return \Collective\Html\HtmlBuilder::linkSecureAsset($url, $title, $attributes);
-        }
-        
-        /**
-         * Generate a HTML link to a named route.
-         *
-         * @param string $name
-         * @param string $title
-         * @param array $parameters
-         * @param array $attributes
-         * @return \Illuminate\Support\HtmlString 
-         * @static 
-         */
-        public static function linkRoute($name, $title = null, $parameters = array(), $attributes = array())
-        {
-            return \Collective\Html\HtmlBuilder::linkRoute($name, $title, $parameters, $attributes);
-        }
-        
-        /**
-         * Generate a HTML link to a controller action.
-         *
-         * @param string $action
-         * @param string $title
-         * @param array $parameters
-         * @param array $attributes
-         * @return \Illuminate\Support\HtmlString 
-         * @static 
-         */
-        public static function linkAction($action, $title = null, $parameters = array(), $attributes = array())
-        {
-            return \Collective\Html\HtmlBuilder::linkAction($action, $title, $parameters, $attributes);
-        }
-        
-        /**
-         * Generate a HTML link to an email address.
-         *
-         * @param string $email
-         * @param string $title
-         * @param array $attributes
-         * @param bool $escape
-         * @return \Illuminate\Support\HtmlString 
-         * @static 
-         */
-        public static function mailto($email, $title = null, $attributes = array(), $escape = true)
-        {
-            return \Collective\Html\HtmlBuilder::mailto($email, $title, $attributes, $escape);
-        }
-        
-        /**
-         * Obfuscate an e-mail address to prevent spam-bots from sniffing it.
-         *
-         * @param string $email
-         * @return string 
-         * @static 
-         */
-        public static function email($email)
-        {
-            return \Collective\Html\HtmlBuilder::email($email);
-        }
-        
-        /**
-         * Generates non-breaking space entities based on number supplied.
-         *
-         * @param int $num
-         * @return string 
-         * @static 
-         */
-        public static function nbsp($num = 1)
-        {
-            return \Collective\Html\HtmlBuilder::nbsp($num);
-        }
-        
-        /**
-         * Generate an ordered list of items.
-         *
-         * @param array $list
-         * @param array $attributes
-         * @return \Illuminate\Support\HtmlString|string 
-         * @static 
-         */
-        public static function ol($list, $attributes = array())
-        {
-            return \Collective\Html\HtmlBuilder::ol($list, $attributes);
-        }
-        
-        /**
-         * Generate an un-ordered list of items.
-         *
-         * @param array $list
-         * @param array $attributes
-         * @return \Illuminate\Support\HtmlString|string 
-         * @static 
-         */
-        public static function ul($list, $attributes = array())
-        {
-            return \Collective\Html\HtmlBuilder::ul($list, $attributes);
-        }
-        
-        /**
-         * Generate a description list of items.
-         *
-         * @param array $list
-         * @param array $attributes
-         * @return \Illuminate\Support\HtmlString 
-         * @static 
-         */
-        public static function dl($list, $attributes = array())
-        {
-            return \Collective\Html\HtmlBuilder::dl($list, $attributes);
-        }
-        
-        /**
-         * Build an HTML attribute string from an array.
-         *
-         * @param array $attributes
-         * @return string 
-         * @static 
-         */
-        public static function attributes($attributes)
-        {
-            return \Collective\Html\HtmlBuilder::attributes($attributes);
-        }
-        
-        /**
-         * Obfuscate a string to prevent spam-bots from sniffing it.
-         *
-         * @param string $value
-         * @return string 
-         * @static 
-         */
-        public static function obfuscate($value)
-        {
-            return \Collective\Html\HtmlBuilder::obfuscate($value);
-        }
-        
-        /**
-         * Generate a meta tag.
-         *
-         * @param string $name
-         * @param string $content
-         * @param array $attributes
-         * @return \Illuminate\Support\HtmlString 
-         * @static 
-         */
-        public static function meta($name, $content, $attributes = array())
-        {
-            return \Collective\Html\HtmlBuilder::meta($name, $content, $attributes);
-        }
-        
-        /**
-         * Generate an html tag.
-         *
-         * @param string $tag
-         * @param mixed $content
-         * @param array $attributes
-         * @return \Illuminate\Support\HtmlString 
-         * @static 
-         */
-        public static function tag($tag, $content, $attributes = array())
-        {
-            return \Collective\Html\HtmlBuilder::tag($tag, $content, $attributes);
-        }
-        
-        /**
-         * Register a custom macro.
-         *
-         * @param string $name
-         * @param callable $macro
-         * @return void 
-         * @static 
-         */
-        public static function macro($name, $macro)
-        {
-            \Collective\Html\HtmlBuilder::macro($name, $macro);
-        }
-        
-        /**
-         * Checks if macro is registered.
-         *
-         * @param string $name
-         * @return bool 
-         * @static 
-         */
-        public static function hasMacro($name)
-        {
-            return \Collective\Html\HtmlBuilder::hasMacro($name);
-        }
-        
-        /**
-         * Dynamically handle calls to the class.
-         *
-         * @param string $method
-         * @param array $parameters
-         * @return mixed 
-         * @throws \BadMethodCallException
-         * @static 
-         */
-        public static function macroCall($method, $parameters)
-        {
-            return \Collective\Html\HtmlBuilder::macroCall($method, $parameters);
-        }
-        
-        /**
-         * Register a custom component.
-         *
-         * @param $name
-         * @param $view
-         * @param array $signature
-         * @return void 
-         * @static 
-         */
-        public static function component($name, $view, $signature)
-        {
-            \Collective\Html\HtmlBuilder::component($name, $view, $signature);
-        }
-        
-        /**
-         * Check if a component is registered.
-         *
-         * @param $name
-         * @return bool 
-         * @static 
-         */
-        public static function hasComponent($name)
-        {
-            return \Collective\Html\HtmlBuilder::hasComponent($name);
-        }
-        
-        /**
-         * Dynamically handle calls to the class.
-         *
-         * @param string $method
-         * @param array $parameters
-         * @return \Illuminate\Contracts\View\View|mixed 
-         * @throws \BadMethodCallException
-         * @static 
-         */
-        public static function componentCall($method, $parameters)
-        {
-            return \Collective\Html\HtmlBuilder::componentCall($method, $parameters);
-        }
-        
-    }         
 
     class FormFacade {
         
@@ -12460,62 +12440,717 @@ namespace Collective\Html {
         }
         
     }         
+
+    class HtmlFacade {
+        
+        /**
+         * Convert an HTML string to entities.
+         *
+         * @param string $value
+         * @return string 
+         * @static 
+         */
+        public static function entities($value)
+        {
+            return \Collective\Html\HtmlBuilder::entities($value);
+        }
+        
+        /**
+         * Convert entities to HTML characters.
+         *
+         * @param string $value
+         * @return string 
+         * @static 
+         */
+        public static function decode($value)
+        {
+            return \Collective\Html\HtmlBuilder::decode($value);
+        }
+        
+        /**
+         * Generate a link to a JavaScript file.
+         *
+         * @param string $url
+         * @param array $attributes
+         * @param bool $secure
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */
+        public static function script($url, $attributes = array(), $secure = null)
+        {
+            return \Collective\Html\HtmlBuilder::script($url, $attributes, $secure);
+        }
+        
+        /**
+         * Generate a link to a CSS file.
+         *
+         * @param string $url
+         * @param array $attributes
+         * @param bool $secure
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */
+        public static function style($url, $attributes = array(), $secure = null)
+        {
+            return \Collective\Html\HtmlBuilder::style($url, $attributes, $secure);
+        }
+        
+        /**
+         * Generate an HTML image element.
+         *
+         * @param string $url
+         * @param string $alt
+         * @param array $attributes
+         * @param bool $secure
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */
+        public static function image($url, $alt = null, $attributes = array(), $secure = null)
+        {
+            return \Collective\Html\HtmlBuilder::image($url, $alt, $attributes, $secure);
+        }
+        
+        /**
+         * Generate a link to a Favicon file.
+         *
+         * @param string $url
+         * @param array $attributes
+         * @param bool $secure
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */
+        public static function favicon($url, $attributes = array(), $secure = null)
+        {
+            return \Collective\Html\HtmlBuilder::favicon($url, $attributes, $secure);
+        }
+        
+        /**
+         * Generate a HTML link.
+         *
+         * @param string $url
+         * @param string $title
+         * @param array $attributes
+         * @param bool $secure
+         * @param bool $escape
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */
+        public static function link($url, $title = null, $attributes = array(), $secure = null, $escape = true)
+        {
+            return \Collective\Html\HtmlBuilder::link($url, $title, $attributes, $secure, $escape);
+        }
+        
+        /**
+         * Generate a HTTPS HTML link.
+         *
+         * @param string $url
+         * @param string $title
+         * @param array $attributes
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */
+        public static function secureLink($url, $title = null, $attributes = array())
+        {
+            return \Collective\Html\HtmlBuilder::secureLink($url, $title, $attributes);
+        }
+        
+        /**
+         * Generate a HTML link to an asset.
+         *
+         * @param string $url
+         * @param string $title
+         * @param array $attributes
+         * @param bool $secure
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */
+        public static function linkAsset($url, $title = null, $attributes = array(), $secure = null)
+        {
+            return \Collective\Html\HtmlBuilder::linkAsset($url, $title, $attributes, $secure);
+        }
+        
+        /**
+         * Generate a HTTPS HTML link to an asset.
+         *
+         * @param string $url
+         * @param string $title
+         * @param array $attributes
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */
+        public static function linkSecureAsset($url, $title = null, $attributes = array())
+        {
+            return \Collective\Html\HtmlBuilder::linkSecureAsset($url, $title, $attributes);
+        }
+        
+        /**
+         * Generate a HTML link to a named route.
+         *
+         * @param string $name
+         * @param string $title
+         * @param array $parameters
+         * @param array $attributes
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */
+        public static function linkRoute($name, $title = null, $parameters = array(), $attributes = array())
+        {
+            return \Collective\Html\HtmlBuilder::linkRoute($name, $title, $parameters, $attributes);
+        }
+        
+        /**
+         * Generate a HTML link to a controller action.
+         *
+         * @param string $action
+         * @param string $title
+         * @param array $parameters
+         * @param array $attributes
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */
+        public static function linkAction($action, $title = null, $parameters = array(), $attributes = array())
+        {
+            return \Collective\Html\HtmlBuilder::linkAction($action, $title, $parameters, $attributes);
+        }
+        
+        /**
+         * Generate a HTML link to an email address.
+         *
+         * @param string $email
+         * @param string $title
+         * @param array $attributes
+         * @param bool $escape
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */
+        public static function mailto($email, $title = null, $attributes = array(), $escape = true)
+        {
+            return \Collective\Html\HtmlBuilder::mailto($email, $title, $attributes, $escape);
+        }
+        
+        /**
+         * Obfuscate an e-mail address to prevent spam-bots from sniffing it.
+         *
+         * @param string $email
+         * @return string 
+         * @static 
+         */
+        public static function email($email)
+        {
+            return \Collective\Html\HtmlBuilder::email($email);
+        }
+        
+        /**
+         * Generates non-breaking space entities based on number supplied.
+         *
+         * @param int $num
+         * @return string 
+         * @static 
+         */
+        public static function nbsp($num = 1)
+        {
+            return \Collective\Html\HtmlBuilder::nbsp($num);
+        }
+        
+        /**
+         * Generate an ordered list of items.
+         *
+         * @param array $list
+         * @param array $attributes
+         * @return \Illuminate\Support\HtmlString|string 
+         * @static 
+         */
+        public static function ol($list, $attributes = array())
+        {
+            return \Collective\Html\HtmlBuilder::ol($list, $attributes);
+        }
+        
+        /**
+         * Generate an un-ordered list of items.
+         *
+         * @param array $list
+         * @param array $attributes
+         * @return \Illuminate\Support\HtmlString|string 
+         * @static 
+         */
+        public static function ul($list, $attributes = array())
+        {
+            return \Collective\Html\HtmlBuilder::ul($list, $attributes);
+        }
+        
+        /**
+         * Generate a description list of items.
+         *
+         * @param array $list
+         * @param array $attributes
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */
+        public static function dl($list, $attributes = array())
+        {
+            return \Collective\Html\HtmlBuilder::dl($list, $attributes);
+        }
+        
+        /**
+         * Build an HTML attribute string from an array.
+         *
+         * @param array $attributes
+         * @return string 
+         * @static 
+         */
+        public static function attributes($attributes)
+        {
+            return \Collective\Html\HtmlBuilder::attributes($attributes);
+        }
+        
+        /**
+         * Obfuscate a string to prevent spam-bots from sniffing it.
+         *
+         * @param string $value
+         * @return string 
+         * @static 
+         */
+        public static function obfuscate($value)
+        {
+            return \Collective\Html\HtmlBuilder::obfuscate($value);
+        }
+        
+        /**
+         * Generate a meta tag.
+         *
+         * @param string $name
+         * @param string $content
+         * @param array $attributes
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */
+        public static function meta($name, $content, $attributes = array())
+        {
+            return \Collective\Html\HtmlBuilder::meta($name, $content, $attributes);
+        }
+        
+        /**
+         * Generate an html tag.
+         *
+         * @param string $tag
+         * @param mixed $content
+         * @param array $attributes
+         * @return \Illuminate\Support\HtmlString 
+         * @static 
+         */
+        public static function tag($tag, $content, $attributes = array())
+        {
+            return \Collective\Html\HtmlBuilder::tag($tag, $content, $attributes);
+        }
+        
+        /**
+         * Register a custom macro.
+         *
+         * @param string $name
+         * @param callable $macro
+         * @return void 
+         * @static 
+         */
+        public static function macro($name, $macro)
+        {
+            \Collective\Html\HtmlBuilder::macro($name, $macro);
+        }
+        
+        /**
+         * Checks if macro is registered.
+         *
+         * @param string $name
+         * @return bool 
+         * @static 
+         */
+        public static function hasMacro($name)
+        {
+            return \Collective\Html\HtmlBuilder::hasMacro($name);
+        }
+        
+        /**
+         * Dynamically handle calls to the class.
+         *
+         * @param string $method
+         * @param array $parameters
+         * @return mixed 
+         * @throws \BadMethodCallException
+         * @static 
+         */
+        public static function macroCall($method, $parameters)
+        {
+            return \Collective\Html\HtmlBuilder::macroCall($method, $parameters);
+        }
+        
+        /**
+         * Register a custom component.
+         *
+         * @param $name
+         * @param $view
+         * @param array $signature
+         * @return void 
+         * @static 
+         */
+        public static function component($name, $view, $signature)
+        {
+            \Collective\Html\HtmlBuilder::component($name, $view, $signature);
+        }
+        
+        /**
+         * Check if a component is registered.
+         *
+         * @param $name
+         * @return bool 
+         * @static 
+         */
+        public static function hasComponent($name)
+        {
+            return \Collective\Html\HtmlBuilder::hasComponent($name);
+        }
+        
+        /**
+         * Dynamically handle calls to the class.
+         *
+         * @param string $method
+         * @param array $parameters
+         * @return \Illuminate\Contracts\View\View|mixed 
+         * @throws \BadMethodCallException
+         * @static 
+         */
+        public static function componentCall($method, $parameters)
+        {
+            return \Collective\Html\HtmlBuilder::componentCall($method, $parameters);
+        }
+        
+    }         
 }
     
-namespace Intervention\Image\Facades {
+namespace Barryvdh\DomPDF {
 
-    class Image {
+    class Facade {
         
         /**
-         * Overrides configuration settings
+         * Get the DomPDF instance
          *
-         * @param array $config
+         * @return \Barryvdh\DomPDF\Dompdf 
          * @static 
          */
-        public static function configure($config = array())
+        public static function getDomPDF()
         {
-            return \Intervention\Image\ImageManager::configure($config);
+            return \Barryvdh\DomPDF\PDF::getDomPDF();
         }
         
         /**
-         * Initiates an Image instance from different input types
+         * Set the paper size (default A4)
          *
-         * @param mixed $data
-         * @return \Intervention\Image\Image 
+         * @param string $paper
+         * @param string $orientation
+         * @return $this 
          * @static 
          */
-        public static function make($data)
+        public static function setPaper($paper, $orientation = 'portrait')
         {
-            return \Intervention\Image\ImageManager::make($data);
+            return \Barryvdh\DomPDF\PDF::setPaper($paper, $orientation);
         }
         
         /**
-         * Creates an empty image canvas
+         * Show or hide warnings
          *
-         * @param integer $width
-         * @param integer $height
-         * @param mixed $background
-         * @return \Intervention\Image\Image 
+         * @param bool $warnings
+         * @return $this 
          * @static 
          */
-        public static function canvas($width, $height, $background = null)
+        public static function setWarnings($warnings)
         {
-            return \Intervention\Image\ImageManager::canvas($width, $height, $background);
+            return \Barryvdh\DomPDF\PDF::setWarnings($warnings);
         }
         
         /**
-         * Create new cached image and run callback
-         * (requires additional package intervention/imagecache)
+         * Load a HTML string
          *
-         * @param \Closure $callback
-         * @param integer $lifetime
-         * @param boolean $returnObj
-         * @return \Image 
+         * @param string $string
+         * @param string $encoding Not used yet
+         * @return static 
          * @static 
          */
-        public static function cache($callback, $lifetime = null, $returnObj = false)
+        public static function loadHTML($string, $encoding = null)
         {
-            return \Intervention\Image\ImageManager::cache($callback, $lifetime, $returnObj);
+            return \Barryvdh\DomPDF\PDF::loadHTML($string, $encoding);
+        }
+        
+        /**
+         * Load a HTML file
+         *
+         * @param string $file
+         * @return static 
+         * @static 
+         */
+        public static function loadFile($file)
+        {
+            return \Barryvdh\DomPDF\PDF::loadFile($file);
+        }
+        
+        /**
+         * Load a View and convert to HTML
+         *
+         * @param string $view
+         * @param array $data
+         * @param array $mergeData
+         * @param string $encoding Not used yet
+         * @return static 
+         * @static 
+         */
+        public static function loadView($view, $data = array(), $mergeData = array(), $encoding = null)
+        {
+            return \Barryvdh\DomPDF\PDF::loadView($view, $data, $mergeData, $encoding);
+        }
+        
+        /**
+         * Set/Change an option in DomPdf
+         *
+         * @param array $options
+         * @return static 
+         * @static 
+         */
+        public static function setOptions($options)
+        {
+            return \Barryvdh\DomPDF\PDF::setOptions($options);
+        }
+        
+        /**
+         * Output the PDF as a string.
+         *
+         * @return string The rendered PDF as string
+         * @static 
+         */
+        public static function output()
+        {
+            return \Barryvdh\DomPDF\PDF::output();
+        }
+        
+        /**
+         * Save the PDF to a file
+         *
+         * @param $filename
+         * @return static 
+         * @static 
+         */
+        public static function save($filename)
+        {
+            return \Barryvdh\DomPDF\PDF::save($filename);
+        }
+        
+        /**
+         * Make the PDF downloadable by the user
+         *
+         * @param string $filename
+         * @return \Illuminate\Http\Response 
+         * @static 
+         */
+        public static function download($filename = 'document.pdf')
+        {
+            return \Barryvdh\DomPDF\PDF::download($filename);
+        }
+        
+        /**
+         * Return a response with the PDF to show in the browser
+         *
+         * @param string $filename
+         * @return \Illuminate\Http\Response 
+         * @static 
+         */
+        public static function stream($filename = 'document.pdf')
+        {
+            return \Barryvdh\DomPDF\PDF::stream($filename);
+        }
+        
+    }         
+}
+    
+namespace TCG\Voyager\Facades {
+
+    class Voyager {
+        
+        /**
+         * 
+         *
+         * @static 
+         */
+        public static function model($name)
+        {
+            return \TCG\Voyager\Voyager::model($name);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */
+        public static function modelClass($name)
+        {
+            return \TCG\Voyager\Voyager::modelClass($name);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */
+        public static function useModel($name, $object)
+        {
+            return \TCG\Voyager\Voyager::useModel($name, $object);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */
+        public static function formField($row, $dateType, $dataTypeContent)
+        {
+            return \TCG\Voyager\Voyager::formField($row, $dateType, $dataTypeContent);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */
+        public static function afterFormFields($row, $dataType, $dataTypeContent)
+        {
+            return \TCG\Voyager\Voyager::afterFormFields($row, $dataType, $dataTypeContent);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */
+        public static function addFormField($handler)
+        {
+            return \TCG\Voyager\Voyager::addFormField($handler);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */
+        public static function addAfterFormField($handler)
+        {
+            return \TCG\Voyager\Voyager::addAfterFormField($handler);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */
+        public static function formFields()
+        {
+            return \TCG\Voyager\Voyager::formFields();
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */
+        public static function setting($key, $default = null)
+        {
+            return \TCG\Voyager\Voyager::setting($key, $default);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */
+        public static function image($file, $default = '')
+        {
+            return \TCG\Voyager\Voyager::image($file, $default);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */
+        public static function routes()
+        {
+            return \TCG\Voyager\Voyager::routes();
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */
+        public static function can($permission)
+        {
+            return \TCG\Voyager\Voyager::can($permission);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */
+        public static function canOrFail($permission)
+        {
+            return \TCG\Voyager\Voyager::canOrFail($permission);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */
+        public static function canOrAbort($permission, $statusCode = 403)
+        {
+            return \TCG\Voyager\Voyager::canOrAbort($permission, $statusCode);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */
+        public static function getVersion()
+        {
+            return \TCG\Voyager\Voyager::getVersion();
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */
+        public static function addAlert($alert)
+        {
+            return \TCG\Voyager\Voyager::addAlert($alert);
+        }
+        
+        /**
+         * 
+         *
+         * @static 
+         */
+        public static function alerts()
+        {
+            return \TCG\Voyager\Voyager::alerts();
+        }
+        
+        /**
+         * 
+         *
+         * @param string|\TCG\Voyager\Model|\TCG\Voyager\Collection $model
+         * @return bool 
+         * @static 
+         */
+        public static function translatable($model)
+        {
+            return \TCG\Voyager\Voyager::translatable($model);
         }
         
     }         
@@ -12588,7 +13223,7 @@ namespace {
     
     class Eloquent extends \Illuminate\Database\Eloquent\Model {    
         /**
-         * Create and return and un-saved model instance.
+         * Create and return an un-saved model instance.
          *
          * @param array $attributes
          * @return \Illuminate\Database\Eloquent\Model 
@@ -13166,8 +13801,8 @@ namespace {
          * Apply the callback's query changes if the given "value" is true.
          *
          * @param mixed $value
-         * @param \Closure $callback
-         * @param \Closure $default
+         * @param callable $callback
+         * @param callable $default
          * @return mixed 
          * @static 
          */
@@ -14571,13 +15206,17 @@ namespace {
         }
         }
     
-    class Datatables extends \Yajra\Datatables\Datatables {}
+    class Cart extends \Gloudemans\Shoppingcart\Facades\Cart {}
     
-    class HTML extends \Collective\Html\HtmlFacade {}
+    class MakerOrder extends \App\Facades\OrderingFacade {}
     
     class Form extends \Collective\Html\FormFacade {}
     
-    class Image extends \Intervention\Image\Facades\Image {}
+    class Html extends \Collective\Html\HtmlFacade {}
+    
+    class PDF extends \Barryvdh\DomPDF\Facade {}
+    
+    class Voyager extends \TCG\Voyager\Facades\Voyager {}
     
 }
 

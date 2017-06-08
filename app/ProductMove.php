@@ -10,6 +10,7 @@ use Illuminate\Database\Eloquent\Model;
  *
  * @property Product product
  * @property Invoice invoice
+ * @property integer quantity
  */
 class ProductMove extends Model
 {

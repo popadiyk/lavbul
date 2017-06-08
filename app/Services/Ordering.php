@@ -12,14 +12,20 @@ use \Cart as Cart;
 use App\Product;
 use App\OrderStatus;
 use App\Order;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Auth;
 use App\Invoice;
 use Illuminate\Http\Request;
 use App\ProductMove;
 
+/**
+ * Class Ordering
+ * @package App\Services
+ *
+ * @method Request public makeOrderSaleWithInvoice(Request $request)
+ */
 class Ordering
 {
-
     /**
      * Checking quantity of all products in the cart before beginning order
      * @return array
@@ -92,6 +98,44 @@ class Ordering
         $invoice->delete();
 
         return false;
+    }
+
+
+    public function returnedProductToBase($invoices)
+    {
+        /** @var Invoice $invoice */
+        foreach($invoices as $invoice ) {
+            //change status Invoice to failed
+            $invoice->changeStatus(Invoice::STATUS_FAILED);
+
+            /** @var Order $order */
+            $order = $invoice->order;
+            if( $order != null ) {
+                $order->changeStatus(OrderStatus::FAILED);
+            }
+
+            /** @var Collection ProductMove $productsMove */
+            $productsMove = $invoice->productMove;
+
+            $this->increaseProductsQty($productsMove);
+        }
+    }
+
+    /**
+     * Increase quantity of the products which belong to invoice
+     * (and are involve by product_move table) and raw of them in product_moves are deleted
+     *
+     * @param Collection ProductMove $productsMove
+     */
+    private function increaseProductsQty($productsMove)
+    {
+
+        /** @var ProductMove $productMove */
+        foreach($productsMove as $productMove)  {
+            $productMove->product->increaseQty($productMove->quantity);
+
+            $productMove->delete();
+        }
     }
 
     /**

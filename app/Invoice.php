@@ -2,6 +2,7 @@
 
 namespace App;
 
+use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
 
 /**
@@ -11,6 +12,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property User client
  * @property User author
  * @property Order order
+ * @property ProductMove Collection productMove
  */
 class Invoice extends Model
 {
@@ -79,6 +81,14 @@ class Invoice extends Model
         return $this->belongsTo(User::class, 'author_id', 'id');
     }
 
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
+     */
+    public function products()
+    {
+        return $this->belongsToMany(Product::class, 'product_moves', 'invoice_id', 'product_id');
+    }
     /**
      * @param $query
      * @param $type
@@ -97,5 +107,38 @@ class Invoice extends Model
     public function scopeOfStatus($query, $status)
     {
         return $query->where('status', $status);
+    }
+
+    /**
+     * @param $query
+     * @return mixed
+     */
+    public function scopeIsTimeToFailed($query)
+    {
+        $date = Carbon::yesterday();
+
+        return $query->where('updated_at', '<', $date);
+    }
+
+    /**
+     * Change status current invoices
+     *
+     * @TODO to need solving the checking of input param
+     * @param $status
+     */
+    public function changeStatus($status)
+    {
+        $this->status = $status;
+        $this->save();
+    }
+
+    /**
+     * The relationship with ProductMove
+     *
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function productMove()
+    {
+        return $this->hasMany(ProductMove::class, 'invoice_id', 'id');
     }
 }

@@ -58,4 +58,15 @@ class Order extends Model
     {
         return $query->where('status_id', OrderStatus::UNCONFIRMED);
     }
+
+    /**
+     * Changing status_id of current order
+     * @TODO To check input param
+     * @param $status
+     */
+    public function changeStatus($status)
+    {
+        $this->status_id = $status;
+        $this->save();
+    }
 }
