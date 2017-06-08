@@ -375,6 +375,7 @@ figcaption>h5{
 
     .modal-backdrop {
       background-color: snow !important;
+      z-index: inherit;
     }
     .modal-backdrop.in {
       opacity: -0.5 !important;
@@ -393,23 +394,22 @@ figcaption>h5{
 
   #send_order {
     border-radius: 10px;
-  background-color:  #b9f8a8;
-  width: 450px;
-  height: 52px;
+    background-color:  #b9f8a8;
+    height: 50px;
   }
 
   #order {
     color:  #333333;
-  font-size: 24px;
-  font-weight: 700;
+  font-size: 22px;
+  font-weight: 500;
   line-height: 30px;
-  text-align: left;
+  text-align: center;
   }
   #return_into_basket {
   text-align: center;
   }
 
-  #return {
+  #continue {
     color:  #aba8a8;
     font-size: 18px;
     font-weight: 400;
