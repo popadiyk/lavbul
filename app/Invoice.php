@@ -13,6 +13,9 @@ use Illuminate\Database\Eloquent\Model;
  * @property User author
  * @property Order order
  * @property ProductMove Collection productMove
+ * @property string type
+ * @property string status
+ * @property Product Collection product
  */
 class Invoice extends Model
 {
@@ -32,7 +35,6 @@ class Invoice extends Model
         'total_account',
     ];
 
-
     const TYPE_PURCHASE = 'purchase';
     const TYPE_SALES = 'sales';
     const TYPE_WRITE_OF = 'writeOf';
@@ -42,6 +44,26 @@ class Invoice extends Model
     const STATUS_CONFIRMED = 'confirmed';
     const STATUS_CLOSED = 'closed';
     const STATUS_FAILED = 'failed';
+
+    /**
+     * Accessor for getting total_account from data base
+     *
+     * @return float|int
+     */
+    public function getTotalAccountAttribute()
+    {
+        return $this->attributes['total_account'] / 100;
+    }
+
+    /**
+     * Accessor for setting total_account to data base
+     *
+     * @param $value
+     */
+    public function setTotalAccountAttribute($value)
+    {
+        $this->attributes['total_account'] = $value * 100;
+    }
 
     /**
      * The relationship with orders
@@ -57,6 +79,8 @@ class Invoice extends Model
      * The relationship with users (client)
      *
      * @TODO When type is writeOf then client only one static
+     * @TODO It's a very bad method
+     *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function client()
@@ -81,7 +105,6 @@ class Invoice extends Model
         return $this->belongsTo(User::class, 'author_id', 'id');
     }
 
-
     /**
      * @return \Illuminate\Database\Eloquent\Relations\BelongsToMany
      */
@@ -89,6 +112,7 @@ class Invoice extends Model
     {
         return $this->belongsToMany(Product::class, 'product_moves', 'invoice_id', 'product_id');
     }
+
     /**
      * @param $query
      * @param $type

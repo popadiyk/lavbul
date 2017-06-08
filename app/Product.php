@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property integer $price
  * @property Group $group
  * @property Manufacture $manufacture
+ * @property int quantity
  * @method bool function isEnoughQty($qty)
  */
 class Product extends Model implements Buyable
@@ -38,7 +39,48 @@ class Product extends Model implements Buyable
     ];
 
     /**
+     * Accessor for getting price from  date base
+     *
+     * @return float|int
+     */
+    public function getPriceAttribute()
+    {
+        return $this->attributes['price'] / 100;
+    }
+
+    /**
+     * Accessor for setting price to date base
+     *
+     * @param $value
+     */
+    public function setPriceAttribute($value)
+    {
+        $this->attributes['price'] = $value * 100;
+    }
+
+    /**
+     * Accessor for getting purchase_price from database
+     *
+     * @return float|int
+     */
+    public function getPurchasePriceAttribute()
+    {
+        return $this->attributes['purchase_price'] / 100;
+    }
+
+    /**
+     * Accessor for setting purchase_price from data base
+     *
+     * @param $value
+     */
+    public function setPurchasePriceAttribute($value)
+    {
+        $this->attributes['purchase_price'] = $value* 100;
+    }
+
+    /**
      * This is relationship with group products
+     *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function group()
@@ -48,6 +90,7 @@ class Product extends Model implements Buyable
 
     /**
      * THis is relationship with manufacture
+     *
      * @return \Illuminate\Database\Eloquent\Relations\BelongsTo
      */
     public function manufacture()
