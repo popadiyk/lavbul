@@ -20,49 +20,38 @@
                           <button type="button" class="btn btn-default btn-lg" id="send_order"><span id="order">Оформити замовлення</span></button>
                         </div>
                         <div class="modal-footer" id="return_into_basket">
-                         <a href="#"><span id="return">Перейти до кошика</span></a>
+                         <i class="fa fa-shopping-cart" aria-hidden="true" style="font-size: 24px; color: #aba8a8 !important; padding-right: 6px;"></i><a href="#"><span id="return">Перейти до кошика</span></a>
                         </div>
                       </div>
                     </div>
                 </div>
-                <script>
-                $('document').ready(function(){
-                    $('#basket_modal').modal();
-                });
-                </script>
                 <!-- End of Basket_Modal -->
             </li>
            <li><a href="#user_modal" data-toggle="modal"><i class="fa fa-user-secret fa-2x" aria-hidden="true"></i>
                 <!--  User_Modal -->
                 <div class="modal fade" id="user_modal" role="dialog">
-                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                   <div class="modal-dialog modal-sm">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                    <div class="modal-dialog">
                       <!--  Modal content -->
-                       <div class="modal-content">  
+                        <div class="modal-content">  
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                           <div class="modal-body">
+                            <div class="modal-body">
                                 <span id="head">Реєстрація</span>
-                                <form class="form-horizontal">
-                                    <div class="control-group" style="padding-bottom: 10px; padding-top: 20px;">
-                                        <div class="controls">
-                                            <input type="text" class="input-large" id="inputEmail" placeholder="Email">
-                                        </div>
+                                <form id="contact-form" role="form" style="padding-top: 20px;">
+                                    <div class="form-group wow fadeInUp">
+                                        <label class="sr-only" for="c_email">E-mail</label>
+                                        <input type="email" id="c_email" class="form-control" placeholder="E-mail" style="font-style: italic;">
                                     </div>
-                                      <div class="control-group" style="padding-bottom: 10px;">
-                                        <div class="controls">
-                                          <input type="password" id="inputPassword" placeholder="Password">
-                                        </div>
-                                      </div>
-                                      <div class="control-group" style="padding-bottom: 10px;">
-                                      <span id="pass"></span>
-                                        <div class="controls">
-                                          <button type="submit" class="btn" id="register"><span id="to_reg">Зареєструватись</span></button>
-                                        </div>
-                                      </div>
+                                    <div class="form-group wow fadeInUp" data-wow-delay=".1s">
+                                        <label class="sr-only" for="c_email">Password</label>
+                                        <input type="password" id="c_password" class="form-control" placeholder="Password" style="font-style: italic;">
+                                    </div>
+                                    <br>
+                                    <button type="submit" class="btn btn-lg btn-block" id="register"><span  id="to_reg">Зареєструватись</span></button>
                                 </form>
-                               <div class="modal-footer" id="return_into_basket">
+                                <div class="modal-footer" id="return_into_basket">
                                     <span id="if">Якщо Ви зареєстровані на сайті, Вам потрібно <a href="#" id="enter">Увійти</a></span>
-                               </div>
+                                </div>
                             </div>
                         </div>
                     </div>

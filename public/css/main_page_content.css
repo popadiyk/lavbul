@@ -425,28 +425,12 @@ figcaption>h5{
   font-weight: 700;
   line-height: 30px;
   text-align: left;
-  /* padding-bottom: 20px; */
-}
-
-#email, #pass {
-  color:  #000000;
-  font-size: 16px;
-  font-weight: 700;
-  line-height: 30px;
-  text-align: left !important;
-}
-
-#inputEmail, #inputPassword {
-  width: 260px;
-  height: 39px;
-  border-radius: 5px;
-  border: 1px solid grey;
 }
 
 #register {
   border-radius: 7px;
   background-color:  #b9f8a8;
-  width: 260px;
+  /* width: 260px; */
   height: 39px;
   padding-top: 5px;
   padding-bottom: 5px;
@@ -455,17 +439,17 @@ figcaption>h5{
 
 #to_reg {
   color:  #333333;
-font-size: 18px;/* Approximation due to font substitution */
+font-size: 18px;
 font-weight: 700;
-line-height: 30px;/* Approximation due to font substitution */
+line-height: 30px;
 text-align: left;
 }
 
 #if {
   color:  #999999;
-font-size: 13px;/* Approximation due to font substitution */
+font-size: 13px;
 font-weight: 700;
-line-height: 30px;/* Approximation due to font substitution */
+line-height: 30px;
 text-align: left;
 }
 
@@ -474,7 +458,7 @@ text-align: left;
   text-decoration: underline;
   font-weight: 400;
 }
-/* styles for user_modal */
+/* end of styles for user_modal */
 
 
 
