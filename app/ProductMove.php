@@ -50,6 +50,25 @@ class ProductMove extends Model
     }
 
     /**
+     * Accessor for getting sum from database
+     *
+     * @return float|int
+     */
+    public function getSumAttribute()
+    {
+        return $this->attributes['sum'] / 100;
+    }
+
+    /**
+     * Accessor for setting sum to database
+     * @param $value
+     */
+    public function setSumAttribute($value)
+    {
+        $this->attributes['sum'] = $value * 100;
+    }
+
+    /**
      * @param Product $product
      * @param $invoice_id
      * @param $quantity
