@@ -33,7 +33,7 @@
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                     <div class="modal-dialog">
                       <!--  Modal content -->
-                        <div class="modal-content">  
+                        <div class="modal-content">
                             <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                             <div class="modal-body">
                                 <span id="head">Реєстрація</span>
