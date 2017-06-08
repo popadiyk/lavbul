@@ -7,7 +7,6 @@
             <li class="nav-text"><a href="{{ url('/master_classes') }}">МАЙСТЕР-КЛАСИ</a></li>
             <li class="nav-text"><a href="{{ url('/news') }}">НОВИНИ</a></li>
             <li class="nav-text"><a href="{{ url('/contacts') }}">КОНТАКТИ</a></li>
-<<<<<<< HEAD
             <li><a href="#" role="button" class="btn" data-toggle="modal"><i class="fa fa-search fa-2x" aria-hidden="true"></i></a></li>
             <li><a href="#basket_modal" data-toggle="modal"><i class="fa fa-cart-arrow-down fa-2x" aria-hidden="true"></i>
                 <!-- Basket_Modal -->
@@ -59,11 +58,6 @@
                </div>
                <!-- End of User_Modal -->
            </li>
-=======
-            <li><a href="#"><i class="fa fa-search fa-2x" aria-hidden="true"></i></a></li>
-            <li><a href="#"><i class="fa fa-cart-arrow-down fa-2x" aria-hidden="true"></i></a></li>
-            <li><a href="#"><i class="fa fa-user-secret fa-2x" aria-hidden="true"></i></a></li>
->>>>>>> 896fb5b41525d00b11de12ce284d42cd497b0e08
         </ul>
     </div>
 </div>
