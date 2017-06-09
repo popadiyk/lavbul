@@ -23,6 +23,7 @@ class ProductsSeeder extends Seeder
             'marking' => 10000,
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'main_photo' => '/products_photo/10000.jpg'
         ]);
         DB::table('products')->insert([
             'group_id' => 1,
@@ -35,6 +36,7 @@ class ProductsSeeder extends Seeder
             'marking' => 10001,
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'main_photo' => '/products_photo/10001.jpg'
         ]);
 
     }

@@ -16,7 +16,7 @@ class InvoicesSeeder extends Seeder
             'autor_id' => '1',
             'user_id'=> '1',
             'manufacturer_id' => '1',
-            'pay_status_id' => '1',
+            //'pay_status_id' => '1',
             'type_id' => '1',
             'description' => 'накладна на надходження',
             'total_sum' => '1000',

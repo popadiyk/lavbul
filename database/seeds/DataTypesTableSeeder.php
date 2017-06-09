@@ -52,19 +52,19 @@ class DataTypesTableSeeder extends Seeder
             ])->save();
         }
 
-        $dataType = $this->dataType('name', 'categories');
-        if (!$dataType->exists) {
-            $dataType->fill([
-                'slug'                  => 'categories',
-                'display_name_singular' => 'Category',
-                'display_name_plural'   => 'Categories',
-                'icon'                  => 'voyager-categories',
-                'model_name'            => 'TCG\\Voyager\\Models\\Category',
-                'controller'            => '',
-                'generate_permissions'  => 1,
-                'description'           => '',
-            ])->save();
-        }
+//        $dataType = $this->dataType('name', 'categories');
+//        if (!$dataType->exists) {
+//            $dataType->fill([
+//                'slug'                  => 'categories',
+//                'display_name_singular' => 'Category',
+//                'display_name_plural'   => 'Categories',
+//                'icon'                  => 'voyager-categories',
+//                'model_name'            => 'TCG\\Voyager\\Models\\Category',
+//                'controller'            => '',
+//                'generate_permissions'  => 1,
+//                'description'           => '',
+//            ])->save();
+//        }
 
         $dataType = $this->dataType('slug', 'menus');
         if (!$dataType->exists) {
@@ -136,6 +136,19 @@ class DataTypesTableSeeder extends Seeder
             ])->save();
         }
 
+        $dataType = $this->dataType('slug', 'products');
+        if (!$dataType->exists) {
+            $dataType->fill([
+                'name'                  => 'products',
+                'display_name_singular' => 'Продукти',
+                'display_name_plural'   => 'Продукти',
+                'icon'                  => 'voyager-bag',
+                'model_name'            => 'App\Product',
+                'controller'            => 'Admin\ProductsController',
+                'generate_permissions'  => 1,
+                'description'           => '',
+            ])->save();
+        }
 
 
     }

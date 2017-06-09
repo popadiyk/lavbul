@@ -182,6 +182,8 @@ return [
         App\Providers\RouteServiceProvider::class,
 
         App\Providers\OrderingServiceProvider::class,
+        App\Providers\HelperServiceProvider::class,
+        Intervention\Image\ImageServiceProvider::class
 
     ],
 
@@ -232,10 +234,11 @@ return [
         'Validator' => Illuminate\Support\Facades\Validator::class,
         'View' => Illuminate\Support\Facades\View::class,
         'Cart' => Gloudemans\Shoppingcart\Facades\Cart::class,
-
         'MakerOrder' => App\Facades\OrderingFacade::class,
         'Form' => Collective\Html\FormFacade::class,
         'Html' => Collective\Html\HtmlFacade::class,
+        'HelperForImage' => App\Helpers\HelperForImage::class,
+        'Image' => Intervention\Image\Facades\Image::class
         'PDF' => Barryvdh\DomPDF\Facade::class,
 
     ],

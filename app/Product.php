@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property integer $price
  * @property Group $group
  * @property Manufacture $manufacture
+ * @property ProductPhoto Collection $images
  * @property int quantity
  * @method bool function isEnoughQty($qty)
  */
@@ -36,6 +37,7 @@ class Product extends Model implements Buyable
         'quantity',
         'description',
         'marking',
+        'main_photo'
     ];
 
     /**
@@ -131,6 +133,13 @@ class Product extends Model implements Buyable
     }
 
     /**
+
+    public function images()
+    {
+        return $this->hasMany('App\ProductPhoto');
+    }
+
+
      * @param integer $delta
      */
     public function increaseQty($delta)
@@ -165,4 +174,5 @@ class Product extends Model implements Buyable
     {
         return $this->quantity < $qty ? false : true;
     }
+
 }
