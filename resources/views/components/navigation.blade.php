@@ -14,15 +14,68 @@
                     <div class="modal-dialog">
                         <!-- Modal content-->
                         <div class="modal-content">
-                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                        <div class="modal-body">
-                          <p id="info_basket">У кошику 8 товарів на сумму 15 675</p>
-                          <button type="button" class="btn btn-default btn-lg" id="send_order"><span id="order">Оформити замовлення</span></button>
+                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+                            <div class="modal-body">
+                                <div class="row">
+                                <p id="info_basket">У кошику 2 товари на сумму 546 грн</p>
+                                     <div class="row">
+                                        <div class="col-md-3">
+                                            <img src="img/mini_plate.png">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="description" style="padding-top: 40px;">
+                                                <p>Тарілка скляна (декоративна) в стилі Прованс</p>
+                                                <p>Артикул 0846930675</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="input-group quantity_goods" style="padding-top: 60px;">
+                                              <input type="number" step="1" min="1" max="10" id="num_count" name="quantity" value="1" title="Qty">
+                                              <input type="button" value="-" id="button_minus">
+                                              <input type="button" value="+" id="button_plus">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="price" style="padding-top: 60px;">
+                                                <span>120 грн</span>
+                                            </div>
+                                        </div>
+                                    </div>
+
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            <img src="img/mini_plate.png">
+                                        </div>
+                                        <div class="col-md-4">
+                                            <div class="description" style="padding-top: 40px;">
+                                                <p>Тарілка скляна (декоративна) в стилі Прованс</p>
+                                                <p>Артикул 0846930675</p>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-3">
+                                            <div class="input-group quantity_goods" style="padding-top: 60px;">
+                                              <input type="number" step="1" min="1" max="10" id="num_count" name="quantity" value="1" title="Qty">
+                                              <input type="button" value="-" id="button_minus">
+                                              <input type="button" value="+" id="button_plus">
+                                            </div>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <div class="price" style="padding-top: 60px;">
+                                                <span>120 грн</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-6 pull-left">
+                                        <a href="#" id="continue"><i class="fa fa-angle-left" aria-hidden="true" style="padding-right: 5px;"> </i>Продовжити вибір товарів</a>
+                                    </div>
+                                    <div class="col-md-6 pull-right">
+                                        <a class="btn" href=" {{ url('/order') }}" id="send_order" class="pull-right"><span id="order">Оформити замовлення</span></a>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="modal-footer" id="return_into_basket">
-                         <i class="fa fa-shopping-cart" aria-hidden="true" style="font-size: 24px; color: #aba8a8 !important; padding-right: 6px;"></i><a href="#"><span id="return">Перейти до кошика</span></a>
-                        </div>
-                      </div>
                     </div>
                 </div>
                 <!-- End of Basket_Modal -->

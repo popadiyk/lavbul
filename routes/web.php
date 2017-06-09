@@ -59,4 +59,8 @@ Route::group(['prefix' => '/'], function () {
 	Route::get('master_classes', function (){
 	    return view('master_classes.index');
 	});
+
+	Route::get('order', function (){
+	    return view('order.index');
+	});
 });
