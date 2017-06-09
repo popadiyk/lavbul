@@ -13,17 +13,7 @@ class ProductGroupsSeeder extends Seeder
     public function run()
     {
         DB::table('groups')->insert([
-            'title' => 'Картини',
-            'group_id' => '0',
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        ]);
-        DB::table('groups')->insert([
-            'title' => 'Деревяні вироби',
-            'group_id' => '0',
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        ]);
-        DB::table('groups')->insert([
-            'title' => 'Іграшки',
+            'title' => 'Вироби ручної роботи',
             'group_id' => '0',
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
@@ -33,27 +23,37 @@ class ProductGroupsSeeder extends Seeder
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
         DB::table('groups')->insert([
-            'title' => 'Рамки',
+            'title' => 'Іграшки',
+            'group_id' => '1',
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+        ]);
+        DB::table('groups')->insert([
+            'title' => 'Картини',
+            'group_id' => '1',
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+        ]);
+        DB::table('groups')->insert([
+            'title' => 'Фанера',
+            'group_id' => '1',
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+        ]);
+        DB::table('groups')->insert([
+            'title' => 'Лазерні нічники',
+            'group_id' => '1',
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+        ]);
+        DB::table('groups')->insert([
+            'title' => 'Папір в наборах',
             'group_id' => '2',
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
         DB::table('groups')->insert([
-            'title' => 'Деревяні ложки',
+            'title' => 'Папір по-штучно',
             'group_id' => '2',
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
         DB::table('groups')->insert([
-            'title' => 'Зайці',
-            'group_id' => '3',
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        ]);
-        DB::table('groups')->insert([
-            'title' => 'Великі зайці',
-            'group_id' => '7',
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
-        ]);
-        DB::table('groups')->insert([
-            'title' => 'Деревяні ноги',
+            'title' => 'Клейові матеріали',
             'group_id' => '2',
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);

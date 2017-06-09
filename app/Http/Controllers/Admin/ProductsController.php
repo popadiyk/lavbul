@@ -206,7 +206,7 @@ class ProductsController extends Controller
         $changedProduct = $request->all();
         $myProduct = Product::all()->where('id', $id)->first();
         $myPhotos = Product::find($id)->images;
-
+        if ($myPhotos != null)
         if ($myPhotos->count() == 0){
             if(array_key_exists('sup_photo_1', $request->all()) == true){
                 $sup_photo_1 = new ProductPhoto();
@@ -224,7 +224,7 @@ class ProductsController extends Controller
                 $sup_photo_2->save();
             }
         }
-
+        if ($myPhotos != null)
         if ($myPhotos->count() == 1){
             if (HelperForImage::whatImage($myPhotos[0]['path']) == 1){
                 if(array_key_exists('sup_photo_1', $request->all()) == true){
@@ -262,7 +262,7 @@ class ProductsController extends Controller
                 }
             }
         }
-
+        if ($myPhotos != null)
         if ($myPhotos->count() == 2){
             if(array_key_exists('sup_photo_1', $request->all()) == true){
                 unlink(substr($myPhotos[0]['path'], 1));
