@@ -60,7 +60,4 @@ Route::group(['prefix' => '/'], function () {
 	    return view('master_classes.index');
 	});
 
-	Route::get('order', function (){
-	    return view('order.index');
-	});
 });

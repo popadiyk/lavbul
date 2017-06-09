@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Product;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use \Cart as Cart;
@@ -26,6 +27,7 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
+
         $duplicates = Cart::search(function ($cartItem, $rowId) use ($request) {
             return $cartItem->id === $request->id;
         });
@@ -33,7 +35,8 @@ class CartController extends Controller
             return redirect('cart')->withSuccessMessage('Item is already in your cart!');
         }
 
-        Cart::add($request->id, $request->name, 1, $request->price)->associate('App\Product');
+        Cart::add($request->id, $request->name, 1, $request->price, ['marking' => $request->marking])
+            ->associate('App\Product');
 
 
         return redirect('cart')->withSuccessMessage('Item was added to your cart!');
@@ -61,7 +64,7 @@ class CartController extends Controller
         if($checkQty !== null) {
             session()->flash('error_message', 'Quantity was too much! Prefer is '.$checkQty );
 
-            return response()->json(['success' => false]);
+            return response()->json(['success' => false, 'qty'=> $checkQty]);
         }
 
         Cart::update($id, $request->quantity);

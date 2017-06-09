@@ -55,6 +55,34 @@ $('[data-toggle="datepicker"]').datepicker();
     }
   }
 });
-  
+// for cart
+$(document).ready(function(){
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $('.quantity').on('change', function() {
+        var id = $(this).attr('data-id')
+        var error_field = $(this).siblings('span.error_qty');
+        $.ajax({
+            type: "PATCH",
+            url: '{{ url("/cart") }}' + '/' + id,
+            data: {
+                'quantity': this.value,
+            },
+            success: function(data) {
+                if(data.success == false) {
+                    error_field.text("Дост:" + data.qty);
+                } else {
+                    error_field.text('');
+                }
+            },
+            error: function(data) {
+
+            }
+        });
+    });
+});
 
 </script>

@@ -26,17 +26,19 @@
 						    </tr>
 						  </thead>
 						  <tbody>
+						  @foreach(Cart::content() as $item)
 						    <tr>
 						      <td  style="padding-top: 35px;"><button type="button" class="close" aria-hidden="true">×</button></td>
 						      <td style="width: 70px;"><img src="img/for_order.png"></td>
-						      <td style="width: 200px; padding-top: 25px;"> <p>Тарілка скляна (декоративна) в стилі Прованс</p></td>
-						      <td style="padding-top: 25px;">230 грн</td>
+						      <td style="width: 200px; padding-top: 25px;"> <p>{{ $item->name }}</p></td>
+						      <td style="padding-top: 25px;">{{ number_format($item->subtotal, 2).'грн.' }}</td>
 						      <td style="padding-top: 25px;">0%</td>
+						      <td style="padding-top: 25px;">{{ number_format($item->subtotal, 2).'грн.' }}</td>
+								<td style="padding-top: 25px;"> <p>{{ $item->qty }}" title="Qty"></p></td>
 						      <td style="padding-top: 25px;">230 грн</td>
-						      <td style="padding-top: 25px;"> <input type="number" step="1" min="1" max="10" id="num_count" name="quantity" value="1" title="Qty"></td>
-						      <td style="padding-top: 25px;">230 грн</td>
-						      <tr><td colspan="8" style="background-color: #e0e0e0; text-align: right;">В підсумку: 230 грн</td></tr>
+						      <tr><td colspan="8" style="background-color: #e0e0e0; text-align: right;">{{ $item->subtotal }}</td></tr>
 						    </tr>
+						  @endforeach
 						</tbody>
 					</table>
 				</div>
