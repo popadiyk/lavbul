@@ -305,15 +305,15 @@ figcaption>h5{
 /*  */
 
 /* navigation part */
-	.clearHeader{
+	   .clearHeader{
         /* style for javascrypt */
     }
     .darkHeader {
         height: 100px;
         background-color: rgba(107,107,107,0.66);
         position: fixed;
-        top:200;
-        width: 100%;
+       /*  top:200;
+        width: 100%; */
     }
     .navigation {
       height: 88px;
@@ -371,8 +371,98 @@ figcaption>h5{
     }
 /* end avigation part */
 
+
+/* styles for basket_modal */
+
+    .modal-backdrop {
+      background-color: snow !important;
+      z-index: inherit;
+    }
+    .modal-backdrop.in {
+      opacity: -0.5 !important;
+    }
+    #info_basket {
+      font-family: CenturyGothic;
+  color:  #666666;
+  font-size: 22px;
+  font-weight: 400;
+  line-height: 30px;
+  text-align: left;
+  text-shadow: none;
+  text-transform: none;
+  text-align: center;
+    }
+
+  #send_order {
+    border-radius: 10px;
+    background-color:  #b9f8a8;
+    height: 50px;
+  }
+
+  #order {
+    color:  #333333;
+  font-size: 22px;
+  font-weight: 500;
+  line-height: 30px;
+  text-align: center;
+  }
+  #return_into_basket {
+  text-align: center;
+  }
+
+  #continue {
+    color:  #aba8a8;
+    font-size: 18px;
+    font-weight: 400;
+    line-height: 30px;
+  }
+
+/* styles for basket_modal */
+
+/* styles for user_modal */
+#head {
+  color:  #000000;
+  font-size: 30px;
+  font-weight: 700;
+  line-height: 30px;
+  text-align: left;
+}
+
+#register {
+  border-radius: 7px;
+  background-color:  #b9f8a8;
+  /* width: 260px; */
+  height: 39px;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  
+}
+
+#to_reg {
+  color:  #333333;
+font-size: 18px;
+font-weight: 700;
+line-height: 30px;
+text-align: left;
+}
+
+#if {
+  color:  #999999;
+font-size: 13px;
+font-weight: 700;
+line-height: 30px;
+text-align: left;
+}
+
+#enter {
+  color: black;
+  text-decoration: underline;
+  font-weight: 400;
+}
+/* end of styles for user_modal */
+
 /* swiper styles */
-	.swiper-container {
+    .swiper-container {
         width: 100%;
         height: 100%;
     }
@@ -539,9 +629,6 @@ figcaption>h5{
      	display: inline-block;
       	list-style: none;
     }
-    .social h3 {
-      	margin-left: 40px;
-    }
 
     .about_us_footer ul>li {
       	list-style: none;
@@ -577,3 +664,14 @@ figcaption>h5{
         margin: 5px;
     }
 /* end footer part */
+
+.news_header_container{
+  height: 50vh; 
+  background: url('../img/news_header.png') 100% 100% no-repeat; 
+    background-size: cover;
+}
+.classes_header_container{
+  height: 50vh; 
+  background: url('../img/classes_header.png') 100% 100% no-repeat; 
+    background-size: cover;
+}

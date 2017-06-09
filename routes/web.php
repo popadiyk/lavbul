@@ -13,30 +13,20 @@
 
 Route::get('/test', 'TestController@index');
 
-
-Route::get('/', function () {
-    return view('main_page');
-});
-
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-Route::get('/contacts', function (){
-    return view('contacts_page');
-});
-Route::get('/feedbacks', 'FeedbacksController@index');
 
+Route::get('/feedbacks', 'FeedbacksController@index');
 
 Route::resource('/products', 'ProductController');
 
-Route::group(['prefix' => 'admin'], function () {
-   Voyager::routes();
-});
+Route::resource('/invoices', 'InvoiceController');
+Route::get('/invoices/generatePdf/{id}', 'InvoiceController@generatePdf');
 
 Route::resource('shop', 'ProductController', ['only' => ['index', 'show']]);
 Route::resource('cart', 'CartController');
 Route::delete('emptyCart', 'CartController@emptyCart');
-
 
 Route::group(['prefix' => 'admin'], function () {
     Voyager::routes();
@@ -47,6 +37,30 @@ Route::get('test_test', function(){
     MakingOrder::test();
 });
 
-Route::get('/product', function() {
-	return view('products_page');
+Route::group(['prefix' => '/'], function () {
+	Route::get('/', function () {
+	    return view('main.index');
+	});
+	Route::get('products', function() {
+		return view('products.index');
+	});
+	Route::get('product', function() {
+		return view('products.product');
+	});
+	Route::get('contacts', function (){
+	    return view('contacts.index');
+	});
+	Route::get('news', function (){
+	    return view('news.index');
+	});
+	Route::get('one_news', function (){
+	    return view('news.one_news');
+	});
+	Route::get('master_classes', function (){
+	    return view('master_classes.index');
+	});
+
+	Route::get('order', function (){
+	    return view('order.index');
+	});
 });

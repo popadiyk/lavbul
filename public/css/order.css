@@ -1,0 +1,11 @@
+.order_header {
+	height: 50vh;
+	background: url(../img/order_main.png) 100% 100% no-repeat;
+	background-size: cover;
+}
+
+button#make_order.btn.btn-default {
+	border-radius: 7px !important;
+  	background-color:  #b9f8a8 !important;
+
+}

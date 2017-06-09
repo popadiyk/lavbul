@@ -7,10 +7,16 @@ use App;
 use Illuminate\Http\Request;
 use \Cart as Cart;
 use App\Delivery;
+use App\OrderStatus;
 use App\PaymentType;
 use App\Facades\OrderingFacade as MakerOrder;
 use Illuminate\Support\Facades\Auth;
 
+/**
+ * Class OrderController
+ * @package App\Http\Controllers
+ *
+ */
 class OrderController extends Controller
 {
     /**
@@ -20,12 +26,14 @@ class OrderController extends Controller
      */
     public function index()
     {
-        //
+        $orders = Order::isConfirmed()->where('user_id', Auth::id())->get();
+
+        return view('cabinet.index', compact('orders'));
     }
 
     /**
      * Show the form for creating a new resource.
-     * @TODO To need checking all items of cart on quantity
+     *
      * @return \Illuminate\Http\Response
      */
     public function create()
@@ -47,16 +55,19 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-      if(!Auth::check()) {
-          return back()->with('error_message', 'You need checking in the shop');
-      }
+        if(!Auth::check()) {
+          return back()->with('error_message', 'You need to be authoriseted  in the shop');
+        }
 
-       $order = new Order($request->all());
+        if( $request->input('delivery_id') == Delivery::SHOP) {
+           if(! MakerOrder::makeOrderSaleWithInvoice($request)) {
+               return back()->with('error_message', 'Maybe the quantity isn\'t enough, try again!!');
+           }
+        }
 
+        $orders = Order::isConfirmed()->where('user_id', Auth::id())->get();
 
-       $order->user_id = Auth::id();
-       $order->status_id = 1;
-       $order->save();
+        return view('cabinet.index', compact('orders'));
     }
 
     /**
@@ -104,17 +115,17 @@ class OrderController extends Controller
         //
     }
 
+    /**
+     * for testing
+     * @TODO delete
+     * @param Request $request
+     */
     public function execute(Request $request)
     {
 
         MakerOrder::test();
 
-
        $cart = (Cart::content());
-
-
-
-
 
         foreach($cart as $item) {
             dump($item->id);
