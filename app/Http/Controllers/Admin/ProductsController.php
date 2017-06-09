@@ -6,12 +6,12 @@ use App\Group;
 use App\Manufacture;
 use App\Product;
 use Illuminate\Http\Request;
-use Symfony\Component\HttpKernel\Tests\Bundle\NamedBundle;
 use TCG\Voyager\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
 use TCG\Voyager\Facades\Voyager;
 use TCG\Voyager\Http\Controllers\Traits\BreadRelationshipParser;
-use Carbon\Carbon;
+use HelperForImage;
+use App\ProductPhoto;
 
 class ProductsController extends Controller
 {
@@ -71,6 +71,7 @@ class ProductsController extends Controller
         $groups = Group::all();
         $manufactures = Manufacture::all();
         $slug = $this->getSlug($request);
+        $supPhotos = Product::find($id)->images;
 
         $dataType = Voyager::model('DataType')->where('slug', '=', $slug)->first();
 
@@ -87,7 +88,7 @@ class ProductsController extends Controller
         $isModelTranslatable = is_bread_translatable($dataTypeContent);
 
         $view = 'admin.products.edit-add';
-        return view($view, compact('dataType', 'dataTypeContent', 'isModelTranslatable', 'groups', 'manufactures'));
+        return view($view, compact('dataType', 'dataTypeContent', 'isModelTranslatable', 'groups', 'manufactures', 'supPhotos'));
 
     }
 
@@ -101,6 +102,7 @@ class ProductsController extends Controller
         $groups = Group::all();
         $manufactures = Manufacture::all();
         $slug = $this->getSlug($request);
+        $supPhotos = Product::find($id)->images;
 
         $dataType = Voyager::model('DataType')->where('slug', '=', $slug)->first();
 
@@ -124,7 +126,7 @@ class ProductsController extends Controller
 
         $view = 'admin.products.read';
 
-        return view($view, compact('dataType', 'dataTypeContent', 'isModelTranslatable', 'groups', 'manufactures'));
+        return view($view, compact('supPhotos','dataType', 'dataTypeContent', 'isModelTranslatable', 'groups', 'manufactures'));
     }
 
     public function store(Request $request)
@@ -135,15 +137,39 @@ class ProductsController extends Controller
         Voyager::canOrFail('add_'.$dataType->name);
         //Validate fields with ajax
         $val = $this->validateBread($request->all(), $dataType->addRows);
+
+        $this->validate($request, [
+            'marking' => 'required|unique:products|max:255',
+            'title' => 'unique:products'
+        ]);
         if ($val->fails()) {
             return response()->json(['errors' => $val->messages()]);
         }
         // save in data base
         $newProduct = $request->all();
         $newProduct = new Product($newProduct);
-        $newProduct['main_photo']->move('products_photo', $newProduct['marking'].'.jpg');
-        $newProduct['main_photo'] = '/products_photo/'.$newProduct['marking'].'.jpg';
+
+        if (array_key_exists('main_photo', $request->all()) == true){
+            $path = HelperForImage::storeImage($newProduct['main_photo'], $request['marking']);
+            $newProduct['main_photo'] = $path;
+        }
         $newProduct->save();
+
+        if(array_key_exists('sup_photo_1', $request->all()) == true){
+            $sup_photo_1 = new ProductPhoto();
+            $path = HelperForImage::storeImage($request['sup_photo_1'], $newProduct['marking'].'(1)');
+            $sup_photo_1['product_id'] = $newProduct->id;
+            $sup_photo_1['path'] = $path;
+            $sup_photo_1->save();
+        }
+
+        if(array_key_exists('sup_photo_2', $request->all()) == true){
+            $sup_photo_2 = new ProductPhoto();
+            $path = HelperForImage::storeImage($request['sup_photo_2'], $newProduct['marking'].'(2)');
+            $sup_photo_2['product_id'] = $newProduct->id;
+            $sup_photo_2['path'] = $path;
+            $sup_photo_2->save();
+        }
 
         return redirect()
             ->route('voyager.'.$dataType->slug.'.index')
@@ -167,26 +193,110 @@ class ProductsController extends Controller
         // Check permission
         Voyager::canOrFail('edit_'.$dataType->name);
         //Validate fields with ajax
+
         $val = $this->validateBread($request->all(), $dataType->editRows);
         if ($val->fails()) {
             return response()->json(['errors' => $val->messages()]);
         }
-
+        $this->validate($request, [
+            'marking' => 'unique:products,marking,' . $id,
+            'title' => 'unique:products,title,' . $id,
+        ]);
         // save in data base
         $changedProduct = $request->all();
-        $newProduct = Product::all()->where('id', $id)->first();
-        if( $request->hasFile('main_photo')) {
-            $changedProduct['main_photo']->move('products_photo', $request['marking'] . '.jpg');
-            $changedProduct['main_photo'] = '/products_photo/' . $request['marking'] . '.jpg';
+        $myProduct = Product::all()->where('id', $id)->first();
+        $myPhotos = Product::find($id)->images;
+
+        if ($myPhotos->count() == 0){
+            if(array_key_exists('sup_photo_1', $request->all()) == true){
+                $sup_photo_1 = new ProductPhoto();
+                $path = HelperForImage::storeImage($changedProduct['sup_photo_1'], $request['marking'].'(1)');
+                $sup_photo_1['product_id'] = $id;
+                $sup_photo_1['path'] = $path;
+                $sup_photo_1->save();
+            }
+
+            if(array_key_exists('sup_photo_2', $request->all()) == true){
+                $sup_photo_2 = new ProductPhoto();
+                $path = HelperForImage::storeImage($changedProduct['sup_photo_2'], $request['marking'].'(2)');
+                $sup_photo_2['product_id'] = $id;
+                $sup_photo_2['path'] = $path;
+                $sup_photo_2->save();
+            }
         }
-        $newProduct->update($changedProduct);
+
+        if ($myPhotos->count() == 1){
+            if (HelperForImage::whatImage($myPhotos[0]['path']) == 1){
+                if(array_key_exists('sup_photo_1', $request->all()) == true){
+                    unlink(substr($myPhotos[0]['path'], 1));
+                    $sup_photo_1 = $myPhotos[0];
+                    $path = HelperForImage::storeImage($changedProduct['sup_photo_1'], $request['marking'].'(1)');
+                    $sup_photo_1['product_id'] = $id;
+                    $sup_photo_1['path'] = $path;
+                    $sup_photo_1->save();
+                }
+
+                if(array_key_exists('sup_photo_2', $request->all()) == true){
+                    $sup_photo_2 = new ProductPhoto();
+                    $path = HelperForImage::storeImage($changedProduct['sup_photo_2'], $request['marking'].'(2)');
+                    $sup_photo_2['product_id'] = $id;
+                    $sup_photo_2['path'] = $path;
+                    $sup_photo_2->save();
+                }
+            } else {
+                if(array_key_exists('sup_photo_1', $request->all()) == true){
+                    $sup_photo_1 = new ProductPhoto();
+                    $path = HelperForImage::storeImage($changedProduct['sup_photo_1'], $request['marking'].'(1)');
+                    $sup_photo_1['product_id'] = $id;
+                    $sup_photo_1['path'] = $path;
+                    $sup_photo_1->save();
+                }
+
+                if(array_key_exists('sup_photo_2', $request->all()) == true){
+                    unlink(substr($myPhotos[1]['path'], 1));
+                    $sup_photo_2 = $myPhotos[1];
+                    $path = HelperForImage::storeImage($changedProduct['sup_photo_2'], $request['marking'].'(2)');
+                    $sup_photo_2['product_id'] = $id;
+                    $sup_photo_2['path'] = $path;
+                    $sup_photo_2->save();
+                }
+            }
+        }
+
+        if ($myPhotos->count() == 2){
+            if(array_key_exists('sup_photo_1', $request->all()) == true){
+                unlink(substr($myPhotos[0]['path'], 1));
+                $sup_photo_1 = $myPhotos[0];
+                $path = HelperForImage::storeImage($changedProduct['sup_photo_1'], $request['marking'].'(1)');
+                $sup_photo_1['product_id'] = $id;
+                $sup_photo_1['path'] = $path;
+                $sup_photo_1->save();
+            }
+            if(array_key_exists('sup_photo_2', $request->all()) == true){
+                unlink(substr($myPhotos[1]['path'], 1));
+                $sup_photo_2 = $myPhotos[1];
+                $path = HelperForImage::storeImage($changedProduct['sup_photo_2'], $request['marking'].'(2)');
+                $sup_photo_2['product_id'] = $id;
+                $sup_photo_2['path'] = $path;
+                $sup_photo_2->save();
+            }
+        }
+
+        if (array_key_exists('main_photo', $request->all()) == true){
+            if ($myProduct['main_photo'] != '/products_photo/nophoto.jpg'){
+                unlink(substr($myProduct['main_photo'], 1));
+            }
+            $path = HelperForImage::storeImage($changedProduct['main_photo'], $request['marking']);
+            $changedProduct['main_photo'] = $path;
+        }
+        $myProduct->update($changedProduct);
 
         return redirect()
             ->route('voyager.'.$dataType->slug.'.index')
             ->with([
                 'message'    => "Зміни успішно збережені!",
                 'alert-type' => 'success',
-            ]);
+            ])->with('thread_cookie_test', true);
     }
 
     /**

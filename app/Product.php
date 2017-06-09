@@ -14,6 +14,7 @@ use Illuminate\Database\Eloquent\Model;
  * @property integer $price
  * @property Group $group
  * @property Manufacture $manufacture
+ * @property ProductPhoto Collection $images
  */
 class Product extends Model implements Buyable
 {
@@ -85,6 +86,14 @@ class Product extends Model implements Buyable
     public function getBuyablePrice($options = null)
     {
       return $this->price / 100 ;
+    }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function images()
+    {
+        return $this->hasMany('App\ProductPhoto');
     }
 
 }
