@@ -12,6 +12,17 @@
 		<div class="row">
 			<div class="col-md-12">
 				<div class="col-md-12">
+					@if (session()->has('success_message'))
+						<div class="alert alert-success">
+							{{ session()->get('success_message') }}
+						</div>
+					@endif
+
+					@if (session()->has('error_message'))
+						<div class="alert alert-danger">
+							{{ session()->get('error_message') }}
+						</div>
+					@endif
 					<table class="table table-striped">
 						  <thead style="background-color:#f1e4d3 ">
 						    <tr>
@@ -28,17 +39,30 @@
 						  <tbody>
 						  @foreach(Cart::content() as $item)
 						    <tr>
-						      <td  style="padding-top: 35px;"><button type="button" class="close" aria-hidden="true">×</button></td>
+						      <td>
+								<form action="{{ url('cart', [$item->rowId]) }}" method="POST" class="side-by-side">
+									{!! csrf_field() !!}
+									<input type="hidden" name="_method" value="DELETE">
+									<input type="submit" class="btn btn-danger btn-sm" value="Видалити">
+								</form>
+							  </td>
 						      <td style="width: 70px;"><img src="img/for_order.png"></td>
-						      <td style="width: 200px; padding-top: 25px;"> <p>{{ $item->name }}</p></td>
-						      <td style="padding-top: 25px;">{{ number_format($item->subtotal, 2).'грн.' }}</td>
+						      <td style="width: 200px; padding-top: 25px;"> <a href="{{ url('shop', [$item->model->slug]) }}">{{ $item->name }}</td>
+						      <td style="padding-top: 25px;">{{ number_format($item->subtotal / $item->qty , 2).'грн.' }}</td>
 						      <td style="padding-top: 25px;">0%</td>
-						      <td style="padding-top: 25px;">{{ number_format($item->subtotal, 2).'грн.' }}</td>
-								<td style="padding-top: 25px;"> <p>{{ $item->qty }}" title="Qty"></p></td>
-						      <td style="padding-top: 25px;">230 грн</td>
-						      <tr><td colspan="8" style="background-color: #e0e0e0; text-align: right;">{{ $item->subtotal }}</td></tr>
+						      <td style="padding-top: 25px;">{{ number_format($item->subtotal / $item->qty , 2).'грн.' }}</td>
+							  <td style="padding-top: 25px;"> <p>{{ $item->qty }}</p></td>
+						      <td style="padding-top: 25px;">{{ number_format($item->subtotal, 2) }}</td>
 						    </tr>
 						  @endforeach
+						  <tr>
+							  <td colspan="7" style="background-color: #e0e0e0; text-align: right;">Доставка:</td>
+							  <td style="background-color: #e0e0e0;">0 грн</td>
+						  </tr>
+						  <tr>
+							  <td colspan="7" style="background-color: #e0e0e0; text-align: right;">Ітого:</td>
+							  <td colspan="8" style="background-color: #e0e0e0;">{{ number_format(Cart::total(), 2) }}</td>
+						  </tr>
 						</tbody>
 					</table>
 				</div>

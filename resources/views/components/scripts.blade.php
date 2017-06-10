@@ -64,7 +64,9 @@ $(document).ready(function(){
     });
     $('.quantity').on('change', function() {
         var id = $(this).attr('data-id')
-        var error_field = $(this).siblings('span.error_qty');
+       /* var error_field = $(this).siblings('span.error_qty');*/
+       var error_tooltip = null;
+
         $.ajax({
             type: "PATCH",
             url: '{{ url("/cart") }}' + '/' + id,
@@ -72,11 +74,27 @@ $(document).ready(function(){
                 'quantity': this.value,
             },
             success: function(data) {
+
                 if(data.success == false) {
-                    error_field.text("Дост:" + data.qty);
+                    // changing color of the select
+                    error_tooltip = 'Доступно ' + data.item.qty + 'шт';
+                    $('[data-id="'  + id + '"]')
+                        .addClass('error_qty')
+                        .prop('title', error_tooltip).tooltip('show');
+
                 } else {
-                    error_field.text('');
+                    $('[data-id="'  + id + '"]')
+                        .removeClass('error_qty')
+                        .tooltip('destroy');
                 }
+                //rewrite price for product
+                $('#' + id).text(data.item.price * data.item.qty + ' грн');
+                //get and set new total info for the cart
+                $.get('js_cart/get_info_total', function(data, status) {
+                    $('#info_basket').text(
+                        'У кошику ' + data.total_qty + ' товарів на сумму ' + data.summ_total + 'грн'
+                    );
+                });
             },
             error: function(data) {
 

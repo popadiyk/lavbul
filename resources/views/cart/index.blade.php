@@ -16,6 +16,10 @@
     }
     .error_qty{
         color: red;
+        border-color: red;
+    }
+    .cart_action{
+        margin-top:30px;
     }
 </style>
 <div class="modal fade" id="basket_modal" role="dialog">
@@ -25,44 +29,36 @@
             <div class="modal-body">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
                 <div class="row">
-                    <p id="info_basket">У кошику {{ sizeof(Cart::content()) }} товари на сумму {{Cart::total()}} грн</p>
+                    <p id="info_basket">У кошику {{ Cart::count() }} товари на сумму {{Cart::total()}} грн</p>
                 </div>
-                {{--<div class="row">
-                    @if (session()->has('success_message'))
-                        <div class="alert alert-success">
-                            {{ session()->get('success_message') }}
-                        </div>
-                    @endif
-
-                    @if (session()->has('error_message'))
-                        <div class="alert alert-danger">
-                            {{ session()->get('error_message') }}
-                        </div>
-                    @endif
-                </div>--}}
-
                 @foreach(Cart::content() as $item)
-                    <div class="row">
+                    <div class="row" >
                         <div class="col-md-2 cart_image">
                             <img src="img/mini_plate.png">
                         </div>
                         <div class="col-md-5 cart_title">
                             <a href="{{ url('shop', [$item->model->slug]) }}">Арт.{{ $item->options->marking.". ".$item->name }}</a>
                         </div>
-                        <div class="col-md-2 cart_qty">
-                            <select class="quantity" data-id="{{ $item->rowId }}">
+                        <div class="col-md-1 cart_qty">
+                            <select class="quantity" data-id="{{ $item->rowId }}" data-toggle="tooltip" title="">
                                 <option {{ $item->qty == 1 ? 'selected' : '' }}>1</option>
                                 <option {{ $item->qty == 2 ? 'selected' : '' }}>2</option>
                                 <option {{ $item->qty == 3 ? 'selected' : '' }}>3</option>
                                 <option {{ $item->qty == 4 ? 'selected' : '' }}>4</option>
                                 <option {{ $item->qty == 5 ? 'selected' : '' }}>5</option>
                             </select>
-                            <span class="error_qty"></span>
                         </div>
                         <div class="col-md-2 cart_price">
                             <div class="price">
-                                <span>{{ number_format($item->subtotal, 2).'грн.' }}</span>
+                                <span id="{{ $item->rowId }}">{{ number_format($item->subtotal, 2) }} грн</span>
                             </div>
+                        </div>
+                        <div class="col-md-2 cart_action">
+                            <form action="{{ url('cart', [$item->rowId]) }}" method="POST" class="side-by-side">
+                                {!! csrf_field() !!}
+                                <input type="hidden" name="_method" value="DELETE">
+                                <input type="submit" class="btn btn-danger btn-sm" value="Видалити">
+                            </form>
                         </div>
                     </div>
                 @endforeach

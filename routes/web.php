@@ -26,6 +26,11 @@ Route::get('/invoices/generatePdf/{id}', 'InvoiceController@generatePdf');
 
 Route::resource('shop', 'ProductController', ['only' => ['index', 'show']]);
 Route::resource('cart', 'CartController');
+Route::get('js_cart/get_info_total', 'CartController@getTotalQty');
+
+
+
+
 Route::delete('emptyCart', 'CartController@emptyCart');
 
 Route::group(['prefix' => 'admin'], function () {
