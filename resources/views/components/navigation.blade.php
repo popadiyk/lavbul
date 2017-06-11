@@ -8,79 +8,8 @@
             <li class="nav-text"><a href="{{ url('/news') }}">НОВИНИ</a></li>
             <li class="nav-text"><a href="{{ url('/contacts') }}">КОНТАКТИ</a></li>
             <li><a href="#" role="button" class="btn" data-toggle="modal"><i class="fa fa-search fa-2x" aria-hidden="true"></i></a></li>
-            <li><a href="#basket_modal" data-toggle="modal"><i class="fa fa-cart-arrow-down fa-2x" aria-hidden="true"></i>
-                <!-- Basket_Modal -->
-                <div class="modal fade" id="basket_modal" role="dialog">
-                    <div class="modal-dialog">
-                        <!-- Modal content-->
-                        <div class="modal-content">
-                            <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                            <div class="modal-body">
-                                <div class="row">
-                                <p id="info_basket">У кошику 2 товари на сумму 546 грн</p>
-                                     <div class="row">
-                                        <div class="col-md-3">
-                                            <img src="img/mini_plate.png">
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="description" style="padding-top: 40px;">
-                                                <p>Тарілка скляна (декоративна) в стилі Прованс</p>
-                                                <p>Артикул 0846930675</p>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="input-group quantity_goods" style="padding-top: 60px;">
-                                              <input type="number" step="1" min="1" max="10" id="num_count" name="quantity" value="1" title="Qty">
-                                              <input type="button" value="-" id="button_minus">
-                                              <input type="button" value="+" id="button_plus">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <div class="price" style="padding-top: 60px;">
-                                                <span>120 грн</span>
-                                            </div>
-                                        </div>
-                                    </div>
-
-                                    <div class="row">
-                                        <div class="col-md-3">
-                                            <img src="img/mini_plate.png">
-                                        </div>
-                                        <div class="col-md-4">
-                                            <div class="description" style="padding-top: 40px;">
-                                                <p>Тарілка скляна (декоративна) в стилі Прованс</p>
-                                                <p>Артикул 0846930675</p>
-                                            </div>
-                                        </div>
-                                        <div class="col-md-3">
-                                            <div class="input-group quantity_goods" style="padding-top: 60px;">
-                                              <input type="number" step="1" min="1" max="10" id="num_count" name="quantity" value="1" title="Qty">
-                                              <input type="button" value="-" id="button_minus">
-                                              <input type="button" value="+" id="button_plus">
-                                            </div>
-                                        </div>
-                                        <div class="col-md-2">
-                                            <div class="price" style="padding-top: 60px;">
-                                                <span>120 грн</span>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-6 pull-left">
-                                        <a href="#" id="continue"><i class="fa fa-angle-left" aria-hidden="true" style="padding-right: 5px;"> </i>Продовжити вибір товарів</a>
-                                    </div>
-                                    <div class="col-md-6 pull-right">
-                                        <a class="btn" href=" {{ url('/order') }}" id="send_order" class="pull-right"><span id="order">Оформити замовлення</span></a>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <!-- End of Basket_Modal -->
-            </li>
-           <li><a href="#user_modal" data-toggle="modal"><i class="fa fa-user-secret fa-2x" aria-hidden="true"></i>
+            <li><a href="#basket_modal" data-toggle="modal"><i class="fa fa-cart-arrow-down fa-2x" aria-hidden="true"></i></a></li>
+            <li><a href="#user_modal" data-toggle="modal"><i class="fa fa-user-secret fa-2x" aria-hidden="true"></i></a>
                 <!--  User_Modal -->
                 <div class="modal fade" id="user_modal" role="dialog">
                     <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
@@ -112,5 +41,6 @@
                <!-- End of User_Modal -->
            </li>
         </ul>
+        @include('cart.index')
     </div>
 </div>

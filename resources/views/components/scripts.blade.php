@@ -55,6 +55,58 @@ $('[data-toggle="datepicker"]').datepicker();
     }
   }
 });
-  
+//--------------------------- for cart ---------------------------------------//
+$(document).ready(function(){
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+    $('.quantity').on('change', function() {
+        var id = $(this).attr('data-id')
+       /* var error_field = $(this).siblings('span.error_qty');*/
+       var error_tooltip = null;
+
+        $.ajax({
+            type: "PATCH",
+            url: '{{ url("/cart") }}' + '/' + id,
+            data: {
+                'quantity': this.value,
+            },
+            success: function(data) {
+
+                if(data.success == false) {
+                    // changing color of the select and add tooltip
+                    error_tooltip = 'Доступно ' + data.allowable_qty + 'шт';
+                    $('[data-id="'  + id + '"]')
+                        .addClass('error_qty')
+                        .prop('title', error_tooltip)
+                        .tooltip('show');
+
+                    // disable button for checking order
+                    $('#cart_btn_check_order').addClass('disabled');
+
+                } else {
+                    $('[data-id="'  + id + '"]')
+                        .removeClass('error_qty')
+                        .tooltip('destroy');
+
+                    $('#cart_btn_check_order').removeClass('disabled');
+                }
+                //rewrite price for product
+                $('#' + id).text(data.item.price * data.item.qty + ' грн');
+                //get and set new total info for the cart
+                $.get('js_cart/get_info_total', function(data, status) {
+                    $('#info_basket').text(
+                        'У кошику ' + data.total_qty + ' товарів на сумму ' + data.summ_total + 'грн'
+                    );
+                });
+            },
+            error: function(data) {
+
+            }
+        });
+    });
+});
 
 </script>

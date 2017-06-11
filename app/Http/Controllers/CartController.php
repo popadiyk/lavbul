@@ -1,6 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
+use App\Product;
 use Illuminate\Http\Request;
 use App\Http\Requests;
 use \Cart as Cart;
@@ -26,6 +27,7 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
+
         $duplicates = Cart::search(function ($cartItem, $rowId) use ($request) {
             return $cartItem->id === $request->id;
         });
@@ -33,7 +35,8 @@ class CartController extends Controller
             return redirect('cart')->withSuccessMessage('Item is already in your cart!');
         }
 
-        Cart::add($request->id, $request->name, 1, $request->price)->associate('App\Product');
+        Cart::add($request->id, $request->name, 1, $request->price, ['marking' => $request->marking])
+            ->associate('App\Product');
 
 
         return redirect('cart')->withSuccessMessage('Item was added to your cart!');
@@ -61,13 +64,17 @@ class CartController extends Controller
         if($checkQty !== null) {
             session()->flash('error_message', 'Quantity was too much! Prefer is '.$checkQty );
 
-            return response()->json(['success' => false]);
+            return response()->json([
+                'success' => false,
+                'item'=> Cart::get($id),
+                'allowable_qty' => $checkQty
+            ]);
         }
 
         Cart::update($id, $request->quantity);
         session()->flash('success_message', 'Quantity was updated successfully!');
 
-        return response()->json(['success' => true]);
+        return response()->json(['success' => true, 'item'=> Cart::get($id)]);
     }
     /**
      * Remove the specified resource from storage.
@@ -78,7 +85,7 @@ class CartController extends Controller
     public function destroy($id)
     {
         Cart::remove($id);
-        return redirect('cart')->withSuccessMessage('Item has been removed!');
+        return back()->withSuccessMessage('Item has been removed!');
     }
     /**
      * Remove the resource from storage.
@@ -90,5 +97,21 @@ class CartController extends Controller
         Cart::destroy();
         return redirect('cart')->withSuccessMessage('Your cart has been cleared!');
     }
+
+    /**
+     * Get total quantity for ajax in modal cart
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    public function getTotalQty()
+    {
+        $total_qty = Cart::count();
+
+        $amount_total = Cart::total();
+
+
+        return response()->json(['total_qty'=> $total_qty, 'summ_total' => $amount_total]);
+    }
+
 
 }

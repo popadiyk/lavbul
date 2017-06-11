@@ -26,6 +26,7 @@
                 <thead>
                 <tr>
                     <th class="table-image"></th>
+                    <th>Article</th>
                     <th>Product</th>
                     <th>Quantity</th>
                     <th>Price</th>
@@ -38,6 +39,7 @@
                 @foreach (Cart::content() as $item)
                     <tr>
                         <td class="table-image"><a href="{{ url('shop', [$item->model->slug]) }}"><img src="{{ asset('img/' . $item->model->image) }}" alt="product" class="img-responsive cart-image"></a></td>
+                        <td><a href="{{ url('shop', [$item->model->slug]) }}">{{ $item->options->marking }}</a></td>
                         <td><a href="{{ url('shop', [$item->model->slug]) }}">{{ $item->name }}</a></td>
                         <td>
                             <select class="quantity" data-id="{{ $item->rowId }}">
@@ -113,15 +115,15 @@
 
 @endsection
 
-@section('extra-js')
     <script>
-        (function(){
+        $(document).ready(function(){
             $.ajaxSetup({
                 headers: {
                     'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
                 }
             });
             $('.quantity').on('change', function() {
+
                 var id = $(this).attr('data-id')
                 $.ajax({
                     type: "PATCH",
@@ -138,6 +140,6 @@
                     }
                 });
             });
-        })();
+        });
+
     </script>
-@endsection

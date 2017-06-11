@@ -41,7 +41,7 @@ class OrderController extends Controller
         $deliveries = Delivery::all();
         $payments = PaymentType::all();
 
-        return view('tests.order', [
+        return view('order.index', [
             'deliveries' => $deliveries,
             'payments' => $payments
         ]);
