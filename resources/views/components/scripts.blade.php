@@ -55,7 +55,7 @@ $('[data-toggle="datepicker"]').datepicker();
     }
   }
 });
-// for cart
+//--------------------------- for cart ---------------------------------------//
 $(document).ready(function(){
     $.ajaxSetup({
         headers: {
@@ -76,16 +76,22 @@ $(document).ready(function(){
             success: function(data) {
 
                 if(data.success == false) {
-                    // changing color of the select
-                    error_tooltip = 'Доступно ' + data.item.qty + 'шт';
+                    // changing color of the select and add tooltip
+                    error_tooltip = 'Доступно ' + data.allowable_qty + 'шт';
                     $('[data-id="'  + id + '"]')
                         .addClass('error_qty')
-                        .prop('title', error_tooltip).tooltip('show');
+                        .prop('title', error_tooltip)
+                        .tooltip('show');
+
+                    // disable button for checking order
+                    $('#cart_btn_check_order').addClass('disabled');
 
                 } else {
                     $('[data-id="'  + id + '"]')
                         .removeClass('error_qty')
                         .tooltip('destroy');
+
+                    $('#cart_btn_check_order').removeClass('disabled');
                 }
                 //rewrite price for product
                 $('#' + id).text(data.item.price * data.item.qty + ' грн');

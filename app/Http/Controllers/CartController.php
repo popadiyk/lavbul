@@ -64,7 +64,11 @@ class CartController extends Controller
         if($checkQty !== null) {
             session()->flash('error_message', 'Quantity was too much! Prefer is '.$checkQty );
 
-            return response()->json(['success' => false, 'item'=> Cart::get($id)]);
+            return response()->json([
+                'success' => false,
+                'item'=> Cart::get($id),
+                'allowable_qty' => $checkQty
+            ]);
         }
 
         Cart::update($id, $request->quantity);

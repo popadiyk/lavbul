@@ -73,79 +73,103 @@
 		<div class="col-md-12">
 			<h3><strong>Доставка і оплата</strong></h3>
 		</div>
-		<div class="row">
-			<div class="col-md-8">
-				<form id="contact-form" role="form" style="padding-top: 20px;">
+		{{---------------- the begin of the form -------------------}}
+		{!! Form::open(['route' =>'order.store', 'id'=>'make_order']) !!}
+			<div class="row">
+				<div class="col-md-8">
 					<div class="col-md-3">Імʼя</div>
 					<div class="col-md-7">
 						<div class="form-group wow fadeInUp">
-							<label class="sr-only" for="c_name">Імʼя</label>
-							<input type="text" id="c_name" class="form-control" placeholder="Ваше ім'я" style="font-style: italic;">
+							{!! Form::label('name', 'Імʼя', ['class'=>"sr-only"]) !!}
+							{!! Form::text('name', null , [
+								'class' => 'form-control',
+								'required' => 'required',
+								'placeholder'=>"Ваше ім'я",
+								'style'=>"font-style: italic;"
+								]) !!}
 						</div>
 					</div>
 					<br>
 					<div class="col-md-3">E-mail</div>
 					<div class="col-md-7">
-					<div class="form-group wow fadeInUp" data-wow-delay=".1s">
-						<label class="sr-only" for="c_email">Email</label>
-						<input type="email" id="c_email" class="form-control" placeholder="E-mail" style="font-style: italic;">
+						<div class="form-group wow fadeInUp" data-wow-delay=".1s">
+							{{--<label class="sr-only" for="c_email">Email</label>--}}
+							{!! Form::label('email', 'E-mail', ['class' => 'sr-only']) !!}
+							{!! Form::email('email', null, [
+								'class' => 'form-control',
+								'placeholder' => "E-mail",
+								 'style' => "font-style: italic;",
+								 'required' => 'required'
+								 ]) !!}
+						</div>
 					</div>
-					</div>
-				</form>
-			</div>
-		</div>
-		<!-- personal data -->
-
-		<div class="row">
-			<div class="col-md-8">
-				<form>
-					 <div class="col-md-3">
-						<p style="font-size: 14px; padding-top: 20px;"><strong>Спосіб доставки</strong></p>
-					</div>
-					<div class="col-md-7">
-					    <div class="form-group">
-					      	<label for="sel1"></label>
-					      	<select class="form-control">
-					        <option>Магазин</option>
-					        <option>Укр Пошта</option>
-					        <option>Нова пошта </option>
-					        <option>Кур'єр</option>
-					      </select>
-					    </div>
-					</div>
-				</form>
-			</div>
-		</div>
-
-		<div class="row">
-			<div class="col-md-8">
-				 <form>
-					 <div class="col-md-3">
-						<p style="font-size: 14px; padding-top: 20px;"><strong>Спосіб оплати</strong></p>
-					</div>
-					<div class="col-md-7">
-					    <div class="form-group">
-					      <label for="sel1"></label>
-					      <select class="form-control">
-					        <option>Безготівковий</option>
-					        <option>Готівковий</option>
-					      </select>
-					    </div>
-				    </div>
-				 </form>
-			</div>
-		</div>
-
-		<div class="row" style="padding-bottom: 30px;">
-			<div class="col-md-7 col-md-offset-2" style="padding: 0">
-				<div class="col-md-4">
-					<button type="button" class="btn btn-small" id="make_order" style="background-color: #b9f8a8;"><i class="fa fa-angle-left" aria-hidden="true" style="padding-right: 5px;"></i><span>Продовжити покупки</span></button>
-				</div>
-				<div class="col-md-4">
-					<button type="button" class="btn btn-small"  id="make_order" style="background-color: #b9f8a8;"><span>Сформувати замовлення<i class="fa fa-angle-right" aria-hidden="true" style="padding-left: 5px;"></i></span></button>
 				</div>
 			</div>
-		</div>
+			<!-- personal data -->
+			<div class="row">
+				<div class="col-md-8">
+					<div class="col-md-3">
+						{!! Form::label('delivery_id', "Спосіб доставки", ['style' => "font-size: 14px; padding-top: 20px;"]) !!}
+					</div>
+					<div class="col-md-7">
+						<div class="form-group">
+							<label for="sel1"></label>
+							{!! Form::select('delivery_id', $deliveries->pluck('title', 'id'), null, ['class' => 'form-control']) !!}
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-8">
+					<div class="col-md-3">
+						{{--<p style="font-size: 14px; padding-top: 20px;"><strong>Спосіб оплати</strong></p>--}}
+						 {!! Form::label('payment_id', "Спосіб оплати", ['style' => "font-size: 14px; padding-top: 20px;"]) !!}
+					</div>
+					<div class="col-md-7">
+						<div class="form-group">
+							<label for="sel1"></label>
+							{!! Form::select('payment_id', $payments->pluck('title', 'id'), null , ['class'=>'form-control']) !!}
+						</div>
+					</div>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-md-8">
+					<div class="col-md-3">
+						{!! Form::label('address', 'Адресса', ['style' => "font-size: 14px; padding-top: 20px;"]) !!}
+					</div>
+					<div class="col-md-7">
+						<div class="form-group">
+							<label for="sel1"></label>
+							{!! Form::textarea('address', null , ['class' => 'form-control','required' => 'required' ]) !!}
+						</div>
+					</div>
+				</div>
+			</div>
+			{!! Form::hidden('cart', Cart::content()) !!}
+			{!! Form::token() !!}
+			{{-------------- the buttons block --------------}}
+			<div class="row" style="padding-bottom: 30px;">
+				<div class="col-md-7 col-md-offset-2" style="padding: 0">
+					<div class="col-md-4">
+						{{--<button type="button" class="btn btn-small" id="make_order" style="background-color: #b9f8a8;">
+							<i class="fa fa-angle-left" aria-hidden="true" style="padding-right: 5px;"></i><span>Продовжити покупки</span>
+						</button>--}}
+
+						<a href="{{ url('/') }}" class="btn btn-primary btn-smal" style="background-color: #b9f8a8; border: 0px solid; color:black;">
+							<i class="fa fa-angle-left" aria-hidden="true" style="padding-right: 5px;"></i><span>Продовжити покупки</span>
+						</a> &nbsp;
+					</div>
+					<div class="col-md-4">
+						<button type="submit" form="make_order" class="btn btn-small" style="background-color: #b9f8a8;">
+							<span>Сформувати замовлення<i class="fa fa-angle-right" aria-hidden="true" style="padding-left: 5px;"></i></span>
+						</button>
+					</div>
+				</div>
+			</div>
+			{{-------------- the ens buttons block-----------}}
+		{!! Form::close() !!}
+		{{---------------- the begin of the form -------------------}}
 	</div>
 </div>
 @endsection
