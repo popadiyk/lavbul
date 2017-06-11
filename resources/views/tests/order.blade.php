@@ -103,6 +103,8 @@
                 {!! Form::submit('Make order',['class' => 'btn btn-success']) !!}
             </div>
         </div>
+
+
         {!! Form::close() !!}
     </div>
 @endsection
