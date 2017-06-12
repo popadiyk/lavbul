@@ -44,7 +44,7 @@
                     <div class="col-lg-4 {{($k > 2) ? 'mrgTop' : ''}}">
                       <div class="service_block">
                         <div class="delay-03s animated wow  zoomIn">
-                          <span><a href="{{ url('/product') }}"><img src="{{ $product->main_photo }}" class="width-100"></a></span>
+                          <span><a href="{{ url('/product/'.$product->id ) }}"><img src="{{ $product->main_photo }}" class="width-100"></a></span>
                         </div>
                         <h3 class="animated fadeInUp wow">{{$product->title}}</h3>
                         <button type="button" class="btn btn-success col-xs-12" style="margin-bottom: 15px;"><span>Додати в кошик</span></button>
