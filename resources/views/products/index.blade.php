@@ -5,7 +5,7 @@
 	<div class="container">
 		<div class="row" style="margin-top: 20px; margin-bottom: 20px;">
 
-				<div class="col-md-4">
+				<div class="col-md-3">
 					<div class="category_all">
 						<ul class="nav nav-pills nav-stacked" id="list_of_products">
 							<li><a href="" id="category">КАТЕГОРІЇ</a></li>
@@ -49,7 +49,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-md-8">
+				<div class="col-md-9">
 					<div class="row">
 						<div class="col-md-4 dropdown">
 							<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" class="sort_by">Сортувати за
@@ -68,7 +68,7 @@
 							<i class="fa fa-th-large" aria-hidden="true" style="padding-right: 5px;"></i><i class="fa fa-th-list" aria-hidden="true"></i>	 
 						</div>
 					</div>
-					@include('main.products')
+					@include('main.products', ['products' => $products ])
 					<div class="row" style="padding-top: 20px;">
 						<div class="col-md-12 text-center">
 							<nav aria-label="Page navigation example">

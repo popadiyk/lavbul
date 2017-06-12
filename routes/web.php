@@ -46,9 +46,7 @@ Route::group(['prefix' => '/'], function () {
 	Route::get('/', function () {
 	    return view('main.index');
 	});
-	Route::get('products', function() {
-		return view('products.index');
-	});
+	Route::get('products', 'HomeController@products');
 	Route::get('product', function() {
 		return view('products.product');
 	});
@@ -65,4 +63,8 @@ Route::group(['prefix' => '/'], function () {
 	    return view('master_classes.index');
 	});
 
+	Route::get('order', function (){
+	    return view('order.index');
+	});
 });
+
