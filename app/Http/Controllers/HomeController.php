@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Product;
 
 class HomeController extends Controller
 {
@@ -28,5 +29,10 @@ class HomeController extends Controller
 
     public function test(){
         return view('layouts.temp_main');
+    }
+
+    public function products(){
+        $products = Product::all();
+        return view('products.index', [ 'products' => $products ]);
     }
 }
