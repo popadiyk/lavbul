@@ -9,7 +9,7 @@
             @include('main.advertise')
             <!-- advertise --> 
             <!-- LIST OF PRODUCTS -->    
-            @include('main.products')
+            @include('main.products_dump')
             <!-- LIST OF PRODUCTS -->
         </div>
     </div>
