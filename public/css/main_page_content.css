@@ -1,3 +1,9 @@
+body::-webkit-scrollbar { width: 0 !important }
+
+body { -ms-overflow-style: none; }
+
+/* body { overflow: -moz-scrollbars-none; } */
+
 @font-face {
     font-family: 'Century Gothic';
     src: url(fonts/Century Gothic.ttf);
@@ -324,22 +330,22 @@ figcaption>h5{
       top: 0;
     }
 
-    .navigation ul {
+    #nav-menu {
       width: 100%;
       text-align: center;
       padding: 0;
     }
 
-    .navigation ul>li {
+    #nav-menu>li {
       display: inline-block;
       padding: 5px 15px 0 15px;
     }
 
-    .navigation ul>li>img {
+    #nav-menu>li>img {
       height: 88px;
     }
 
-    .navigation ul>li>a {
+    #nav-menu>li>a {
       color: #fce0d7;
       font-size: 17px;
       text-decoration: none;
@@ -352,14 +358,14 @@ figcaption>h5{
       text-shadow: 2px 2px 4px #000000;
     }
 
-    .navigation ul>li>a:hover {
+    #nav-menu>li>a:hover {
       font-size: 17px;
       text-decoration: none;
       color: #fce0d7;
       text-shadow: 4px 4px 6px #000000;
     }
 
-    .navigation ul>li>i {
+    #nav-menu>li>i {
       color: #fce0d7;
       text-shadow: 2px 2px 4px #000000;
     }
@@ -675,3 +681,62 @@ text-align: left;
   background: url('../img/classes_header.png') 100% 100% no-repeat; 
     background-size: cover;
 }
+
+#nav-menu .dropdown-menu {
+  top: auto !important; 
+  right: 2%;
+  float: right;
+  left: auto !important;
+  padding: 10px;
+  /* background: gray; */
+  /* opacity: 0.5; */
+}
+
+    .service_block{
+        padding: 5px;
+        border-radius: 10px;
+        border-width: 1px;
+        border-color: #d7d7d7;
+        border-style: solid;
+        max-height: 350px; 
+        overflow: hidden;
+    }
+    .service_block:hover{
+        background-color: white;
+        z-index: 10;
+        max-height: 800px;
+        position: absolute;
+        -webkit-transform: scale(1.2,1.2);
+        -webkit-transition-timing-function: ease-out;
+        -webkit-transition-duration: 550ms;
+        -moz-transform: scale(1.2,1.2);
+        -moz-transition-timing-function: ease-out;
+        -moz-transition-duration: 550ms;
+    }
+    .service_block h3 {
+        font-family: 'Raleway', sans-serif;
+        font-weight: 600;
+        font-size: 18px;
+        color: #111111;
+        margin: 20px 0 18px;
+        height: 36px;
+    }
+    .dropdown-toggle::after {
+        display: none
+    }
+    .cart_counter {
+        min-width: 10px;
+        padding: 3px 7px;
+        font-size: 12px;
+        font-weight: bold;
+        line-height: 1;
+        color: red;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: middle;
+        background-color: white;
+        border-radius: 10px;
+        position: relative;
+        top: -15px;
+        right: 5px;
+    }
