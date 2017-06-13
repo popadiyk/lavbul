@@ -13,11 +13,11 @@ class PaymentTypeTableSeeder extends Seeder
     public function run()
     {
         PaymentType::firstOrCreate([
-            'title' => 'in shop'
-        ]);
+            'title' => 'Безготівковий'
+        ])->save();
 
         PaymentType::firstOrCreate([
-            'title' => 'card'
-        ]);
+            'title' => 'Готівковий'
+        ])->save();
     }
 }

@@ -18,6 +18,7 @@ class Order extends Model
         'invoice_id',
         'user_id',
         'name',
+        'email',
         'cart',
         'payment_id',
         'delivery_id',
