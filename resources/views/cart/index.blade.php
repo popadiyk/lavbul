@@ -63,18 +63,18 @@
                     </div>
                 @endforeach
                     <div class="row">
-                        <div class="col-md-4 pull-left">
-                            <a href="{{ url('/') }}" class="btn btn-info btn-md">Продовжити вибір товарів</a>
+                        <div class="col-md-4 text-center">
+                            <a href="{{ url('/') }}" class="btn btn-info">Продовжити вибір</a>
                         </div>
-                        <div class="col-md-2">
+                        <div class="col-md-3 text-center">
                             <form action="{{ url('/emptyCart') }}" method="POST">
                                 {!! csrf_field() !!}
                                 <input type="hidden" name="_method" value="DELETE">
-                                <input type="submit" class="btn btn-danger btn-md" value="Очистити">
+                                <input type="submit" class="btn btn-danger" value="Очистити">
                             </form>
                         </div>
-                        <div class="col-md-6 pull-right">
-                            <a href="{{ route('order.create') }}" id="cart_btn_check_order" class="btn btn-success btn-md">Оформити замовлення</a>
+                        <div class="col-md-5 text-center">
+                            <a href="{{ route('order.create') }}" id="cart_btn_check_order" class="btn btn-success">Оформити замовлення</a>
                         </div>
                     </div>
             </div>

@@ -8,7 +8,7 @@
             <li class="nav-text"><a href="{{ url('/news') }}">НОВИНИ</a></li>
             <li class="nav-text"><a href="{{ url('/contacts') }}">КОНТАКТИ</a></li>
             <li><a class="dropdown-toggle" data-toggle="dropdown" href="#menu"><i class="fa fa-search fa-2x" aria-hidden="true"></i></a></li>
-            <li><a class="dropdown-toggle" data-toggle="dropdown" href="#menu"><i class="fa fa-cart-arrow-down fa-2x" aria-hidden="true"></i><span class="cart_counter">5</span></a></li>
+            <li><a href="#basket_modal" data-toggle="modal"><i class="fa fa-cart-arrow-down fa-2x" aria-hidden="true"></i><span class="cart_counter">{{ Cart::count() }}</span></a></li>
             <li class="user" >
             @if (Auth::user())
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#">
