@@ -68,7 +68,48 @@
 							<i class="fa fa-th-large" aria-hidden="true" style="padding-right: 5px;"></i><i class="fa fa-th-list" aria-hidden="true"></i>	 
 						</div>
 					</div>
-					@include('main.products', ['products' => $products ])
+					<div class="row text-center">
+					    <div class="col-xs-12" style="padding-bottom: 20px;">
+					        <span class="recommend">Рекомендуємо</span>
+					    </div>
+					</div>
+					<div class="row">
+					    <!--Service-->
+					    <section>
+					        <div class="service_wrapper"> 
+					          @foreach ($products as $k => $product)
+					              @if ($k == 0 || $k%3 == 0)
+					                  <div class="row">
+					              @endif
+					                    <div class="col-lg-4 {{($k > 2) ? 'mrgTop' : ''}}">
+					                        <div class="row service_block" style="margin: 0;">
+					                            <div class="delay-03s animated wow  zoomIn">
+					                                <span>
+					                                    <a href="{{ url('/product/'.$product->id ) }}">
+					                                        <img src="{{ $product->main_photo }}" class="width-100">
+					                                    </a>
+					                                </span>
+					                            </div>
+					                            <h3 class="animated fadeInUp wow">{{$product->title}}</h3>
+					                            <p class="col-xs-3">{{$product->price}} грн.</p>
+					                            {{ Form::number('count', 0, array('class'=>'col-xs-3', 'min'=>'1', 'max'=>$product->quantity, 'style'=>'padding:0; height:36px;')) }}
+					                            {{ Html::link('http://test.com', 'в корзину', array('class'=>'btn btn-success', 'style' => 'margin-bottom: 15px;'))}}
+					                            <p class="animated fadeInDown wow">{!! str_limit($product->description , 50, '...') !!} 
+					                                <span style="font-size: 10px">
+					                                    <a href="{{ url('/product/'.$product->id ) }}" style="text-decoration: none;">детальніше</a>
+					                                </span>
+					                            </p>   
+					                        </div>
+					                    </div>
+					              @if(($k+1)%3 == 0)
+					                  </div>
+					              @endif
+					            {{-- expr --}}
+					          @endforeach
+					        </div>
+					    </section>
+					    <!--Service-->
+					</div>
 					<div class="row" style="padding-top: 20px;">
 						<div class="col-md-12 text-center">
 							<nav aria-label="Page navigation example">
