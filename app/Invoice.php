@@ -4,6 +4,7 @@ namespace App;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use PDF;
 
 /**
  * Class Invoice
@@ -15,7 +16,6 @@ use Illuminate\Database\Eloquent\Model;
  * @property ProductMove Collection productMove
  * @property string type
  * @property string status
- * @property Product Collection product
  */
 class Invoice extends Model
 {
@@ -164,5 +164,22 @@ class Invoice extends Model
     public function productMove()
     {
         return $this->hasMany(ProductMove::class, 'invoice_id', 'id');
+    }
+
+    /**
+     * @return static
+     */
+    public function getPdf()
+    {
+        $products = ProductMove::where('invoice_id', $this->id)->get();
+
+        PDF::setOptions(['dpi' => 150, 'defaultFont' => 'sans-serif']);
+
+        $pdf = PDF::loadView('invoices.index', [
+            'invoice'=> $this,
+            'products' => $products
+        ]);
+
+        return $pdf;
     }
 }
