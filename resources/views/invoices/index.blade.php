@@ -55,6 +55,9 @@
         <span>Оплата рахунку</span>
     </p>
 
+    @foreach($products as $product)
+        <p>{{ $product->product->title }}</p>
+    @endforeach
 </div>
 </body>
 </HTML>

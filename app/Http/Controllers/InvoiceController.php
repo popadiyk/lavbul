@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use App\Invoice;
 use App\Product;
+use App\ProductMove;
 use Illuminate\Http\Request;
-use PDF;
+
 
 class InvoiceController extends Controller
 {
@@ -94,12 +95,7 @@ class InvoiceController extends Controller
     {
         $invoice = Invoice::find($id);
 
-        //Collection prodacts = ProductsMove()->where('invoice_id, $id)
-        $products = Product::all();
-
-        PDF::setOptions(['dpi' => 150, 'defaultFont' => 'sans-serif']);
-
-        $pdf = PDF::loadView('invoices.index', compact('invoice', 'products'));
+        $pdf = $invoice->getPdf();
 
         return $pdf->stream('invoice.pdf');
 

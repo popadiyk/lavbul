@@ -14,7 +14,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'email', 'password', 'phone', 'role',
+        'name', 'role_id', 'email', 'password', 'phone',
     ];
     /**
      * The attributes that should be hidden for arrays.
@@ -24,4 +24,24 @@ class User extends Authenticatable
     protected $hidden = [
         'password', 'remember_token',
     ];
+
+    public function role()
+    {
+        return $this->belongsTo(Role::class);
+    }
+
+    public function isAdmin() {
+
+        $role = $this->role;
+
+        return $role->name == 'admin' ? true : false;
+    }
+
+    public function isSuperUser()
+    {
+        $role = $this->role;
+
+        return $role->name == 'super_user' ? true : false;
+    }
+
 }

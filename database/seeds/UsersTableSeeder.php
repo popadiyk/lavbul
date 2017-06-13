@@ -24,5 +24,19 @@ class UsersTableSeeder extends Seeder
                 'role_id'        => $role->id,
             ]);
         }
+
+        $role = Role::where('name', 'super_user')->firstOrFail();
+
+        if(User::where('role_id', $role->id)->count()) {
+            return;
+        }
+
+        User::create([
+            'name'           => 'SuperUser',
+            'email'          => 'super_user@super_user.com',
+            'password'       => bcrypt('super_user'),
+            'remember_token' => str_random(60),
+            'role_id'        => $role->id,
+        ]);
     }
 }
