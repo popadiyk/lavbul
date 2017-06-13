@@ -17,6 +17,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Invoice;
 use Illuminate\Http\Request;
 use App\ProductMove;
+use App\User;
+use App\Jobs\SendMailInvoice;
 
 /**
  * Class Ordering
@@ -71,12 +73,17 @@ class Ordering
 
     /**
      * Make the order and generate invoice for sale from online-shop and delivery INSHOP
+     *
      * @param Request $request
      * @return bool
      */
     public function makeOrderSaleWithInvoice(Request $request)
     {
-        $user_id = $author_id =  Auth::id();
+        if(Auth::check()) {
+            $user_id = $author_id =  Auth::id();
+        }else {
+            $user_id = $author_id = User::where('role_id', 2)->first()->id;
+        }
 
         $invoice = $this->createInvoice(Invoice::TYPE_SALES, $user_id, $author_id, Cart::total());
 
@@ -88,12 +95,17 @@ class Ordering
         $order->invoice_id = $invoice->id;
         $order->save();
 
+        /* here is place for dispatch() job for sending email with invoice */
+
         if($this->saleProducts($order)) {
             Cart::destroy();
+           //Sending email with new Invoice to user
+            dispatch(new SendMailInvoice($invoice));
+
             return true;
         }
 
-        // delete invoice and order, becouse the $this->saleProducts return false
+        // delete invoice and order, because the $this->saleProducts return false
         $order->delete();
         $invoice->delete();
 
