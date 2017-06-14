@@ -76,7 +76,7 @@
 					<div class="row">
 					    <!--Service-->
 					    <section>
-					        <div class="service_wrapper"> 
+					        <div class="service_wrapper products"> 
 					          @foreach ($products as $k => $product)
 					              @if ($k == 0 || $k%3 == 0)
 					                  <div class="row">
