@@ -1,0 +1,6 @@
+.about_header_container{
+	height: 50vh; 
+	background: url('../img/about.png') 100% 100% no-repeat; 
+    background-size: cover;
+}
+

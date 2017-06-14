@@ -25,6 +25,7 @@
   <link href="{{ asset('css/animation.css') }}" rel="stylesheet">
   <link href="{{ asset('css/main_page_content.css')}}" rel="stylesheet">
    <link href="{{ asset('css/order.css')}}" rel="stylesheet">
+    <link href="{{ asset('css/about_us.css')}}" rel="stylesheet">
   {{--<script src="{{ asset('js/bootstrap.js') }}"></script>--}}
    
 

@@ -369,7 +369,63 @@ figcaption>h5{
       height: 30px !important; 
       padding-left: 5px !important;
     }
+
+    #info {
+        color: #fce0d7;
+      font-size: 17px;
+      text-decoration: none;
+      text-transform: uppercase;
+      font-family: Corbel;
+      font-weight: bolder;
+      line-height: 60px;
+      text-indent: -15px;
+      /* text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black; */
+      text-shadow: 2px 2px 4px #000000;
+    }
 /* end avigation part */
+
+/* styles for dropdown */
+.dropbtn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 120px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    border-radius: 5px;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {background-color: #fce0d7;  border-radius: 5px;}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #3e8e41;
+}
+/* end of styles for dropdown */
 
 
 /* styles for basket_modal */
@@ -674,4 +730,23 @@ text-align: left;
   height: 50vh; 
   background: url('../img/classes_header.png') 100% 100% no-repeat; 
     background-size: cover;
+}
+
+.about_header_container{
+  height: 50vh; 
+  background: url('../img/about_header.png') 100% 100% no-repeat; 
+  background-size: cover;
+}
+
+.black_header_container {
+  height: 28vh; 
+  background: url('../img/black.png') 100% 100% no-repeat; 
+  background-size: cover;
+}
+
+.white_header_container {
+  height: 50vh; 
+  background: url('../img/white.png') 100% 100% no-repeat; 
+  background-size: cover;
+  padding: 0px;
 }

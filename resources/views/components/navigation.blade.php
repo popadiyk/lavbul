@@ -6,7 +6,16 @@
             <li class="nav-text"><a href="{{ url('/products') }}">ПРОДУКЦІЯ</a></li>
             <li class="nav-text"><a href="{{ url('/master_classes') }}">МАЙСТЕР-КЛАСИ</a></li>
             <li class="nav-text"><a href="{{ url('/news') }}">НОВИНИ</a></li>
-            <li class="nav-text"><a href="{{ url('/contacts') }}">КОНТАКТИ</a></li>
+            <li><div class="dropdown">
+                    <a href="#" id="info">ІНФО</a>
+                    <div class="dropdown-content">
+                    <a href="{{ url('/about') }}">ПРО НАС</a>
+                    <a href="#">ОПЛАТА І ДОСТАВКА</a>
+                    <a href="{{ url('/contacts') }}">КОНТАКТИ</a>
+                  </div>
+                </div>
+            </li>
+           <!--  <li class="nav-text"><a href="{{ url('/contacts') }}">КОНТАКТИ</a></li> -->
             <li><a href="#" role="button" class="btn" data-toggle="modal"><i class="fa fa-search fa-2x" aria-hidden="true"></i></a></li>
             <li><a href="#basket_modal" data-toggle="modal"><i class="fa fa-cart-arrow-down fa-2x" aria-hidden="true"></i></a></li>
             <li><a href="#user_modal" data-toggle="modal"><i class="fa fa-user-secret fa-2x" aria-hidden="true"></i></a>
