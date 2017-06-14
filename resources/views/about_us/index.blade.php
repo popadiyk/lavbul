@@ -79,7 +79,6 @@
 	    			<p>Product Name</p>
 	    			<p>150 грн</p>
 	    		</figcaption>
-	    		
 	    	</div>
 	    	<div class="col-md-4">
 	    		<figure>
@@ -89,7 +88,6 @@
 	    			<p>Product Name</p>
 	    			<p>150 грн</p>
 	    		</figcaption>
-	    		
 	    	</div>
 	    	<div class="col-md-4">
 	    		<figure>
@@ -99,12 +97,10 @@
 	    			<p>Product Name</p>
 	    			<p>150 грн</p>
 	    		</figcaption>
-	    		
 	    	</div>
 	    </div>
 	    <div class="col-md-2">
 	    </div>
 	</div>
-
 </div>
 @endsection
