@@ -9,6 +9,12 @@
 
 $(document).ready(function(){
 
+    $.ajaxSetup({
+        headers: {
+            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+        }
+    });
+
 $('[data-toggle="datepicker"]').datepicker();
 
 // slider
@@ -57,11 +63,7 @@ $('[data-toggle="datepicker"]').datepicker();
 });
 //--------------------------- for cart ---------------------------------------//
 $(document).ready(function(){
-    $.ajaxSetup({
-        headers: {
-            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
-        }
-    });
+
     $('.quantity').on('change', function() {
         var id = $(this).attr('data-id')
        /* var error_field = $(this).siblings('span.error_qty');*/
@@ -113,6 +115,45 @@ $(document).ready(function(){
         e.stopPropagation();
       }
     });
+
+    $('button.to-cart').on('click', function(){
+        var id = $(this).attr('data-id');
+        var data = {};
+
+        $(this).siblings('input').each(function(index){
+            data[this.name] = this.value;
+        });
+
+        $.ajax({
+            type: "POST",
+            url: '{{ url("add_to_cart") }}',
+            data: data,
+            success: function(data){
+                if(data.success == true) {
+                    $('#total-count-cart').text(data.count_cart);
+                    $('button[data-id=' + id +']')
+                        .removeClass('btn-success')
+                        .addClass('btn-info');
+                }
+            },
+        });
+
+
+
+    });
+// Open modal in AJAX callback
+    $('#testModalBasket').click(function(event) {
+        event.preventDefault();
+        $.get('/get_cart', function(html) {
+            $('#basket_modal').html(html).modal();
+        });
+    });
+
+    {{--{{ Form::hidden('id', $product->id) }}
+    {{ Form::hidden('name', $product->title) }}
+    {{ Form::hidden('price',  $product->price) }}
+    {{ Form::hidden('marking', $product->marking) }}--}}
+
 
 });
 

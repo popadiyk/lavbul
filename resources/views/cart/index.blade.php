@@ -22,7 +22,7 @@
         margin-top:30px;
     }
 </style>
-<div class="modal fade" id="basket_modal" role="dialog">
+
     <div class="modal-dialog">
         <!-- Modal content-->
         <div class="modal-content">
@@ -80,5 +80,5 @@
             </div>
         </div>
     </div>
-</div>
+
 <!-- End of Basket_Modal -->

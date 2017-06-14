@@ -10,6 +10,7 @@ use App\Invoice;
 use Carbon\Carbon;
 use App\Facades\OrderingFacade as MakerOrder;
 use App\User;
+use Gloudemans\Shoppingcart\Facades\Cart;
 
 class TestController extends Controller
 {
@@ -20,6 +21,6 @@ class TestController extends Controller
 
        $this->dispatch(new SendMailInvoice($invoice));
 
-       dd(env("APP_BASE_URL"));
+       dd(Cart::content());
    }
 }

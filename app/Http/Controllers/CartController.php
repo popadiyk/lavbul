@@ -38,9 +38,40 @@ class CartController extends Controller
         Cart::add($request->id, $request->name, 1, $request->price, ['marking' => $request->marking])
             ->associate('App\Product');
 
-
+       /* return response()->json(['success' => true]);*/
         return redirect('cart')->withSuccessMessage('Item was added to your cart!');
     }
+
+    public function store_js(Request $request)
+    {
+        $item = $request->all();
+
+        $duplicates = Cart::search(function ($cartItem, $rowId) use ($item) {
+            return $cartItem->id === $item['id'];
+        });
+
+        if (!$duplicates->isEmpty()) {
+            return response()->json(['success'=> false, 'data' =>'duplicate']);
+        }
+
+        Cart::add($item['id'], $item['name'], $item['quantity'], $item['price'], ['marking' => $item['marking']])
+            ->associate('App\Product');
+
+        return response()->json(['success'=> true, 'count_cart' => Cart::count()]);
+
+    }
+
+
+    public function getCart()
+    {
+        return view('cart.index');
+    }
+
+
+
+
+
+
     /**
      * Update the specified resource in storage.
      *
@@ -112,6 +143,8 @@ class CartController extends Controller
 
         return response()->json(['total_qty'=> $total_qty, 'summ_total' => $amount_total]);
     }
+
+
 
 
 }

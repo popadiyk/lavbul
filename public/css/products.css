@@ -101,7 +101,7 @@ div.panel {
 	padding-top: 50px;
 }
 
-.pagination > li > a {
+.pagination > li > a , .pagination > li > span {
 	border-radius: 50%; 
 	background-color:  rgba(235, 235, 235, 0.28) !important;
 	width: 69px;

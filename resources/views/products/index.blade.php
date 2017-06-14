@@ -77,11 +77,11 @@
 					    <!--Service-->
 					    <section>
 					        <div class="service_wrapper"> 
-					          @foreach ($products as $k => $product)
-					              @if ($k == 0 || $k%3 == 0)
+					          @foreach ($products as $product)
+					              @if ($loop->first || $loop->iteration - 1  % 3 == 0)
 					                  <div class="row">
 					              @endif
-					                    <div class="col-lg-4 {{($k > 2) ? 'mrgTop' : ''}}">
+					                    <div class="col-lg-4 {{($loop->iteration > 3) ? 'mrgTop' : ''}}">
 					                        <div class="row service_block" style="margin: 0;">
 					                            <div class="delay-03s animated wow  zoomIn">
 					                                <span>
@@ -92,16 +92,30 @@
 					                            </div>
 					                            <h3 class="animated fadeInUp wow">{{$product->title}}</h3>
 					                            <p class="col-xs-3">{{$product->price}} грн.</p>
-					                            {{ Form::number('count', 0, array('class'=>'col-xs-3', 'min'=>'1', 'max'=>$product->quantity, 'style'=>'padding:0; height:36px;')) }}
-					                            {{ Html::link('http://test.com', 'в корзину', array('class'=>'btn btn-success', 'style' => 'margin-bottom: 15px;'))}}
-					                            <p class="animated fadeInDown wow">{!! str_limit($product->description , 50, '...') !!} 
+					                            {{ Form::number('quantity', 1, array('class'=>'col-xs-3', 'min'=>'1', 'max'=>$product->quantity, 'style'=>'padding:0; height:36px;')) }}
+
+												{{ Form::hidden('id', $product->id ) }}
+												{{ Form::hidden('name', $product->title ) }}
+												{{ Form::hidden('price',  $product->price) }}
+												{{ Form::hidden('marking', $product->marking) }}
+
+												@if(in_array($product->id, $products_id_in_cart))
+													<button class="btn  btn-info to-cart" data-id="{{ $product->id }}" disabled style='margin-bottom:15px;'> додано</button>
+												@else
+													<button class="btn  btn-success to-cart" data-id="{{ $product->id }}" style='margin-bottom:15px;'>в кошик</button>
+												@endif
+
+
+
+
+					                               <p class="animated fadeInDown wow">{!! str_limit($product->description , 50, '...') !!}
 					                                <span style="font-size: 10px">
 					                                    <a href="{{ url('/product/'.$product->id ) }}" style="text-decoration: none;">детальніше</a>
 					                                </span>
 					                            </p>   
 					                        </div>
 					                    </div>
-					              @if(($k+1)%3 == 0)
+					              @if($loop->iteration % 3 == 0)
 					                  </div>
 					              @endif
 					            {{-- expr --}}
@@ -113,25 +127,7 @@
 					<div class="row" style="padding-top: 20px;">
 						<div class="col-md-12 text-center">
 							<nav aria-label="Page navigation example">
-								<ul class="pagination">
-									<li class="page-item">
-										<a class="page-link" href="#" aria-label="Previous">
-											<span aria-hidden="true">&laquo;</span>
-											<span class="sr-only">Previous</span>
-										</a>
-									</li>
-									<li class="page-item"><a class="page-link" href="#">1</a></li>
-									<li class="page-item">
-										<a class="page-link active" href="#">2 <span class="sr-only">(current)</span></a>
-									</li>
-									<li class="page-item"><a class="page-link" href="#">3</a></li>
-									<li class="page-item">
-										<a class="page-link" href="#" aria-label="Next">
-											<span aria-hidden="true">&raquo;</span>
-											<span class="sr-only">Next</span>
-										</a>
-									</li>
-								</ul>
+								{{ $products->links() }}
 							</nav>
 						</div>
 					</div>
