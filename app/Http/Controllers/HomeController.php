@@ -35,4 +35,10 @@ class HomeController extends Controller
         $products = Product::all();
         return view('products.index', [ 'products' => $products ]);
     }
+
+    public function product($id){
+        $product = Product::find($id);
+        return view('products.product', [ 'product' => $product ]);
+    }
+
 }

@@ -1,36 +1,35 @@
 @extends('layouts.main')
 @section('content')
 	@include('products.header')
-
 <div class="container-fluid" style="background: #d7d7d7; padding-top: 40px; padding-bottom: 40px;">
 	<div class="container">
 		<div class="col-md-6">
 			<div class="col-md-12" style="margin-bottom: 20px;">
 				<figure>
-					<img src="img/plate.png" width="100%">
+					<img src="{{ $product->main_photo}}" width="100%">
 				</figure>
 			</div>
 			<div class="col-md-12">
 				<figure>
 					<div class="col-md-4">
-						<img src="img/mini_plate.png" width="100%">
+						<img src="{{ $product->main_photo}}" width="100%">
 					</div>
 					<div class="col-md-4">
-						<img src="img/mini_plate.png" width="100%">
+						<img src="{{ $product->main_photo}}" width="100%">
 					</div>
 					<div class="col-md-4">
-						<img src="img/mini_plate.png" width="100%">
+						<img src="{{ $product->main_photo}}" width="100%">
 					</div>
 				</figure>
 			</div>
 		</div>
 		<div class="col-md-6">
-			<h3>Тарілка скляна (декоративна) в стилі прованс Трави</h3>
-			<h3>180 грн</h3>
-			<p>"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris</p>
-			<h6>Артикул: 356776</h6>
+			<h3>{{ $product->title}}</h3>
+			<h3>{{ $product->price}}грн</h3>
+			<p>{{ $product->description}}</p>
+			<h6>Артикул: {{ $product->marking}}</h6>
 			<h6>Розмір: 25 х 25</h6>
-			<h6>Матеріал: кераміка</h6>
+			<h6>Матеріал: якісь тряпочки</h6>
 			<h6>Термін виготовлення: в наявності</h6>
 			<span>
 				<button type="button" class="basket"><span class="add">Додати в кошик</span></button>
@@ -65,7 +64,7 @@
 					<div class="row" style="padding-bottom: 10px;">
 						<div class="col-md-4">
 							<figure>
-								<img src="img/vlada.png">
+								<img src="/img/vlada.png">
 							</figure>
 						</div>
 						<div class="col-md-8">
@@ -78,7 +77,7 @@
 					<div class="row">
 						<div class="col-md-4">
 							<figure>
-								<img src="img/vlada.png">
+								<img src="/img/vlada.png">
 							</figure>
 						</div>
 						<div class="col-md-8">
@@ -91,7 +90,7 @@
 					<div class="row">
 						<div class="col-md-4">
 							<figure>
-								<img src="img/vlada.png">
+								<img src="/img/vlada.png">
 							</figure>
 						</div>
 						<div class="col-md-8">
@@ -127,7 +126,7 @@
 						<div class="col-md-12">
 							<div class="col-md-3">
 								<figure>
-									<img src="img/hearts.jpg" style="width: 170px; height: 170px;">
+									<img src="/img/hearts.jpg" style="width: 170px; height: 170px;">
 								</figure>
 								<div class="products">
 									<span class="product_name">Product name</span><br>
@@ -136,7 +135,7 @@
 							</div>
 							<div class="col-md-3">
 								<figure>
-									<img src="img/boxes.jpg" style="width: 170px; height: 170px;">
+									<img src="/img/boxes.jpg" style="width: 170px; height: 170px;">
 								</figure>
 								<div class="products">
 									<span class="product_name">Product name</span><br>
@@ -145,7 +144,7 @@
 							</div>
 							<div class="col-md-3">
 								<figure>
-									<img src="img/earings.jpg" style="width: 170px; height: 170px;">
+									<img src="/img/earings.jpg" style="width: 170px; height: 170px;">
 								</figure>
 								<div class="products" style="text-align: center;">
 									<span class="product_name">Product name</span><br>
@@ -154,7 +153,7 @@
 							</div>
 							<div class="col-md-3">
 								<figure>
-									<img src="img/tolda.jpg" style="width: 170px; height: 170px;">
+									<img src="/img/tolda.jpg" style="width: 170px; height: 170px;">
 								</figure>
 								<div class="products" style="text-align: center;">
 									<span class="product_name">Product name</span><br>
