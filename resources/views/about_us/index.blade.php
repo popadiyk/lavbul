@@ -69,89 +69,89 @@
 	        <span class="recommend">Рекомендуємо</span>
 	    </div>
 
-  		<div id="myCarousel" class="carousel slide" data-ride="carousel">
-    	<!-- Wrapper for slides -->
-		<div class="col-md-2">
-		</div>
-		<div class="col-md-8">
-		    <div class="carousel-inner">
-		      	<div class="item active">
-		        	<div class="col-md-4">
-			    		<figure>
-			    			<img src="img/for_about_1.png">
-			    		</figure>
-			    		<figcaption>
-			    			<p>Product Name</p>
-			    			<p>150 грн</p>
-			    		</figcaption>
-			    	</div>
-			    	 <div class="col-md-4">
-			    		<figure>
-			    			<img src="img/for_about_1.png">
-			    		</figure>
-			    		<figcaption>
-			    			<p>Product Name</p>
-			    			<p>150 грн</p>
-			    		</figcaption>
-			    	</div>
-			    	<div class="col-md-4">
-			    		<figure>
-			    			<img src="img/for_about_1.png">
-			    		</figure>
-			    		<figcaption>
-			    			<p>Product Name</p>
-			    			<p>150 грн</p>
-			    		</figcaption>
-			    	</div>
-		      </div>
-		      <div class="item">
-		        <div class="col-md-4">
-			    		<figure>
-			    			<img src="img/for_about_1.png">
-			    		</figure>
-			    		<figcaption>
-			    			<p>Product Name</p>
-			    			<p>150 грн</p>
-			    		</figcaption>
-			    	</div>
-			    	 <div class="col-md-4">
-			    		<figure>
-			    			<img src="img/for_about_1.png">
-			    		</figure>
-			    		<figcaption>
-			    			<p>Product Name</p>
-			    			<p>150 грн</p>
-			    		</figcaption>
-			    	</div>
-			    	<div class="col-md-4">
-			    		<figure>
-			    			<img src="img/for_about_1.png">
-			    		</figure>
-			    		<figcaption>
-			    			<p>Product Name</p>
-			    			<p>150 грн</p>
-			    		</figcaption>
-			    	</div>
-		      </div>
-		    </div>
-		    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-			     <span class="glyphicon glyphicon-chevron-left"></span>
-			     <span class="sr-only">Previous</span>
-		    </a>
-		    <a class="right carousel-control" href="#myCarousel" data-slide="next">
-			     <span class="glyphicon glyphicon-chevron-right"></span>
-			     <span class="sr-only">Next</span>
-		    </a>
+	  	<div id="myCarousel" class="carousel slide" data-ride="carousel">
+	    	<!-- Wrapper for slides -->
+			<div class="col-md-2">
+			</div>
+			<div class="col-md-8">
+				<div class="carousel-inner">
+				    <div class="item active">
+			        	<div class="col-md-4">
+				    		<figure>
+				    			<img src="img/for_about_1.png">
+				    		</figure>
+				    		<figcaption>
+				    			<p>Product Name</p>
+				    			<p>150 грн</p>
+				    		</figcaption>
+				    	</div>
+				    	 <div class="col-md-4">
+				    		<figure>
+				    			<img src="img/for_about_1.png">
+				    		</figure>
+				    		<figcaption>
+				    			<p>Product Name</p>
+				    			<p>150 грн</p>
+				    		</figcaption>
+				    	</div>
+				    	<div class="col-md-4">
+				    		<figure>
+				    			<img src="img/for_about_1.png">
+				    		</figure>
+				    		<figcaption>
+				    			<p>Product Name</p>
+				    			<p>150 грн</p>
+				    		</figcaption>
+				    	</div>
+				    </div>
+				    <div class="item">
+			            <div class="col-md-4">
+				    		<figure>
+				    			<img src="img/for_about_1.png">
+				    		</figure>
+				    		<figcaption>
+				    			<p>Product Name</p>
+				    			<p>150 грн</p>
+				    		</figcaption>
+				    	</div>
+				    	 <div class="col-md-4">
+				    		<figure>
+				    			<img src="img/for_about_1.png">
+				    		</figure>
+				    		<figcaption>
+				    			<p>Product Name</p>
+				    			<p>150 грн</p>
+				    		</figcaption>
+				    	</div>
+				    	<div class="col-md-4">
+				    		<figure>
+				    			<img src="img/for_about_1.png">
+				    		</figure>
+				    		<figcaption>
+				    			<p>Product Name</p>
+				    			<p>150 грн</p>
+				    		</figcaption>
+				    	</div>
+				    </div>
+				</div>
+			    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+				     <span class="glyphicon glyphicon-chevron-left"></span>
+				     <span class="sr-only">Previous</span>
+			    </a>
+			    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+				     <span class="glyphicon glyphicon-chevron-right"></span>
+				     <span class="sr-only">Next</span>
+			    </a>
 
-	       <ol class="carousel-indicators">
-		       <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-		       <li data-target="#myCarousel" data-slide-to="1"></li>
-		       <li data-target="#myCarousel" data-slide-to="2"></li>
-		    </ol>
-	    </div>
-		<div class="col-md-2">
-		</div>
-  		</div>
+		        <ol class="carousel-indicators">
+			       <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+			       <li data-target="#myCarousel" data-slide-to="1"></li>
+			       <li data-target="#myCarousel" data-slide-to="2"></li>
+			    </ol>
+		    </div>
+			<div class="col-md-2">
+			</div>
+	  	</div>
 	</div>
 </div>
 

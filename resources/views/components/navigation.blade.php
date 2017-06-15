@@ -7,7 +7,7 @@
             <li class="nav-text"><a href="{{ url('/master_classes') }}">МАЙСТЕР-КЛАСИ</a></li>
             <li class="nav-text"><a href="{{ url('/news') }}">НОВИНИ</a></li>
             <li>
-               <div class="dropdown" id="drop">
+               <div class="dropdown">
                   <a href="#" class="info">ІНФО</a>
                   <div class="dropdown-content">
                     <a href="{{ url('/about') }}">Про нас</a>
