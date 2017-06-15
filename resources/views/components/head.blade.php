@@ -22,6 +22,7 @@
   <link href="{{ asset('css/main_page_content.css')}}" rel="stylesheet">
   <link href="{{ asset('css/products.css')}}" rel="stylesheet">
   <link href="{{ asset('css/one_product.css')}}" rel="stylesheet">
+   <link href="{{ asset('css/payments.css')}}" rel="stylesheet">
 
   <style>
       #our_location{

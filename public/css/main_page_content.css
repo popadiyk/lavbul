@@ -358,6 +358,26 @@ figcaption>h5{
       text-shadow: 2px 2px 4px #000000;
     }
 
+    .info {
+      color: #fce0d7;
+      font-size: 17px;
+      text-decoration: none;
+      text-transform: uppercase;
+      font-family: Corbel;
+      font-weight: bolder;
+      line-height: 60px;
+      text-indent: -15px;
+      /* text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black; */
+      text-shadow: 2px 2px 4px #000000;
+    }
+
+    .info:hover {
+      font-size: 17px;
+      text-decoration: none;
+      color: #fce0d7;
+      text-shadow: 4px 4px 6px #000000;
+    }
+
     #nav-menu>li>a:hover {
       font-size: 17px;
       text-decoration: none;
