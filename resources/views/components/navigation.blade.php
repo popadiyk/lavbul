@@ -7,15 +7,15 @@
             <li class="nav-text"><a href="{{ url('/master_classes') }}">МАЙСТЕР-КЛАСИ</a></li>
             <li class="nav-text"><a href="{{ url('/news') }}">НОВИНИ</a></li>
             <li>
-             <li><div class="dropdown" id="drop">
-                <a href="#" class="info">ІНФО</a>
-                <div class="dropdown-content">
-                  <a href="{{ url('/about') }}">Про нас</a>
-                  <a href="{{ url('/payments') }}">Оплата і доставка</a>
-                  <a href="{{ url('/contacts') }}">Контакти</a>
-                </div>
-            </div>
-           </li>
+               <div class="dropdown" id="drop">
+                  <a href="#" class="info">ІНФО</a>
+                  <div class="dropdown-content">
+                    <a href="{{ url('/about') }}">Про нас</a>
+                    <a href="{{ url('/payments') }}">Оплата і доставка</a>
+                    <a href="{{ url('/contacts') }}">Контакти</a>
+                  </div>
+              </div>
+            </li>
             <li><a class="dropdown-toggle" data-toggle="dropdown" href="#menu"><i class="fa fa-search fa-2x" aria-hidden="true"></i></a></li>
             <li><a href="#basket_modal" data-toggle="modal"><i class="fa fa-cart-arrow-down fa-2x" aria-hidden="true"></i><span class="cart_counter">{{ Cart::count() }}</span></a></li>
             <li class="user" >
@@ -34,7 +34,7 @@
                 </ul>
             @else
                 <a class="dropdown-toggle" data-toggle="dropdown" href="#menu">
-                  <i class="fa fa-user-secret fa-2x" aria-hidden="true"></i>
+                  <i class="fa fa-user-plus fa-2x" aria-hidden="true"></i></i>
                 </a>
                 <ul class="col-md-4 dropdown-menu keep-open-on-click" style="">
                     <ul class="nav nav-tabs">

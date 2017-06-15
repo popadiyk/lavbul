@@ -772,17 +772,11 @@ text-align: left;
 }
 
 .black_header_container {
-  height: 28vh; 
+  height: 30vh; 
   background: url('../img/black.png') 100% 100% no-repeat; 
   background-size: cover;
 }
 
-.white_header_container {
-  height: 50vh; 
-  background: url('../img/white.png') 100% 100% no-repeat; 
-  background-size: cover;
-  padding: 0px;
-}
 
 #nav-menu .dropdown-menu {
   top: auto !important; 

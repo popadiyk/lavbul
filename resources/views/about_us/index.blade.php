@@ -13,7 +13,7 @@
 						<img src="img/success_work.png">
 					</figure>
 					<figcaption>
-						<p>Більше трьох років успішної роботи</p>
+						<p class="more_than_years">Більше трьох років успішної роботи</p>
 					</figcaption>
 				</div>
 				<div class="col-md-3">
@@ -21,7 +21,7 @@
 						<img src="img/clients.png">
 					</figure>
 					<figcaption>
-						<p>Більше 3000 задоволених клієнтів<p>
+						<p class="more_than_clients">Більше 3000 задоволених клієнтів<p>
 					</figcaption>
 				</div>
 				<div class="col-md-3">
@@ -29,7 +29,7 @@
 						<img src="img/collegs.png">
 					</figure>
 					<figcaption>
-						<p>Креативний та веселий колектив</p>
+						<p class="creative">Креативний та веселий колектив</p>
 					</figcaption>
 				</div>
 			</div>
@@ -70,13 +70,6 @@
 	    </div>
 
   		<div id="myCarousel" class="carousel slide" data-ride="carousel">
-    	<!-- Indicators -->
-		    <ol class="carousel-indicators">
-		       <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-		       <li data-target="#myCarousel" data-slide-to="1"></li>
-		       <li data-target="#myCarousel" data-slide-to="2"></li>
-		    </ol>	
-
     	<!-- Wrapper for slides -->
 		<div class="col-md-2">
 		</div>
@@ -141,20 +134,23 @@
 			    	</div>
 		      </div>
 		    </div>
-		 
+		    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+			     <span class="glyphicon glyphicon-chevron-left"></span>
+			     <span class="sr-only">Previous</span>
+		    </a>
+		    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+			     <span class="glyphicon glyphicon-chevron-right"></span>
+			     <span class="sr-only">Next</span>
+		    </a>
+
+	       <ol class="carousel-indicators">
+		       <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+		       <li data-target="#myCarousel" data-slide-to="1"></li>
+		       <li data-target="#myCarousel" data-slide-to="2"></li>
+		    </ol>
 	    </div>
 		<div class="col-md-2">
 		</div>
-
-	   <!--  Left and right controls -->
-	   <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-	     <span class="glyphicon glyphicon-chevron-left"></span>
-	     <span class="sr-only">Previous</span>
-	   </a>
-	   <a class="right carousel-control" href="#myCarousel" data-slide="next">
-	     <span class="glyphicon glyphicon-chevron-right"></span>
-	     <span class="sr-only">Next</span>
-	   </a>
   		</div>
 	</div>
 </div>
