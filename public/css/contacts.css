@@ -18,12 +18,13 @@ span.fa.fa-envelope-o, span.fa.fa-map-marker, span.fa.fa-phone {
 	font-size: 24px;
 }
 .header_text{
-	color: #fce0d7;
+	color: #f5cfc3;
 	/* font-family: Corbel; */
 	font-weight: bolder;
 	position: relative; 
-	top: 30%;
-	text-shadow: 2px 2px 4px #000000;
+	top: 90%;
+    font-size: 48px;
+    text-shadow: 2px 2px 4px #000000; 
 }
 .contacts_header_container{
 	height: 50vh; 

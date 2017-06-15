@@ -65,5 +65,14 @@ Route::group(['prefix' => '/'], function () {
 	Route::get('order', function (){
 	    return view('order.index');
 	});
+
+	Route::get('about', function (){
+	    return view('about_us.index');
+	});
+
+	Route::get('payments', function (){
+	    return view('payments.index');
+	});
+
 });
 
