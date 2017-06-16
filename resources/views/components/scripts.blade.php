@@ -19,7 +19,7 @@ $('[data-toggle="datepicker"]').datepicker();
         paginationClickable: true,
         spaceBetween: 0,
         centeredSlides: true,
-        autoplay: 2500,
+        // autoplay: 2500,
         autoplayDisableOnInteraction: false
     });
 // navigation menu

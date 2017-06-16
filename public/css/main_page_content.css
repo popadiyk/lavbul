@@ -32,9 +32,10 @@ body {
 .grid {
 	position: relative;
 	clear: both;
-	margin: 0 auto;
+	margin: 0 auto !important;
 	padding: 1em 0 4em;
-	max-width: 100%;
+	/* max-width: 100%; */
+  max-width: 300px;
 	list-style: none;
 	text-align: center;
 }
@@ -836,3 +837,19 @@ text-align: left;
         top: -15px;
         right: 5px;
     }
+
+
+
+@media screen and (max-width: 992px) { 
+  .swiper-slide .swiper-img{
+    height: 100%;
+  }
+}
+@media screen and (max-width: 768px) { 
+  .advertise-padding div:nth-child(1){
+    padding-top: 40px;
+  }
+  .footer-block .container .row{
+    text-align: center;
+  }
+}
