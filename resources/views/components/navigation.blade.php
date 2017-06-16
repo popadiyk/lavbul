@@ -1,7 +1,7 @@
 <div class="container">
-    <div class="navigation">
+    <div class="hidden-xs hidden-sm navigation">
         <ul id="nav-menu">
-            <li class="hidden-xs"><img src="/img/min_logo.png" width="88px"></li>
+            <li><img src="/img/min_logo.png" width="88px"></li>
             <li class="active nav-text"><a href="{{ url('/') }}">ГОЛОВНА</a></li>
             <li class="nav-text"><a href="{{ url('/products') }}">ПРОДУКЦІЯ</a></li>
             <li class="nav-text"><a href="{{ url('/master_classes') }}">МАЙСТЕР-КЛАСИ</a></li>
@@ -118,4 +118,61 @@
         </ul>
         @include('cart.index')
     </div>
+    <nav class="navbar navbar-default navigation" style="height: 50px;">
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#navbar" aria-expanded="false" aria-controls="navbar">
+            <i class="fa fa-bars fa-2x" aria-hidden="true"></i>
+          </button>
+          <a class="navbar-brand" style="text-transform: uppercase; font-weight: bolder;" href="#">Лавка-Булавка</a>
+        </div>
+        <div id="navbar" class="navbar-collapse collapse" aria-expanded="false" style="height: 1px; background-color: white;">
+          <ul class="nav navbar-nav">
+            <li class="active nav-text"><a href="{{ url('/') }}">ГОЛОВНА</a></li>
+            <li class="nav-text"><a href="{{ url('/products') }}">ПРОДУКЦІЯ</a></li>
+            <li class="nav-text"><a href="{{ url('/master_classes') }}">МАЙСТЕР-КЛАСИ</a></li>
+            <li class="nav-text"><a href="{{ url('/news') }}">НОВИНИ</a></li>
+            <li class="dropdown">
+              <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">ІНФО <span class="caret"></span></a>
+              <ul class="dropdown-menu">
+                <li><a href="{{ url('/about') }}">Про нас</a></li>
+                <li><a href="{{ url('/payments') }}">Оплата і доставка</a></li>
+                <li><a href="{{ url('/contacts') }}">Контакти</a></li>
+{{--                 <li role="separator" class="divider"></li>
+                <li class="dropdown-header">Nav header</li>
+                <li><a href="#">Separated link</a></li>
+                <li><a href="#">One more separated link</a></li> --}}
+              </ul>
+            </li>
+            <li>
+              <a class="dropdown-toggle" data-toggle="dropdown" href="#menu"><i class="fa fa-search fa-2x" aria-hidden="true"></i></a>
+              <ul class="dropdown-menu">
+                <li>
+                  <input type="text" name="search" value="" placeholder="введите текст">
+                </li>
+              </ul>
+            </li>
+            <li><a href="#basket_modal" data-toggle="modal"><i class="fa fa-cart-arrow-down fa-2x" aria-hidden="true"></i><span class="cart_counter">{{ Cart::count() }}</span></a></li>
+            <li class="user" >
+            @if (Auth::user())
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                    <i class="fa fa-user-circle-o fa-2x" aria-hidden="true" title="{{ Auth::user()->name }}"></i>
+                </a>
+                <ul class="dropdown-menu" role="menu">
+                    <li><a href="#">Профіль</a></li>
+                    <li>
+                        <a href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Вийти</a>
+                        <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
+                            {{ csrf_field() }}
+                        </form>
+                    </li>
+                </ul> 
+            @else
+                <a class="dropdown-toggle" data-toggle="dropdown" href="#menu">
+                  <i class="fa fa-user-plus fa-2x" aria-hidden="true"></i></i>
+                </a>           
+            @endif
+            </li>
+          </ul>
+        </div><!--/.nav-collapse -->
+    </nav>
 </div>

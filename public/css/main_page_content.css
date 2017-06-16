@@ -856,6 +856,20 @@ text-align: left;
     text-transform: uppercase;
 }
 
+.navigation .navbar-toggle {
+    position: relative;
+    float: right;
+    padding: 0;
+    /* margin-top: 8px; */
+    margin-right: 15px;
+    /* margin-bottom: 8px; */
+    background-color: transparent;
+    background-image: none;
+    border: 1px solid transparent;
+    border-radius: 4px;
+    /* margin-top: auto; */
+}
+
 
 @media screen and (max-width: 992px) { 
   .swiper-slide .swiper-img{
