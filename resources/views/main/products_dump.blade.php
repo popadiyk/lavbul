@@ -34,7 +34,7 @@
             </div>
         </div>
     </div>
-    <div class="row borderTop" style="margin-top: 40px;">
+    <div class="row borderTop hidden-xs" style="margin-top: 40px;">
         <div class="col-xs-6 col-sm-6 col-md-3 col-lg-3">
             <div>
                 <div class="icon2  delay-03s animated wow zoomIn animated" style="visibility: visible; animation-name: zoomIn;"> <span><img src="img/boxes.jpg" class="width-100"></span> </div>

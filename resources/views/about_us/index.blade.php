@@ -9,7 +9,7 @@
 		<div class="row" style="padding-top: 30px; padding-bottom: 30px;">
 			<div class="col-md-11 col-md-offset-2">
 				<div class="col-md-3">
-					<figure>
+					<figure class="text-center">
 						<img src="img/success_work.png">
 					</figure>
 					<figcaption>
@@ -17,7 +17,7 @@
 					</figcaption>
 				</div>
 				<div class="col-md-3">
-					<figure>
+					<figure class="text-center">
 						<img src="img/clients.png">
 					</figure>
 					<figcaption>
@@ -25,7 +25,7 @@
 					</figcaption>
 				</div>
 				<div class="col-md-3">
-					<figure>
+					<figure class="text-center">
 						<img src="img/collegs.png">
 					</figure>
 					<figcaption>
