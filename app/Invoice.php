@@ -156,6 +156,29 @@ class Invoice extends Model
         $this->save();
     }
 
+    public function getType($type){
+        switch ($type){
+            case 'sales': return 'Продаж'; break;
+            case 'purchase': return 'Закупівля'; break;
+            case 'writeOf': return 'Списання'; break;
+            case 'realisation': return 'Реалізація'; break;
+        }
+    }
+
+    public function getStatus($status){
+        switch ($status){
+            case 'unconfirmed': return 'НЕ ПРОВЕДЕНА'; break;
+            case 'confirmed': return 'СТВОРЕНА'; break;
+            case 'closed': return 'УСПІШНА'; break;
+            case 'failed': return 'ВІДМІНЕНА'; break;
+        }
+    }
+
+
+    public function getDescription(){
+        return '['.$this->productMove[0]->product->marking.'] '.$this->productMove[0]->product->title.'. . .';
+    }
+
     /**
      * The relationship with ProductMove
      *
@@ -165,4 +188,6 @@ class Invoice extends Model
     {
         return $this->hasMany(ProductMove::class, 'invoice_id', 'id');
     }
+
+
 }

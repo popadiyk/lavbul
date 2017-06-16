@@ -104,4 +104,5 @@ class InvoiceController extends Controller
         return $pdf->stream('invoice.pdf');
 
     }
+    
 }

@@ -29,6 +29,7 @@ Route::resource('cart', 'CartController');
 Route::delete('emptyCart', 'CartController@emptyCart');
 
 Route::group(['prefix' => 'admin'], function () {
+	Route::get('/invoices/create', array('as'=>'pagination', 'uses'=>'InvoiceController@create'));
     Voyager::routes();
 });
 Route::resource('order', 'OrderController');
