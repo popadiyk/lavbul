@@ -17,7 +17,7 @@ body { -ms-overflow-style: none; }
 }
 /* 'Montserrat' */
 body {
-    font-family: Century !important;
+    font-family: Century;
     margin: 0;
     padding: 0;
 }
