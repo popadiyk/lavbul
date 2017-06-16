@@ -1,34 +1,10 @@
-<style>
-    .cart_qty{
-        margin-top:40px
-    }
-    .cart_title{
-        margin-top:40px
-    }
-    .cart_price{
-        margin-top:40px
-    }
-    .cart_image img{
-        width: 100px;
-    }
-    .cart_marking{
-        margin-top:40px
-    }
-    .error_qty{
-        color: red;
-        border-color: red;
-    }
-    .cart_action{
-        margin-top:30px;
-    }
-</style>
 <div class="modal fade" id="basket_modal" role="dialog">
     <div class="modal-dialog">
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-body">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <div class="row">
+                <div class="row" style="padding-bottom: 10px;">
                     <p id="info_basket">У кошику {{ Cart::count() }} товари на сумму {{Cart::total()}} грн</p>
                 </div>
                 @foreach(Cart::content() as $item)
@@ -66,13 +42,13 @@
                         <div class="col-md-4 text-center">
                             <a href="{{ url('/') }}" class="btn btn-info">Продовжити вибір</a>
                         </div>
-                        <div class="col-md-3 text-center">
-                            <form action="{{ url('/emptyCart') }}" method="POST">
-                                {!! csrf_field() !!}
-                                <input type="hidden" name="_method" value="DELETE">
-                                <input type="submit" class="btn btn-danger" value="Очистити">
-                            </form>
-                        </div>
+                       <!--  <div class="col-md-3 text-center">
+                           <form action="{{ url('/emptyCart') }}" method="POST">
+                               {!! csrf_field() !!}
+                               <input type="hidden" name="_method" value="DELETE">
+                               <input type="submit" class="btn btn-danger" value="Очистити">
+                           </form>
+                       </div> -->
                         <div class="col-md-5 text-center">
                             <a href="{{ route('order.create') }}" id="cart_btn_check_order" class="btn btn-success">Оформити замовлення</a>
                         </div>
