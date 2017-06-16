@@ -1,7 +1,7 @@
 <div class="container">
     <div class="navigation">
         <ul id="nav-menu">
-            <li><img src="/img/min_logo.png" width="88px"></li>
+            <li class="hidden-xs"><img src="/img/min_logo.png" width="88px"></li>
             <li class="active nav-text"><a href="{{ url('/') }}">ГОЛОВНА</a></li>
             <li class="nav-text"><a href="{{ url('/products') }}">ПРОДУКЦІЯ</a></li>
             <li class="nav-text"><a href="{{ url('/master_classes') }}">МАЙСТЕР-КЛАСИ</a></li>

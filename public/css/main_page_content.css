@@ -837,7 +837,24 @@ text-align: left;
         top: -15px;
         right: 5px;
     }
-
+.footer-block button.accordion {
+    /* background-color: white; */
+    cursor: pointer;
+    /* padding: 5px; */
+    /* width: 100%; */
+    border: none;
+    /* text-align: left; */
+    outline: none;
+    transition: 0.7s;
+    /* font-family: 'Montserrat'; */
+    color: #666666 !important;
+    /* font-size: 22px; */
+    font-weight: bolder;
+    line-height: 30px;
+    text-align: center;
+    text-indent: -15px;
+    text-transform: uppercase;
+}
 
 
 @media screen and (max-width: 992px) { 
@@ -851,5 +868,16 @@ text-align: left;
   }
   .footer-block .container .row{
     text-align: center;
+  }
+  .footer-block .container {
+    margin-top: 0px;
+  }
+  .contacts ul > li {
+    margin-left: 33%;
+  }
+}
+@media screen and (max-width: 480px) { 
+  .contacts ul > li {
+    margin-left: 0;
   }
 }
