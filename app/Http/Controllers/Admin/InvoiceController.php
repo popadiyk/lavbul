@@ -11,6 +11,7 @@ use Illuminate\Support\Facades\DB;
 use TCG\Voyager\Facades\Voyager;
 use TCG\Voyager\Http\Controllers\Traits\BreadRelationshipParser;
 use App\ProductMove;
+use HelperForImage;
 
 
 class InvoiceController extends Controller
@@ -102,18 +103,60 @@ class InvoiceController extends Controller
         $manufacture = $request->manufacture;
         $newInvoice->type = $request->type;
         //dd($manufacture);
+        //dd($request->search);
 
-
-        if($newInvoice->type == "sales" || $newInvoice->type == "writeOf"){
-            $products = Product::paginate(10);
-            $products->withPath('create?type='.$newInvoice->type);
-            //dd($products);
-
+        if($newInvoice->type == "sales" || $newInvoice->type == "writeOf") {
+            if ($request->search != null) {
+                $search = $request->search;
+                $products = [];
+                $columns = ['marking', 'title'];
+                if ($search) {
+                    foreach ($columns as $column) {
+                        $items = Product::where($column, 'like', '%' . $search . '%')->get();
+                        if (count($items) > 0) {
+                            foreach ($items as $item) {
+                                if(!in_array($item, $products)){
+                                    array_push($products, $item);
+                                }
+                            }
+                        }
+                    }
+                    $products = HelperForImage::paginate($products, 10);
+                    $products->withPath('create?type='.$newInvoice->type.'&search='.$request->search);
+                    //dd($products);
+                }
+            } else {
+                $products = Product::paginate(10);
+                $products->withPath('create?type='.$newInvoice->type);
+            }
         }
+
         if ($newInvoice->type == "purchase"){
             //dd($manufacture);
-            $products = Product::where('manufacture_id', $manufacture)->paginate(10);
-            $products->withPath('create?type='.$newInvoice->type.'&manufacture='.$manufacture);
+            if ($request->search != null) {
+                $search = $request->search;
+                $products = [];
+                $columns = ['marking', 'title'];
+                if ($search) {
+                    foreach ($columns as $column) {
+                        $items = Product::where($column, 'like', '%' . $search . '%')->where('manufacture_id', $manufacture)->get();
+                        if (count($items) > 0) {
+                            foreach ($items as $item) {
+                                if(!in_array($item, $products)){
+                                    array_push($products, $item);
+                                }
+                            }
+                        }
+                    }
+                    $products = HelperForImage::paginate($products, 10);
+                    $products->withPath('create?type='.$newInvoice->type.'&manufacture='.$manufacture.'&search='.$request->search);
+                    //dd($products);
+                }
+            } else {
+                $products = Product::where('manufacture_id', $manufacture)->paginate(10);
+                $products->withPath('create?type='.$newInvoice->type.'&manufacture='.$manufacture);
+            }
+
         }
         $productRealizations = [];
         $invoceRealizations = [];
@@ -138,6 +181,11 @@ class InvoiceController extends Controller
             }
             //dd($invoceRealizations);
         }
+
+//        if ($request->search != null){
+//            return view('admin.invoices.data-edit-add', compact('products'));
+//        }
+
 
         if ($request->ajax()){
             //dd($request->ajax());

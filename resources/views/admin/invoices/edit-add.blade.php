@@ -130,7 +130,15 @@
                                     </div>
                             </div>
                         </div>
-                        <div id="products-table" class="col-xs-6" style="height: 500px; overflow-y: scroll;">
+                        <div class="col-xs-6" style="padding: 0px; margin: 0px; padding-right: 20px;">
+                            <form method="get" name="search" action="javascript:void(0)">
+                                <input id ="input-search" type="text" class="form-control" style="margin: 5px 0px; width: 73%; display: inline-block;">
+                                <button id="search" type="submit" class="btn btn-success" style="width:25%;">
+                                    <i class="voyager-search"></i> Знайти
+                                </button>
+                            </form>
+                        </div>
+                        <div id="products-table" class="col-xs-6" style="width: 48%; padding: 0px; height: 460px; overflow-y: scroll;">
                             @if ($newInvoice->type != 'realisation')
                                 @include('admin.invoices.data-edit-add');
                             @else
@@ -174,7 +182,8 @@
         calculateSumm();
 
         function checkQty() {
-            if (parseInt($('#qty').val()) > parseInt($('#qty').attr('max'))) return false;
+            if (parseInt($('#qty').val()) > parseInt($('#qty').attr('max')) && type != "purchase") return false;
+
                 modal.style.display = "none";
                 checkIfExist(Product);
 
@@ -186,12 +195,22 @@
                 myTr.attr('price', Product.price);
                 myTr.attr('purchase_price', Product.purchase_price);
 
-                myTr.append('<td>' + Product.marking + '</td>');
-                myTr.append('<td>' + Product.title + '</td>');
-                myTr.append('<td style="text-align: center;">' + $('#qty').val() + '</td>');
-                myTr.append('<td style="text-align: center;">' + Product.price + '</td>');
-                myTr.append('<td class="summ" style="text-align: center;">' + $('#qty').val() * Product.price + '</td>');
-                myTr.append('<td style="text-align: center;"> <i class="voyager-pen" marking="'+Product.marking+'" style="color:orange; cursor: pointer;"></i> <i class="voyager-trash" marking="'+Product.marking+'" style="color:red; margin-left: 15px; cursor: pointer;"></i> </td>');
+                if (type != "purchase"){
+                    myTr.append('<td>' + Product.marking + '</td>');
+                    myTr.append('<td>' + Product.title + '</td>');
+                    myTr.append('<td style="text-align: center;">' + $('#qty').val() + '</td>');
+                    myTr.append('<td style="text-align: center;">' + Product.price + '</td>');
+                    myTr.append('<td class="summ" style="text-align: center;">' + $('#qty').val() * Product.price + '</td>');
+                    myTr.append('<td style="text-align: center;"> <i class="voyager-pen" marking="'+Product.marking+'" style="color:orange; cursor: pointer;"></i> <i class="voyager-trash" marking="'+Product.marking+'" style="color:red; margin-left: 15px; cursor: pointer;"></i> </td>');
+                } else {
+                    myTr.append('<td>' + Product.marking + '</td>');
+                    myTr.append('<td>' + Product.title + '</td>');
+                    myTr.append('<td style="text-align: center;">' + $('#qty').val() + '</td>');
+                    myTr.append('<td style="text-align: center;">' + Product.purchase_price + '</td>');
+                    myTr.append('<td class="summ" style="text-align: center;">' + $('#qty').val() * Product.purchase_price + '</td>');
+                    myTr.append('<td style="text-align: center;"> <i class="voyager-pen" marking="'+Product.marking+'" style="color:orange; cursor: pointer;"></i> <i class="voyager-trash" marking="'+Product.marking+'" style="color:red; margin-left: 15px; cursor: pointer;"></i> </td>');
+
+                }
                 console.log(Product);
                 calculateSumm();
                 removeProductEvent();
@@ -221,6 +240,7 @@
             });
         }
 
+        // функція навішує евент на едіт-іконку для редагування кількості елементів з інвойс листа після створення продукту
         function editProductEvent() {
             $(".voyager-pen").click(function () {
                 var editMarking = $(this).attr('marking');
@@ -239,7 +259,11 @@
 
 
                 modal.style.display = "block";
+                if (type != "purchase")
                 $('#qty').val("").focus().attr('max', $(this).attr('maxqty'));
+                else {
+                    $('#qty').val("").focus();
+                }
 
             });
         }
@@ -274,12 +298,16 @@
         // МОДАЛКА
         var modal = document.getElementById('myModal');
 
+        // Івент для даблкліку на продукти розвішується завжди
         function getProduct() {
             $("tr").dblclick(function () {
                 modal.style.display = "block";
 
-                $('#qty').val("").focus().attr('max', $(this).attr('maxqty'));
-
+                if (type != "purchase")
+                    $('#qty').val("").focus().attr('max', $(this).attr('maxqty'));
+                else {
+                    $('#qty').val("").focus();
+                }
                 Product = {
                     marking: $(this).attr('marking'),
                     title: $(this).attr('title'),
@@ -301,41 +329,95 @@
 
 
 
+        // Робота пошуку (івенти)
 
-//        $(window).on('hashchange', function () {
-//            if (window.location.hash) {
-//                var page = window.location.hash.replace('#', '');
-//                if (page == Number.NaN || page <= 0){
-//                    return false;
-//                }else{
-//                    getData(page);
-//                }
-//            }
-//        });
+        var myurl;
+        var starturl = window.location.href;
+        $(document).ready(function () {
+            $(document).on('click', '#search', function (event) {
+                $(document).off('click', '.pagination li a');
+                if ($("#input-search").val() == "") {
+                    manufacture = $(".page-content").attr('manufacture');
+                    console.log(manufacture);
+                    if (manufacture == "") {
+                        getData(1);
+                    }
+                    else {
+                        getDataMan(1);
+                    }
+                    $(document).on('click', '.pagination li a', function (event) {
+                            $('li').removeClass('active');
+                            $(this).parent('li').addClass('active');
+                            event.preventDefault();
+                            var page = $(this).attr('href').split('page=')[1];
+                            manufacture = $(".page-content").attr('manufacture');
+                            console.log(manufacture);
+                            if (manufacture == "") {
+                                getData(page);
+                            }
+                            else {
+                                getDataMan(page);
+                            }
+
+                            var body = $('#products-table');
+                            var top = body.scrollTop();
+
+                            if (top != 0) {
+                                body.animate({scrollTop: 0}, '2000');
+                            }
+                    });
+                    return false;
+                }
+                myurl = starturl + '&search=' + $("#input-search").val();
+                getDataSearch(myurl, 1);
+                $(document).on('click', '.pagination li a', function (event) {
+                    $(this).unbind('click');
+                    $('li').removeClass('active');
+                    $(this).parent('li').addClass('active');
+                    event.preventDefault();
+                    var page = $(this).attr('href').split('page=')[1];
+                    getDataSearch(myurl, page);
+                    var body = $('#products-table');
+                    var top = body.scrollTop();
+
+                    if (top != 0){
+                        body.animate({scrollTop:0}, '2000');
+                    }
+
+                });
+
+            });
+        });
+
+        // івенти на паганацію сторінок для АДЖАКСА
 
         $(document).ready(function () {
-           $(document).on('click', '.pagination li a', function (event) {
-//               alert(page);
-               $('li').removeClass('active');
-               $(this).parent('li').addClass('active');
-               event.preventDefault();
-               var myurl = $(this).attr('href');
-               var page = $(this).attr('href').split('page=')[1];
-               manufacture = $(".page-content").attr('manufacture');
+                $(document).on('click', '.pagination li a', function (event) {
+                    if ($("#input-search").val() == ""){
+                        $('li').removeClass('active');
+                        $(this).parent('li').addClass('active');
+                        event.preventDefault();
+                        var page = $(this).attr('href').split('page=')[1];
+                        manufacture = $(".page-content").attr('manufacture');
+                        console.log(manufacture);
+                        if (manufacture == "") {
+                            getData(page);
+                        }
+                        else {
+                            getDataMan(page);
+                        }
 
-               if (manufacture == null)
-               getData(page);
-               else
-                   getDataMan(page);
+                        var body = $('#products-table');
+                        var top = body.scrollTop();
 
-               var body = $('#products-table');
-               var top = body.scrollTop();
-
-               if (top != 0){
-                   body.animate({scrollTop:0}, '2000');
-               }
-           });
+                        if (top != 0) {
+                            body.animate({scrollTop: 0}, '2000');
+                        }
+                    }
+                });
         });
+
+        // Функції АДЖАКСА (на пошук, з постачальником, без постачальника)
 
         $.ajaxSetup({
             headers: {
@@ -348,7 +430,22 @@
             manufacture = $(".page-content").attr('manufacture');
         });
 
+        function getDataSearch(url, page) {
+            console.log("getDataSearch");
+            $.ajax({
+                url: url + '&page=' + page,
+                type: "get"
+            }).done(function (data) {
+                $("#products-table").empty().html(data);
+                location.hash = page;
+                getProduct();
+            }).fail(function (jqXHR, ajaxOptions, thrownError) {
+                alert("No response from server");
+            });
+        }
+
         function getData(page) {
+            console.log("getData");
             $.ajax({
                 url: '/admin/invoices/create?type='+type+'&page=' + page,
                 type: "get"
@@ -362,8 +459,8 @@
         }
 
         function getDataMan(page) {
+            console.log("getDataMan");
             $.ajax({
-
                 url: '/admin/invoices/create?type='+type+'&manufacture='+manufacture+'&page=' + page,
                 type: "get"
             }).done(function (data) {
