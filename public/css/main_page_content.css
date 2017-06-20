@@ -17,7 +17,7 @@ body { -ms-overflow-style: none; }
 }
 /* 'Montserrat' */
 body {
-    font-family: Century !important;
+    font-family: Century;
     margin: 0;
     padding: 0;
 }
@@ -32,9 +32,10 @@ body {
 .grid {
 	position: relative;
 	clear: both;
-	margin: 0 auto;
+	margin: 0 auto !important;
 	padding: 1em 0 4em;
-	max-width: 100%;
+	/* max-width: 100%; */
+  max-width: 300px;
 	list-style: none;
 	text-align: center;
 }
@@ -836,3 +837,47 @@ text-align: left;
         top: -15px;
         right: 5px;
     }
+.footer-block button.accordion {
+    /* background-color: white; */
+    cursor: pointer;
+    /* padding: 5px; */
+    /* width: 100%; */
+    border: none;
+    /* text-align: left; */
+    outline: none;
+    transition: 0.7s;
+    /* font-family: 'Montserrat'; */
+    color: #666666 !important;
+    /* font-size: 22px; */
+    font-weight: bolder;
+    line-height: 30px;
+    text-align: center;
+    text-indent: -15px;
+    text-transform: uppercase;
+}
+
+
+@media screen and (max-width: 992px) { 
+  .swiper-slide .swiper-img{
+    height: 100%;
+  }
+}
+@media screen and (max-width: 768px) { 
+  .advertise-padding div:nth-child(1){
+    padding-top: 40px;
+  }
+  .footer-block .container .row{
+    text-align: center;
+  }
+  .footer-block .container {
+    margin-top: 0px;
+  }
+  .contacts ul > li {
+    margin-left: 33%;
+  }
+}
+@media screen and (max-width: 480px) { 
+  .contacts ul > li {
+    margin-left: 0;
+  }
+}

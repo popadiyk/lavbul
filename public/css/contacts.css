@@ -23,7 +23,9 @@ span.fa.fa-envelope-o, span.fa.fa-map-marker, span.fa.fa-phone {
 	font-weight: bolder;
 	position: relative; 
 	top: 90%;
-    font-size: 48px;
+    /* font-size: 48px; */
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
     text-shadow: 2px 2px 4px #000000; 
 }
 .contacts_header_container{
