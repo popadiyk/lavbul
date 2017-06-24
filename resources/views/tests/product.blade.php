@@ -3,6 +3,7 @@
 @section('content')
 <div class="container">
     <p><a href="{{ url('/shop') }}">Shop</a> / {{ $product->title }}</p>
+    <h1>Article: {{ $product->marking }}</h1>
     <h1>{{ $product->title }}</h1>
 
     <hr>
@@ -19,6 +20,7 @@
                 <input type="hidden" name="id" value="{{ $product->id }}">
                 <input type="hidden" name="name" value="{{ $product->title }}">
                 <input type="hidden" name="price" value="{{ $product->price }}">
+                <input type="hidden" name="marking" value="{{ $product->marking }}">
                 <input type="submit" class="btn btn-success btn-lg" value="Add to Cart">
             </form>
 

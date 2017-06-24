@@ -1,10 +1,23 @@
-@font-face {
-    font-family: 'Century Gothic';
-    src: url(fonts/Century Gothic.ttf);
-}
+body::-webkit-scrollbar { width: 0 !important }
+body { -ms-overflow-style: none; }
 
+/* body { overflow: -moz-scrollbars-none; } */
+
+@font-face {
+    font-family: Century;
+    src: url(/fonts/CenturyGothic.ttf);
+}
+@font-face {
+    font-family: Corbel; 
+    src: url(/fonts/corbel.ttf);
+}
+@font-face {
+    font-family: Icons; 
+    src: url(/fonts/glyphicons-halflings-regular.ttf);
+}
+/* 'Montserrat' */
 body {
-    font-family: 'Montserrat';
+    font-family: Century;
     margin: 0;
     padding: 0;
 }
@@ -19,9 +32,10 @@ body {
 .grid {
 	position: relative;
 	clear: both;
-	margin: 0 auto;
+	margin: 0 auto !important;
 	padding: 1em 0 4em;
-	max-width: 100%;
+	/* max-width: 100%; */
+  max-width: 300px;
 	list-style: none;
 	text-align: center;
 }
@@ -200,7 +214,7 @@ figcaption>h5{
 
 .product_name {
 	text-align: center;
-	font-family: 'Montserrat';
+	/* font-family: 'Montserrat'; */
 	color:  #424141;
 	font-size: 18px;
 	font-weight: 400;
@@ -211,7 +225,7 @@ figcaption>h5{
 }
 
 .before_price {
-	font-family: 'ABeeZee';
+	/* font-family: 'ABeeZee'; */
 	color:  #e1582e;
 	font-size: 16px;
 	font-weight: 700;
@@ -221,7 +235,7 @@ figcaption>h5{
 }
 
 .after_price {
-	font-family: 'ABeeZee';
+	/* font-family: 'ABeeZee'; */
 	color:  #414040;
 	font-size: 20px;
 	font-weight: 700;
@@ -276,7 +290,7 @@ figcaption>h5{
 
 .funtacy {
 	padding-top: 20px;
-	font-family: 'Roboto Condensed', sans-serif;
+	/* font-family: 'Roboto Condensed', sans-serif; */
 	color:  #fdfbfb;
 	font-size: 60px;
 	font-weight: 600;
@@ -324,22 +338,35 @@ figcaption>h5{
       top: 0;
     }
 
-    .navigation ul {
+    #nav-menu {
       width: 100%;
       text-align: center;
       padding: 0;
     }
 
-    .navigation ul>li {
+    #nav-menu>li {
       display: inline-block;
       padding: 5px 15px 0 15px;
     }
 
-    .navigation ul>li>img {
+    #nav-menu>li>img {
       height: 88px;
     }
 
-    .navigation ul>li>a {
+    #nav-menu>li>a {
+      color: #fce0d7;
+      font-size: 17px;
+      text-decoration: none;
+      text-transform: uppercase;
+      /* font-family: Corbel; */
+      font-weight: bolder;
+      line-height: 60px;
+      text-indent: -15px;
+      /* text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black; */
+      text-shadow: 2px 2px 4px #000000;
+    }
+
+    .info {
       color: #fce0d7;
       font-size: 17px;
       text-decoration: none;
@@ -352,14 +379,21 @@ figcaption>h5{
       text-shadow: 2px 2px 4px #000000;
     }
 
-    .navigation ul>li>a:hover {
+    .info:hover {
       font-size: 17px;
       text-decoration: none;
       color: #fce0d7;
       text-shadow: 4px 4px 6px #000000;
     }
 
-    .navigation ul>li>i {
+    #nav-menu>li>a:hover {
+      font-size: 17px;
+      text-decoration: none;
+      color: #fce0d7;
+      text-shadow: 4px 4px 6px #000000;
+    }
+
+    #nav-menu>li>i {
       color: #fce0d7;
       text-shadow: 2px 2px 4px #000000;
     }
@@ -369,7 +403,63 @@ figcaption>h5{
       height: 30px !important; 
       padding-left: 5px !important;
     }
+
+    #info {
+        color: #fce0d7;
+      font-size: 17px;
+      text-decoration: none;
+      text-transform: uppercase;
+      font-family: Corbel;
+      font-weight: bolder;
+      line-height: 60px;
+      text-indent: -15px;
+      /* text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black; */
+      text-shadow: 2px 2px 4px #000000;
+    }
 /* end avigation part */
+
+/* styles for dropdown */
+.dropbtn {
+    background-color: #4CAF50;
+    color: white;
+    padding: 16px;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+}
+
+.dropdown {
+    position: relative;
+    display: inline-block;
+}
+
+.dropdown-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    min-width: 120px;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    border-radius: 5px;
+}
+
+.dropdown-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+}
+
+.dropdown-content a:hover {background-color: #fce0d7;  border-radius: 5px;}
+
+.dropdown:hover .dropdown-content {
+    display: block;
+}
+
+.dropdown:hover .dropbtn {
+    background-color: #3e8e41;
+}
+/* end of styles for dropdown */
 
 
 /* styles for basket_modal */
@@ -382,7 +472,7 @@ figcaption>h5{
       opacity: -0.5 !important;
     }
     #info_basket {
-      font-family: CenturyGothic;
+      /* font-family: CenturyGothic; */
   color:  #666666;
   font-size: 22px;
   font-weight: 400;
@@ -586,7 +676,7 @@ text-align: left;
         position: absolute; 
         top: 5%; 
         right: 13%; 
-        font-family: 'Roboto Condensed', sans-serif;
+        /* font-family: 'Roboto Condensed', sans-serif; */
         color:  #424141;
         font-size: 28px;
         font-weight: 600;
@@ -610,7 +700,7 @@ text-align: left;
         left: 55%; 
     }
     .partners-image span {
-        font-family: 'Montserrat';
+        /* font-family: 'Montserrat'; */
         color:  #424141;
         font-size: 18px;
         font-weight: 700;
@@ -656,7 +746,7 @@ text-align: left;
         font-weight: bolder;
     }
     .footer-block{
-        font-family: 'Montserrat';
+        /* font-family: 'Montserrat'; */
         color:  #424141;
         font-size: 15px;
     }
@@ -674,4 +764,120 @@ text-align: left;
   height: 50vh; 
   background: url('../img/classes_header.png') 100% 100% no-repeat; 
     background-size: cover;
+}
+
+.about_header_container{
+  height: 50vh; 
+  background: url('../img/about_header.png') 100% 100% no-repeat; 
+  background-size: cover;
+}
+
+.black_header_container {
+  height: 30vh; 
+  background: url('../img/black.png') 100% 100% no-repeat; 
+  background-size: cover;
+}
+
+
+#nav-menu .dropdown-menu {
+  top: auto !important; 
+  right: 2%;
+  float: right;
+  left: auto !important;
+  padding: 10px;
+  /* background: gray; */
+  /* opacity: 0.5; */
+}
+
+    .service_block{
+        padding: 5px;
+        border-radius: 10px;
+        border-width: 1px;
+        border-color: #d7d7d7;
+        border-style: solid;
+        max-height: 350px; 
+        overflow: hidden;
+    }
+    .products .service_block:hover{
+        background-color: white;
+        z-index: 10;
+        max-height: 800px;
+        position: absolute;
+        -webkit-transform: scale(1.2,1.2);
+        -webkit-transition-timing-function: ease-out;
+        -webkit-transition-duration: 550ms;
+        -moz-transform: scale(1.2,1.2);
+        -moz-transition-timing-function: ease-out;
+        -moz-transition-duration: 550ms;
+    }
+    .service_block h3 {
+        /* font-family: 'Raleway', sans-serif; */
+        font-weight: 600;
+        font-size: 18px;
+        color: #111111;
+        margin: 20px 0 18px;
+        height: 36px;
+    }
+    .dropdown-toggle::after {
+        display: none
+    }
+    .cart_counter {
+        min-width: 10px;
+        padding: 3px 7px;
+        font-size: 12px;
+        font-weight: bold;
+        line-height: 1;
+        color: red;
+        text-align: center;
+        white-space: nowrap;
+        vertical-align: middle;
+        background-color: white;
+        border-radius: 10px;
+        position: relative;
+        top: -15px;
+        right: 5px;
+    }
+.footer-block button.accordion {
+    /* background-color: white; */
+    cursor: pointer;
+    /* padding: 5px; */
+    /* width: 100%; */
+    border: none;
+    /* text-align: left; */
+    outline: none;
+    transition: 0.7s;
+    /* font-family: 'Montserrat'; */
+    color: #666666 !important;
+    /* font-size: 22px; */
+    font-weight: bolder;
+    line-height: 30px;
+    text-align: center;
+    text-indent: -15px;
+    text-transform: uppercase;
+}
+
+
+@media screen and (max-width: 992px) { 
+  .swiper-slide .swiper-img{
+    height: 100%;
+  }
+}
+@media screen and (max-width: 768px) { 
+  .advertise-padding div:nth-child(1){
+    padding-top: 40px;
+  }
+  .footer-block .container .row{
+    text-align: center;
+  }
+  .footer-block .container {
+    margin-top: 0px;
+  }
+  .contacts ul > li {
+    margin-left: 33%;
+  }
+}
+@media screen and (max-width: 480px) { 
+  .contacts ul > li {
+    margin-left: 0;
+  }
 }

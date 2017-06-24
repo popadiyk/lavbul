@@ -41,7 +41,7 @@ class OrderController extends Controller
         $deliveries = Delivery::all();
         $payments = PaymentType::all();
 
-        return view('tests.order', [
+        return view('order.index', [
             'deliveries' => $deliveries,
             'payments' => $payments
         ]);
@@ -55,9 +55,9 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        if(!Auth::check()) {
+       /* if(!Auth::check()) {
           return back()->with('error_message', 'You need to be authoriseted  in the shop');
-        }
+        }*/
 
         if( $request->input('delivery_id') == Delivery::SHOP) {
            if(! MakerOrder::makeOrderSaleWithInvoice($request)) {
@@ -65,9 +65,14 @@ class OrderController extends Controller
            }
         }
 
-        $orders = Order::isConfirmed()->where('user_id', Auth::id())->get();
+        if(Auth::check()) {
+            $orders = Order::isConfirmed()->where('user_id', Auth::id())->get();
 
-        return view('cabinet.index', compact('orders'));
+            return view('cabinet.index', compact('orders'));
+        }
+
+        return back()->with('success_message', 'На Вашу почту відправлений інвойс на проплату');;
+
     }
 
     /**

@@ -26,6 +26,11 @@ Route::get('/invoices/generatePdf/{id}', 'InvoiceController@generatePdf');
 
 Route::resource('shop', 'ProductController', ['only' => ['index', 'show']]);
 Route::resource('cart', 'CartController');
+Route::get('js_cart/get_info_total', 'CartController@getTotalQty');
+
+
+
+
 Route::delete('emptyCart', 'CartController@emptyCart');
 
 Route::group(['prefix' => 'admin'], function () {
@@ -42,12 +47,9 @@ Route::group(['prefix' => '/'], function () {
 	Route::get('/', function () {
 	    return view('main.index');
 	});
-	Route::get('products', function() {
-		return view('products.index');
-	});
-	Route::get('product', function() {
-		return view('products.product');
-	});
+	Route::get('products', 'HomeController@products');
+	Route::get('product/{id}', 'HomeController@product');
+	
 	Route::get('contacts', function (){
 	    return view('contacts.index');
 	});
@@ -64,4 +66,14 @@ Route::group(['prefix' => '/'], function () {
 	Route::get('order', function (){
 	    return view('order.index');
 	});
+
+	Route::get('about', function (){
+	    return view('about_us.index');
+	});
+
+	Route::get('payments', function (){
+	    return view('payments.index');
+	});
+
 });
+

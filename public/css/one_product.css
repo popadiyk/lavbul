@@ -17,7 +17,7 @@ button.basket {
 }
 
 span.add {
-	font-family: 'Montserrat' !important;
+	/* font-family: 'Montserrat' !important; */
 	color:  #666666 !important;
 	font-size: 24px !important;/* Approximation due to font substitution */
 	font-weight: 700 !important;

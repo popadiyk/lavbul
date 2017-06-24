@@ -9,12 +9,12 @@
             @include('main.advertise')
             <!-- advertise --> 
             <!-- LIST OF PRODUCTS -->    
-            @include('main.products')
+            @include('main.products_dump')
             <!-- LIST OF PRODUCTS -->
         </div>
     </div>
     <!-- part for partners -->
-    <div class="container-fluid hidden-sm partners-block">
+    <div class="container-fluid hidden-xs hidden-sm partners-block">
         <div class="container">
             @include('main.partners')
         </div>
