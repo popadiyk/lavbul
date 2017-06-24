@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Invoice;
 use App\Product;
 use App\Manufacture;
+use App\Client;
 use Illuminate\Http\Request;
 use TCG\Voyager\Http\Controllers\Controller;
 use Illuminate\Support\Facades\DB;
@@ -102,6 +103,8 @@ class InvoiceController extends Controller
         $newInvoice = new Invoice();
         $manufacture = $request->manufacture;
         $newInvoice->type = $request->type;
+        $clients = Client::all();
+
         //dd($manufacture);
         //dd($request->search);
 
@@ -203,7 +206,7 @@ class InvoiceController extends Controller
             : false;
         // Check if BREAD is Translatable
         $isModelTranslatable = is_bread_translatable($dataTypeContent);
-        return view('admin.invoices.edit-add', compact('dataType', 'dataTypeContent', 'isModelTranslatable', 'newInvoice', 'products', 'manufacture', 'productRealizations', 'invoceRealizations'));
+        return view('admin.invoices.edit-add', compact('dataType', 'dataTypeContent', 'isModelTranslatable', 'newInvoice', 'products', 'manufacture', 'productRealizations', 'invoceRealizations', 'clients'));
     }
 
     /**

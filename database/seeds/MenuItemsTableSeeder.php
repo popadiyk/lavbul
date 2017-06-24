@@ -243,6 +243,35 @@ class MenuItemsTableSeeder extends Seeder
                 ])->save();
             }
 
+            $menuItem = MenuItem::firstOrNew([
+                'menu_id'    => $menu->id,
+                'title'      => 'Накладні',
+                'url'        => '/admin/invoices',
+            ]);
+            if (!$menuItem->exists) {
+                $menuItem->fill([
+                    'target'     => '_self',
+                    'icon_class' => 'voyager-file-text',
+                    'color'      => null,
+                    'parent_id'  => null,
+                    'order'      => 12,
+                ])->save();
+            }
+
+            $menuItem = MenuItem::firstOrNew([
+                'menu_id'    => $menu->id,
+                'title'      => 'Клієнти',
+                'url'        => '/admin/clients',
+            ]);
+            if (!$menuItem->exists) {
+                $menuItem->fill([
+                    'target'     => '_self',
+                    'icon_class' => 'voyager-pirate',
+                    'color'      => null,
+                    'parent_id'  => null,
+                    'order'      => 13,
+                ])->save();
+            }
 
         }
     }

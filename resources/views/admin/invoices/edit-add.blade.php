@@ -74,9 +74,26 @@
 @stop
 
 @section('page_header')
-    <h1 class="page-title">
-        <i class="{{ $dataType->icon }}"></i> @if(isset($dataTypeContent->id)){{ 'Змінюємо' }}@else{{ 'Створюємо' }}@endif {{ $dataType->display_name_singular }} на {{$newInvoice->type}}
-    </h1>
+    <div class="col-xs-4">
+        <h1 class="page-title">
+            <i class="{{ $dataType->icon }}"></i> @if(isset($dataTypeContent->id)){{ 'Змінюємо' }}@else{{ 'Створюємо' }}@endif {{ $dataType->display_name_singular }} на {{$newInvoice->type}}
+        </h1>
+    </div>
+    @if ($newInvoice->type == "sales")
+    <div class="col-xs-3" style="padding-top: 18px;">
+        <label style="font-size: 12px; font-weight: bold;">Клієнт:</label>
+        <select id="clients" name="clients" >
+            <option></option>
+            @foreach($clients as $client)
+                @if ($client->id == 1)
+                <option value="{{$client->id}}&{{$client->discount}}" selected="selected">{{$client->card}} - {{$client->name}} - {{$client->discount}}%</option>
+                @else
+                <option value="{{$client->id}}&{{$client->discount}}">{{$client->card}} - {{$client->name}} - {{$client->discount}}%</option>
+                @endif
+            @endforeach
+        </select>
+    </div>
+    @endif
 @stop
 
 @section('content')
@@ -179,7 +196,35 @@
 @section('javascript')
     <script>
 
+        $(function() {
+            $("#clients").select2({
+                placeholder: "Оберіть клієнта",
+                language: {
+                    noResults: function () {
+                        return "Співпадінь, не знайдено";
+                    },
+                },
+                width: "100%"
+
+            });
+        });
+
         calculateSumm();
+
+        $('#clients').change(function () {
+            console.log('value:' + $('#clients').val());
+
+            if ($('#clients').val().split('&')[1] == 0){
+                $("#discount").val("");
+            } else {
+                $("#discount").val($('#clients').val().split('&')[1]);
+            }
+            calculateSumm();
+//            if ($("#discousnt").val() == "" || $("#discount").val() == "-"){
+//                $("#discount").val("-");
+//                $("#total-sum-discount").val(totalSumm.toFixed(2));
+//            }
+        });
 
         function checkQty() {
             if (parseInt($('#qty').val()) > parseInt($('#qty').attr('max')) && type != "purchase") return false;
@@ -287,7 +332,13 @@
                 $("#discount").val("-");
                 $("#total-sum-discount").val(totalSumm.toFixed(2));
             } else {
-
+                $("#total-sum-discount").val((totalSumm * (1 - $("#discount").val()/100)).toFixed(2));
+            }
+            var type = $(".page-content").attr('type');
+            if (type == "writeOf") {
+                totalSumm = 0;
+                $("#total-sum").val(totalSumm.toFixed(2));
+                $("#total-sum-discount").val(totalSumm.toFixed(2));
             }
 
             console.log(totalSumm);
