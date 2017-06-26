@@ -137,16 +137,25 @@ $(document).ready(function(){
                 }
             },
         });
-
-
-
     });
 // Open modal in AJAX callback
     $('#testModalBasket').click(function(event) {
         event.preventDefault();
         $.get('/get_cart', function(html) {
             $('#basket_modal').html(html).modal();
+
+            $('button.delete-product').click( function(event){
+                var id = $(this).attr('data-id');
+                var that = this;
+                deleteFromCart(id, function(){
+                    $(that).parents('.row').remove();
+                })
+
+            });
         });
+
+
+
     });
 
     {{--{{ Form::hidden('id', $product->id) }}
@@ -157,4 +166,10 @@ $(document).ready(function(){
 
 });
 
+function deleteFromCart(id,resolve) {
+
+    $.post('/delete_product/' + id, function(data){
+        resolve();
+    })
+}
 </script>

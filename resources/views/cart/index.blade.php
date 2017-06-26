@@ -9,7 +9,8 @@
         margin-top:40px
     }
     .cart_image img{
-        width: 100px;
+        width: 80px;
+        height: 70px;
     }
     .cart_marking{
         margin-top:40px
@@ -20,6 +21,9 @@
     }
     .cart_action{
         margin-top:30px;
+    }
+    .cart-footer{
+        margin-top: 30px;
     }
 </style>
 
@@ -32,11 +36,14 @@
                     <p id="info_basket">У кошику {{ Cart::count() }} товари на сумму {{Cart::total()}} грн</p>
                 </div>
                 @foreach(Cart::content() as $item)
-                    <div class="row" >
-                        <div class="col-md-2 cart_image">
-                            <img src="img/mini_plate.png">
+                    <div class="row" data-id = '{{ $item->rowId }}' >
+                        <div class="col-md-1 cart_action">
+                            <button class="delete-product" data-id = '{{  $item->rowId }}'>X</button>
                         </div>
-                        <div class="col-md-5 cart_title">
+                        <div class="col-md-2 cart_image">
+                            <img class="img-circle"  src="{{ App\Product::find($item->id)->main_photo }}">
+                        </div>
+                        <div class="col-md-6 cart_title">
                             <a href="{{ url('shop', [$item->model->slug]) }}">Арт.{{ $item->options->marking.". ".$item->name }}</a>
                         </div>
                         <div class="col-md-1 cart_qty">
@@ -53,16 +60,10 @@
                                 <span id="{{ $item->rowId }}">{{ number_format($item->subtotal, 2) }} грн</span>
                             </div>
                         </div>
-                        <div class="col-md-2 cart_action">
-                            <form action="{{ url('cart', [$item->rowId]) }}" method="POST" class="side-by-side">
-                                {!! csrf_field() !!}
-                                <input type="hidden" name="_method" value="DELETE">
-                                <input type="submit" class="btn btn-danger btn-sm" value="Видалити">
-                            </form>
-                        </div>
+
                     </div>
                 @endforeach
-                    <div class="row">
+                    <div class="row cart-footer">
                         <div class="col-md-4 text-center">
                             <a href="{{ url('/') }}" class="btn btn-info">Продовжити вибір</a>
                         </div>

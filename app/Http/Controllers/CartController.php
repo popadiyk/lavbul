@@ -68,10 +68,6 @@ class CartController extends Controller
     }
 
 
-
-
-
-
     /**
      * Update the specified resource in storage.
      *
@@ -144,7 +140,11 @@ class CartController extends Controller
         return response()->json(['total_qty'=> $total_qty, 'summ_total' => $amount_total]);
     }
 
-
+    public function deleteProductFromCart($id)
+    {
+        Cart::remove($id);
+        return response()->json(['success'=> true, 'rawId' => $id]);
+    }
 
 
 }

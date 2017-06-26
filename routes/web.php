@@ -28,7 +28,7 @@ Route::resource('shop', 'ProductController', ['only' => ['index', 'show']]);
 Route::resource('cart', 'CartController');
 Route::post('add_to_cart', 'CartController@store_js');
 Route::get('/get_cart', 'CartController@getCart');
-
+Route::post('/delete_product/{id}', 'CartController@deleteProductFromCart');
 Route::get('js_cart/get_info_total', 'CartController@getTotalQty');
 
 
