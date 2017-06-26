@@ -26,4 +26,17 @@ class HelperForImage {
             return 2;
         }
     }
+
+    public static function paginate($items, $perPage)
+    {
+        $pageStart           = \Request::get('page', 1);
+        $offSet              = ($pageStart * $perPage) - $perPage;
+        $itemsForCurrentPage = array_slice($items, $offSet, $perPage, TRUE);
+
+        return new Illuminate\Pagination\LengthAwarePaginator(
+            $itemsForCurrentPage, count($items), $perPage,
+            Illuminate\Pagination\Paginator::resolveCurrentPage(),
+            ['path' => Illuminate\Pagination\Paginator::resolveCurrentPath()]
+        );
+    }
 }

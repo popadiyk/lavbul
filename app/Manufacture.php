@@ -47,6 +47,6 @@ class Manufacture extends Model
      */
     public function manufactureType()
     {
-        return $this->belongsTo(ManufactureType::class);
+        return $this->belongsTo(ManufactureType::class, 'type_id', 'id');
     }
 }
