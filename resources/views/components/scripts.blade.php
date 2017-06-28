@@ -1,6 +1,8 @@
 
 <script src={{ asset('js/jquery-3.2.1.min.js')}}></script>
-<script src={{ asset('js/bootstrap.js') }}></script>
+<script src={{ asset('js/tether.min.js') }}></script>
+<script src={{ asset('js/bootstrap.min.js') }}></script>
+<script src={{ asset('js/mdb.min.js') }}></script>
 <script src={{ asset('js/datepicker.js') }}></script>
 <script src={{ asset('js/swiper.jquery.min.js')}}></script>
 <script src={{ asset('js/wow.js')}}></script>
@@ -8,6 +10,14 @@
 <script>
 
 $(document).ready(function(){
+
+$('.navbar-toggler').on('click', function(){
+  if($('#navbarsExampleCenteredNav').hasClass('show')){
+    $('.navigation').removeClass('open');
+  } else{
+    $('.navigation').addClass('open');
+  }
+});
 
 $('[data-toggle="datepicker"]').datepicker();
 
@@ -24,7 +34,7 @@ $('[data-toggle="datepicker"]').datepicker();
     });
 // navigation menu
   $(function() {
-      var header = $("#nav-menu");
+      var header = $(".navigation");
       $(window).scroll(function() {    
           var scroll = $(window).scrollTop();
           if (scroll >= 1) {
