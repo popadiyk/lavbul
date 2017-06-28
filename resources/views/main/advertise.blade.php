@@ -1,4 +1,4 @@
-<div class="row text-center advertise-padding">
+<div class="row text-center">
     <div class="col-xs-12 col-sm-6 col-md-4" style="margin-left: auto; margin-right: auto;">
         <div class="grid wow zoomIn">
             <figure class="effect-bubba">
