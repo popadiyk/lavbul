@@ -1,7 +1,7 @@
 @extends('layouts.main')
 @section('content')
-	@include('products.header')
-<div class="container-fluid" style="background: #d7d7d7; padding-top: 40px; padding-bottom: 40px;">
+@include('products.header')
+<div class="container-fluid" style="background: #E9EAEA; padding-top: 40px; padding-bottom: 40px;">
 	<div class="container">
 		<div class="col-md-6">
 			<div class="col-md-12" style="margin-bottom: 20px;">
@@ -35,10 +35,11 @@
 				<button type="button" class="basket"><span class="add">Додати в кошик</span></button>
 			</span>
 		</div>
-
 	</div>
 </div>
-<div class="container-fluid">
+
+<!-- This part temporary is hidden -->
+<!-- <div class="container-fluid">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-6">
@@ -111,59 +112,97 @@
 			</div>
 		</div>
 	</div>
-</div>
+</div> -->
 <div class="container-fluid">
 	<div class="container">
-		<div class="row">
-			<div class="col-md-12">
-				<div  style="padding-bottom: 20px;">
-					<div class="row">
-						<div class="col-md-12 text-center" style="padding-bottom: 20px;">
-							<span class="recommend">Рекомендуємо</span>
-						</div>
-					</div>
-					<div class="row"><!-- LIST OF PRODUCTS -->
-						<div class="col-md-12">
-							<div class="col-md-3">
-								<figure>
-									<img src="/img/hearts.jpg" style="width: 170px; height: 170px;">
-								</figure>
-								<div class="products">
-									<span class="product_name">Product name</span><br>
-									<span class="before_price" "><del>150 грн.</del></span><span class="after_price">100 грн.</span>
-								</div>
-							</div>
-							<div class="col-md-3">
-								<figure>
-									<img src="/img/boxes.jpg" style="width: 170px; height: 170px;">
-								</figure>
-								<div class="products">
-									<span class="product_name">Product name</span><br>
-									<span class="after_price">180 грн.</span>
-								</div>
-							</div>
-							<div class="col-md-3">
-								<figure>
-									<img src="/img/earings.jpg" style="width: 170px; height: 170px;">
-								</figure>
-								<div class="products" style="text-align: center;">
-									<span class="product_name">Product name</span><br>
-									<span class="after_price">150 грн.</span>
-								</div>
-							</div>
-							<div class="col-md-3">
-								<figure>
-									<img src="/img/tolda.jpg" style="width: 170px; height: 170px;">
-								</figure>
-								<div class="products" style="text-align: center;">
-									<span class="product_name">Product name</span><br>
-									<span class="after_price">150 грн.</span>
-								</div>
-							</div>
-						</div>
-					</div>
+		<div class="row text-center" style="height: 428px; background-color: #E9EAEA; margin-top: 30px;">
+		    <div class="col-xs-12" style="padding-bottom: 20px;">
+		        <span class="recommend">Рекомендуємо</span>
+		    </div>
+
+		  	<div id="myCarousel" class="carousel slide" data-ride="carousel">
+		    	<!-- Wrapper for slides -->
+				<div class="col-md-2">
 				</div>
-			</div>
+				<div class="col-md-8">
+					<div class="carousel-inner">
+					    <div class="item active">
+				        	<div class="col-md-4">
+					    		<figure>
+					    			<img src="{{ $product->main_photo}}" width="80%" height="40%">
+					    		</figure>
+					    		<figcaption>
+					    			<p>{{ $product->title}}</p>
+					    			<p>{{ $product->price}}грн</p>
+					    		</figcaption>
+					    	</div>
+					    	 <div class="col-md-4">
+					    		<figure>
+					    			<img src="{{ $product->main_photo}}" width="80%" height="40%">
+					    		</figure>
+					    		<figcaption>
+					    			<p>{{ $product->title}}</p>
+					    			<p>{{ $product->price}}грн</p>
+					    		</figcaption>
+					    	</div>
+					    	<div class="col-md-4">
+					    		<figure>
+					    			<img src="{{ $product->main_photo}}" width="80%" height="40%">
+					    		</figure>
+					    		<figcaption>
+					    			<p>{{ $product->title}}</p>
+					    			<p>{{ $product->price}}грн</p>
+					    		</figcaption>
+					    	</div>
+					    </div>
+					    <div class="item">
+				            <div class="col-md-4">
+					    		<figure>
+					    			<img src="{{ $product->main_photo}}" width="80%" height="40%">
+					    		</figure>
+					    		<figcaption>
+					    			<p>{{ $product->title}}</p>
+					    			<p>{{ $product->price}}грн</p>
+					    		</figcaption>
+					    	</div>
+					    	 <div class="col-md-4">
+					    		<figure>
+					    			<img src="{{ $product->main_photo}}" width="80%" height="40%">
+					    		</figure>
+					    		<figcaption>
+					    			<p>{{ $product->title}}</p>
+					    			<p>{{ $product->price}}грн</p>
+					    		</figcaption>
+					    	</div>
+					    	<div class="col-md-4">
+					    		<figure>
+					    			<img src="{{ $product->main_photo}}" width="80%" height="40%">
+					    		</figure>
+					    		<figcaption>
+					    			<p>{{ $product->title}}</p>
+					    			<p>{{ $product->price}}грн</p>
+					    		</figcaption>
+					    	</div>
+					    </div>
+					</div>
+				    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
+					     <span class="glyphicon glyphicon-chevron-left"></span>
+					     <span class="sr-only">Previous</span>
+				    </a>
+				    <a class="right carousel-control" href="#myCarousel" data-slide="next">
+					     <span class="glyphicon glyphicon-chevron-right"></span>
+					     <span class="sr-only">Next</span>
+				    </a>
+
+			        <ol class="carousel-indicators">
+				       <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
+				       <li data-target="#myCarousel" data-slide-to="1"></li>
+				       <li data-target="#myCarousel" data-slide-to="2"></li>
+				    </ol>
+			    </div>
+				<div class="col-md-2">
+				</div>
+		  	</div>
 		</div>
 	</div>
 </div>

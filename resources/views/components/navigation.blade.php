@@ -16,7 +16,8 @@
                   </div>
               </div>
             </li>
-            <li><a class="dropdown-toggle" data-toggle="dropdown" href="#menu"><i class="fa fa-search fa-2x" aria-hidden="true"></i></a></li>
+            <!-- This part stay -->
+            <!-- <li><a class="dropdown-toggle" data-toggle="dropdown" href="#menu"><i class="fa fa-search fa-2x" aria-hidden="true"></i></a></li> -->
             <li><a href="#basket_modal" data-toggle="modal"><i class="fa fa-cart-arrow-down fa-2x" aria-hidden="true"></i><span class="cart_counter">{{ Cart::count() }}</span></a></li>
             <li class="user" >
             @if (Auth::user())

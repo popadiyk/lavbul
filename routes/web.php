@@ -75,5 +75,9 @@ Route::group(['prefix' => '/'], function () {
 	    return view('payments.index');
 	});
 
+	Route::get('main', function (){
+	    return view('main.index');
+	});
+
 });
 

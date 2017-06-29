@@ -51,7 +51,7 @@
 				</div>
 				<div class="col-md-9">
 					<div class="row">
-						<div class="col-md-4 dropdown">
+						<div class="col-md-6 dropdown">
 							<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" class="sort_by">Сортувати за
 							<span class="caret"></span></button>
 							<ul class="dropdown-menu">
@@ -61,11 +61,8 @@
 								<li><a href="#">Normal</a></li>
 							</ul>
 						</div>
-						<div class="col-md-5">
-							<span>Показано 1-12 із 100 товарів</span>
-						</div>
-						<div class="col-md-3" style="text-align: right;">
-							<i class="fa fa-th-large" aria-hidden="true" style="padding-right: 5px;"></i><i class="fa fa-th-list" aria-hidden="true"></i>	 
+						<div class="col-md-6">
+							<span style="float: right;">Показано 1-12 із 100 товарів</span>
 						</div>
 					</div>
 					<div class="row text-center">
@@ -94,11 +91,11 @@
 					                            <p class="col-xs-3">{{$product->price}} грн.</p>
 					                            {{ Form::number('count', 0, array('class'=>'col-xs-3', 'min'=>'1', 'max'=>$product->quantity, 'style'=>'padding:0; height:36px;')) }}
 					                            {{ Html::link('http://test.com', 'в корзину', array('class'=>'btn btn-success', 'style' => 'margin-bottom: 15px;'))}}
-					                            <p class="animated fadeInDown wow">{!! str_limit($product->description , 50, '...') !!} 
+					                            <!-- <p class="animated fadeInDown wow">{!! str_limit($product->description , 50, '...') !!} 
 					                                <span style="font-size: 10px">
 					                                    <a href="{{ url('/product/'.$product->id ) }}" style="text-decoration: none;">детальніше</a>
 					                                </span>
-					                            </p>   
+					                            </p>    -->
 					                        </div>
 					                    </div>
 					              @if(($k+1)%3 == 0)
