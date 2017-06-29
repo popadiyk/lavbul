@@ -1,3 +1,20 @@
+<style>
+#myTop {
+     display: none;
+      position: fixed;
+      bottom: 20px;
+      right: 30px;
+      z-index: 99;
+      border: none;
+      color: #e9967c;
+}
+
+#myTop a:hover {
+  background-color: #555;
+}
+</style>
+
+
 <!-- FOOTER -->
 <div class="container-fluid footer-block">
     <div class="container">
@@ -97,6 +114,10 @@
             </div>
         </div>
     </div>
+</div>
+
+<div class="to_top">
+    <a href="#" onclick="topFunction()" id="myTop" title="To top"><i class="fa fa-chevron-up fa-2x" aria-hidden="true"></i></a>
 </div>
 
 <!-- END FOOTER -->
