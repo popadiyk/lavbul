@@ -69,7 +69,7 @@
   </button>
   <div class="navbar-collapse justify-content-md-center collapse" id="navbarsExampleCenteredNav" aria-expanded="false" style="">
     <ul class="navbar-nav">
-      <li class="nav-item align-self-center hidden-xs hidden-sm"><img src="http://larashop.dev/img/min_logo.png" height="88px"></li>
+      <li class="nav-item align-self-center hidden-xs hidden-sm"><img src="img/min_logo.png" height="88px"></li>
       <li class="nav-item align-self-center"><a class="nav-link" href="{{ url('/') }}">ГОЛОВНА</a></li>
       <li class="nav-item align-self-center"><a class="nav-link" href="{{ url('/products') }}">ПРОДУКЦІЯ</a></li>
       <li class="nav-item align-self-center"><a class="nav-link" href="{{ url('/master_classes') }}">МАЙСТЕР-КЛАСИ</a></li>
@@ -84,7 +84,7 @@
         </div>
       </li>
       <li class="nav-item align-self-center dropdown">
-        <a class="nav-link waves-effect waves-light" data-toggle="modal" data-target="#sideModalTR"><i class="fa fa-search fa-2x" aria-hidden="true"></i></a>
+        <!-- <a class="nav-link waves-effect waves-light" data-toggle="modal" data-target="#sideModalTR"><i class="fa fa-search fa-2x" aria-hidden="true"></i></a> -->
       </li>
       <li class="nav-item align-self-center">
         <a class="nav-link waves-effect waves-light" data-toggle="modal" data-target="#fullHeightModalRight"><i class="fa fa-cart-arrow-down fa-2x" aria-hidden="true"></i><span class="cart_counter">{{ Cart::count() }}</span></a>
@@ -274,16 +274,18 @@
 </div>
 <!--Modal: Cart-->
 
+
+<!-- temporary is hidden -->
 <!--Modal: Search-->
-<div class="modal fade right" id="sideModalTR" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<!-- <div class="modal fade right" id="sideModalTR" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
     <div class="modal-dialog modal-side modal-top-right" role="document">
-        <!--Content-->
+        Content
         <div class="modal-content">
-            <!--Header-->
+            Header
             <div class="modal-header">
                 <h4 class="modal-title w-100" id="myModalLabel">Пошук по сайту</h4>
             </div>
-            <!--Body-->
+            Body
             <div class="modal-body">
                 <div class="md-form form-sm">
                     <i class="fa fa-search prefix"></i>
@@ -291,14 +293,14 @@
                     <label for="searchForm">введіть текст</label>
                 </div>
             </div>
-            <!--Footer-->
+            Footer
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary waves-effect waves-light" data-dismiss="modal">Закрити</button>
                 <button type="button" class="btn btn-primary waves-effect waves-light">Шукати</button>
             </div>
         </div>
-        <!--/.Content-->
+        /.Content
     </div>
-</div>
+</div> -->
 <!--Modal: Search-->
 
