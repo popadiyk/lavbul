@@ -38,6 +38,7 @@ class OrderController extends Controller
      */
     public function create()
     {
+
         $deliveries = Delivery::all();
         $payments = PaymentType::all();
 

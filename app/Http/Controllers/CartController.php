@@ -79,7 +79,7 @@ class CartController extends Controller
     {
         // Validation on max quantity
         $validator = Validator::make($request->all(), [
-            'quantity' => 'required|numeric|between:1,5'
+            'quantity' => 'required|numeric|between:1,100'
         ]);
         if ($validator->fails()) {
             session()->flash('error_message', 'Quantity must be between 1 and 5.');
@@ -136,8 +136,13 @@ class CartController extends Controller
 
         $amount_total = Cart::total();
 
+        $total_products = count(Cart::content());
 
-        return response()->json(['total_qty'=> $total_qty, 'summ_total' => $amount_total]);
+        return response()->json([
+            'total_qty'=> $total_qty,
+            'total_products' => $total_products,
+            'summ_total' => $amount_total,
+        ]);
     }
 
     public function deleteProductFromCart($id)
