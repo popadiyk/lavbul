@@ -13,6 +13,7 @@ use TCG\Voyager\Facades\Voyager;
 use TCG\Voyager\Http\Controllers\Traits\BreadRelationshipParser;
 use App\ProductMove;
 use HelperForImage;
+use App\Facades\OrderingFacade as MakerOrder;
 
 
 class InvoiceController extends Controller
@@ -54,6 +55,7 @@ class InvoiceController extends Controller
             $dataTypeContent = call_user_func([DB::table($dataType->name), $getter]);
             $model = false;
         }
+        //dd($dataTypeContent);
         // Check if BREAD is Translatable
         $isModelTranslatable = is_bread_translatable($model);
         $view = 'voyager::bread.browse';
@@ -78,8 +80,37 @@ class InvoiceController extends Controller
     {
     }
 
+    /**
+     * @param Request $request
+     */
     public function store(Request $request)
     {
+        //dd($request->all());
+        $errMsg = [];
+        // Первіряємо чи є така кількість товарів яка прийшла з інвойса
+        if ($request->type == 'sales' || $request->type == 'writeOf'){
+            $tf = MakerOrder::isValidQty($request->goods);
+            if ($tf == false){
+                array_push($errMsg, 'Бажана кількість товарів не доступна, перевірте залишки!');
+            }
+        }
+        // Підрахуємо реальну вартість по накладній
+        $realSumm = MakerOrder::getInvoiceSumm($request->goods, $request->discount, $request->type);
+        // Перевіряємо валідність сумми
+        $isSummValid = MakerOrder::isValidSumm($realSumm, $request->invoiceSumm);
+        if ($isSummValid == false){
+            array_push($errMsg, 'Загальна сумма товарів не співпадає з обрахованою на сервері! Перевірте ціни!');
+        }
+        // якщо накладна пройшла валідність
+        if (empty($errMsg)){
+            return MakerOrder::createInvoiceAdmin($request);
+            //return ;
+        }
+        else {
+            return $errMsg;
+        }
+//        return redirect()
+//            ->route('voyager.invoices.index');
     }
 
     /**

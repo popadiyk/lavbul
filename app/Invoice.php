@@ -86,7 +86,7 @@ class Invoice extends Model
     public function client()
     {
         if($this->type === self::TYPE_SALES) {
-            return $this->belongsTo(User::class, 'client_id', 'id');
+            return $this->belongsTo(Client::class, 'client_id', 'id');
         }else if($this->type === self::TYPE_PURCHASE || $this->type === self::TYPE_REALISATION) {
             return $this->belongsTo(Manufacture::class, 'client_id', 'id');
         }else {
@@ -176,8 +176,12 @@ class Invoice extends Model
 
 
     public function getDescription(){
+        if ($this->type == 'realisation')
+        return '[...]';
         return '['.$this->productMove[0]->product->marking.'] '.$this->productMove[0]->product->title.'. . .';
     }
+
+
 
     /**
      * The relationship with ProductMove

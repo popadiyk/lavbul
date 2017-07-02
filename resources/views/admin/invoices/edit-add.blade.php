@@ -74,25 +74,30 @@
 @stop
 
 @section('page_header')
-    <div class="col-xs-4">
+    <div class="col-xs-9">
         <h1 class="page-title">
             <i class="{{ $dataType->icon }}"></i> @if(isset($dataTypeContent->id)){{ 'Змінюємо' }}@else{{ 'Створюємо' }}@endif {{ $dataType->display_name_singular }} на {{$newInvoice->type}}
+            @if (Voyager::can('add_'.$dataType->name))
+                <button id="create_invoice" style="left: 0px;;" class="btn btn-success">
+                    <i class="voyager-plus"></i> Cтворити накладну
+                </button>
+            @endif
         </h1>
     </div>
     @if ($newInvoice->type == "sales")
-    <div class="col-xs-3" style="padding-top: 18px;">
-        <label style="font-size: 12px; font-weight: bold;">Клієнт:</label>
-        <select id="clients" name="clients" >
-            <option></option>
-            @foreach($clients as $client)
-                @if ($client->id == 1)
-                <option value="{{$client->id}}&{{$client->discount}}" selected="selected">{{$client->card}} - {{$client->name}} - {{$client->discount}}%</option>
-                @else
-                <option value="{{$client->id}}&{{$client->discount}}">{{$client->card}} - {{$client->name}} - {{$client->discount}}%</option>
-                @endif
-            @endforeach
-        </select>
-    </div>
+        <div class="col-xs-3" style="padding-top: 18px;">
+            <label style="font-size: 12px; font-weight: bold;">Клієнт:</label>
+            <select id="clients" name="clients" >
+                <option></option>
+                @foreach($clients as $client)
+                    @if ($client->id == 1)
+                        <option value="{{$client->id}}&{{$client->discount}}" selected="selected">{{$client->card}} - {{$client->name}} - {{$client->discount}}%</option>
+                    @else
+                        <option value="{{$client->id}}&{{$client->discount}}">{{$client->card}} - {{$client->name}} - {{$client->discount}}%</option>
+                    @endif
+                @endforeach
+            </select>
+        </div>
     @endif
 @stop
 
@@ -119,10 +124,10 @@
                                     <tbody>
                                         @if ($newInvoice->type == 'realisation')
                                             @foreach($productRealizations as $productRealization)
-                                                <tr>
+                                                <tr marking ="{{$productRealization[0]}}" title = "{{$productRealization[1]}}">
                                                     <td>{{$productRealization[0]}}</td>
                                                     <td>{{$productRealization[1]}}</td>
-                                                    <td style="text-align: center;">{{$productRealization[2]}}</td>
+                                                    <td style="text-align: center;" class = "wanted-qty">{{$productRealization[2]}}</td>
                                                     <td style="text-align: center;">{{$productRealization[3]}}</td>
                                                     <td class="summ" style="text-align: center;">{{$productRealization[4]}}</td>
                                                     <td style="text-align: center;"> <i class="voyager-wallet" style="color:green; cursor: pointer;"></i></td>
@@ -150,7 +155,7 @@
                         <div class="col-xs-6" style="padding: 0px; margin: 0px; padding-right: 20px;">
                             <form method="get" name="search" action="javascript:void(0)">
                                 <input id ="input-search" type="text" class="form-control" style="margin: 5px 0px; width: 73%; display: inline-block;">
-                                <button id="search" type="submit" class="btn btn-success" style="width:25%;">
+                                <button id="search" type="submit" class="btn btn-info" style="width:25%;">
                                     <i class="voyager-search"></i> Знайти
                                 </button>
                             </form>
@@ -191,10 +196,60 @@
         </div>
     </div>
 
+    <div id="voyager-loader" style="display: none;">
+        <?php $admin_loader_img = Voyager::setting('admin_loader', ''); ?>
+        @if($admin_loader_img == '')
+            <img src="{{ voyager_asset('images/logo-icon.png') }}" alt="Voyager Loader">
+        @else
+            <img src="{{ Voyager::image($admin_loader_img) }}" alt="Voyager Loader">
+        @endif
+    </div>
+
 @stop
 
 @section('javascript')
     <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+
+        $('#create_invoice').click(function () {
+            if (type == 'sales'){
+                var discount = (100 - $('#clients').val().split('&')[1])/100;
+                var client = $('#clients').val().split('&')[0];
+            }
+            var goods = [];
+            //$('#voyager-loader').css("display","block");
+            $('#invoiceTable tbody tr').each (function() {
+                var myProduct = {
+                    marking: $(this).attr('marking'),
+                    title: $(this).attr('title'),
+                    qty: $(this).find('.wanted-qty').html()
+                };
+                goods.push(myProduct);
+            });
+
+            $.ajax({
+                url: '/admin/invoices',
+                type: "post",
+                data: { type : type ,
+                        manufacture : manufacture,
+                        client : client,
+                        discount : discount,
+                        goods : goods,
+                        invoiceSumm : $('#total-sum-discount').val()
+                    }
+            }).done(function (data) {
+                //loader.style.left = (sidebar.clientWidth/2)+'px';
+//                window.location.href = '/admin/invoices';
+                console.log(data);
+            }).fail(function (jqXHR, ajaxOptions, thrownError) {
+                alert("No response from server");
+            });
+        });
 
         $(function() {
             $("#clients").select2({
@@ -243,14 +298,14 @@
                 if (type != "purchase"){
                     myTr.append('<td>' + Product.marking + '</td>');
                     myTr.append('<td>' + Product.title + '</td>');
-                    myTr.append('<td style="text-align: center;">' + $('#qty').val() + '</td>');
+                    myTr.append('<td style="text-align: center;" class = "wanted-qty">' + $('#qty').val() + '</td>');
                     myTr.append('<td style="text-align: center;">' + Product.price + '</td>');
                     myTr.append('<td class="summ" style="text-align: center;">' + $('#qty').val() * Product.price + '</td>');
                     myTr.append('<td style="text-align: center;"> <i class="voyager-pen" marking="'+Product.marking+'" style="color:orange; cursor: pointer;"></i> <i class="voyager-trash" marking="'+Product.marking+'" style="color:red; margin-left: 15px; cursor: pointer;"></i> </td>');
                 } else {
                     myTr.append('<td>' + Product.marking + '</td>');
                     myTr.append('<td>' + Product.title + '</td>');
-                    myTr.append('<td style="text-align: center;">' + $('#qty').val() + '</td>');
+                    myTr.append('<td style="text-align: center;" class = "wanted-qty">' + $('#qty').val() + '</td>');
                     myTr.append('<td style="text-align: center;">' + Product.purchase_price + '</td>');
                     myTr.append('<td class="summ" style="text-align: center;">' + $('#qty').val() * Product.purchase_price + '</td>');
                     myTr.append('<td style="text-align: center;"> <i class="voyager-pen" marking="'+Product.marking+'" style="color:orange; cursor: pointer;"></i> <i class="voyager-trash" marking="'+Product.marking+'" style="color:red; margin-left: 15px; cursor: pointer;"></i> </td>');
