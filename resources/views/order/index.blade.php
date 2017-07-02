@@ -7,7 +7,7 @@
 <div class="container-fluid" style="padding-top: 30px; padding-bottom: 30px;">
 	<div class="container" style="background-color: #F2F2F2;">
 			<div class="col-md-12">
-				<h3><strong>Ваша корзина</strong></h3>
+				<h3><strong>Ваш заказ</strong></h3>
 			</div>
 		<div class="row">
 			<div class="col-md-12">
@@ -47,12 +47,12 @@
 								</form>
 							  </td>
 						      <td style="width: 70px;"><img src="img/for_order.png"></td>
-						      <td style="width: 200px; padding-top: 25px;"> <a href="{{ url('shop', [$item->model->slug]) }}">{{ $item->name }}</td>
+								<td style="width: 200px; padding-top: 25px;"> <a href="{{ url('shop', [$item->model->slug]) }}">{{ $item->name }}</a></td>
 						      <td style="padding-top: 25px;">{{ number_format($item->subtotal / $item->qty , 2).'грн.' }}</td>
 						      <td style="padding-top: 25px;">0%</td>
 						      <td style="padding-top: 25px;">{{ number_format($item->subtotal / $item->qty , 2).'грн.' }}</td>
 							  <td style="padding-top: 25px;"> <p>{{ $item->qty }}</p></td>
-						      <td style="padding-top: 25px;">{{ number_format($item->subtotal, 2) }}</td>
+						      <td style="padding-top: 25px;">{{ number_format($item->subtotal, 2) }} грн.</td>
 						    </tr>
 						  @endforeach
 						  <tr>
@@ -60,7 +60,7 @@
 							  <td style="background-color: #e0e0e0;">0 грн</td>
 						  </tr>
 						  <tr>
-							  <td colspan="7" style="background-color: #e0e0e0; text-align: right;">Ітого:</td>
+							  <td colspan="7" style="background-color: #e0e0e0; text-align: right;">Разом:</td>
 							  <td colspan="8" style="background-color: #e0e0e0;">{{ number_format(Cart::total(), 2) }}</td>
 						  </tr>
 						</tbody>
@@ -113,7 +113,6 @@
 					</div>
 					<div class="col-md-7">
 						<div class="form-group">
-							<label for="sel1"></label>
 							{!! Form::select('delivery_id', $deliveries->pluck('title', 'id'), null, ['class' => 'form-control']) !!}
 						</div>
 					</div>
@@ -127,13 +126,12 @@
 					</div>
 					<div class="col-md-7">
 						<div class="form-group">
-							<label for="sel1"></label>
 							{!! Form::select('payment_id', $payments->pluck('title', 'id'), null , ['class'=>'form-control']) !!}
 						</div>
 					</div>
 				</div>
 			</div>
-			<div class="row">
+			<div class="row hide" id="address-block">
 				<div class="col-md-8">
 					<div class="col-md-3">
 						{!! Form::label('address', 'Адресса', ['style' => "font-size: 14px; padding-top: 20px;"]) !!}
@@ -141,7 +139,7 @@
 					<div class="col-md-7">
 						<div class="form-group">
 							<label for="sel1"></label>
-							{!! Form::textarea('address', null , ['class' => 'form-control','required' => 'required' ]) !!}
+							{!! Form::textarea('address', null , ['class' => 'form-control' ]) !!}
 						</div>
 					</div>
 				</div>
