@@ -37,6 +37,7 @@ Route::get('js_cart/get_info_total', 'CartController@getTotalQty');
 Route::delete('emptyCart', 'CartController@emptyCart');
 
 Route::group(['prefix' => 'admin'], function () {
+	Route::get('/invoices/create', array('as'=>'pagination', 'uses'=>'InvoiceController@create'));
     Voyager::routes();
 });
 Route::resource('order', 'OrderController');
@@ -68,5 +69,18 @@ Route::group(['prefix' => '/'], function () {
 	Route::get('order', function (){
 	    return view('order.index');
 	});
+
+	Route::get('about', function (){
+	    return view('about_us.index');
+	});
+
+	Route::get('payments', function (){
+	    return view('payments.index');
+	});
+
+	Route::get('main', function (){
+	    return view('main.index');
+	});
+
 });
 

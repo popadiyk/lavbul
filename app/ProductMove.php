@@ -26,7 +26,8 @@ class ProductMove extends Model
         'product_id',
         'invoice_id',
         'quantity',
-        'sum'
+        'sum',
+        'isPaid'
     ];
 
     /**
@@ -88,5 +89,25 @@ class ProductMove extends Model
         }
 
         return false;
+    }
+
+    public function getProductType($manufacture_id){
+        //dd($this->product->manufacture->id);
+        if ($this->invoice->type == "sales" && $this->product->manufacture->id == $manufacture_id && $this->isPaid == false && $this->product->manufacture->manufactureType->title == "realization"){
+            $realizationProduct = [];
+
+            array_push($realizationProduct, $this->product->marking);
+            array_push($realizationProduct, $this->product->title);
+            array_push($realizationProduct, $this->quantity);
+            array_push($realizationProduct, $this->product->getPurchasePriceAttribute());
+            array_push($realizationProduct, $this->quantity * $this->product->getPurchasePriceAttribute());
+
+
+            return $realizationProduct;
+        } else return null;
+    }
+
+    public function getInvoices(){
+        return "Накладна #".$this->invoice->id." від ".$this->invoice->created_at;
     }
 }

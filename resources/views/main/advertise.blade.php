@@ -1,5 +1,5 @@
-<div class="row">
-    <div class="col-xs-4 col-sm-4 col-md-4">
+<div class="row text-center">
+    <div class="col-xs-12 col-sm-6 col-md-3" style="margin-left: auto; margin-right: auto;">
         <div class="grid wow zoomIn">
             <figure class="effect-bubba">
                 <img src="img/img.jpg" alt="img01" class="img-discount"/>
@@ -9,7 +9,7 @@
             </figure>
         </div>
     </div>
-    <div class="col-xs-4 col-sm-4 col-md-4">
+    <div class="col-xs-12 col-sm-6 col-md-3" style="margin-left: auto; margin-right: auto;">
         <div class="grid wow zoomIn">
             <figure class="effect-bubba">
                 <img src="img/img.jpg" alt="img01" class="img-discount"/>
@@ -19,7 +19,7 @@
             </figure>
         </div>
     </div>
-    <div class="col-xs-4 col-sm-4 col-md-4">
+    <div class="col-xs-12 col-sm-12 col-md-3" style="margin-left: auto; margin-right: auto;">
         <div class="grid wow zoomIn">
             <figure class="effect-bubba">
                 <img src="img/img.jpg" alt="img01" class="img-discount"/>

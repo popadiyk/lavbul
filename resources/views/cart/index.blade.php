@@ -1,3 +1,4 @@
+
 <style>
     .product_row{
         margin: 0px 10px 0px 0px;
@@ -74,11 +75,15 @@
 
 </style>
 
+
+<div class="modal fade" id="basket_modal" role="dialog">
+
     <div class="modal-dialog">
         <!-- Modal content-->
         <div class="modal-content">
             <div class="modal-body">
                 <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
+
                 <div class="row">
                     <p id="info_basket"><span>Ваша корзина</span> (<span class="total_counter_product"></span> товарів ) {{--товари на сумму {{Cart::total()}} грн--}}</p>
                 </div>
@@ -113,6 +118,7 @@
 
                     </div>
                 @endforeach
+
 
             </div>
             <div class="modal-footer cart-footer">

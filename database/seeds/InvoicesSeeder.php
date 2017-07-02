@@ -13,13 +13,56 @@ class InvoicesSeeder extends Seeder
     public function run()
     {
         DB::table('invoices')->insert([
-            'autor_id' => '1',
-            'user_id'=> '1',
-            'manufacturer_id' => '1',
-            //'pay_status_id' => '1',
-            'type_id' => '1',
-            'description' => 'накладна на надходження',
-            'total_sum' => '1000',
+            'type' => 'sales',
+            'client_id' => '1',
+            'author_id' => '1',
+            'status' => 'unconfirmed',
+            'total_account' => '12000',
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+        ]);
+        DB::table('invoices')->insert([
+            'type' => 'realisation',
+            'client_id' => '1',
+            'author_id' => '1',
+            'status' => 'failed',
+            'total_account' => '12000',
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+        ]);
+        DB::table('invoices')->insert([
+            'type' => 'purchase',
+            'client_id' => '1',
+            'author_id' => '1',
+            'status' => 'closed',
+            'total_account' => '12000',
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+        ]);
+        DB::table('invoices')->insert([
+            'type' => 'sales',
+            'client_id' => '1',
+            'author_id' => '1',
+            'status' => 'confirmed',
+            'total_account' => '12000',
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+        ]);
+        DB::table('invoices')->insert([
+            'type' => 'writeOf',
+            'client_id' => '1',
+            'author_id' => '1',
+            'status' => 'confirmed',
+            'total_account' => '12000',
+            'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+        ]);
+        DB::table('invoices')->insert([
+            'type' => 'sales',
+            'client_id' => '1',
+            'author_id' => '1',
+            'status' => 'confirmed',
+            'total_account' => '12000',
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);

@@ -1,6 +1,8 @@
 
 <script src={{ asset('js/jquery-3.2.1.min.js')}}></script>
-<script src={{ asset('js/bootstrap.js') }}></script>
+<script src={{ asset('js/tether.min.js') }}></script>
+<script src={{ asset('js/bootstrap.min.js') }}></script>
+<script src={{ asset('js/mdb.min.js') }}></script>
 <script src={{ asset('js/datepicker.js') }}></script>
 <script src={{ asset('js/swiper.jquery.min.js')}}></script>
 <script src={{ asset('js/wow.js')}}></script>
@@ -16,6 +18,16 @@ $(document).ready(function(){
 
     $('[data-toggle="datepicker"]').datepicker();
 
+$('.navbar-toggler').on('click', function(){
+  if($('#navbarsExampleCenteredNav').hasClass('show')){
+    $('.navigation').removeClass('open');
+  } else{
+    $('.navigation').addClass('open');
+  }
+});
+
+$('[data-toggle="datepicker"]').datepicker();
+
 // slider
     var swiper = new Swiper('.swiper-container', {
         pagination: '.swiper-pagination',
@@ -24,12 +36,14 @@ $(document).ready(function(){
         paginationClickable: true,
         spaceBetween: 0,
         centeredSlides: true,
-        autoplay: 2500,
-        autoplayDisableOnInteraction: false
+        autoplay: 3500,
+        autoplayDisableOnInteraction: false,
+        loop: true
     });
 // navigation menu
-    $(function() {
-      var header = $("#nav-menu");
+
+  $(function() {
+      var header = $(".navigation");
       $(window).scroll(function() {    
           var scroll = $(window).scrollTop();
           if (scroll >= 1) {
@@ -61,7 +75,26 @@ $(document).ready(function(){
   }
 });
 
-//------------------scripts for cart ---------------------------------------//
+// to_top button
+window.onscroll = function() {scrollFunction()};
+
+function scrollFunction() {
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        document.getElementById("myTop").style.display = "block";
+    } else {
+        document.getElementById("myTop").style.display = "none";
+    }
+}
+
+
+function topFunction() {
+    document.body.scrollTop = 0; 
+    document.documentElement.scrollTop = 0;
+}
+
+
+//--------------------------- for cart ---------------------------------------//
+
 $(document).ready(function(){
 
     $(document).on('click', '.dropdown-menu', function(e) {

@@ -1,0 +1,45 @@
+
+.creative, .more_than_clients, .more_than_years {
+	font-family: 'Century';
+	color:  #666666;
+	font-size: 18px;/* Approximation due to font substitution */
+	font-weight: 400;
+	line-height: 36px;/* Approximation due to font substitution */
+	text-align: center;
+}
+
+.carousel-control.right, .carousel-control.left {
+	background-image: none;
+}
+
+.carousel-indicators {
+	position: absolute;
+	bottom: -35px;
+}
+
+.carousel-indicators li {
+	background-color: #e5e5e5;
+	width: 15px;
+	height: 15px;
+}
+
+.carousel-indicators .active {
+	background-color: #e5e5e5;
+	border: 1px solid lightgrey;
+	width: 17px;
+	height: 17px;
+}
+
+.carousel-control {
+	color: darkgrey;
+}
+
+.carousel-control.right {
+	bottom: 50px;
+	right: -70px;
+}
+
+.carousel-control.left {
+	bottom: 50px;
+	left: -70px;
+}

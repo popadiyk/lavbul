@@ -1,9 +1,9 @@
 .contact {
-	font-family: 'Josefin Sans', sans-serif;
+	/* font-family: 'Josefin Sans', sans-serif; */
 }
 
 .number, .adress, .email {
-	font-family: 'ABeeZee';
+	/* font-family: 'ABeeZee'; */
 	font-size: 16px;
 	padding-left: 5px;
 }
@@ -18,12 +18,15 @@ span.fa.fa-envelope-o, span.fa.fa-map-marker, span.fa.fa-phone {
 	font-size: 24px;
 }
 .header_text{
-	color: #fce0d7;
-	font-family: Corbel;
+	color: #f5cfc3;
+	/* font-family: Corbel; */
 	font-weight: bolder;
 	position: relative; 
-	top: 30%;
-	text-shadow: 2px 2px 4px #000000;
+	top: 90%;
+    /* font-size: 48px; */
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+    text-shadow: 2px 2px 4px #000000; 
 }
 .contacts_header_container{
 	height: 50vh; 
@@ -72,7 +75,7 @@ span.fa.fa-envelope-o, span.fa.fa-map-marker, span.fa.fa-phone {
     z-index: 20;
 }
 .service_block h3 {
-    font-family: 'Raleway', sans-serif;
+    /* font-family: 'Raleway', sans-serif; */
     font-weight: 600;
     font-size: 18px;
     color: #111111;

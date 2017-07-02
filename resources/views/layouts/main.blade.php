@@ -1,6 +1,6 @@
 @include('components.head')
 
-@include('components.navigation')
+@include('components.navbar')
 
     @yield('content')
 

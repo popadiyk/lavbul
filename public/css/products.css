@@ -15,7 +15,7 @@
 }
 
 a#category {
-	font-family: 'Roboto Condensed', sans-serif;;
+	/* font-family: 'Roboto Condensed', sans-serif; */
 	color:  #f6d3c7 !important;
 	font-size: 30px;
 	font-weight: 600;
@@ -38,7 +38,7 @@ button.accordion {
     text-align: left;
     outline: none;
     transition: 0.4s;
-    font-family: 'Montserrat';
+    /* font-family: 'Montserrat'; */
 	color:  #666666 !important;
 	font-size: 22px;/* Approximation due to font substitution */
 	font-weight:400;
@@ -65,7 +65,7 @@ div.panel {
 }
 
 .showned {
-	font-family: 'Montserrat';
+	/* font-family: 'Montserrat'; */
 	color:  #666666;
 	font-size: 14px;
 	font-weight: 400;
@@ -75,7 +75,7 @@ div.panel {
 }
 
 .sort_by {
-	font-family: 'Montserrat';
+	/* font-family: 'Montserrat'; */
 	color:  #333333;
 	font-size: 18px;/* Approximation due to font substitution */
 	font-weight: 400;
@@ -91,7 +91,7 @@ div.panel {
 }
 
 .our_prod {
-	font-family: 'Roboto Condensed', sans-serif;;
+	/* font-family: 'Roboto Condensed', sans-serif; */
 	color:  #4c4b4a;
 	font-size: 60px;
 	font-weight: 700;
@@ -107,7 +107,7 @@ div.panel {
 	width: 69px;
 	height: 68px;
 	border: 2px solid #f6d2c7 !important;
-	font-family: 'Montserrat';
+	/* font-family: 'Montserrat'; */
 	color:  #666666 !important;
 	font-size: 18px;
 	font-weight: bolder;

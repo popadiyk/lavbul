@@ -24,10 +24,11 @@ class DatabaseSeeder extends Seeder
         $this->call(PercentsSeeder::class);
         $this->call(CommentsSeeder::class);
         $this->call(DiscountsSeeder::class);
-       /* $this->call(ProductMovesSeeder::class);*/
+        $this->call(ProductMovesSeeder::class);
         $this->call(DeliveriesSeeder::class);
-//        $this->call(InvoicesSeeder::class);
+        $this->call(InvoicesSeeder::class);
         $this->call(AboutUsSeeder::class);
+        $this->call(ClientsSeeder::class);
 //        $this->call(AdminAboutUsSeeder::class);
 //        $this->call(AdminGroupsSeeder::class);
     }

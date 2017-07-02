@@ -14,7 +14,7 @@
         </div>
     </div>
     <!-- part for partners -->
-    <div class="container-fluid hidden-sm partners-block">
+    <div class="container-fluid hidden-xs hidden-sm partners-block">
         <div class="container">
             @include('main.partners')
         </div>
