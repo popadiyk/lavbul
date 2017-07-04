@@ -87,7 +87,7 @@
         <!-- <a class="nav-link waves-effect waves-light" data-toggle="modal" data-target="#sideModalTR"><i class="fa fa-search fa-2x" aria-hidden="true"></i></a> -->
       </li>
       <li class="nav-item align-self-center">
-        <a class="nav-link waves-effect waves-light" data-toggle="modal" data-target="#fullHeightModalRight"><i class="fa fa-cart-arrow-down fa-2x" aria-hidden="true"></i><span class="cart_counter">{{ Cart::count() }}</span></a>
+        <a class="nav-link waves-effect waves-light" id="testModalBasket" data-target="#fullHeightModalRight"><i class="fa fa-cart-arrow-down fa-2x" aria-hidden="true"></i><span id='total-count-cart' class="cart_counter total_counter_product">{{ Cart::count() }}</span></a>
       </li>
       <li class="nav-item align-self-center dropdown">
         @if (Auth::user())
@@ -133,7 +133,6 @@
                             <div class="md-form form-sm">
                                 {{ $errors->has('email') ? ' has-error' : '' }}
                                 <i class="fa fa-envelope prefix"></i>
-                                {{-- <input type="text" id="form22" class="form-control"> --}}
                                 {{ Form::email('email', null, ['class' => 'form-control', 'required', 'autofocus']) }}
                                 @if ($errors->has('email'))
                                     <span class="help-block">
@@ -145,7 +144,6 @@
                             <div class="md-form form-sm">
                                 {{ $errors->has('password') ? ' has-error' : '' }}
                                 <i class="fa fa-lock prefix"></i>
-                                {{-- <input type="password" id="form23" class="form-control"> --}}
                                 {{ Form::password('password', array('class' => 'form-control', 'required')) }}
                                 @if ($errors->has('password'))
                                     <span class="help-block">
@@ -178,7 +176,6 @@
                             <div class="md-form form-sm">
                                 {{ $errors->has('email') ? ' has-error' : '' }}
                                 <i class="fa fa-envelope prefix"></i>
-                                {{-- <input type="text" id="form24" class="form-control"> --}}
                                 {{ Form::email('email', null, ['class' => 'form-control', 'required']) }}
                                 @if ($errors->has('email'))
                                     <span class="help-block">
@@ -189,20 +186,17 @@
                             </div>
                             <div class="md-form form-sm">
                                 <i class="fa fa-user prefix"></i>
-                                {{-- <input type="text" id="form24" class="form-control"> --}}
                                 {{ Form::text('name', null, array('class' => 'form-control')) }}
                                 <label for="name">Ваше ім'я</label>
                             </div>
                             <div class="md-form form-sm">
                                 <i class="fa fa-phone prefix"></i>
-                                {{-- <input type="text" id="form24" class="form-control"> --}}
                                 {{ Form::tel('phone', null, array('class' => 'form-control', 'required')) }}
                                 <label for="phone">Ваш телефон</label>
                             </div>
                             <div class="md-form form-sm">
                                 {{ $errors->has('password') ? ' has-error' : '' }}
                                 <i class="fa fa-lock prefix"></i>
-                                {{-- <input type="password" id="form25" class="form-control"> --}}
                                 {{ Form::password('password', array('class' => 'form-control', 'required')) }}
                                 @if ($errors->has('password'))
                                     <span class="help-block">
@@ -213,7 +207,6 @@
                             </div>
                             <div class="md-form form-sm">
                                 <i class="fa fa-lock prefix"></i>
-                                {{-- <input type="password" id="form26" class="form-control"> --}}
                                 {{ Form::password('password_confirmation', array('class' => 'form-control', 'required', 'id'=>'password-confirm')) }}
                                 <label for="password_confirmation">Повторіть пароль</label>
                             </div>
@@ -244,36 +237,8 @@
 </div>
 <!--Modal: Login / Register Form-->
 
-<!--Modal: Cart-->
-<div class="modal fade right" id="fullHeightModalRight" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog modal-full-height modal-right" role="document">
-        <!--Content-->
-        <div class="modal-content" style="overflow: scroll;">
-            <!--Header-->
-            <div class="modal-header">
-                <h4 class="modal-title w-100" id="myModalLabel">Корзина товарів</h4>
-            </div>
-            <!--Body-->
-            <div class="modal-body">
-                <ul class="list-group z-depth-0">
-                    <li class="list-group-item justify-content-around">
-                        <div class="col-md-3"><img src="https://mdbootstrap.com/img/Photos/Avatars/img%20%281%29.jpg" class="rounded-circle rounded mx-auto d-block" width="50px;"></div>
-                        <div class="col-md-3"><input type="number" name="" value="" placeholder=""></div>
-                        <div class="col-md-3"><span class="badge badge-primary badge-pill">14</span></div>
-                    </li>
-                </ul>
-            </div>
-            <!--Footer-->
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary waves-effect waves-light" data-dismiss="modal" style="padding: 10px;">Закрити</button>
-                <button type="button" class="btn btn-primary waves-effect waves-light" style="padding: 10px;">Зробити замовлення</button>
-            </div>
-        </div>
-        <!--/.Content-->
-    </div>
+<div class="modal fade top" id="fullHeightModalRight" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 </div>
-<!--Modal: Cart-->
-
 
 <!-- temporary is hidden -->
 <!--Modal: Search-->
