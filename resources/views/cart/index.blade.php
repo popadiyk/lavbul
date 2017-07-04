@@ -1,60 +1,71 @@
-<div class="modal fade" id="basket_modal" role="dialog">
-    <div class="modal-dialog">
-        <!-- Modal content-->
-        <div class="modal-content">
+<!--Modal: Cart-->
+    <div class="modal-dialog modal-lg" role="document">
+        <!--Content-->
+        <div class="modal-content" >
+            <!--Header-->
+            <div class="modal-header">
+                {{-- <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button> --}}
+                <p id="info_basket"><h4 class="modal-title w-100 text-center" id="myModalLabel">Корзина (<span class="total_counter_product"></span> товарів )</h4></p>
+            </div>
+            <!--Body-->
             <div class="modal-body">
-                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×</button>
-                <div class="row" style="padding-bottom: 10px;">
-                    <p id="info_basket">У кошику {{ Cart::count() }} товари на сумму {{Cart::total()}} грн</p>
-                </div>
-                @foreach(Cart::content() as $item)
-                    <div class="row" >
-                        <div class="col-md-2 cart_image">
-                            <img src="img/mini_plate.png">
-                        </div>
-                        <div class="col-md-5 cart_title">
-                            <a href="{{ url('shop', [$item->model->slug]) }}">Арт.{{ $item->options->marking.". ".$item->name }}</a>
-                        </div>
-                        <div class="col-md-1 cart_qty">
-                            <select class="quantity" data-id="{{ $item->rowId }}" data-toggle="tooltip" title="">
-                                <option {{ $item->qty == 1 ? 'selected' : '' }}>1</option>
-                                <option {{ $item->qty == 2 ? 'selected' : '' }}>2</option>
-                                <option {{ $item->qty == 3 ? 'selected' : '' }}>3</option>
-                                <option {{ $item->qty == 4 ? 'selected' : '' }}>4</option>
-                                <option {{ $item->qty == 5 ? 'selected' : '' }}>5</option>
-                            </select>
-                        </div>
-                        <div class="col-md-2 cart_price">
-                            <div class="price">
-                                <span id="{{ $item->rowId }}">{{ number_format($item->subtotal, 2) }} грн</span>
+                <ul class="list-group z-depth-0">
+                    
+{{--                         <div class="col-md-3"><img src="https://mdbootstrap.com/img/Photos/Avatars/img%20%281%29.jpg" class="rounded-circle rounded mx-auto d-block" width="50px;"></div>
+                        <div class="col-md-3"><input type="number" name="" value="" placeholder=""></div>
+                        <div class="col-md-3"><span class="badge badge-primary badge-pill">14</span></div> --}}
+                    
+                    @foreach(Cart::content() as $item)
+                    <li class="list-group-item justify-content-around">
+                        <div class="row product_row" data-id = '{{ $item->rowId }}' >
+                            <div class="col-md-1 cart_action my-auto">
+                                <a href="#" class="delete-product" data-id="{{$item->rowId}}" title="видалити з корзини">X</a>
                             </div>
+                            <div class="col-md-2 cart_image my-auto">
+                                <img class="img-circle" width="100%;" src="{{ App\Product::find($item->id)->main_photo }}">
+                            </div>
+                            <div class="col-md-3 cart_title my-auto">
+                                <a href="{{ url('shop', [$item->model->slug]) }}">Арт.{{ $item->options->marking.". ".$item->name }}</a>
+                            </div>
+                            <div class="col-md-2 cart_price my-auto">
+                                <div class="price">
+                                    <span id="{{ $item->rowId }}">{{  App\Product::find($item->id)->price }} грн</span>
+                                </div>
+                            </div>
+                            <div class="col-md-2 cart_qty my-auto">
+                                <div class="number quantity count-input space-bottom" data-id="{{ $item->rowId }}" data-toggle="tooltip" title="">
+                                    <a class="incr-btn" data-action="decrease" href="#">–</a>
+                                    <input class="quantity" style="width: 50%; text-align: center;" type="text" name="quantity" data-id="{{ $item->rowId }}" value="{{ $item->qty }}">
+                                    <a class="incr-btn" data-action="increase" href="#">&plus;</a>
+                                </div>
+                            </div>
+                            <div class="col-md-2 product_total_price my-auto">
+                                <div class="price">
+                                    <span data-id = "{{ $item->rowId }}" price-one="{{ App\Product::find($item->id)->price }}">{{ number_format($item->subtotal, 2) }} грн</span>
+                                </div>
+                            </div>
+
                         </div>
-                        <div class="col-md-2 cart_action">
-                            <form action="{{ url('cart', [$item->rowId]) }}" method="POST" class="side-by-side">
-                                {!! csrf_field() !!}
-                                <input type="hidden" name="_method" value="DELETE">
-                                <input type="submit" class="btn btn-danger btn-sm" value="Видалити">
-                            </form>
-                        </div>
-                    </div>
-                @endforeach
-                    <div class="row">
-                        <div class="col-md-4 text-center">
-                            <a href="{{ url('/') }}" class="btn btn-info">Продовжити вибір</a>
-                        </div>
-                       <!--  <div class="col-md-3 text-center">
-                           <form action="{{ url('/emptyCart') }}" method="POST">
-                               {!! csrf_field() !!}
-                               <input type="hidden" name="_method" value="DELETE">
-                               <input type="submit" class="btn btn-danger" value="Очистити">
-                           </form>
-                       </div> -->
-                        <div class="col-md-5 text-center">
-                            <a href="{{ route('order.create') }}" id="cart_btn_check_order" class="btn btn-success">Оформити замовлення</a>
-                        </div>
-                    </div>
+                    </li>
+                    @endforeach
+
+                </ul>
+            </div>
+            <div class="row">
+                <div class="col-xs-12 justify-content-around" style="font-weight: bolder; text-align: right; padding-right: 50px;">
+                    <span>Разом:</span><span id="footer-total-sum">{{ Cart::total() }} грн.</span>
+                </div>
+            </div>
+            <!--Footer-->
+            <div class="modal-footer">
+
+                <a href="{{ url('/products') }}" class="btn btn-secondary waves-effect waves-light"  style="padding: 10px;">Продовжиити вибір</a>
+                <a href="{{ route('order.create') }}" id="cart_btn_check_order" class="btn btn-success waves-effect waves-light" style="padding: 10px;">Оформити замовлення</a>
+{{--                 <button type="button" class="btn btn-secondary waves-effect waves-light" data-dismiss="modal" style="padding: 10px;">Закрити</button> --}}
+{{--                 <button type="button" class="btn btn-primary waves-effect waves-light" style="padding: 10px;">Зробити замовлення</button> --}}
             </div>
         </div>
+        <!--/.Content-->
     </div>
-</div>
-<!-- End of Basket_Modal -->
+
+<!--Modal: Cart
