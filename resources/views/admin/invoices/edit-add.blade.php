@@ -352,7 +352,7 @@
                             title: $(this).attr('title'),
                             maxqty: $(this).attr('maxqty'),
                             price: $(this).attr('price'),
-                            purchase_price: $(this).attr('purchaseprice')
+                            purchase_price: $(this).attr('purchase_price')
                         };
                     }
                 });

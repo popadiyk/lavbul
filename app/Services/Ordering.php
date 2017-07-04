@@ -352,6 +352,9 @@ class Ordering
                 foreach ($productMoves as $productMove){
                     $currentProduct = Product::where('id', $productMove->product_id)->first();
                     $currentProduct->quantity = $currentProduct->quantity - $productMove->quantity;
+                    if ($currentProduct->quantity < 0) {
+                        return -1;
+                    }
                     $currentProduct->save();
                 }
             }
@@ -363,6 +366,9 @@ class Ordering
                 foreach ($productMoves as $productMove){
                     $currentProduct = Product::where('id', $productMove->product_id)->first();
                     $currentProduct->quantity = $currentProduct->quantity - $productMove->quantity;
+                    if ($currentProduct->quantity < 0) {
+                        return -1;
+                    }
                     $currentProduct->save();
                 }
             }
@@ -381,7 +387,6 @@ class Ordering
             if (($currentInvoice->status == Invoice::STATUS_CLOSED || $currentInvoice->status == Invoice::STATUS_CONFIRMED) && $status == Invoice::STATUS_FAILED) {
                 $productMoves = ProductMove::all()->where('realisation', $invoice_id);
                 foreach ($productMoves as $productMove) {
-                    $productMove->realisation = 0;
                     $productMove->isPaid = false;
                     $productMove->save();
                 }
