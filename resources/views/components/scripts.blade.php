@@ -187,14 +187,15 @@ $(document).ready(function(){
                 var id = $(this).attr('data-id');
                 var that = this;
                 deleteFromCart(id, function(){
-                    $(that).parents('.li').remove();
+                    $(that).parents('li.list-group-item').remove();
+                    updateTotalTitle();
                 })
             });
             $(".incr-btn").on("click", function (e) {
                 var $button = $(this);
                 var id = $button.parent().attr('data-id');
                 var oldValue = $button.parent().find('input').val();
-                console.log(oldValue);
+
                 $button.parent().find('.incr-btn[data-action="decrease"]').removeClass('inactive');
                 if ($button.data('action') == "increase") {
                     var newVal = parseFloat(oldValue) + 1;
@@ -233,7 +234,7 @@ function changeProductCost(id, newVal){
     $price.text(total_cost + " грн");
 }
 function deleteFromCart(id,resolve) {
-    $.post('/delete_product/success' + id, function(data){
+    $.post('/delete_product/' + id, function(data){
         resolve();
     })
 }

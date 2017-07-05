@@ -37,6 +37,13 @@ class CartController extends Controller
        /* return response()->json(['success' => true]);*/
         return redirect('cart')->withSuccessMessage('Item was added to your cart!');
     }
+
+    /**
+     * For ajax
+     *
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function store_js(Request $request)
     {
         $item = $request->all();
@@ -50,10 +57,15 @@ class CartController extends Controller
             ->associate('App\Product');
         return response()->json(['success'=> true, 'count_cart' => Cart::count()]);
     }
+
+    /**
+     * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
+     */
     public function getCart()
     {
         return view('cart.index');
     }
+
     /**
      * Update the specified resource in storage.
      *
@@ -84,6 +96,7 @@ class CartController extends Controller
         session()->flash('success_message', 'Quantity was updated successfully!');
         return response()->json(['success' => true, 'item'=> Cart::get($id)]);
     }
+
     /**
      * Remove the specified resource from storage.
      *
@@ -95,6 +108,7 @@ class CartController extends Controller
         Cart::remove($id);
         return back()->withSuccessMessage('Item has been removed!');
     }
+
     /**
      * Remove the resource from storage.
      *
@@ -105,6 +119,7 @@ class CartController extends Controller
         Cart::destroy();
         return redirect('cart')->withSuccessMessage('Your cart has been cleared!');
     }
+
     /**
      * Get total quantity for ajax in modal cart
      *
@@ -121,9 +136,17 @@ class CartController extends Controller
             'summ_total' => $amount_total,
         ]);
     }
+
+    /**
+     * For ajax
+     *
+     * @param $id
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function deleteProductFromCart($id)
     {
         Cart::remove($id);
+
         return response()->json(['success'=> true, 'rawId' => $id]);
     }
 }
