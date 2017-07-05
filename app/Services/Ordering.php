@@ -327,6 +327,16 @@ class Ordering
             $invoice->status = Invoice::STATUS_FAILED;
             $invoice->total_account = $this->getInvoiceSumm($request->goods, $request->discount, $request->type);;
             $invoice->save();
+
+            $productMoves = ProductMove::all();
+            foreach ($productMoves as $productMove) {
+                if ($productMove->getProductType(Invoice::where('id', $invoice->id)->first()->client_id) != null) {
+                    $productMove->realisation = $invoice->id;
+                    $productMove->isPaid = true;
+                    $productMove->save();
+                }
+            }
+
             $this->changeInvoiceStatus($invoice->id, Invoice::STATUS_CLOSED, $request->type);
             return 1;
         } else {
@@ -393,15 +403,12 @@ class Ordering
             }
 
             if (($currentInvoice->status == Invoice::STATUS_FAILED) && ($status == Invoice::STATUS_CLOSED || $status == Invoice::STATUS_CONFIRMED)){
-                $productMoves = ProductMove::all();
+                $productMoves = ProductMove::all()->where('realisation', $invoice_id);
                 foreach ($productMoves as $productMove) {
-                    if ($productMove->getProductType(Invoice::where('id', $invoice_id)->first()->client_id) != null) {
-                        $productMove->realisation = $invoice_id;
-                        $productMove->isPaid = true;
-                        $productMove->save();
-                    }
+                    $productMove->realisation = $invoice_id;
+                    $productMove->isPaid = true;
+                    $productMove->save();
                 }
-
             }
         }
 

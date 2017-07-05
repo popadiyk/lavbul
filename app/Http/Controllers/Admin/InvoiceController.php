@@ -75,22 +75,46 @@ class InvoiceController extends Controller
         $invoice = Invoice::where('id', $id)->first();
         if ($invoice->type == 'realisation'){
             $moveProducts = ProductMove::all()->where('realisation', $id);
+            $sum = 0;
+            //dd($moveProducts);
+            foreach ($moveProducts as $moveProduct){
+                $sum = $sum + Product::where('id', $moveProduct->product_id)->first()->purchase_price * $moveProduct->quantity;
+            }
+            if ($sum != $invoice->total_account) {
+                return redirect()
+                    ->route('voyager.invoices.index')
+                    ->with([
+                        'message' => "Нажаль ця накладна більше не актуальна!",
+                        'alert-type' => 'error',
+                    ]);
+            }
+                foreach ($moveProducts as $moveProduct){
+                    $myProduct = Product::where('id', $moveProduct->product_id)->first();
+                    $productInArray = [
+                        $myProduct->marking,
+                        $myProduct->title,
+                        $moveProduct->quantity,
+                        $myProduct->purchase_price,
+                        $myProduct->purchase_price * $moveProduct->quantity
+                    ];
+                    array_push($products, $productInArray);
+                }
         } else {
             $moveProducts = ProductMove::all()->where('invoice_id', $id);
+            foreach ($moveProducts as $moveProduct){
+                $myProduct = Product::where('id', $moveProduct->product_id)->first();
+                $productInArray = [
+                    $myProduct->marking,
+                    $myProduct->title,
+                    $moveProduct->quantity,
+                    $moveProduct->sum/$moveProduct->quantity,
+                    $moveProduct->sum
+                ];
+                array_push($products, $productInArray);
+            }
         }
 
 
-        foreach ($moveProducts as $moveProduct){
-            $myProduct = Product::where('id', $moveProduct->product_id)->first();
-            $productInArray = [
-                $myProduct->marking,
-                $myProduct->title,
-                $moveProduct->quantity,
-                $moveProduct->sum/$moveProduct->quantity,
-                $moveProduct->sum
-            ];
-            array_push($products, $productInArray);
-        }
 
         // GET THE DataType based on the slug
         $dataType = Voyager::model('DataType')->where('slug', '=', $slug)->first();

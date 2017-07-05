@@ -222,7 +222,7 @@
                 var client = $('#clients').val().split('&')[0];
             }
             var goods = [];
-            //$('#voyager-loader').css("display","block");
+            $('#voyager-loader').css("display","block");
             $('#invoiceTable tbody tr').each (function() {
                 var myProduct = {
                     marking: $(this).attr('marking'),
@@ -243,9 +243,8 @@
                         invoiceSumm : $('#total-sum-discount').val()
                     }
             }).done(function (data) {
-                //loader.style.left = (sidebar.clientWidth/2)+'px';
-//                window.location.href = '/admin/invoices';
-                console.log(data);
+                window.location.href = '/admin/invoices';
+//                console.log(data);
             }).fail(function (jqXHR, ajaxOptions, thrownError) {
                 alert("No response from server");
             });
