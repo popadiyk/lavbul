@@ -57,11 +57,11 @@
                                 </div>
                                 <div class="row" style="margin: 0px;">
                                     <label>Знижка:</label>
-                                    <input type="text" name="discount" id="discount" style="width: 20%; text-align: center; border:none; border:solid 1px #ccc; border-radius: 5px;" disabled>
+                                    <input type="text" name="discount" @if ($invoice->client->discount) value="{{$invoice->client->discount}} %" @else value="-" @endif id="discount" style="width: 20%; text-align: center; border:none; border:solid 1px #ccc; border-radius: 5px;" disabled>
                                 </div>
                                 <div class="row" style="margin: 0px;">
                                     <label>Сумма зі знижкою:</label>
-                                    <input type="text" name="total-sum-discount" id="total-sum-discount" style="color:orangered; font-weight: bold; width: 20%;  text-align: center; border:none; border:solid 1px #ccc; border-radius: 5px;" disabled>
+                                    <input type="text" name="total-sum-discount" value="{{number_format($invoice->total_account, 2, '.', '')}}" id="total-sum-discount" style="color:orangered; font-weight: bold; width: 20%;  text-align: center; border:none; border:solid 1px #ccc; border-radius: 5px;" disabled>
                                 </div>
                             </div>
                         </div>

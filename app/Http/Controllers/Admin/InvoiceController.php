@@ -97,6 +97,7 @@ class InvoiceController extends Controller
                         $myProduct->purchase_price,
                         $myProduct->purchase_price * $moveProduct->quantity
                     ];
+                    
                     array_push($products, $productInArray);
                 }
         } else {
@@ -159,6 +160,88 @@ class InvoiceController extends Controller
      */
     public function show(Request $request, $id)
     {
+        $slug = $this->getSlug($request);
+        $products = [];
+
+        $invoice = Invoice::where('id', $id)->first();
+        if ($invoice->type == 'realisation'){
+            $moveProducts = ProductMove::all()->where('realisation', $id);
+            $sum = 0;
+            //dd($moveProducts);
+            foreach ($moveProducts as $moveProduct){
+                $sum = $sum + Product::where('id', $moveProduct->product_id)->first()->purchase_price * $moveProduct->quantity;
+            }
+            if ($sum != $invoice->total_account) {
+                return redirect()
+                    ->route('voyager.invoices.index')
+                    ->with([
+                        'message' => "Нажаль ця накладна більше не актуальна!",
+                        'alert-type' => 'error',
+                    ]);
+            }
+            foreach ($moveProducts as $moveProduct){
+                $myProduct = Product::where('id', $moveProduct->product_id)->first();
+                $productInArray = [
+                    $myProduct->marking,
+                    $myProduct->title,
+                    $moveProduct->quantity,
+                    $myProduct->purchase_price,
+                    $myProduct->purchase_price * $moveProduct->quantity
+                ];
+
+                array_push($products, $productInArray);
+            }
+        } else {
+            $moveProducts = ProductMove::all()->where('invoice_id', $id);
+            foreach ($moveProducts as $moveProduct){
+                $myProduct = Product::where('id', $moveProduct->product_id)->first();
+                $productInArray = [
+                    $myProduct->marking,
+                    $myProduct->title,
+                    $moveProduct->quantity,
+                    $moveProduct->sum/$moveProduct->quantity,
+                    $moveProduct->sum
+                ];
+                array_push($products, $productInArray);
+            }
+        }
+
+
+
+        // GET THE DataType based on the slug
+        $dataType = Voyager::model('DataType')->where('slug', '=', $slug)->first();
+        // Check permission
+
+        Voyager::canOrFail('browse_'.$dataType->name);
+        $getter = $dataType->server_side ? 'paginate' : 'get';
+        // Next Get or Paginate the actual content from the MODEL that corresponds to the slug DataType
+        if (strlen($dataType->model_name) != 0) {
+            $model = app($dataType->model_name);
+            $relationships = $this->getRelationships($dataType);
+            if ($model->timestamps) {
+                $dataTypeContent = call_user_func([$model->with($relationships)->latest(), $getter]);
+            } else {
+                $dataTypeContent = call_user_func([
+                    $model->with($relationships)->orderBy($model->getKeyName(), 'DESC'),
+                    $getter,
+                ]);
+            }
+            //Replace relationships' keys for labels and create READ links if a slug is provided.
+            $dataTypeContent = $this->resolveRelations($dataTypeContent, $dataType);
+        } else {
+            // If Model doesn't exist, get data from table name
+            $dataTypeContent = call_user_func([DB::table($dataType->name), $getter]);
+            $model = false;
+        }
+        //dd($dataTypeContent);
+        // Check if BREAD is Translatable
+        $isModelTranslatable = is_bread_translatable($model);
+        $view = 'voyager::bread.browse';
+        if (view()->exists("voyager::$slug.browse")) {
+            $view = "voyager::$slug.browse";
+        }
+
+        return view('admin.invoices.read', compact('dataType', 'dataTypeContent', 'isModelTranslatable', 'invoice', 'products'));
     }
 
     /**
