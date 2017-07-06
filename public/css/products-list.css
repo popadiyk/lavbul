@@ -5,6 +5,7 @@
 	position:relative;
 	border: 1px solid #EFECEC;
 	padding: 10px;
+	height: 100%;
 }
 .mid-pop .zoom-icon {
 	top: 0px;
@@ -115,6 +116,9 @@ a.item_add {
 }
 .mid-2 {
 	padding-top: 1em;
+}
+.item-grid{
+	height: 384px;
 }
 
 @media(max-width:1220px){
