@@ -93,7 +93,7 @@ class ProductMove extends Model
 
     public function getProductType($manufacture_id){
         //dd($this->product->manufacture->id);
-        if ($this->invoice->type == "sales" && $this->product->manufacture->id == $manufacture_id && $this->isPaid == false && $this->product->manufacture->manufactureType->title == "realization"){
+        if ($this->invoice->status == "closed" && $this->invoice->type == "sales" && $this->product->manufacture->id == $manufacture_id && $this->isPaid == false && $this->product->manufacture->manufactureType->title == "realization"){
             $realizationProduct = [];
 
             array_push($realizationProduct, $this->product->marking);

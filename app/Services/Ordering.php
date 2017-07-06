@@ -204,4 +204,217 @@ class Ordering
         }
         return true;
     }
+
+    /**
+     * Checked qty product for marking
+     * @param $marking
+     * @param $wantedQty
+     * @return bool
+     */
+    public function isValidQty($goods){
+        foreach ($goods as $good){
+            $checkedProduct = Product::where('marking', $good['marking'])->first();
+            $realQty = $checkedProduct->quantity;
+            if ($good['qty'] > $realQty){
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * Cheked is RealSumm == invoiceSumm
+     * @param $realSumm
+     * @param $invoceSumm
+     * @return bool
+     */
+    public function isValidSumm($realSumm, $invoceSumm){
+        if ($realSumm != $invoceSumm){
+            return false;
+        }
+        return true;
+    }
+
+    /**
+     * Calculate RealSum
+     * @param $goods
+     * @param $discount
+     * @return int
+     */
+    public function getInvoiceSumm($goods, $discount, $type){
+        $realSumm = 0;
+        if ($type == 'sales'){
+            foreach ($goods as $good){
+                $currentProduct = Product::where('marking', $good['marking'])->first();
+                $realSumm = $realSumm + $currentProduct->price * $good['qty'];
+            }
+            return $realSumm * $discount;
+        } else if ($type == 'purchase' || $type == 'realisation'){
+            foreach ($goods as $good){
+                $currentProduct = Product::where('marking', $good['marking'])->first();
+                $realSumm = $realSumm + $currentProduct->purchase_price * $good['qty'];
+            }
+            return $realSumm;
+        } else if ($type == 'writeOf'){
+            return $realSumm;
+        }
+    }
+    
+    public function createInvoiceAdmin($request){
+        if ($request->type == 'sales'){
+            $invoice = new Invoice();
+            $invoice->type = $request->type;
+            $invoice->client_id = $request->client;
+            $invoice->author_id = Auth::user()->id;
+            $invoice->status = Invoice::STATUS_FAILED;
+            $invoice->total_account = $this->getInvoiceSumm($request->goods, $request->discount, $request->type);
+            $invoice->save();
+
+            foreach ($request->goods as $good){
+                $currentProduct = Product::where('marking', $good['marking'])->first();
+                $currentProductMove = new ProductMove();
+                $currentProductMove->product_id = $currentProduct->id;
+                $currentProductMove->invoice_id = $invoice->id;
+                $currentProductMove->quantity = $good['qty'];
+                $currentProductMove->sum = $good['qty'] * $currentProduct->price * $request->discount;
+                $currentProductMove->save();
+            }
+            $this->changeInvoiceStatus($invoice->id, Invoice::STATUS_CLOSED, $request->type);
+            return 1;
+        } else if ($request->type == 'purchase'){
+            $invoice = new Invoice();
+            $invoice->type = $request->type;
+            $invoice->client_id = $request->manufacture;
+            $invoice->author_id = Auth::user()->id;
+            $invoice->status = Invoice::STATUS_FAILED;
+            $invoice->total_account = $this->getInvoiceSumm($request->goods, $request->discount, $request->type);
+            $invoice->save();
+            foreach ($request->goods as $good){
+                $currentProduct = Product::where('marking', $good['marking'])->first();
+                $currentProductMove = new ProductMove();
+                $currentProductMove->product_id = $currentProduct->id;
+                $currentProductMove->invoice_id = $invoice->id;
+                $currentProductMove->quantity = $good['qty'];
+                $currentProductMove->sum = $good['qty'] * $currentProduct->purchase_price;
+                $currentProductMove->save();
+            }
+            $this->changeInvoiceStatus($invoice->id, Invoice::STATUS_CLOSED, $request->type);
+            return 1;
+        } else if ($request->type == 'writeOf'){
+            $invoice = new Invoice();
+            $invoice->type = $request->type;
+            $invoice->client_id = Auth::user()->id;
+            $invoice->author_id = Auth::user()->id;
+            $invoice->status = Invoice::STATUS_FAILED;
+            $invoice->total_account = 0;
+            $invoice->save();
+            foreach ($request->goods as $good){
+                $currentProduct = Product::where('marking', $good['marking'])->first();
+                $currentProductMove = new ProductMove();
+                $currentProductMove->product_id = $currentProduct->id;
+                $currentProductMove->invoice_id = $invoice->id;
+                $currentProductMove->quantity = $good['qty'];
+                $currentProductMove->sum = 0;
+                $currentProductMove->save();
+            }
+            $this->changeInvoiceStatus($invoice->id, Invoice::STATUS_CLOSED, $request->type);
+            return 1;
+        } else if ($request->type == 'realisation') {
+            $invoice = new Invoice();
+            $invoice->type = $request->type;
+            $invoice->client_id = $request->manufacture;
+            $invoice->author_id = Auth::user()->id;
+            $invoice->status = Invoice::STATUS_FAILED;
+            $invoice->total_account = $this->getInvoiceSumm($request->goods, $request->discount, $request->type);;
+            $invoice->save();
+
+            $productMoves = ProductMove::all();
+            foreach ($productMoves as $productMove) {
+                if ($productMove->getProductType(Invoice::where('id', $invoice->id)->first()->client_id) != null) {
+                    $productMove->realisation = $invoice->id;
+                    $productMove->isPaid = true;
+                    $productMove->save();
+                }
+            }
+
+            $this->changeInvoiceStatus($invoice->id, Invoice::STATUS_CLOSED, $request->type);
+            return 1;
+        } else {
+            return 0;
+        }
+        
+    }
+
+    public function changeInvoiceStatus($invoice_id, $status, $type){
+        $currentInvoice = Invoice::where('id', $invoice_id)->first();
+        if ($type == 'sales' || $type == 'writeOf'){
+            if (($currentInvoice->status == Invoice::STATUS_CLOSED || $currentInvoice->status == Invoice::STATUS_CONFIRMED) && $status == Invoice::STATUS_FAILED){
+                $productMoves = ProductMove::all()->where('invoice_id', $invoice_id);
+                foreach ($productMoves as $productMove){
+                    $currentProduct = Product::where('id', $productMove->product_id)->first();
+                    $currentProduct->quantity = $currentProduct->quantity + $productMove->quantity;
+                    $currentProduct->save();
+                }
+            }
+
+            if (($currentInvoice->status == Invoice::STATUS_FAILED) && ($status == Invoice::STATUS_CLOSED || $status == Invoice::STATUS_CONFIRMED)){
+                $productMoves = ProductMove::all()->where('invoice_id', $invoice_id);
+                foreach ($productMoves as $productMove){
+                    $currentProduct = Product::where('id', $productMove->product_id)->first();
+                    $currentProduct->quantity = $currentProduct->quantity - $productMove->quantity;
+                    if ($currentProduct->quantity < 0) {
+                        return -1;
+                    }
+                    $currentProduct->save();
+                }
+            }
+        }
+        
+        if ($type == 'purchase'){
+            if (($currentInvoice->status == Invoice::STATUS_CLOSED || $currentInvoice->status == Invoice::STATUS_CONFIRMED) && $status == Invoice::STATUS_FAILED){
+                $productMoves = ProductMove::all()->where('invoice_id', $invoice_id);
+                foreach ($productMoves as $productMove){
+                    $currentProduct = Product::where('id', $productMove->product_id)->first();
+                    $currentProduct->quantity = $currentProduct->quantity - $productMove->quantity;
+                    if ($currentProduct->quantity < 0) {
+                        return -1;
+                    }
+                    $currentProduct->save();
+                }
+            }
+
+            if (($currentInvoice->status == Invoice::STATUS_FAILED) && ($status == Invoice::STATUS_CLOSED || $status == Invoice::STATUS_CONFIRMED)){
+                $productMoves = ProductMove::all()->where('invoice_id', $invoice_id);
+                foreach ($productMoves as $productMove){
+                    $currentProduct = Product::where('id', $productMove->product_id)->first();
+                    $currentProduct->quantity = $currentProduct->quantity + $productMove->quantity;
+                    $currentProduct->save();
+                }
+            }
+        }
+        
+        if ($type = 'realisation'){
+            if (($currentInvoice->status == Invoice::STATUS_CLOSED || $currentInvoice->status == Invoice::STATUS_CONFIRMED) && $status == Invoice::STATUS_FAILED) {
+                $productMoves = ProductMove::all()->where('realisation', $invoice_id);
+                foreach ($productMoves as $productMove) {
+                    $productMove->isPaid = false;
+                    $productMove->save();
+                }
+            }
+
+            if (($currentInvoice->status == Invoice::STATUS_FAILED) && ($status == Invoice::STATUS_CLOSED || $status == Invoice::STATUS_CONFIRMED)){
+                $productMoves = ProductMove::all()->where('realisation', $invoice_id);
+                foreach ($productMoves as $productMove) {
+                    $productMove->realisation = $invoice_id;
+                    $productMove->isPaid = true;
+                    $productMove->save();
+                }
+            }
+        }
+
+        $currentInvoice->status = $status;
+        $currentInvoice->save();
+    }
+
+    
 }
