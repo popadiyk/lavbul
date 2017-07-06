@@ -79,7 +79,7 @@
 		<div class="row" style="padding-top: 20px;">
 			<div class="col-md-12 text-center">
 				<nav aria-label="Page navigation example">
-					<ul class="pagination">
+					<ul class="pagination list-inline justify-content-center">
 						<li class="page-item">
 							<a class="page-link" href="#" aria-label="Previous">
 								<span aria-hidden="true">&laquo;</span>
