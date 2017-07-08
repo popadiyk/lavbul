@@ -39,4 +39,10 @@ class HomeController extends Controller
         $product = Product::find($id);
         return view('products.product', [ 'product' => $product ]);
     }
+    public function gotomain(Request $request){
+        $myProduct = Product::all()->where('id', $request->id)->first();
+        $myProduct->goToMain($request->act);
+
+        return $request->act;
+    }
 }
