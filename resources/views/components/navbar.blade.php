@@ -69,7 +69,7 @@
   </button>
   <div class="navbar-collapse justify-content-md-center collapse" id="navbarsExampleCenteredNav" aria-expanded="false" style="">
     <ul class="navbar-nav">
-      <li class="nav-item align-self-center hidden-xs hidden-sm"><img src="img/min_logo.png" height="88px"></li>
+      <li class="nav-item align-self-center hidden-xs hidden-sm"><img src="/img/min_logo.png" height="88px"></li>
       <li class="nav-item align-self-center"><a class="nav-link" href="{{ url('/') }}">ГОЛОВНА</a></li>
       <li class="nav-item align-self-center"><a class="nav-link" href="{{ url('/products') }}">ПРОДУКЦІЯ</a></li>
       <li class="nav-item align-self-center"><a class="nav-link" href="{{ url('/master_classes') }}">МАЙСТЕР-КЛАСИ</a></li>
@@ -237,7 +237,7 @@
 </div>
 <!--Modal: Login / Register Form-->
 
-<div class="modal fade top" id="fullHeightModalRight" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade right" id="fullHeightModalRight" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 </div>
 
 <!-- temporary is hidden -->
