@@ -8,8 +8,8 @@
     <h1 class="page-title">
         <i class="voyager-list"></i>Змітини накладну
         @if (Voyager::can('add_'.$dataType->name))
-            <button type="submit" form="form-group" class="btn btn-info">
-                <i class="voyager-medal-rank-star"></i> Повернутись назад
+            <button type="submit" form="form-group" class="btn btn-success">
+                <i class="voyager-medal-rank-star"></i> Зберегти данні
             </button>
         @endif
     </h1>
@@ -37,16 +37,16 @@
                                     </tr>
                                     </thead>
                                     <tbody>
-                                    @foreach($products as $product)
-                                        <tr style="background: @if ($loop->iteration%2 == 0) palegreen @else mediumspringgreen @endif;">
-                                            <td>{{$product[0]}}</td>
-                                            <td>{{$product[1]}}</td>
-                                            <td style="text-align: center;">{{$product[2]}}</td>
-                                            <td style="text-align: center;">{{$product[3]}}</td>
-                                            <td class="summ" style="text-align: center;">{{$product[4]}}</td>
-                                            <td style="text-align: center;"> <i class="voyager-wallet" style="color:green; cursor: pointer;"></i></td>
-                                        </tr>
-                                    @endforeach
+                                        @foreach($products as $product)
+                                            <tr style="background: @if ($loop->iteration%2 == 0) palegreen @else mediumspringgreen @endif;">
+                                                <td>{{$product[0]}}</td>
+                                                <td>{{$product[1]}}</td>
+                                                <td style="text-align: center;">{{$product[2]}}</td>
+                                                <td style="text-align: center;">{{$product[3]}}</td>
+                                                <td class="summ" style="text-align: center;">{{$product[4]}}</td>
+                                                <td style="text-align: center;"> <i class="voyager-wallet" style="color:green; cursor: pointer;"></i></td>
+                                            </tr>
+                                        @endforeach
                                     </tbody>
                                 </table>
                             </div>
@@ -67,8 +67,11 @@
                         </div>
 
                         <div id="invoice_info" class="col-xs-6" style="width: 48%; padding: 0px; height: 460px; overflow-y: scroll;">
-                            <form action="{{ route('voyager.'.$dataType->slug.'.index', $invoice->id) }}"
-                                  name="invoiceform" id="form-group" method="GET" enctype="multipart/form-data" class="panel-body">
+                            <form action="{{ route('voyager.'.$dataType->slug.'.update', $invoice->id) }}"
+                                  name="invoiceform" id="form-group" method="POST" enctype="multipart/form-data" class="panel-body">
+                                <!-- PUT Method if we are editing -->
+                                    {{ method_field("PUT") }}
+                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                 <div class="form-group">
                                     <label style="background: yellow; padding: 3px 8px; border-radius: 4px;" for="name"> Накладна <strong>
                                             @if($invoice->type == 'sales')
@@ -80,7 +83,7 @@
                                             @elseif($invoice->type == 'realisation')
                                                 на реалізацію
                                             @endif</strong>
-                                        номер: <strong>#{{$invoice->id}}</strong> від <strong>{{$invoice->created_at->format('d.m.Yр. | H:i')}} </strong>
+                                            номер: <strong>#{{$invoice->id}}</strong> від <strong>{{$invoice->created_at->format('d.m.Yр. | H:i')}} </strong>
                                     </label>
                                 </div>
 
@@ -95,15 +98,23 @@
 
                                 <div class="form-group">
                                     <label for="name">Поточний статус:
-                                        @if ($invoice->status == 'closed')
+                                            @if ($invoice->status == 'closed')
                                             <strong style="color: limegreen;">УСПІШНА</strong>
-                                        @elseif ($invoice->status == 'confirmed')
+                                            @elseif ($invoice->status == 'confirmed')
                                             <strong style="color: blue;">СТВОРЕНА</strong>
-                                        @elseif ($invoice->status == 'failed')
+                                            @elseif ($invoice->status == 'failed')
                                             <strong style="color: red;">ВІДМІНЕНА</strong>
-                                        @endif</label>
+                                            @endif</label>
                                 </div>
 
+                                <div class="form-group">
+                                    <label for="name">Змінити статус накладної:</label>
+                                    <select size="4" id="group-select" name="status" required >
+                                        <option value="closed">УСПІШНА</option>
+                                        <option value="confirmed">СТВОРЕНА</option>
+                                        <option value="failed">ВІДМІНЕНА</option>
+                                    </select>
+                                </div>
                             </form>
                         </div>
                     </div>
@@ -114,12 +125,12 @@
 
 
         {{--<div class="row">--}}
-        {{--<div class="col-md-12">--}}
-        {{--<div class="panel panel-bordered">--}}
-        {{--<div class="panel-body">--}}
-        {{--</div>--}}
-        {{--</div>--}}
-        {{--</div>--}}
+            {{--<div class="col-md-12">--}}
+                {{--<div class="panel panel-bordered">--}}
+                    {{--<div class="panel-body">--}}
+                    {{--</div>--}}
+                {{--</div>--}}
+            {{--</div>--}}
         {{--</div>--}}
         @stop
 
@@ -136,4 +147,3 @@
                 })
             </script>
 @stop
-

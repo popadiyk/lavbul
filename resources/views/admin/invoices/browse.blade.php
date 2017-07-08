@@ -2,6 +2,9 @@
 
 <style>
 
+    .actions{
+        width: 150px !important;
+    }
     /* The Modal (background) */
     .modal {
         display: none; /* Hidden by default */
@@ -83,6 +86,7 @@
 @stop
 
 @section('content')
+    @include('voyager::alerts')
     <div class="page-content container-fluid">
         <div class="row">
             <div class="col-md-12">
@@ -108,24 +112,29 @@
                         <table id="dataTable" class="table table-hover">
                             <thead>
                             <tr>
-                                <th style="width: 120px;">Дата</th>
+                                <th style="width: 150px;">Дата</th>
                                 <th style="width: 100px;">Тип</th>
                                 <th style="width: 50px;">Номер</th>
                                 <th>Опис</th>
                                 <th>Клієнт</th>
                                 <th>Сумма</th>
                                 <th>Статус</th>
-                                <th class="actions"></th>
+                                <th class="actions" ></th>
                             </tr>
                             </thead>
                             <tbody>
                             @foreach($dataTypeContent as $data)
                                 <tr>
-                                    <td>{{ \Carbon\Carbon::parse($data->created_at)->format('d.m.Y | h:i') }}</td>
+                                    <td>{{ \Carbon\Carbon::parse($data->created_at)->format('d.m.Y | H:i') }}</td>
                                     <td> {{ $data->getType($data->type) }}</td>
                                     <td>{{$data->id}}</td>
                                     <td>{{$data->getDescription()}}</td>
-                                    <td>{{$data->client->name}}</td>
+                                    <td>@if ($data->type == 'realisation' || $data->type == 'purchase')
+                                            {{$data->client->title}}
+                                        @else
+                                            {{$data->client->name}}
+                                        @endif
+                                    </td>
                                     <td>{{number_format($data->total_account, 2)}}</td>
                                     <td>@if($data->status == 'confirmed')
                                         <p style="color: blue;">
@@ -138,12 +147,7 @@
                                     @endif
                                             {{$data->getStatus($data->status)}}</p>
                                     </td>
-                                    <td class="no-sort no-click">
-                                        @if (Voyager::can('delete_'.$dataType->name))
-                                            <div class="btn-sm btn-danger pull-right delete" data-id="{{ $data->id }}" id="delete-{{ $data->id }}">
-                                                <i class="voyager-trash"></i> Delete
-                                            </div>
-                                        @endif
+                                    <td class="no-sort no-click" >
                                         @if (Voyager::can('edit_'.$dataType->name))
                                             <a href="{{ route('voyager.'.$dataType->slug.'.edit', $data->id) }}" class="btn-sm btn-primary pull-right edit">
                                                 <i class="voyager-edit"></i> Edit
