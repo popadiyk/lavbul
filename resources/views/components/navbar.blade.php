@@ -237,7 +237,7 @@
 </div>
 <!--Modal: Login / Register Form-->
 
-<div class="modal fade top" id="fullHeightModalRight" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+<div class="modal fade right" id="fullHeightModalRight" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 </div>
 
 <!-- temporary is hidden -->
