@@ -133,19 +133,29 @@
                                     </td>
                                     <td class="no-sort no-click">
                                         @if (Voyager::can('delete_'.$dataType->name))
-                                            <div class="btn-sm btn-danger pull-right delete" data-id="{{ $data->id }}" id="delete-{{ $data->id }}">
-                                                <i class="voyager-trash"></i> Delete
-                                            </div>
+                                            <a title="Видалити" class="btn btn-danger delete" data-id="{{ $data->id }}" id="delete-{{ $data->id }}">
+                                                <i class="voyager-trash"></i>
+                                            </a>
                                         @endif
                                         @if (Voyager::can('edit_'.$dataType->name))
-                                            <a href="{{ route('voyager.'.$dataType->slug.'.edit', $data->id) }}" class="btn-sm btn-primary pull-right edit">
-                                                <i class="voyager-edit"></i> Edit
+                                            <a title="Змінити" href="{{ route('voyager.'.$dataType->slug.'.edit', $data->id) }}" class="btn btn-primary edit">
+                                                <i class="voyager-edit"></i>
                                             </a>
                                         @endif
+                                            <br>
                                         @if (Voyager::can('read_'.$dataType->name))
-                                            <a href="{{ route('voyager.'.$dataType->slug.'.show', $data->id) }}" class="btn-sm btn-warning pull-right">
-                                                <i class="voyager-eye"></i> View
+                                            <a title="Перегляд" style="margin-left: 5px; margin-right: 2px;" href="{{ route('voyager.'.$dataType->slug.'.show', $data->id) }}" class="btn btn-warning">
+                                                <i class="voyager-eye"></i>
                                             </a>
+                                        @endif
+                                        @if ($data->isMain() == false)
+                                            <a title="На головну" style="margin-left: 5px; margin-right: 2px;" class="btn btn-success gotomain" act="add" dataid = "{{$data->id}}" onclick="gotomain(this)">
+                                                <i class="voyager-angle-right"></i>
+                                            </a>
+                                            @else
+                                                <a title="З головної" style="background: green; margin-left: 5px; margin-right: 2px;" class="btn btn-success gotomain" act="del" dataid = "{{$data->id}}" onclick="gotomain(this)">
+                                                    <i class="voyager-angle-left"></i>
+                                                </a>
                                         @endif
                                     </td>
                                 </tr>
@@ -205,6 +215,27 @@
 @section('javascript')
     <!-- DataTables -->
     <script>
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+        function gotomain (element) {
+            //event.preventDefault();
+            //alert($(element).attr('act'));
+
+            $.ajax({
+                url: 'gotomain',
+                type: "post",
+                data: {id : $(element).attr('dataid'),
+                        act : $(element).attr('act')}
+            }).done(function (data) {
+                console.log(data);
+            }).fail(function (jqXHR, ajaxOptions, thrownError) {
+                alert("No response from server");
+            });
+        }
+
         @if (!$dataType->server_side)
             $(document).ready(function () {
             $('#dataTable').DataTable({ "order": [] });

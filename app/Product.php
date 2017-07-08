@@ -4,6 +4,7 @@ namespace App;
 
 use Gloudemans\Shoppingcart\Contracts\Buyable;
 use Illuminate\Database\Eloquent\Model;
+use App\MainProducts;
 
 /**
  * Class Product
@@ -132,21 +133,58 @@ class Product extends Model implements Buyable
       return $this->price;
     }
 
-    /**
 
     public function images()
     {
         return $this->hasMany('App\ProductPhoto');
     }
 
-
+    /**
      * @param integer $delta
      */
+
     public function increaseQty($delta)
     {
         $this->quantity += $delta;
         $this->save();
     }
+
+    /**
+     * @param $act
+     * @return bool
+     */
+    public function goToMain($act){
+        $mainProducts = MainProducts::all();
+        if ($act == 'add'){
+            if (count($mainProducts) < 8){
+                $newMainProduct = new MainProducts();
+                $newMainProduct->marking = $this->marking;
+                $newMainProduct->save();
+                return true;
+            }
+            return false;
+        } 
+        if ($act == 'del'){
+            $myMainProduct = MainProducts::where('marking', $this->marking)->first();
+            $myMainProduct->delete();
+            return true;
+        }
+    }
+
+    /**
+     * Функція перевірки чи є товар на головній торінці
+     * @return bool
+     */
+    public function isMain(){
+        $mainProducts = MainProducts::all();
+        foreach ($mainProducts as $mainProduct){
+            if ($this->marking == $mainProduct->marking){
+                return true;
+            }
+        }
+        return false;
+    }
+
 
     /**
      * @param integer $delta
@@ -164,7 +202,7 @@ class Product extends Model implements Buyable
 
         return true;
     }
-
+    
     /**
      * Checking for enough quantity of the product
      * @param $qty
