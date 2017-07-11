@@ -183,7 +183,7 @@
         <div class="modal-content" style="width: 300px; padding: 10px;">
             <form action="javascript:void(0)" onsubmit="checkQty()">
                 <label for="qty"> Введіть кількість:</label>
-                <input type="number" id="qty" class="form-control" min="1">
+                <input type="number" id="qty" class="form-control" value="1" min="1">
                 <div class="row" style="text-align: center;">
                     <button type="submit" id="add-edit-btn" class="btn btn-success">
                         <i class="voyager-plus"></i> Ок
@@ -281,6 +281,11 @@
         });
 
         function checkQty() {
+            console.log(isNaN(parseInt($('#qty').val())));
+            if (isNaN(parseInt($('#qty').val()))){
+                document.getElementById('myModal').style.display='none';
+                return false;
+            }
             if (parseInt($('#qty').val()) > parseInt($('#qty').attr('max')) && type != "purchase") return false;
 
                 modal.style.display = "none";

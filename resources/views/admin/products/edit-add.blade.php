@@ -89,18 +89,18 @@
 
                                 <div class="form-group col-md-4 col-xs-12">
                                     <label for="purchase_price">Ціна закупки:</label>
-                                    <input type="text" name="purchase_price" class="form-control" value="{{ $dataTypeContent->purchase_price }}" id="purchase_price" required>
+                                    <input type="text" name="purchase_price" class="form-control" value="@if(isset($dataTypeContent->id)){{ $dataTypeContent->purchase_price }}@endif" id="purchase_price" required>
                                 </div>
 
 
                                 <div class="form-group col-md-4 col-xs-12">
                                     <label for="price">Ціна продажу:</label>
-                                    <input type="text" name="price" class="form-control" value="{{ $dataTypeContent->price }}" id="price" required>
+                                    <input type="text" name="price" class="form-control" value="@if(isset($dataTypeContent->id)){{ $dataTypeContent->price }}@endif" id="price" required>
                                 </div>
 
                                 <div class="form-group col-md-4 col-xs-12">
                                     <label for="quantity">Кількість:</label>
-                                    <input type="text" name="quantity" class="form-control" value="{{ $dataTypeContent->quantity }}" id="quantity" required>
+                                    <input type="text" name="quantity" class="form-control" value="@if(isset($dataTypeContent->id)){{ $dataTypeContent->quantity }}@endif" id="quantity" required>
                                 </div>
 
                                 <div class="form-group col-xs-12">
