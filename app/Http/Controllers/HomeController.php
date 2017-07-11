@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Product;
 use App\Group;
+use App\MainProducts;
 use \Cart as Cart;
 class HomeController extends Controller
 {
@@ -23,8 +24,18 @@ class HomeController extends Controller
      */
     public function index()
     {
-        return view('home');
+        $items = MainProducts::all();
+        $products = collect();
+        foreach ($items as $key => $value) {
+            $products->push(Product::where('marking', $value->marking)->first());
+        }
+        $products_id_in_cart = array();
+        foreach(Cart::content() as $item) {
+            array_push($products_id_in_cart, $item->id);
+        }
+        return view('main.index', ['products' => $products, 'products_id_in_cart' => $products_id_in_cart]);
     }
+
     public function test(){
         return view('layouts.temp_main');
     }

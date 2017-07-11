@@ -12,7 +12,7 @@
                 <div class="row">
             @endif
 
-                <div class="col-md-4 item-grid {{($loop->iteration > 4) ? 'mrgTop' : ''}}">
+                <div class="col-md-3 item-grid {{($loop->iteration > 4) ? 'mrgTop' : ''}}">
                     <div class=" mid-pop">
                         <div class="pro-img">
                             <img src="{{ $product->main_photo }}" class="img-responsive" alt="">
@@ -58,31 +58,6 @@
             </div>
             @endif
             @endforeach
-            <div class="row" style="padding-top: 20px;">
-                <div class="col-md-12">
-                    <nav>
-                        <ul class="pagination list-inline justify-content-center">
-                            <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Previous">
-                                    <span aria-hidden="true">&laquo;</span>
-                                    <span class="sr-only">Previous</span>
-                                </a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">1</a></li>
-                            <li class="page-item">
-                                <a class="page-link active" href="#">2 <span class="sr-only">(current)</span></a>
-                            </li>
-                            <li class="page-item"><a class="page-link" href="#">3</a></li>
-                            <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Next">
-                                    <span aria-hidden="true">&raquo;</span>
-                                    <span class="sr-only">Next</span>
-                                </a>
-                            </li>
-                        </ul>
-                    </nav>
-                </div>
-            </div>
         </div>
 
     </section>
