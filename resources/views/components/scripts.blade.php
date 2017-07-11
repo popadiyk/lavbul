@@ -10,6 +10,21 @@
 <script>
 
 $(document).ready(function(){
+// Get the modal
+var productImageModal = document.getElementById('productImageModal');
+
+// Get the image and insert it inside the modal - use its "alt" text as a caption
+var productImage = document.getElementById("productImage");
+var captionText = document.getElementById("caption");
+$('a.picture').click(function(event){
+    event.preventDefault();
+    // productImageModal.style.display = "block";
+    productImage.src = this.href;
+    captionText.innerHTML = this.title;
+});
+
+// Get the <span> element that closes the modal
+var span = document.getElementsByClassName("close")[0];
 
 // accordion
 //uses classList, setAttribute, and querySelectorAll

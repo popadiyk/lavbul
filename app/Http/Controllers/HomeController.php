@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Product;
+use App\Group;
 use \Cart as Cart;
 class HomeController extends Controller
 {
@@ -29,11 +30,12 @@ class HomeController extends Controller
     }
     public function products(){
         $products = Product::paginate(9);
+        $groups = Group::all()->groupBy('group_id');
         $products_id_in_cart = array();
         foreach(Cart::content() as $item) {
             array_push($products_id_in_cart, $item->id);
         }
-        return view('products.index', [ 'products' => $products, 'products_id_in_cart' => $products_id_in_cart ]);
+        return view('products.index', [ 'products' => $products, 'products_id_in_cart' => $products_id_in_cart, 'groups' => $groups ]);
     }
     public function product($id){
         $product = Product::find($id);

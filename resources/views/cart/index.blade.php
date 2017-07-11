@@ -58,8 +58,10 @@
             </div>
             <!--Footer-->
             <div class="modal-footer">
-
-                <a href="{{ url('/products') }}" class="btn btn-secondary waves-effect waves-light"  style="padding: 10px;">Продовжиити вибір</a>
+{{--             <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button> --}}
+                <a href="javascript:;" class="btn btn-secondary waves-effect waves-light"  style="padding: 10px;" data-dismiss="modal" aria-label="Close">Продовжиити вибір</a>
                 <a href="{{ route('order.create') }}" id="cart_btn_check_order" class="btn btn-success waves-effect waves-light" style="padding: 10px;">Оформити замовлення</a>
 {{--                 <button type="button" class="btn btn-secondary waves-effect waves-light" data-dismiss="modal" style="padding: 10px;">Закрити</button> --}}
 {{--                 <button type="button" class="btn btn-primary waves-effect waves-light" style="padding: 10px;">Зробити замовлення</button> --}}

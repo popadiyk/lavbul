@@ -4,7 +4,8 @@
 <style>
 .accordion dl,
 .accordion-list {
-   border:1px solid #ddd;
+	margin-top: .5rem;
+   /* border:1px solid #ddd; */
    &:after {
        content: "";
        display:block;
@@ -15,7 +16,7 @@
 }
 .accordion dd,
 .accordion__panel {
-   background-color:#eee;
+   /* background-color:#eee; */
    font-size:1em;
    line-height:1.5em; 
 }
@@ -25,11 +26,23 @@
 
 .accordion {
     position:relative;
-    background-color:#eee;
+    /* background-color:#eee; */
+}
+.inner-item{
+	width: 90%;
+}
+.inner-item2{
+	width: 90%;
+}
+.inner-item > dt > a:focus, .inner-item > dt > a:hover {
+	font-weight: bolder !important;
+}
+.inner-item2 > dt > a:focus, .inner-item > dt > a:hover {
+	font-weight: bolder !important;
 }
 .accordionTitle,
 .accordion__Heading {
- background-color:#38cc70; 
+ /* background-color:#38cc70;  */
    text-align:center;
      font-weight:700; 
           padding: 5px;
@@ -114,90 +127,58 @@
 	<div class="container">
 		<div class="row" style="margin-top: 20px; margin-bottom: 20px;">
 			<div class="col-md-3">
-				 <div class="accordion">
+				<div class="accordion">
+				{{ dump($groups) }}
 		            <dl>
 		              <dt>
-		                <a href="#accordion1" aria-expanded="false" aria-controls="accordion1" class="accordion-title accordionTitle js-accordionTrigger">Accordion</a>
+		                <a href="#accordion1" aria-expanded="false" aria-controls="accordion1" class="accordion-title accordionTitle js-accordionTrigger btn-sm btn-default waves-effect waves-light">Accordion</a>
 		              </dt>
 		              <dd class="accordion-content accordionItem is-collapsed" id="accordion1" aria-hidden="true">
-		              	<dl>
+		              	<dl class="inner-item">
 			              <dt>
-			                <a href="#accordion1" aria-expanded="false" aria-controls="accordion1" class="accordion-title accordionTitle js-accordionTrigger">First heading</a>
+			                <a href="#accordion1" aria-expanded="false" aria-controls="accordion1" class="accordion-title accordionTitle js-accordionTrigger btn-sm btn-default waves-effect waves-light">First heading</a>
 			              </dt>
 			              <dd class="accordion-content accordionItem is-collapsed" id="accordion1" aria-hidden="true">
-			               test
+			               	<dl class="inner-item2">
+				              <dt>
+				                <a href="#accordion1" aria-expanded="false" aria-controls="accordion1" class="accordion-title accordionTitle js-accordionTrigger btn-sm btn-default waves-effect waves-light">First heading</a>
+				              </dt>
+				              <dd class="accordion-content accordionItem is-collapsed" id="accordion1" aria-hidden="true">
+
+				              </dd>
+				              <dt>
+				                <a href="#accordion1" aria-expanded="false" aria-controls="accordion1" class="accordion-title accordionTitle js-accordionTrigger btn-sm btn-default waves-effect waves-light">First Accordion heading</a>
+				              </dt>
+				              <dd class="accordion-content accordionItem is-collapsed" id="accordion1" aria-hidden="true">
+
+				              </dd>
+				            </dl>
 			              </dd>
 			              <dt>
-			                <a href="#accordion1" aria-expanded="false" aria-controls="accordion1" class="accordion-title accordionTitle js-accordionTrigger">First Accordion heading</a>
+			                <a href="#accordion1" aria-expanded="false" aria-controls="accordion1" class="accordion-title accordionTitle js-accordionTrigger btn-sm btn-default waves-effect waves-light">First Accordion heading</a>
 			              </dt>
 			              <dd class="accordion-content accordionItem is-collapsed" id="accordion1" aria-hidden="true">
-			              test
 			              </dd>
 			            </dl>
 		                
 		              </dd>
 		              <dt>
-		                <a href="#accordion2" aria-expanded="false" aria-controls="accordion2" class="accordion-title accordionTitle js-accordionTrigger">
+		                <a href="#accordion2" aria-expanded="false" aria-controls="accordion2" class="accordion-title accordionTitle js-accordionTrigger btn-sm btn-default waves-effect waves-light">
 		                  Second heading</a>
 		              </dt>
 		              <dd class="accordion-content accordionItem is-collapsed" id="accordion2" aria-hidden="true">
-		                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi eu interdum diam. Donec interdum porttitor risus non bibendum. Maecenas sollicitudin eros in quam imperdiet placerat. Cras justo purus, rhoncus nec lobortis ut, iaculis vel ipsum. Donec dignissim arcu nec elit faucibus condimentum. Donec facilisis consectetur enim sit amet varius. Pellentesque justo dui, sodales quis luctus a, iaculis eget mauris. </p>
-		                <p>Aliquam dapibus, ante quis fringilla feugiat, mauris risus condimentum massa, at elementum libero quam ac ligula. Pellentesque at rhoncus dolor. Duis porttitor nibh ut lobortis aliquam. Nullam eu dolor venenatis mauris placerat tristique eget id dolor. Quisque blandit adipiscing erat vitae dapibus. Nulla aliquam magna nec elementum tincidunt.</p>
+
 		              </dd>
 		              <dt>
-		                <a href="#accordion3" aria-expanded="false" aria-controls="accordion3" class="accordion-title accordionTitle js-accordionTrigger">
+		                <a href="#accordion3" aria-expanded="false" aria-controls="accordion3" class="accordion-title accordionTitle js-accordionTrigger btn-sm btn-default waves-effect waves-light">
 		                  Third Accordion heading
 		                </a>
 		              </dt>
 		              <dd class="accordion-content accordionItem is-collapsed" id="accordion3" aria-hidden="true">
-		                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi eu interdum diam. Donec interdum porttitor risus non bibendum. Maecenas sollicitudin eros in quam imperdiet placerat. Cras justo purus, rhoncus nec lobortis ut, iaculis vel ipsum. Donec dignissim arcu nec elit faucibus condimentum. Donec facilisis consectetur enim sit amet varius. Pellentesque justo dui, sodales quis luctus a, iaculis eget mauris. </p>
-		                <p>Aliquam dapibus, ante quis fringilla feugiat, mauris risus condimentum massa, at elementum libero quam ac ligula. Pellentesque at rhoncus dolor. Duis porttitor nibh ut lobortis aliquam. Nullam eu dolor venenatis mauris placerat tristique eget id dolor. Quisque blandit adipiscing erat vitae dapibus. Nulla aliquam magna nec elementum tincidunt.</p>
+
 		              </dd>
 		            </dl>
-		          </div>
-{{-- 				<div class="category_all">
-					<ul class="nav nav-pills nav-stacked" id="list_of_products">
-						<li><a href="" id="category">КАТЕГОРІЇ</a></li>
-					</ul>
-					<button class="accordion">Одяг</button>
-					<div class="panel">
-						<button class="accordion">Для жінок</button>
-						<div class="panel">
-							<p>Lorem</p>
-						</div>
-					</div>
-
-					<button class="accordion">Взуття</button>
-					<div class="panel">
-						<p>Lorem ipsum</p>
-					</div>
-
-					<button class="accordion">Сумки</button>
-					<div class="panel">
-						<p>Lorem ipsum dolor sit amet</p>
-					</div>
-
-					<button class="accordion">Прикраси</button>
-					<div class="panel">
-						<p>Lorem ipsu</p>
-					</div>
-
-					<button class="accordion">Аксесуари</button>
-					<div class="panel">
-						<p>Lorem</p>
-					</div>
-
-					<button class="accordion">Подарунки</button>
-					<div class="panel">
-						<p>Lorem</p>
-					</div>
-
-					<button class="accordion">Різне</button>
-					<div class="panel">
-						<p>Lorem i</p>
-					</div>
-				</div> --}}
-				
+		        </div>	
 			</div>
 			<div class="col-md-9">
 				<div class="row">
@@ -205,10 +186,8 @@
 						<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" class="sort_by">Сортувати за
 						<span class="caret"></span></button>
 						<ul class="dropdown-menu">
-							<li><a href="#">Normal</a></li>
-							<li class="disabled"><a href="#">Disabled</a></li>
-							<li class="active"><a href="#">Active</a></li>
-							<li><a href="#">Normal</a></li>
+							<li><a href="#">Ціною: від меншої, до більшої</a></li>
+							<li><a href="#">Ціною: від більшої, до меншої</a></li>
 						</ul>
 					</div>
 					<div class="col-md-6">
@@ -239,7 +218,7 @@
 										<div class="pro-img">
 											<img src="{{ $product->main_photo }}" class="img-responsive" alt="">
 											<div class="zoom-icon ">
-												<a class="picture" href="{{ $product->main_photo }}" rel="title" class="b-link-stripe b-animate-go  thickbox"><i class="glyphicon glyphicon-search icon "></i></a>
+												<a class="picture" href="{{ $product->main_photo }}" rel="title" class="b-link-stripe b-animate-go  thickbox" title="{{ $product->title }}" data-toggle="modal" data-target="#productImageModal"><i class="glyphicon glyphicon-search icon "></i></a>
 												<a href="{{ url('/product/'.$product->id ) }}"><i class="glyphicon glyphicon-menu-right icon"></i></a>
 											</div>
 										</div>
@@ -314,6 +293,19 @@
 				
 			</div>
 		</div>
+	</div>
+</div>
+<!-- The Modal -->
+<div class="modal fade" id="productImageModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="margin-top: 80px;">
+	<div class="modal-dialog modal-md text-center" role="document">
+	    <!-- The Close Button -->
+	   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+	    <!-- Modal Content (The Image) -->
+	    <img class="modal-content" id="productImage" style="width: 90%; margin: 0 auto;">
+	    <!-- Modal Caption (Image Text) -->
+	    <div id="caption"></div>
 	</div>
 </div>
 @endsection
