@@ -41,8 +41,6 @@ class HomeController extends Controller
     }
     public function gotomain(Request $request){
         $myProduct = Product::all()->where('id', $request->id)->first();
-        $myProduct->goToMain($request->act);
-
-        return $request->act;
+        return (string)$myProduct->goToMain($request->act);
     }
 }

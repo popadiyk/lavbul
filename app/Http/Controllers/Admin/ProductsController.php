@@ -57,12 +57,44 @@ class ProductsController extends Controller
             $model = false;
         }
 
+        if ($request->search != null) {
+            $search = $request->search;
+            $products = [];
+            $columns = ['marking', 'title'];
+            if ($search) {
+                foreach ($columns as $column) {
+                    $items = Product::where($column, 'like', '%' . $search . '%')->get();
+                    if (count($items) > 0) {
+                        foreach ($items as $item) {
+                            if(!in_array($item, $products)){
+                                array_push($products, $item);
+                            }
+                        }
+                    }
+                }
+                $products = HelperForImage::paginate($products, 10);
+                $products->withPath('&search='.$request->search);
+                //dd($products);
+            }
+        } else {
+            $products = Product::paginate(10);
+            //dd($products);
+            //dd($products->currentPage());
+            //$products->withPath();
+        }
+
         // Check if BREAD is Translatable
         $isModelTranslatable = is_bread_translatable($model);
+        if ($request->ajax()){
+
+            //dd($request->ajax());
+//            dd($newInvoice->manufacture);
+            return view('admin.products.data-edit-add', compact('products','dataType'));
+        }
 
         $view = 'admin.products.browse';
 
-        return view($view, compact('dataType', 'dataTypeContent', 'isModelTranslatable'));
+        return view($view, compact('dataType', 'dataTypeContent', 'isModelTranslatable', 'products'));
 
     }
 
