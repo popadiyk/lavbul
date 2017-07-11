@@ -37,6 +37,7 @@ Route::delete('emptyCart', 'CartController@emptyCart');
 
 Route::group(['prefix' => 'admin'], function () {
 	Route::get('/invoices/create', array('as'=>'pagination', 'uses'=>'InvoiceController@create'));
+	Route::get('products', array('as'=>'pagination', 'uses'=>'ProductsController@index'));
 	Route::post('gotomain', 'HomeController@gotomain');
     Voyager::routes();
 });
