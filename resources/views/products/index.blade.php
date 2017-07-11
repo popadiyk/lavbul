@@ -36,9 +36,14 @@
 }
 .inner-item > dt > a:focus, .inner-item > dt > a:hover {
 	font-weight: bolder !important;
+	box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15) !important;
 }
 .inner-item2 > dt > a:focus, .inner-item > dt > a:hover {
 	font-weight: bolder !important;
+	box-shadow: 0 5px 11px 0 rgba(0, 0, 0, 0.18), 0 4px 15px 0 rgba(0, 0, 0, 0.15) !important;
+}
+.accordionTitle.active{
+	background: #33b5e5 !important;
 }
 .accordionTitle,
 .accordion__Heading {
@@ -128,56 +133,16 @@
 		<div class="row" style="margin-top: 20px; margin-bottom: 20px;">
 			<div class="col-md-3">
 				<div class="accordion">
-				{{ dump($groups) }}
-		            <dl>
-		              <dt>
-		                <a href="#accordion1" aria-expanded="false" aria-controls="accordion1" class="accordion-title accordionTitle js-accordionTrigger btn-sm btn-default waves-effect waves-light">Accordion</a>
-		              </dt>
-		              <dd class="accordion-content accordionItem is-collapsed" id="accordion1" aria-hidden="true">
-		              	<dl class="inner-item">
-			              <dt>
-			                <a href="#accordion1" aria-expanded="false" aria-controls="accordion1" class="accordion-title accordionTitle js-accordionTrigger btn-sm btn-default waves-effect waves-light">First heading</a>
-			              </dt>
-			              <dd class="accordion-content accordionItem is-collapsed" id="accordion1" aria-hidden="true">
-			               	<dl class="inner-item2">
-				              <dt>
-				                <a href="#accordion1" aria-expanded="false" aria-controls="accordion1" class="accordion-title accordionTitle js-accordionTrigger btn-sm btn-default waves-effect waves-light">First heading</a>
-				              </dt>
-				              <dd class="accordion-content accordionItem is-collapsed" id="accordion1" aria-hidden="true">
-
-				              </dd>
-				              <dt>
-				                <a href="#accordion1" aria-expanded="false" aria-controls="accordion1" class="accordion-title accordionTitle js-accordionTrigger btn-sm btn-default waves-effect waves-light">First Accordion heading</a>
-				              </dt>
-				              <dd class="accordion-content accordionItem is-collapsed" id="accordion1" aria-hidden="true">
-
-				              </dd>
-				            </dl>
-			              </dd>
-			              <dt>
-			                <a href="#accordion1" aria-expanded="false" aria-controls="accordion1" class="accordion-title accordionTitle js-accordionTrigger btn-sm btn-default waves-effect waves-light">First Accordion heading</a>
-			              </dt>
-			              <dd class="accordion-content accordionItem is-collapsed" id="accordion1" aria-hidden="true">
-			              </dd>
-			            </dl>
-		                
-		              </dd>
-		              <dt>
-		                <a href="#accordion2" aria-expanded="false" aria-controls="accordion2" class="accordion-title accordionTitle js-accordionTrigger btn-sm btn-default waves-effect waves-light">
-		                  Second heading</a>
-		              </dt>
-		              <dd class="accordion-content accordionItem is-collapsed" id="accordion2" aria-hidden="true">
-
-		              </dd>
-		              <dt>
-		                <a href="#accordion3" aria-expanded="false" aria-controls="accordion3" class="accordion-title accordionTitle js-accordionTrigger btn-sm btn-default waves-effect waves-light">
-		                  Third Accordion heading
-		                </a>
-		              </dt>
-		              <dd class="accordion-content accordionItem is-collapsed" id="accordion3" aria-hidden="true">
-
-		              </dd>
-		            </dl>
+					@php($elements = $groups->groupBy('group_id'))
+	                {{-- пробегаем по родительским групам --}}
+	                @foreach ($elements as $k => $subGroups)
+	                    @if ($k !== 0)
+	                      @break
+	                    @endif
+	                    <dl>
+	                    @include('main.groups', ['items' => $subGroups])
+	                    </dl>
+	                @endforeach
 		        </div>	
 			</div>
 			<div class="col-md-9">

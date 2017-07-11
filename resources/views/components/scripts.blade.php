@@ -10,6 +10,18 @@
 <script>
 
 $(document).ready(function(){
+
+$('.accordion-title').click(function(event){
+    event.preventDefault();
+
+    if ($(this).hasClass('last')) {
+        $('.accordion-title').each(function() {
+            $(this).removeClass('active');
+        });
+        $(this).addClass('active');
+    }
+});
+
 // Get the modal
 var productImageModal = document.getElementById('productImageModal');
 

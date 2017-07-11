@@ -41,7 +41,7 @@ class HomeController extends Controller
     }
     public function products(){
         $products = Product::paginate(9);
-        $groups = Group::all()->groupBy('group_id');
+        $groups = Group::all();
         $products_id_in_cart = array();
         foreach(Cart::content() as $item) {
             array_push($products_id_in_cart, $item->id);
