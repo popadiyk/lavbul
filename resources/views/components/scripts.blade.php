@@ -11,6 +11,14 @@
 
 $(document).ready(function(){
 
+$('.pagination').addClass('list-inline justify-content-center');
+$('.pagination li').addClass('page-item');
+$('.pagination li:first').html("<a class=\"page-link waves-effect waves-effect\" aria-label=\"Previous\" href=\"javascript:;\"><span aria-hidden=\"true\">«</span><span class=\"sr-only\">Previous</span></a>");
+$('.pagination li:last-child').html("<a class=\"page-link waves-effect waves-effect\" href=\"javascript:;\" aria-label=\"Next\><span aria-hidden=\"true\">»</span><span class=\"sr-only\">Next</span></a>");
+var currentPage = $('.pagination li.active span').text();
+$('.pagination li.active').html("<a href=\"javascript:;\">"+currentPage+"</a>");
+
+
 $('.accordion-title').click(function(event){
     event.preventDefault();
 
