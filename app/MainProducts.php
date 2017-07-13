@@ -17,5 +17,9 @@ class MainProducts extends Model
     protected $fillable = [
         'marking'
     ];
-    
+
+    public function product()
+    {
+        return $this->hasOne(Product::class, 'marking', 'marking');
+    }
 }
