@@ -90,7 +90,7 @@
 </style>
 
 @section('page_header')
-    <h1 class="page-title">
+    <h1 class="page-title" style="margin: 0px;">
         <i class="{{ $dataType->icon }}"></i> {{ $dataType->display_name_plural }}
         @if (Voyager::can('add_'.$dataType->name))
             <a href="{{ route('voyager.'.$dataType->slug.'.create') }}" class="btn btn-success">
@@ -104,73 +104,16 @@
     <div class="page-content container-fluid">
         <div class="row">
             <div class="col-md-12">
-                <div class="panel panel-bordered">
-                    <div class="panel-body">
-                        <table id="dataTable" class="table table-hover">
-                            <thead>
-                            <tr>
-                                <th>Код</th>
-                                <th>Назва</th>
-                                <th>Група</th>
-                                <th>Постачальник</th>
-                                <th>Залишок</th>
-                                <th>Ціна</th>
-                                <th>Фото</th>
-                                <th class="actions"></th>
-                            </tr>
-                            </thead>
-                            <tbody>
-                            @foreach($dataTypeContent as $data)
-                                <tr style="text-align: center;">
-                                    <td>{{$data->marking}}</td>
-                                    <td style="text-align: left; width: 300px;">{{$data->title}}</td>
-                                    <td>{{$data->group->title}}</td>
-                                    <td>{{$data->manufacture->title}}</td>
-                                    <td>{{$data->quantity}}</td>
-                                    <td>{{$data->price}}</td>
-                                    <td>
-                                        <img src="{{$data->main_photo}}" alt="{{$data->title}}" style="width:100px">
-                                    </td>
-                                    <td class="no-sort no-click">
-                                        @if (Voyager::can('delete_'.$dataType->name))
-                                            <a title="Видалити" class="btn btn-danger delete" data-id="{{ $data->id }}" id="delete-{{ $data->id }}">
-                                                <i class="voyager-trash"></i>
-                                            </a>
-                                        @endif
-                                        @if (Voyager::can('edit_'.$dataType->name))
-                                            <a title="Змінити" href="{{ route('voyager.'.$dataType->slug.'.edit', $data->id) }}" class="btn btn-primary edit">
-                                                <i class="voyager-edit"></i>
-                                            </a>
-                                        @endif
-                                            <br>
-                                        @if (Voyager::can('read_'.$dataType->name))
-                                            <a title="Перегляд" style="margin-left: 5px; margin-right: 2px;" href="{{ route('voyager.'.$dataType->slug.'.show', $data->id) }}" class="btn btn-warning">
-                                                <i class="voyager-eye"></i>
-                                            </a>
-                                        @endif
-                                        @if ($data->isMain() == false)
-                                            <a title="На головну" style="margin-left: 5px; margin-right: 2px;" class="btn btn-success gotomain" act="add" dataid = "{{$data->id}}" onclick="gotomain(this)">
-                                                <i class="voyager-angle-right"></i>
-                                            </a>
-                                            @else
-                                                <a title="З головної" style="background: green; margin-left: 5px; margin-right: 2px;" class="btn btn-success gotomain" act="del" dataid = "{{$data->id}}" onclick="gotomain(this)">
-                                                    <i class="voyager-angle-left"></i>
-                                                </a>
-                                        @endif
-                                    </td>
-                                </tr>
-                            @endforeach
-                            </tbody>
-                        </table>
-                        @if (isset($dataType->server_side) && $dataType->server_side)
-                            <div class="pull-left">
-                                <div role="status" class="show-res" aria-live="polite">Showing {{ $dataTypeContent->firstItem() }} to {{ $dataTypeContent->lastItem() }} of {{ $dataTypeContent->total() }} entries</div>
-                            </div>
-                            <div class="pull-right">
-                                {{ $dataTypeContent->links() }}
-                            </div>
-                        @endif
-                    </div>
+                <div class="col-xs-12" style="padding: 0px; margin: 0px; padding-left: 20px;">
+                    <form method="get" name="search" action="javascript:void(0)">
+                        <input id ="input-search" type="text" class="form-control" style="margin: 5px 0px; width: 73%; display: inline-block;">
+                        <button id="search" type="submit" class="btn btn-info" style="width:25%;">
+                            <i class="voyager-search"></i> Знайти
+                        </button>
+                    </form>
+                </div>
+                <div id="products-table" class="col-xs-12" style="height: 460px; overflow-y: scroll;">
+                        @include('admin.products.data-edit-add');
                 </div>
             </div>
         </div>
@@ -210,6 +153,15 @@
         <!-- Modal Caption (Image Text) -->
         <div id="caption"></div>
     </div>
+
+    <div id="voyager-loader" style="display: none;">
+        <?php $admin_loader_img = Voyager::setting('admin_loader', ''); ?>
+        @if($admin_loader_img == '')
+            <img src="{{ voyager_asset('images/logo-icon.png') }}" alt="Voyager Loader">
+        @else
+            <img src="{{ Voyager::image($admin_loader_img) }}" alt="Voyager Loader">
+        @endif
+    </div>
 @stop
 
 @section('javascript')
@@ -220,27 +172,38 @@
                 'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
             }
         });
-        function gotomain (element) {
-            //event.preventDefault();
-            //alert($(element).attr('act'));
 
+
+        function gotomain (element) {
+            $('#voyager-loader').css("display","block");
             $.ajax({
                 url: 'gotomain',
                 type: "post",
                 data: {id : $(element).attr('dataid'),
                         act : $(element).attr('act')}
             }).done(function (data) {
-                console.log(data);
+                if (!data){
+                    $('#voyager-loader').css("display","none");
+                    alert("Додавати на головну можна тільки 8 товарів, потрібно щось забрати з головної!");
+                } else {
+                    var curPage = window.location.href;
+                    var page = curPage.split('#')[1];
+                    if (page == undefined){
+                        page = 1;
+                    }
+                        getData(page);
+                }
             }).fail(function (jqXHR, ajaxOptions, thrownError) {
                 alert("No response from server");
             });
+
         }
 
-        @if (!$dataType->server_side)
-            $(document).ready(function () {
-            $('#dataTable').DataTable({ "order": [] });
-        });
-        @endif
+        {{--@if (!$dataType->server_side)--}}
+            {{--$(document).ready(function () {--}}
+            {{--$('#dataTable').DataTable({ "order": [] });--}}
+        {{--});--}}
+        {{--@endif--}}
 
         $('td').on('click', '.delete', function (e) {
             var form = $('#delete_form')[0];
@@ -251,11 +214,11 @@
         });
 
 
-        function parseActionUrl(action, id) {
-            return action.match(/\/[0-9]+$/)
-                    ? action.replace(/([0-9]+$)/, id)
-                    : action + '/' + id;
-        }
+//        function parseActionUrl(action, id) {
+//            return action.match(/\/[0-9]+$/)
+//                    ? action.replace(/([0-9]+$)/, id)
+//                    : action + '/' + id;
+//        }
 
         // Get the modal
         var modal = document.getElementById('myModal');
@@ -279,5 +242,114 @@
         span.onclick = function() {
             modal.style.display = "none";
         }
+
+        // Робота пошуку (івенти)
+        var myurl;
+        var starturl = window.location.href;
+        $(document).ready(function () {
+            $(document).on('click', '#search', function (event) {
+                console.log(1);
+                $(document).off('click', '.pagination li a');
+                if ($("#input-search").val() == "") {
+                    getData(1);
+                    $(document).on('click', '.pagination li a', function (event) {
+                        console.log(11111111);
+
+                        $('li').removeClass('active');
+                        $(this).parent('li').addClass('active');
+                        event.preventDefault();
+                        var page = $(this).attr('href').split('page=')[1];
+                        var url = $(this).attr('href');
+                        getData(page);
+                        var body = $('#products-table');
+                        var top = body.scrollTop();
+
+                        if (top != 0) {
+                            body.animate({scrollTop: 0}, '2000');
+                        }
+                    });
+                    return false;
+                }
+                myurl = starturl + '?search=' + $("#input-search").val();
+                getDataSearch(myurl, 1);
+                $(document).on('click', '.pagination li a', function (event) {
+                    console.log(22222222222);
+                    $(this).unbind('click');
+                    $('li').removeClass('active');
+                    $(this).parent('li').addClass('active');
+                    event.preventDefault();
+                    var page = $(this).attr('href').split('page=')[1];
+                    getDataSearch(myurl, page);
+                    var body = $('#products-table');
+                    var top = body.scrollTop();
+
+                    if (top != 0){
+                        body.animate({scrollTop:0}, '2000');
+                    }
+
+                });
+
+            });
+        });
+
+        // івенти на паганацію сторінок для АДЖАКСА
+
+        $(document).ready(function () {
+            $(document).on('click', '.pagination li a', function (event) {
+                if ($("#input-search").val() == ""){
+                    $('li').removeClass('active');
+                    $(this).parent('li').addClass('active');
+                    event.preventDefault();
+                    var page = $(this).attr('href').split('page=')[1];
+                    getData(page);
+                    var body = $('#products-table');
+                    var top = body.scrollTop();
+
+                    if (top != 0) {
+                        body.animate({scrollTop: 0}, '2000');
+                    }
+                }
+            });
+        });
+
+        // Функції АДЖАКСА (на пошук, з постачальником, без постачальника)
+
+        $.ajaxSetup({
+            headers: {
+                'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+            }
+        });
+
+        function getDataSearch(url, page) {
+            console.log("getDataSearch");
+            $.ajax({
+                url: url + '&page=' + page,
+                type: "get"
+            }).done(function (data) {
+                $("#products-table").empty().html(data);
+                location.hash = page;
+            }).fail(function (jqXHR, ajaxOptions, thrownError) {
+                alert("No response from server");
+            });
+        }
+
+        function getData(page) {
+            console.log("getData");
+            $.ajax({
+                url: '/admin/products?page=' + page,
+                type: "get"
+            }).done(function (data) {
+                $("#products-table").empty().html(data);
+                location.hash = page;
+                $('#voyager-loader').css("display","none");
+            }).fail(function (jqXHR, ajaxOptions, thrownError) {
+                alert("No response from server");
+            });
+        }
+
+        $('document').ready(function () {
+            $('.toggleswitch').bootstrapToggle();
+        });
+
     </script>
 @stop
