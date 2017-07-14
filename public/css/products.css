@@ -117,6 +117,10 @@ div.panel {
 	margin-left: 11px !important;
 }
 
+.pagination .active a{
+	background-color:  rgba(48, 207, 192, 0.7) !important;
+}
+
 .pagination > active > a { 
 	background-color:  #f6d2c7 !important;
 	color: white;
