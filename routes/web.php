@@ -31,6 +31,10 @@ Route::get('/get_cart', 'CartController@getCart');
 Route::post('/delete_product/{id}', 'CartController@deleteProductFromCart');
 Route::get('js_cart/get_info_total', 'CartController@getTotalQty');
 
+//AJAX for sorting
+Route::post('/products/sorting', 'HomeController@filterSorting');
+//AJAX for pagination
+Route::post('/products/pagination', 'HomeController@pagination');
 
 
 Route::delete('emptyCart', 'CartController@emptyCart');
@@ -49,6 +53,7 @@ Route::get('test_test', function(){
 Route::group(['prefix' => '/'], function () {
 	Route::get('/', 'HomeController@index');
 	Route::get('products', 'HomeController@products');
+	Route::post('products/group', 'HomeController@products');
 	Route::get('product/{id}', 'HomeController@product');
 	
 	Route::get('contacts', function (){

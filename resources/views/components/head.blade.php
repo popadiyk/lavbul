@@ -28,6 +28,14 @@
   <link href="{{ asset('css/about_us.css')}}" rel="stylesheet">
   <link href="{{ asset('css/products-list.css')}}" rel="stylesheet">
 
+  <script src={{ asset('js/jquery-3.2.1.min.js')}}></script>
+  <script src={{ asset('js/tether.min.js') }}></script>
+  <script src={{ asset('js/bootstrap.min.js') }}></script>
+  <script src={{ asset('js/mdb.min.js') }}></script>
+  <script src={{ asset('js/datepicker.js') }}></script>
+  <script src={{ asset('js/swiper.jquery.min.js')}}></script>
+  <script src={{ asset('js/wow.js')}}></script>
+
 
   <style>
       #our_location{
