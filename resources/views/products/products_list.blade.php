@@ -24,7 +24,7 @@
   	<div class="row">
 @endif
 	<div class="col-md-4 item-grid {{($loop->iteration > 3) ? 'mrgTop' : ''}}">
-		<div class=" mid-pop">
+		<div class="mid-pop">
 			<div class="pro-img">
 				<img src="{{ $product->main_photo }}" class="img-responsive" alt="">
 				<div class="zoom-icon ">

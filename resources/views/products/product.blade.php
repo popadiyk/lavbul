@@ -1,45 +1,149 @@
 @extends('layouts.main')
 @section('content')
 @include('products.header')
-<div class="container-fluid" style="background: #E9EAEA; padding-top: 40px; padding-bottom: 40px;">
-	<div class="container">
-		<div class="col-md-6">
-			<div class="col-md-12" style="margin-bottom: 20px;">
-				<figure>
-					<img src="{{ $product->main_photo}}" width="100%">
-				</figure>
-			</div>
-			<div class="col-md-12">
-				<figure>
-					<div class="col-md-4">
-						<img src="{{ $product->main_photo}}" width="100%">
+<div class="container" style="padding-top: 40px; padding-bottom: 40px; max-width: 900px;">
+	<div class="col-sm-6 col-md-6">		
+		<div class="flexslider">
+			<ul class="slides">
+				<li data-thumb="{{ $product->main_photo}}">
+					<div class="thumb-image"> 
+						<img src="{{ $product->main_photo}}" class="img-responsive">
 					</div>
-					<div class="col-md-4">
-						<img src="{{ $product->main_photo}}" width="100%">
-					</div>
-					<div class="col-md-4">
-						<img src="{{ $product->main_photo}}" width="100%">
-					</div>
-				</figure>
-			</div>
+				</li>
+				@foreach ($photos as $element)
+					<li data-thumb="{{ $element->path}}">
+					 	<div class="thumb-image">
+					 		<img src="{{ $element->path}}" class="img-responsive">
+					 	</div>
+					</li>
+				@endforeach
+			</ul>
 		</div>
-		<div class="col-md-6">
-			<h3>{{ $product->title}}</h3>
-			<h3>{{ $product->price}}грн</h3>
-			<p>{{ $product->description}}</p>
-			<h6>Артикул: {{ $product->marking}}</h6>
-			<h6>Розмір: 25 х 25</h6>
-			<h6>Матеріал: якісь тряпочки</h6>
-			<h6>Термін виготовлення: в наявності</h6>
-			<span>
-				<button type="button" class="basket"><span class="add">Додати в кошик</span></button>
-			</span>
+	</div>
+	<style>
+		.product_info { padding: 1rem 0; float: right; width: 100%; }
+		.product_info .title_, .product_info .title { font-weight: 200; }
+		/* .product_info .currency { margin-bottom: 2.4rem; } */
+		/* .product_info .currency span { font: 400 2.5rem; color: #1e1e1e; } */
+		.product_info .pp { margin-bottom: 1.2rem; font: 300 1.6rem; color: #4b4b4b; }
+		.product_info .social { color: #9c9c9c; }
+		.product_info .btn { width: 100%; min-width: 0; max-width: 31.5rem; margin: 2.5rem 0 3rem; border-width: 2px; }
+	    .swiper-container-recomend {
+	        width: 100%;
+	        height: 100%;
+	        overflow: hidden;
+	    }
+	    .swiper-container-recomend .swiper-slide {
+	        text-align: center;
+	        font-size: 18px;
+	        background: #fff;
+	        
+	        /* Center slide text vertically */
+	        display: -webkit-box;
+	        display: -ms-flexbox;
+	        display: -webkit-flex;
+	        display: flex;
+	        -webkit-box-pack: center;
+	        -ms-flex-pack: center;
+	        -webkit-justify-content: center;
+	        justify-content: center;
+	        -webkit-box-align: center;
+	        -ms-flex-align: center;
+	        -webkit-align-items: center;
+	        align-items: center;
+	    }
+	    .swiper-pagination-bullet {
+		    width: 18px;
+		    height: 18px;
+		    background-size: cover;
+		}
+		.swiper-container-horizontal > .swiper-pagination-bullets {
+		    bottom: 0px;
+		}
+
+
+	</style>
+	<div class="col-sm-6 col-md-6">
+		<div class="product_info">
+			<h4 class="title_">{{ $product->title}}</h4>
+			<div class="currency">
+				<div><h4>{{ $product->price}} грн</h4></div>
+			</div>
+			<p class="pp">{{ $product->description}}</p>
+			<p class="pp">Артикул: {{ $product->marking}}</p>
+			<p class="pp">Розмір: 25 х 25</p>
+			<p class="pp">Матеріал: якісь тряпочки</p>
+			<p class="pp">Термін виготовлення: в наявності</p>
+			<button type="button" class="btn btn-success waves-effect waves-light">Додати в кошик</button>
+		</div>
+	</div>
+	<div class="col-md-12" style="margin-bottom: 40px;">
+		<h2 class="text-center">РЕКОМЕНДУЄМО</h2>
+	</div>
+	<div class="col-md-12">
+		<!-- Swiper -->
+		<div class="swiper-container-recomend">
+		    <div class="swiper-wrapper">
+		    @foreach ($products as $product)
+		    	<div class="swiper-slide">
+					<div class="mid-pop" style="height: ">
+						<div class="pro-img">
+							<img src="{{ $product->main_photo }}" class="img-responsive" alt="">
+							<div class="zoom-icon ">
+								<a class="picture" href="{{ $product->main_photo }}" rel="title" class="b-link-stripe b-animate-go  thickbox" title="{{ $product->title }}" data-toggle="modal" data-target="#productImageModal"><i class="glyphicon glyphicon-search icon "></i></a>
+								<a href="{{ url('/product/'.$product->id ) }}"><i class="glyphicon glyphicon-menu-right icon"></i></a>
+							</div>
+						</div>
+						<div class="mid-1">
+							<div class="women">
+								<div class="women-top">
+									<p style="margin: 0; height: 3em;"><a href="{{ url('/product/'.$product->id ) }}">{{$product->title}}</a></p>
+								</div>
+								<div class="clearfix"></div>
+							</div>
+							<div class="mid-2" style="padding: 0;">
+								<p style="width: 100%;"><label>{{($product->price)+50}} грн.</label><em class="item_price">{{$product->price}} грн.</em>
+								{{ Form::hidden('id', $product->id ) }}
+								{{ Form::hidden('name', $product->title ) }}
+								{{ Form::hidden('price',  $product->price) }}
+								{{ Form::hidden('marking', $product->marking) }}
+								{{ Form::hidden('quantity', 1) }}
+								@if(in_array($product->id, $products_id_in_cart))
+									<button class="btn btn-sm btn-info pull-right to-cart" data-id="{{ $product->id }}" disabled><i class="fa fa-cart-plus" aria-hidden="true"></i> </button>
+								@else
+									<button class="btn btn-sm btn-success pull-right to-cart" data-id="{{ $product->id }}"><i class="fa fa-cart-plus" aria-hidden="true"></i> </button>
+								@endif
+								</p>
+								<div class="clearfix"></div>
+							</div>
+						</div>
+					</div>
+		        </div>
+		    @endforeach
+		    </div>
+		    <!-- Add Pagination -->
+		    <div class="swiper-pagination"></div>
 		</div>
 	</div>
 </div>
+<div class="modal fade" id="productImageModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="margin-top: 80px;">
+    <div class="modal-dialog modal-md text-center" role="document">
+        <!-- The Close Button -->
+       <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+        </button>
+        <!-- Modal Content (The Image) -->
+        <img class="modal-content" id="productImage" style="width: 90%; margin: 0 auto;">
+        <!-- Modal Caption (Image Text) -->
+        <div id="caption"></div>
+    </div>
+</div>
 
-<!-- This part temporary is hidden -->
-<!-- <div class="container-fluid">
+
+
+
+{{-- This part temporary is hidden --}}
+{{-- <div class="container-fluid">
 	<div class="container">
 		<div class="row">
 			<div class="col-md-6">
@@ -112,98 +216,5 @@
 			</div>
 		</div>
 	</div>
-</div> -->
-<div class="container-fluid">
-	<div class="container">
-		<div class="row text-center" style="height: 428px; background-color: #E9EAEA; margin-top: 30px;">
-		    <div class="col-xs-12" style="padding-bottom: 20px;">
-		        <span class="recommend">Рекомендуємо</span>
-		    </div>
-
-		  	<div id="myCarousel" class="carousel slide" data-ride="carousel">
-		    	<!-- Wrapper for slides -->
-				<div class="col-md-2">
-				</div>
-				<div class="col-md-8">
-					<div class="carousel-inner">
-					    <div class="item active">
-				        	<div class="col-md-4">
-					    		<figure>
-					    			<img src="{{ $product->main_photo}}" width="80%" height="40%">
-					    		</figure>
-					    		<figcaption>
-					    			<p>{{ $product->title}}</p>
-					    			<p>{{ $product->price}}грн</p>
-					    		</figcaption>
-					    	</div>
-					    	 <div class="col-md-4">
-					    		<figure>
-					    			<img src="{{ $product->main_photo}}" width="80%" height="40%">
-					    		</figure>
-					    		<figcaption>
-					    			<p>{{ $product->title}}</p>
-					    			<p>{{ $product->price}}грн</p>
-					    		</figcaption>
-					    	</div>
-					    	<div class="col-md-4">
-					    		<figure>
-					    			<img src="{{ $product->main_photo}}" width="80%" height="40%">
-					    		</figure>
-					    		<figcaption>
-					    			<p>{{ $product->title}}</p>
-					    			<p>{{ $product->price}}грн</p>
-					    		</figcaption>
-					    	</div>
-					    </div>
-					    <div class="item">
-				            <div class="col-md-4">
-					    		<figure>
-					    			<img src="{{ $product->main_photo}}" width="80%" height="40%">
-					    		</figure>
-					    		<figcaption>
-					    			<p>{{ $product->title}}</p>
-					    			<p>{{ $product->price}}грн</p>
-					    		</figcaption>
-					    	</div>
-					    	 <div class="col-md-4">
-					    		<figure>
-					    			<img src="{{ $product->main_photo}}" width="80%" height="40%">
-					    		</figure>
-					    		<figcaption>
-					    			<p>{{ $product->title}}</p>
-					    			<p>{{ $product->price}}грн</p>
-					    		</figcaption>
-					    	</div>
-					    	<div class="col-md-4">
-					    		<figure>
-					    			<img src="{{ $product->main_photo}}" width="80%" height="40%">
-					    		</figure>
-					    		<figcaption>
-					    			<p>{{ $product->title}}</p>
-					    			<p>{{ $product->price}}грн</p>
-					    		</figcaption>
-					    	</div>
-					    </div>
-					</div>
-				    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-					     <span class="glyphicon glyphicon-chevron-left"></span>
-					     <span class="sr-only">Previous</span>
-				    </a>
-				    <a class="right carousel-control" href="#myCarousel" data-slide="next">
-					     <span class="glyphicon glyphicon-chevron-right"></span>
-					     <span class="sr-only">Next</span>
-				    </a>
-
-			        <ol class="carousel-indicators">
-				       <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-				       <li data-target="#myCarousel" data-slide-to="1"></li>
-				       <li data-target="#myCarousel" data-slide-to="2"></li>
-				    </ol>
-			    </div>
-				<div class="col-md-2">
-				</div>
-		  	</div>
-		</div>
-	</div>
-</div>
-					
+</div> --}}
+@endsection	

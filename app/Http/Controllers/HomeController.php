@@ -4,6 +4,7 @@ use Illuminate\Http\Request;
 use App\Product;
 use App\Group;
 use App\MainProducts;
+use App\ProductPhoto;
 use \Cart as Cart;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Database\Eloquent\Collection;
@@ -90,7 +91,18 @@ class HomeController extends Controller
 
     public function product($id){
         $product = Product::find($id);
-        return view('products.product', [ 'product' => $product ]);
+        $products_id_in_cart = array();
+        foreach(Cart::content() as $item) {
+            array_push($products_id_in_cart, $item->id);
+        }
+        $items = MainProducts::all();
+        $products = collect();
+        foreach ($items as $key => $value) {
+            $products->push(Product::where('marking', $value->marking)->first());
+        }
+        $photos = ProductPhoto::where('product_id', $product->id)->get();
+
+        return view('products.product', [ 'product' => $product, 'products' => $products, 'products_id_in_cart' => $products_id_in_cart, 'photos' => $photos ]);
     }
 
     public function gotomain(Request $request){

@@ -60,6 +60,44 @@
     .btn{
         font-weight: bolder;
     }
+    .white{
+        background-color: white;
+    }
+    .modal-c-tabs .nav-tabs > a{
+        background-color: white !important;
+        text-shadow: none;
+        font-weight: bolder !important;
+        margin-top: 5px !important;
+    }
+    .modal-c-tabs .nav-tabs a.active{
+        color:  white !important;
+        background-color: #33b5e5 !important;
+        border: 2px solid white !important;
+        text-shadow: none;
+        font-weight: bolder !important;
+        cursor: pointer !important;
+        height: 100% !important;
+        margin-top: 0px !important;
+    }
+    .modal-c-tabs .nav-tabs .btn-outline-info {
+        border: 2px solid #33b5e5 !important; 
+            border-top-color: rgb(51, 181, 229);
+            border-right-color: rgb(51, 181, 229);
+            border-bottom-color: rgb(51, 181, 229);
+            border-left-color: rgb(51, 181, 229);
+        color: #33b5e5 !important;
+        background-color: white !important;
+        text-shadow: none;
+        font-weight: bolder !important;
+        margin-top: 5px !important;
+    }
+
+    .modal-c-tabs .nav-pills > li > a {
+        color: #33b5e5 !important;
+        text-shadow: none;
+        font-weight: bolder !important;
+        margin-top: 5px !important;
+    }
 
 </style>
 <nav class="navigation navbar navbar-toggleable-md navbar-toggleable-sm navbar-toggleable-xs fixed-top">
@@ -116,10 +154,10 @@
                 <!-- Nav tabs -->
                 <ul class="nav nav-tabs nav-pills nav-fill tabs-2 justify-content-md-center " role="tablist">
                     <li class="nav-item waves-effect waves-light text-center">
-                        <a class="nav-link active" data-toggle="tab" href="#panel7" role="tab"><i class="fa fa-user mr-1"></i> Вхід</a>
+                        <a class="nav-link active btn-outline-info" data-toggle="tab" href="#panel7" role="tab"><i class="fa fa-user mr-1"></i> Вхід</a>
                     </li>
                     <li class="nav-item waves-effect waves-light text-center">
-                        <a class="nav-link" data-toggle="tab" href="#panel8" role="tab"><i class="fa fa-user-plus mr-1"></i> Реєстрація</a>
+                        <a class="nav-link btn-outline-info" data-toggle="tab" href="#panel8" role="tab"><i class="fa fa-user-plus mr-1"></i> Реєстрація</a>
                     </li>
                 </ul>
                 <!-- Tab panels -->

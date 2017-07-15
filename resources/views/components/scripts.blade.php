@@ -1,3 +1,11 @@
+<script src={{ asset('js/tether.min.js') }}></script>
+<script src={{ asset('js/bootstrap.min.js') }}></script>
+<script src={{ asset('js/mdb.min.js') }}></script>
+<script src={{ asset('js/datepicker.js') }}></script>
+<script src={{ asset('js/swiper.jquery.min.js')}}></script>
+<script src={{ asset('js/wow.js')}}></script>
+<script src={{ asset('js/jquery.flexslider.js')}}></script>
+{{-- <script src="http://code.jquery.com/jquery-migrate-3.0.0.js" type="text/javascript" charset="utf-8" async defer></script> --}}
 
 <script>
 //--------------------------- for cart ---------------------------------------//
@@ -6,6 +14,16 @@ $(document).ready(function(){
         headers: {
             'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
         }
+    });
+    $('.flexslider').flexslider({
+        animation: "slide",
+        controlNav: "thumbnails"
+    });
+    var swiper = new Swiper('.swiper-container-recomend', {
+        pagination: '.swiper-pagination',
+        slidesPerView: 4,
+        paginationClickable: true,
+        spaceBetween: 30
     });
 
     $('.quantity').on('change', function() {
@@ -278,6 +296,14 @@ $(document).ready(function(){
         autoplayDisableOnInteraction: false,
         loop: true
     });
+
+    var swiper = new Swiper('.swiper-container-advised', {
+        pagination: '.swiper-pagination',
+        slidesPerView: 4,
+        paginationClickable: true,
+        spaceBetween: 30,
+        freeMode: true
+    });
     // navigation menu
     $(function() {
         var header = $(".navigation");
@@ -297,19 +323,19 @@ $(document).ready(function(){
     });
     wow.init();
     // accordion
-    // var acc = document.getElementsByClassName("accordion");
-    // var i;
-    // for (i = 0; i < acc.length; i++) {
-    //     acc[i].onclick = function() {
-    //         this.classList.toggle("active");
-    //         var panel = this.nextElementSibling;
-    //         if (panel.style.maxHeight){
-    //             panel.style.maxHeight = null;
-    //         } else {
-    //             panel.style.maxHeight = panel.scrollHeight + "px";
-    //         } 
-    //     }
-    // }
+    var acc = document.getElementsByClassName("accordion");
+    var i;
+    for (i = 0; i < acc.length; i++) {
+        acc[i].onclick = function() {
+            this.classList.toggle("active");
+            var panel = this.nextElementSibling;
+            if (panel.style.maxHeight){
+                panel.style.maxHeight = null;
+            } else {
+                panel.style.maxHeight = panel.scrollHeight + "px";
+            } 
+        }
+    }
 
     //BEGIN sorting
     $(document).on('click', 'a.accordion-title', function (event) {
@@ -355,7 +381,18 @@ function topFunction() {
     document.documentElement.scrollTop = 0;
 }
 
+// Get the modal
+var productImageModal = document.getElementById('productImageModal');
 
+// Get the image and insert it inside the modal - use its "alt" text as a caption
+var productImage = document.getElementById("productImage");
+var captionText = document.getElementById("caption");
+$('a.picture').click(function(event){
+    event.preventDefault();
+    // productImageModal.style.display = "block";
+    productImage.src = this.href;
+    captionText.innerHTML = this.title;
+});
 
 
 
