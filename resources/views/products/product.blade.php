@@ -74,7 +74,16 @@
 			<p class="pp">Розмір: 25 х 25</p>
 			<p class="pp">Матеріал: якісь тряпочки</p>
 			<p class="pp">Термін виготовлення: в наявності</p>
-			<button type="button" class="btn btn-success waves-effect waves-light">Додати в кошик</button>
+			{{ Form::hidden('id', $product->id ) }}
+			{{ Form::hidden('name', $product->title ) }}
+			{{ Form::hidden('price',  $product->price) }}
+			{{ Form::hidden('marking', $product->marking) }}
+			{{ Form::hidden('quantity', 1) }}
+			@if(in_array($product->id, $products_id_in_cart))
+				<button type="button" class="btn btn-info waves-effect waves-light to-cart" data-id="{{ $product->id }}" disabled>Додати в кошик</button>
+			@else
+				<button type="button" class="btn btn-success waves-effect waves-light to-cart" data-id="{{ $product->id }}">Додати в кошик</button>
+			@endif
 		</div>
 	</div>
 	<div class="col-md-12" style="margin-bottom: 40px;">
