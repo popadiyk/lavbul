@@ -2,7 +2,7 @@
 @section('content')
 @include('products.header')
 <div class="container" style="padding-top: 40px; padding-bottom: 40px; max-width: 900px;">
-	<div class="col-md-6">		
+	<div class="col-sm-6 col-md-6">		
 		<div class="flexslider">
 			<ul class="slides">
 				<li data-thumb="{{ $product->main_photo}}">
@@ -10,24 +10,21 @@
 						<img src="{{ $product->main_photo}}" class="img-responsive">
 					</div>
 				</li>
-				<li data-thumb="{{ $product->main_photo}}">
-				 	<div class="thumb-image">
-				 		<img src="{{ $product->main_photo}}" class="img-responsive">
-				 	</div>
-				</li>
-				<li data-thumb="{{ $product->main_photo}}">
-					<div class="thumb-image">
-						<img src="{{ $product->main_photo}}" class="img-responsive">
-					</div>
-				</li> 
+				@foreach ($photos as $element)
+					<li data-thumb="{{ $element->path}}">
+					 	<div class="thumb-image">
+					 		<img src="{{ $element->path}}" class="img-responsive">
+					 	</div>
+					</li>
+				@endforeach
 			</ul>
 		</div>
 	</div>
 	<style>
 		.product_info { padding: 1rem 0; float: right; width: 100%; }
 		.product_info .title_, .product_info .title { font-weight: 200; }
-		.product_info .currency { margin-bottom: 2.4rem; }
-		.product_info .currency span { font: 400 2.5rem Roboto; color: #1e1e1e; }
+		/* .product_info .currency { margin-bottom: 2.4rem; } */
+		/* .product_info .currency span { font: 400 2.5rem; color: #1e1e1e; } */
 		.product_info .pp { margin-bottom: 1.2rem; font: 300 1.6rem; color: #4b4b4b; }
 		.product_info .social { color: #9c9c9c; }
 		.product_info .btn { width: 100%; min-width: 0; max-width: 31.5rem; margin: 2.5rem 0 3rem; border-width: 2px; }
@@ -66,19 +63,18 @@
 
 
 	</style>
-	<div class="col-md-6">
+	<div class="col-sm-6 col-md-6">
 		<div class="product_info">
-			<h1 class="title_">{{ $product->title}}</h1>
+			<h4 class="title_">{{ $product->title}}</h4>
 			<div class="currency">
-				<div><span>{{ $product->price}} грн</span></div>
+				<div><h4>{{ $product->price}} грн</h4></div>
 			</div>
-			<p class="pp">Рейпольский А.Д.</p>
 			<p class="pp">{{ $product->description}}</p>
 			<p class="pp">Артикул: {{ $product->marking}}</p>
 			<p class="pp">Розмір: 25 х 25</p>
 			<p class="pp">Матеріал: якісь тряпочки</p>
 			<p class="pp">Термін виготовлення: в наявності</p>
-			<button type="button" class="btn btn-success waves-effect waves-light"><span class="add">Додати в кошик</span></button>
+			<button type="button" class="btn btn-success waves-effect waves-light">Додати в кошик</button>
 		</div>
 	</div>
 	<div class="col-md-12" style="margin-bottom: 40px;">
