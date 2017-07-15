@@ -138,12 +138,12 @@
 							<i class="fa fa-angle-left" aria-hidden="true" style="padding-right: 5px;"></i><span>Продовжити покупки</span>
 						</button>--}}
 
-						<a href="{{ url('/') }}" class="btn btn-primary btn-smal" style="background-color: #b9f8a8; border: 0px solid; color:black;">
+						<a href="{{ url('/') }}" class="btn btn-success waves-effect waves-light">
 							<i class="fa fa-angle-left" aria-hidden="true" style="padding-right: 5px;"></i><span>Продовжити покупки</span>
 						</a> &nbsp;
 					</div>
 					<div class="col-md-4">
-						<button type="submit" form="make_order" class="btn btn-small" style="background-color: #b9f8a8;">
+						<button type="submit" form="make_order" class="btn btn-success waves-effect waves-light">
 							<span>Сформувати замовлення<i class="fa fa-angle-right" aria-hidden="true" style="padding-left: 5px;"></i></span>
 						</button>
 					</div>

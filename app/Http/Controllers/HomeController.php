@@ -90,7 +90,17 @@ class HomeController extends Controller
 
     public function product($id){
         $product = Product::find($id);
-        return view('products.product', [ 'product' => $product ]);
+        $products_id_in_cart = array();
+        foreach(Cart::content() as $item) {
+            array_push($products_id_in_cart, $item->id);
+        }
+        $items = MainProducts::all();
+        $products = collect();
+        foreach ($items as $key => $value) {
+            $products->push(Product::where('marking', $value->marking)->first());
+        }
+
+        return view('products.product', [ 'product' => $product, 'products' => $products, 'products_id_in_cart' => $products_id_in_cart, ]);
     }
 
     public function gotomain(Request $request){
