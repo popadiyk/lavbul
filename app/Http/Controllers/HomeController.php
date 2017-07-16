@@ -95,14 +95,14 @@ class HomeController extends Controller
         foreach(Cart::content() as $item) {
             array_push($products_id_in_cart, $item->id);
         }
-        $items = MainProducts::all();
-        $products = collect();
-        foreach ($items as $key => $value) {
-            $products->push(Product::where('marking', $value->marking)->first());
-        }
+        // $items = MainProducts::all();
+        // $products = collect();
+        // foreach ($items as $key => $value) {
+        //     $products->push(Product::where('marking', $value->marking)->first());
+        // }
         $photos = ProductPhoto::where('product_id', $product->id)->get();
 
-        return view('products.product', [ 'product' => $product, 'products' => $products, 'products_id_in_cart' => $products_id_in_cart, 'photos' => $photos ]);
+        return view('products.product', [ 'product' => $product, 'products_id_in_cart' => $products_id_in_cart, 'photos' => $photos ]);
     }
 
     public function gotomain(Request $request){

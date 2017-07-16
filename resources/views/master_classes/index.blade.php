@@ -29,7 +29,7 @@
 						<span style="align-self: flex-end;"><strong>Відбудеться 01.06.2017 у ТЦ "SkyPark"</strong></span>
 					</div>
 					<div class="col-md-4">
-						<a href="#" class="btn btn-lg text-uppercase pull-right" style="background-color: #b9f8a8; text-decoration: none; color:black; ">Записатись</a>
+						<a href="#" class="btn btn-default waves-effect waves-light btn-lg text-uppercase pull-right" style="text-decoration: none;">Записатись</a>
 					</div>
 				</div>
 			</div>
@@ -48,7 +48,7 @@
 						<span style="align-self: flex-end;"><strong>Відбудеться 01.06.2017 у ТЦ "SkyPark"</strong></span>
 					</div>
 					<div class="col-md-4">
-						<a href="#" class="btn btn-lg text-uppercase pull-right" style="background-color: #b9f8a8; text-decoration: none; color:black; ">Записатись</a>
+						<a href="#" class="btn btn-default waves-effect waves-light btn-lg text-uppercase pull-right" style="text-decoration: none;">Записатись</a>
 					</div>
 				</div>
 			</div>
@@ -67,7 +67,7 @@
 						<span style="align-self: flex-end;"><strong>Відбудеться 01.06.2017 у ТЦ "SkyPark"</strong></span>
 					</div>
 					<div class="col-md-4">
-						<a href="#" class="btn btn-lg text-uppercase pull-right" style="background-color: #b9f8a8; text-decoration: none; color:black; ">Записатись</a>
+						<a href="#" class="btn btn-default waves-effect waves-light btn-lg text-uppercase pull-right" style="text-decoration: none;">Записатись</a>
 					</div>
 				</div>
 			</div>

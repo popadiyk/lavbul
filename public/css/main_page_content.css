@@ -920,7 +920,13 @@ text-align: left;
     border-color: #337ab7;
 }
 
-
+.container {
+  max-width: 960px !important;
+}
+.container-fluid {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
 
 @media screen and (max-width: 992px) { 
   .swiper-slide .swiper-img{

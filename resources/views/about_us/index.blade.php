@@ -5,7 +5,7 @@
 
 
 <div class="container-fluid">
-	<div class="container">
+	<div class="container" style="padding-bottom: 40px;">
 		<div class="row" style="padding-top: 30px; padding-bottom: 30px;">
 			<div class="col-md-11 col-md-offset-2">
 				<div class="col-md-3">
@@ -62,96 +62,7 @@
 				</div>
 			</div>
 		</div>
-	</div>
-
-	<div class="row text-center" style="height: 428px; background-color: #f4f4f4;">
-	    <div class="col-xs-12" style="padding-bottom: 20px;">
-	        <span class="recommend">Рекомендуємо</span>
-	    </div>
-
-	  	<div id="myCarousel" class="carousel slide" data-ride="carousel">
-	    	<!-- Wrapper for slides -->
-			<div class="col-md-2">
-			</div>
-			<div class="col-md-8">
-				<div class="carousel-inner">
-				    <div class="item active">
-			        	<div class="col-md-4">
-				    		<figure>
-				    			<img src="img/for_about_1.png">
-				    		</figure>
-				    		<figcaption>
-				    			<p>Product Name</p>
-				    			<p>150 грн</p>
-				    		</figcaption>
-				    	</div>
-				    	 <div class="col-md-4">
-				    		<figure>
-				    			<img src="img/for_about_1.png">
-				    		</figure>
-				    		<figcaption>
-				    			<p>Product Name</p>
-				    			<p>150 грн</p>
-				    		</figcaption>
-				    	</div>
-				    	<div class="col-md-4">
-				    		<figure>
-				    			<img src="img/for_about_1.png">
-				    		</figure>
-				    		<figcaption>
-				    			<p>Product Name</p>
-				    			<p>150 грн</p>
-				    		</figcaption>
-				    	</div>
-				    </div>
-				    <div class="item">
-			            <div class="col-md-4">
-				    		<figure>
-				    			<img src="img/for_about_1.png">
-				    		</figure>
-				    		<figcaption>
-				    			<p>Product Name</p>
-				    			<p>150 грн</p>
-				    		</figcaption>
-				    	</div>
-				    	 <div class="col-md-4">
-				    		<figure>
-				    			<img src="img/for_about_1.png">
-				    		</figure>
-				    		<figcaption>
-				    			<p>Product Name</p>
-				    			<p>150 грн</p>
-				    		</figcaption>
-				    	</div>
-				    	<div class="col-md-4">
-				    		<figure>
-				    			<img src="img/for_about_1.png">
-				    		</figure>
-				    		<figcaption>
-				    			<p>Product Name</p>
-				    			<p>150 грн</p>
-				    		</figcaption>
-				    	</div>
-				    </div>
-				</div>
-			    <a class="left carousel-control" href="#myCarousel" data-slide="prev">
-				     <span class="glyphicon glyphicon-chevron-left"></span>
-				     <span class="sr-only">Previous</span>
-			    </a>
-			    <a class="right carousel-control" href="#myCarousel" data-slide="next">
-				     <span class="glyphicon glyphicon-chevron-right"></span>
-				     <span class="sr-only">Next</span>
-			    </a>
-
-		        <ol class="carousel-indicators">
-			       <li data-target="#myCarousel" data-slide-to="0" class="active"></li>
-			       <li data-target="#myCarousel" data-slide-to="1"></li>
-			       <li data-target="#myCarousel" data-slide-to="2"></li>
-			    </ol>
-		    </div>
-			<div class="col-md-2">
-			</div>
-	  	</div>
+		@include('products.recomend')
 	</div>
 </div>
 
