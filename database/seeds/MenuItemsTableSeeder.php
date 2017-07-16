@@ -273,6 +273,37 @@ class MenuItemsTableSeeder extends Seeder
                 ])->save();
             }
 
+            $menuItem = MenuItem::firstOrNew([
+                'menu_id'    => $menu->id,
+                'title'      => 'Продукти на головній',
+                'url'        => '/admin/mainproducts',
+            ]);
+            if (!$menuItem->exists) {
+                $menuItem->fill([
+                    'target'     => '_self',
+                    'icon_class' => 'voyager-paw',
+                    'color'      => null,
+                    'parent_id'  => null,
+                    'order'      => 14,
+                ])->save();
+            }
+            
+            $menuItem = MenuItem::firstOrNew([
+                'menu_id'    => $menu->id,
+                'title'      => 'Майстер Класи',
+                'url'        => '/admin/masterclasses',
+            ]);
+            if (!$menuItem->exists) {
+                $menuItem->fill([
+                    'target'     => '_self',
+                    'icon_class' => 'voyager-photo',
+                    'color'      => null,
+                    'parent_id'  => null,
+                    'order'      => 15,
+                ])->save();
+            }
+
+            
         }
     }
 }

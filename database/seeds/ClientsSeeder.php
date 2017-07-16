@@ -20,6 +20,7 @@ class ClientsSeeder extends Seeder
             'discount' => 0,
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'user_id' => 0
         ]);
 
         DB::table('clients')->insert([
@@ -30,6 +31,7 @@ class ClientsSeeder extends Seeder
             'discount' => 100,
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'user_id' => 0
         ]);
 
         DB::table('clients')->insert([
@@ -40,6 +42,7 @@ class ClientsSeeder extends Seeder
             'discount' => 10,
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
             'updated_at' => Carbon::now()->format('Y-m-d H:i:s'),
+            'user_id' => 1
         ]);
 
     }
