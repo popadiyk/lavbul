@@ -93,10 +93,15 @@ span.fa.fa-envelope-o, span.fa.fa-map-marker, span.fa.fa-phone {
 	border-radius: 6px; 
 	text-align: center; 
 	color: inherit;
-	background-color: #eee; 
-	padding-bottom: 48px; 
+/* 	background-color: #eee;  */
+	/* padding-bottom: 48px;  */
 	height: 100%
 }
 .contacts_form button{
-	background-color: #b9f8a8;
+	/* background-color: #b9f8a8; */
+    width: 100%;
+    margin: 0;
+}
+.contacts_form .md-form{
+    text-align: left;
 }

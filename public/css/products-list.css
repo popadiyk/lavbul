@@ -6,6 +6,7 @@
 	border: 1px solid #EFECEC;
 	padding: 10px;
 	height: 100%;
+	border-radius: 5px;
 }
 .mid-pop .zoom-icon {
 	top: 0px;
@@ -118,8 +119,9 @@ a.item_add {
 	padding-top: 1em;
 }
 .item-grid{
-	height: 384px;
+	/* height: 384px; */
 }
+
 
 @media(max-width:1220px){
 	.mid-1 h6 {
@@ -189,3 +191,25 @@ a.item_add {
 		padding-top: 0.5em;
 	}
 }
+
+.women-top {
+    height: 3.5em;
+    text-align: center;
+    width: 100%;
+}
+.women-top h6{
+	width: 100%;
+}
+
+.img-responsive{
+	border-radius: 5px;
+}
+.mid-pop .mid-1 .mid-2 .item_price{
+	color: black; 
+	border-radius:5px; 
+	background-color: rgb(245, 207, 195, 0.3); 
+	font-weight: bolder !important; 
+	padding: 4px;
+}
+
+

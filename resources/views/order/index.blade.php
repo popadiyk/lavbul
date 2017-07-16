@@ -42,7 +42,7 @@
 							<form action="{{ url('cart', [$item->rowId]) }}" method="POST" class="side-by-side">
 								{!! csrf_field() !!}
 								<input type="hidden" name="_method" value="DELETE">
-								<input type="submit" class="btn btn-danger btn-sm" value="Видалити">
+								<button type="submit" class="btn btn-warning btn-sm text-uppercase waves-effect waves-light">Видалити</button>
 							</form>
 						  </td>
 					      <td style="width: 70px;"><img src="{{ App\Product::find($item->id)->main_photo }}" width="100%"></td>
@@ -60,7 +60,7 @@
 					  </tr>
 					  <tr>
 						  <td colspan="7" style="background-color: #e0e0e0; text-align: right;">Ітого:</td>
-						  <td colspan="8" style="background-color: #e0e0e0;">{{ number_format(Cart::total(), 2) }}</td>
+						  <td colspan="8" style="background-color: #e0e0e0;">{{ Cart::total() }}</td>
 					  </tr>
 					</tbody>
 				</table>
@@ -73,8 +73,23 @@
 			</div>
 			{!! Form::open(['route' =>'order.store', 'id'=>'make_order']) !!}
 				<div class="col-md-5">
-					{{-- <div class="col-md-3">Імʼя</div> --}}
-					<div class="col-md-12">
+					<div class="md-form form-sm">
+                        {{ $errors->has('email') ? ' has-error' : '' }}
+                        <i class="fa fa-envelope prefix"></i>
+                        {{ Form::email('email', null, ['class' => 'form-control', 'required']) }}
+                        @if ($errors->has('email'))
+                            <span class="help-block">
+                                <strong>{{ $errors->first('email') }}</strong>
+                            </span>
+                        @endif
+                        <label for="email">Ваш email</label>
+                    </div>
+                    <div class="md-form form-sm">
+                        <i class="fa fa-user prefix"></i>
+                        {{ Form::text('name', null, array('class' => 'form-control')) }}
+                        <label for="name">Ваше ім'я</label>
+                    </div>
+					{{-- <div class="col-md-12">
 						<div class="form-group wow fadeInUp">
 							{!! Form::label('name', 'Імʼя', ['class'=>"sr-only"]) !!}
 							{!! Form::text('name', null , [
@@ -85,10 +100,8 @@
 								]) !!}
 						</div>
 					</div>
-					{{-- <div class="col-md-3">E-mail</div> --}}
 					<div class="col-md-12">
 						<div class="form-group wow fadeInUp" data-wow-delay=".1s">
-							{{--<label class="sr-only" for="c_email">Email</label>--}}
 							{!! Form::label('email', 'email', ['class' => 'sr-only']) !!}
 							{!! Form::email('email', null, [
 								'class' => 'form-control',
@@ -97,53 +110,44 @@
 								 'required' => 'required'
 								 ]) !!}
 						</div>
-					</div>
+					</div> --}}
 				</div>
 				<!-- personal data -->
 				<div class="col-md-7">
-					<div class="col-md-5" style="text-align:right;">
-						{!! Form::label('delivery_id', "Спосіб доставки", ['style' => "font-size: 14px; padding-top: 20px;"]) !!}
-					</div>
-					<div class="col-md-7">
-						<div class="form-group">
-							<label for="sel1"></label>
-							{!! Form::select('delivery_id', $deliveries->pluck('title', 'id'), null, ['class' => 'form-control']) !!}
+					<div class="col-md-12 d-flex justify-content-around" style="height: 50px; margin-bottom: 10px;">
+						<div class="col-md-5 d-flex align-items-end justify-content-end">
+							{!! Form::label('delivery_id', "Спосіб доставки", ['style' => "font-size: 14px; color: #757575;", 'class'=>' align-self-end']) !!}
+						</div>
+						<div class="col-md-7 d-flex align-items-end" style="height: 100%;">
+							{!! Form::select('delivery_id', $deliveries->pluck('title', 'id'), null, ['class' => 'browser-default align-self-end', 'style'=>'width:100%']) !!}
 						</div>
 					</div>
-					<div class="col-md-5" style="text-align:right;">
-						{{--<p style="font-size: 14px; padding-top: 20px;"><strong>Спосіб оплати</strong></p>--}}
-						 {!! Form::label('payment_id', "Спосіб оплати", ['style' => "font-size: 14px; padding-top: 20px;"]) !!}
-					</div>
-					<div class="col-md-7">
-						<div class="form-group">
-							<label for="sel1"></label>
-							{!! Form::select('payment_id', $payments->pluck('title', 'id'), null , ['class'=>'form-control']) !!}
+					<div class="col-md-12 d-flex justify-content-around" style="height: 50px;">
+						<div class="col-md-5 d-flex align-items-end justify-content-end">
+							{!! Form::label('payment_id', "Спосіб оплати", ['style' => "font-size: 14px; color: #757575;", 'class'=>' align-self-end']) !!}
+						</div>
+						<div class="col-md-7 d-flex align-items-end" style="height: 100%;">
+							{!! Form::select('payment_id', $payments->pluck('title', 'id'), null , ['class'=>'browser-default align-self-end', 'style'=>'width:100%']) !!}
 						</div>
 					</div>
-					<div class="col-md-5" style="text-align:right;">
-						{!! Form::label('address', 'Адресса', ['style' => "font-size: 14px; padding-top: 20px;"]) !!}
-					</div>
-					<div class="col-md-7">
-						<div class="form-group">
-							<label for="sel1"></label>
-							{!! Form::textarea('address', null , ['class' => 'form-control', 'required', 'rows' => '5']) !!}
-						</div>
+				</div>
+				<div class="col-md-12">
+					<div class="md-form form-sm">
+					    <i class="fa fa-pencil prefix"></i>
+					    <textarea type="text" id="address" name="address" class="md-textarea"></textarea>
+					    <label for="form8">Адресса</label>
 					</div>
 				</div>
 				{!! Form::hidden('cart', Cart::content()) !!}
 				{!! Form::token() !!}
 				<div class="col-md-12">
-					<div class="col-md-offset-2 col-md-4">
-						{{--<button type="button" class="btn btn-small" id="make_order" style="background-color: #b9f8a8;">
-							<i class="fa fa-angle-left" aria-hidden="true" style="padding-right: 5px;"></i><span>Продовжити покупки</span>
-						</button>--}}
-
-						<a href="{{ url('/') }}" class="btn btn-success waves-effect waves-light">
+					<div class="col-md-offset-1 col-md-5">
+						<a href="{{ url('/products') }}" class="btn btn-success waves-effect waves-light">
 							<i class="fa fa-angle-left" aria-hidden="true" style="padding-right: 5px;"></i><span>Продовжити покупки</span>
 						</a> &nbsp;
 					</div>
-					<div class="col-md-4">
-						<button type="submit" form="make_order" class="btn btn-success waves-effect waves-light">
+					<div class="col-md-5">
+						<button type="submit" form="make_order" class="btn btn-success waves-effect waves-light" style="font-weight: normal;">
 							<span>Сформувати замовлення<i class="fa fa-angle-right" aria-hidden="true" style="padding-left: 5px;"></i></span>
 						</button>
 					</div>

@@ -105,7 +105,7 @@ $(document).ready(function(){
                     $('#total-count-cart').text(data.count_cart);
                     $('button[data-id=' + id +']')
                         .removeClass('btn-success')
-                        .addClass('btn-info');
+                        .addClass('btn-info').attr('disabled', 'disabled');
                 }
             },
         });
@@ -113,7 +113,7 @@ $(document).ready(function(){
     // Open modal in AJAX callback
     $('#testModalBasket').click(function(event) {
         event.preventDefault();
-        $.get('/get_cart', function(html) {
+        $.post('/get_cart', function(html) {
             $('#fullHeightModalRight').html(html).modal();
             updateTotalTitle();
             $('a.delete-product').click( function(event){
@@ -129,10 +129,14 @@ $(document).ready(function(){
                 var $button = $(this);
                 var id = $button.parent().attr('data-id');
                 var oldValue = $button.parent().find('input').val();
+                var maxValue = $button.parent().find('input').attr('max');
 
                 $button.parent().find('.incr-btn[data-action="decrease"]').removeClass('inactive');
                 if ($button.data('action') == "increase") {
                     var newVal = parseFloat(oldValue) + 1;
+                    if (newVal > maxValue) {
+                        newVal = oldValue;
+                    }
                 } else {
                     // Don't allow decrementing below 1
                     if (oldValue > 1) {
@@ -200,7 +204,8 @@ function updateQty(id, qty){
     });
 }
 function updateTotalTitle() {
-    $.get('js_cart/get_info_total', function(data, status){
+    $.post('/js_cart/get_info_total', function(data, status){
+        $('#total-count-cart').text(data.total_products);
         $('span.total_counter_product').text(data.total_products);
         $('#footer-total-sum').text(data.summ_total + " грн.");
     });
@@ -375,10 +380,13 @@ function scrollFunction() {
     }
 }
 
-
 function topFunction() {
-    document.body.scrollTop = 0; 
-    document.documentElement.scrollTop = 0;
+    // document.body.scrollTop = 0; 
+    // document.documentElement.scrollTop = 0;
+    function goToByScroll(){
+        $('html,body').animate({scrollTop: $('body').offset().top - 30},'slow');
+    };
+    goToByScroll();
 }
 
 // Get the modal
@@ -393,6 +401,8 @@ $('a.picture').click(function(event){
     productImage.src = this.href;
     captionText.innerHTML = this.title;
 });
+
+
 
 
 

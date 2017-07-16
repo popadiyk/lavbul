@@ -31,30 +31,31 @@
 							</div>
 							<div class="mid-1">
 								<div class="women">
-									<div class="women-top">
-										{{-- <span>Men</span> --}}
-										<h6><a href="{{ url('/product/'.$product->id ) }}">{{$product->title}}</a></h6>
+									<div class="women-top d-flex mx-auto my-auto">
+										<h6 class="align-self-center"><a href="{{ url('/product/'.$product->id ) }}">{{$product->title}}</a></h6>
 									</div>
-				{{-- 										<div class="img item_add">
-										
-										<a href="#"><i class="fa fa-cart-plus" aria-hidden="true"></i></a>
-									</div> --}}
 									<div class="clearfix"></div>
 								</div>
 								<div class="mid-2">
-									<p style="width: 100%;"><label>{{($product->price)+50}} грн.</label><em class="item_price">{{$product->price}} грн.</em>
-									{{-- {{ Form::number('quantity', 1, array('min'=>'1', 'max'=>$product->quantity, 'style'=>'width: 35px; padding:0; height:36px;')) }} --}}
+									<p style="width: 100%;" class="d-flex justify-content-around">
+										{{-- <label>{{($product->price)+50}} грн.</label> --}}
+										<em class="item_price align-self-center">{{$product->price}} грн.</em>
+										{{-- {{ Form::number('quantity', 1, array('min'=>'1', 'max'=>$product->quantity, 'style'=>'width: 35px; padding:0; height:36px;')) }} --}}
 
-									{{ Form::hidden('id', $product->id ) }}
-									{{ Form::hidden('name', $product->title ) }}
-									{{ Form::hidden('price',  $product->price) }}
-									{{ Form::hidden('marking', $product->marking) }}
-									{{ Form::hidden('quantity', 1) }}
-									@if(in_array($product->id, $products_id_in_cart))
-										<button class="btn btn-sm btn-info pull-right to-cart" data-id="{{ $product->id }}" disabled><i class="fa fa-cart-plus" aria-hidden="true"></i> </button>
-									@else
-										<button class="btn btn-sm btn-success pull-right to-cart" data-id="{{ $product->id }}"><i class="fa fa-cart-plus" aria-hidden="true"></i> </button>
-									@endif
+										{{ Form::hidden('id', $product->id ) }}
+										{{ Form::hidden('name', $product->title ) }}
+										{{ Form::hidden('price',  $product->price) }}
+										{{ Form::hidden('marking', $product->marking) }}
+										{{ Form::hidden('quantity', 1) }}
+										@if ($product->quantity > 0)
+											@if(in_array($product->id, $products_id_in_cart))
+												<button class="btn btn-sm btn-info pull-right to-cart" data-id="{{ $product->id }}" disabled><i class="fa fa-cart-plus" aria-hidden="true"></i> </button>
+											@else
+												<button class="btn btn-sm btn-success pull-right to-cart" data-id="{{ $product->id }}"><i class="fa fa-cart-plus" aria-hidden="true"></i> </button>
+											@endif
+										@else
+											<button class="btn btn-sm btn-success pull-right to-cart" style="background-color: gray !important;" disabled data-id="{{ $product->id }}"><i class="fa fa-cart-plus" aria-hidden="true"></i> </button>
+										@endif
 									</p>
 									<div class="clearfix"></div>
 								</div>
@@ -116,6 +117,7 @@ function getProductsSorted(sort_by, products) {
 
 // BEGIN pagination buttons AJAX
 $(document).on('click', '.pagination a', function (event) {
+	
     $('.pagination li').removeClass('active');
     $(this).parent().addClass('active');
     if($(this).hasClass('first')){

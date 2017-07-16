@@ -13,3 +13,11 @@
 		</a>
 	</li>
 </ul>
+<script>
+$('.pagination li a').click(function(){
+    function goToByScroll(id){
+	    $('html,body').animate({scrollTop: $("."+id).offset().top - 30},'slow');
+	};
+	goToByScroll("header_text");
+});
+</script>
