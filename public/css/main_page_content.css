@@ -748,7 +748,7 @@ text-align: left;
         text-decoration: none;
         color: #424141;
         cursor: pointer;
-        font-size: 16px;
+         color: darkgrey;
     }
 
 
@@ -765,7 +765,7 @@ text-align: left;
         text-decoration: none;
         color: #424141;
         cursor: pointer;
-        font-size: 16px;
+        color: darkgrey;
     }
 
 	.footer-block{
@@ -796,7 +796,8 @@ text-align: left;
     }
 
     .social {
-      margin-top: 30px;
+      margin-top: 20px;
+      position: absolute;
     }
 
 /* end footer part */
@@ -822,6 +823,7 @@ text-align: left;
   height: 30vh; 
   background: url('../img/black.png') 100% 100% no-repeat; 
   background-size: cover;
+  padding: 0;
 }
 
 

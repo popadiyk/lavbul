@@ -52,6 +52,8 @@
                     </ul>
                 </div>
             </div>
+            </div>
+            <div class="row">
             <div class="col-xs-12">
                 <div class="social">
                    <h5><strong>Ми в соцмережах:</strong></h5>
@@ -59,13 +61,13 @@
                        <li><a href=""><i class="fa fa-twitter-square fa-3x" aria-hidden="true"></i></a></li>
                        <li><a href=""><i class="fa fa-instagram fa-3x" aria-hidden="true"></i></a></li>
                       <!--  <li><i class="fa fa-google-plus-square fa-3x" aria-hidden="true"></i></li> -->
-                     <!--   <li><i class="fa fa-facebook-square fa-3x" aria-hidden="true"></i></li> -->
+                      <li><a href=""><i class="fa fa-facebook-square fa-3x" aria-hidden="true"></i></a></li>
                        <li><a href=""><i class="fa fa-vk fa-3x" aria-hidden="true"></i></a></li>
                       <!--  <li><i class="fa fa-linkedin-square fa-3x" aria-hidden="true"></i></li> -->
                    </ul>
                 </div>
             </div>
-        </div>
+            </div>
         <div class="row hidden-sm hidden-md hidden-lg">
             <button class="accordion">Про нас</button>
             <div class="panel">
@@ -106,9 +108,9 @@
                    <ul>
                        <li><i class="fa fa-twitter-square fa-3x" aria-hidden="true"></i></li>
                        <li><i class="fa fa-instagram fa-3x" aria-hidden="true"></i></li>
-                       <li><i class="fa fa-google-plus-square fa-3x" aria-hidden="true"></i></li>
+                       <!-- <li><i class="fa fa-google-plus-square fa-3x" aria-hidden="true"></i></li> -->
                        <li><i class="fa fa-facebook-square fa-3x" aria-hidden="true"></i></li>
-                       <li><i class="fa fa-linkedin-square fa-3x" aria-hidden="true"></i></li>
+                       <!-- <li><i class="fa fa-linkedin-square fa-3x" aria-hidden="true"></i></li> -->
                    </ul>
                 </div>
             </div>

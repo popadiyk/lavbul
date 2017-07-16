@@ -87,6 +87,10 @@ Route::group(['prefix' => '/'], function () {
 	    return view('main.index');
 	});
 
+	Route::get('cabinet', function () {
+		return view('cabinet.index');
+	});
+
 });
 
 
