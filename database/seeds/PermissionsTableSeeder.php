@@ -48,6 +48,9 @@ class PermissionsTableSeeder extends Seeder
 
         Permission::generateFor('clients');
 
+        Permission::generateFor('main_products');
+
+        Permission::generateFor('master_class');
 
     }
 }

@@ -178,6 +178,34 @@ class DataTypesTableSeeder extends Seeder
             ])->save();
         }
 
+        $dataType = $this->dataType('slug', 'mainproducts');
+        if (!$dataType->exists) {
+            $dataType->fill([
+                'name'                  => 'main_products',
+                'display_name_singular' => 'продукт з головної',
+                'display_name_plural'   => 'Продукти на головній',
+                'icon'                  => 'voyager-paw',
+                'model_name'            => 'App\MainProducts',
+                'controller'            => 'Admin\MainPageProductController',
+                'generate_permissions'  => 1,
+                'description'           => '',
+            ])->save();
+        }
+
+        $dataType = $this->dataType('slug', 'masterclasses');
+        if (!$dataType->exists) {
+            $dataType->fill([
+                'name'                  => 'master_class',
+                'display_name_singular' => 'майстер класс',
+                'display_name_plural'   => 'Майстер класс',
+                'icon'                  => 'voyager-photo',
+                'model_name'            => 'App\MasterClass',
+                'controller'            => 'Admin\MasterClassController',
+                'generate_permissions'  => 1,
+                'description'           => '',
+            ])->save();
+        }
+
 
     }
 

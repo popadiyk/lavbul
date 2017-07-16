@@ -8,6 +8,7 @@ use \Cart as Cart;
 use Illuminate\Pagination\Paginator;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
+use App\MasterClassUser;
 
 
 class HomeController extends Controller
@@ -102,6 +103,12 @@ class HomeController extends Controller
         return (string)$myProduct->goToMain($request->act);
     }
 
+    public function change_mc_users_status(Request $request){
+        $myUser = MasterClassUser::where('id', $request->id)->first();
+        $myUser['status'] = $request->status;
+        $myUser->save();
+    }
+
     public function paginate($items, $perPage = self::PER_PAGE, $page = null, $options = [])
     {
         $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
@@ -170,4 +177,6 @@ class HomeController extends Controller
                                                                 'products_id_in_cart' => $products_id_in_cart]
                                                                 )->render());
     }
+
+
 }
