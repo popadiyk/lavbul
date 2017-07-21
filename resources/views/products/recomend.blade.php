@@ -31,6 +31,12 @@
 	.swiper-container-horizontal > .swiper-pagination-bullets {
 	    bottom: 0px;
 	}
+	.women-top p, .women-top p a {
+		width: 100%;
+	}
+	.swiper-pagination{
+		bottom: -35px !important;
+	}
 </style>
 @php
 	$products_id_in_cart = array();
@@ -63,7 +69,7 @@
 					<div class="mid-1">
 						<div class="women">
 							<div class="women-top d-flex mx-auto my-auto">
-								<p class="align-self-center" style="margin: 0; height: 3em;"><a href="{{ url('/product/'.$product->id ) }}">{{$product->title}}</a></p>
+								<p class="align-self-center" style="margin: 0; height: 5em;"><a href="{{ url('/product/'.$product->id ) }}">{{$product->title}}</a></p>
 							</div>
 							<div class="clearfix"></div>
 						</div>
