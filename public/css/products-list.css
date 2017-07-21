@@ -207,6 +207,7 @@ a.item_add {
 .mid-pop .mid-1 .mid-2 .item_price{
 	color: black; 
 	border-radius:5px; 
+	background-color: rgb(245, 207, 195); 
 	background-color: rgb(245, 207, 195, 0.3); 
 	font-weight: bolder !important; 
 	padding: 4px;

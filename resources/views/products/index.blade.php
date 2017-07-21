@@ -147,19 +147,29 @@
 		</div>
 	</div>
 </div>
-<!-- The Modal -->
-<div class="modal fade" id="productImageModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true" style="margin-top: 80px;">
-	<div class="modal-dialog modal-md text-center" role="document">
-	    <!-- The Close Button -->
-	   <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-        </button>
-	    <!-- Modal Content (The Image) -->
-	    <img class="modal-content" id="productImage" style="width: 90%; margin: 0 auto;">
-	    <!-- Modal Caption (Image Text) -->
-	    <div id="caption"></div>
-	</div>
-</div>
+@include('products.showImage')
+<script>
+  $(document).ready(function(){
+$('img').mouseover(function(){
+    $('a.picture').click(function(event){
+        event.preventDefault();
+         // Get the modal
+         console.log('sadf');
+        // var productImageModal = document.getElementById('productImageModal');
+
+        // Get the image and insert it inside the modal - use its "alt" text as a caption
+        var productImage = document.getElementById("productImage");
+        var captionText = document.getElementById("caption");
+        
+
+        productImage.src = $(this).attr('href');
+        console.log($(this).attr('href'));
+        captionText.innerHTML = $(this).attr('title');
+        console.log($(this).attr('title'));
+    });
+});
+
+</script>
 @endsection
 
 

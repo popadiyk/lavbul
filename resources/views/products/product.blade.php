@@ -39,16 +39,20 @@
 			<p class="pp">Артикул: {{ $product->marking}}</p>
 			<p class="pp">Розмір: 25 х 25</p>
 			<p class="pp">Матеріал: якісь тряпочки</p>
-			<p class="pp">Термін виготовлення: в наявності</p>
+			<p class="pp" {{($product->quantity > 0)?'':'style=color:red'}}>Наявність товару: {{($product->quantity > 0)?'є на складі':'відсутній на складі'}}.</p>
 			{{ Form::hidden('id', $product->id ) }}
 			{{ Form::hidden('name', $product->title ) }}
 			{{ Form::hidden('price',  $product->price) }}
 			{{ Form::hidden('marking', $product->marking) }}
 			{{ Form::hidden('quantity', 1) }}
-			@if(in_array($product->id, $products_id_in_cart))
-				<button type="button" class="btn btn-info waves-effect waves-light to-cart" data-id="{{ $product->id }}" disabled>Додати в кошик</button>
+			@if ($product->quantity > 0)
+				@if(in_array($product->id, $products_id_in_cart))
+					<button type="button" class="btn btn-info waves-effect waves-light to-cart" data-id="{{ $product->id }}" disabled>Додати в кошик</button>
+				@else
+					<button type="button" class="btn btn-success waves-effect waves-light to-cart" data-id="{{ $product->id }}">Додати в кошик</button>
+				@endif
 			@else
-				<button type="button" class="btn btn-success waves-effect waves-light to-cart" data-id="{{ $product->id }}">Додати в кошик</button>
+				<button type="button" class="btn btn-info waves-effect waves-light to-cart" style="background-color: gray !important;" data-id="{{ $product->id }}" disabled>Додати в кошик</button>
 			@endif
 		</div>
 	</div>
