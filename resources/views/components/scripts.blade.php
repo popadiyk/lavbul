@@ -8,6 +8,27 @@
 {{-- <script src="http://code.jquery.com/jquery-migrate-3.0.0.js" type="text/javascript" charset="utf-8" async defer></script> --}}
 
 <script>
+$(document).ready(function(){
+$('img').mouseover(function(){
+    $('a.picture').click(function(event){
+        event.preventDefault();
+         // Get the modal
+         console.log('sadf');
+        // var productImageModal = document.getElementById('productImageModal');
+
+        // Get the image and insert it inside the modal - use its "alt" text as a caption
+        var productImage = document.getElementById("productImage");
+        var captionText = document.getElementById("caption");
+        
+
+        productImage.src = $(this).attr('href');
+        console.log($(this).attr('href'));
+        captionText.innerHTML = $(this).attr('title');
+        console.log($(this).attr('title'));
+    });
+});
+
+});
 //--------------------------- for cart ---------------------------------------//
 $(document).ready(function(){
     $.ajaxSetup({
@@ -389,18 +410,8 @@ function topFunction() {
     goToByScroll();
 }
 
-// Get the modal
-var productImageModal = document.getElementById('productImageModal');
 
-// Get the image and insert it inside the modal - use its "alt" text as a caption
-var productImage = document.getElementById("productImage");
-var captionText = document.getElementById("caption");
-$('a.picture').click(function(event){
-    event.preventDefault();
-    // productImageModal.style.display = "block";
-    productImage.src = this.href;
-    captionText.innerHTML = this.title;
-});
+
 
 
 

@@ -105,3 +105,7 @@ span.fa.fa-envelope-o, span.fa.fa-map-marker, span.fa.fa-phone {
 .contacts_form .md-form{
     text-align: left;
 }
+textarea#c_message{
+    padding: 15px;
+    border-radius: 5px;
+}
