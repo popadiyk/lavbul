@@ -29,50 +29,13 @@
 						<span style="align-self: flex-end;"><strong>Відбудеться 01.06.2017 у ТЦ "SkyPark"</strong></span>
 					</div>
 					<div class="col-md-4">
-						<a href="#" class="btn btn-default waves-effect waves-light btn-lg text-uppercase pull-right" style="text-decoration: none;">Записатись</a>
+						<a href="javascript:;" class="btn btn-default waves-effect waves-light btn-lg text-uppercase pull-right" style="text-decoration: none;" data-toggle="modal" data-target="#modalMK" >Записатись</a>
 					</div>
 				</div>
 			</div>
 		</div>
 		<hr>
-		<div class="row" style="padding-bottom: 40px;">
-			<div class="col-md-4">
-				<img src="img/tea.png" width="100%" alt="">
-			</div>
-			<div class="col-md-8">
-				<h3 style="margin-top: 0px;"><strong>Майстер-клас по ДЕКУПАЖУ</strong></h3>
-				
-				<p style="margin-bottom: 60px;">Lorem ipsum — классическая панграмма, условный, зачастую бессмысленный текст-заполнитель, вставляемый в макет страницы. Является искажённым отрывком из философского трактата Марка Туллия Цицерона «О пределах добра и зла», написанного в 45 году до н. э. на латинском языке.</p>
-				<div class="row" style="height: 46px;">
-					<div class="col-md-8" style="height: 100%; display: flex;">
-						<span style="align-self: flex-end;"><strong>Відбудеться 01.06.2017 у ТЦ "SkyPark"</strong></span>
-					</div>
-					<div class="col-md-4">
-						<a href="#" class="btn btn-default waves-effect waves-light btn-lg text-uppercase pull-right" style="text-decoration: none;">Записатись</a>
-					</div>
-				</div>
-			</div>
-		</div>
-		<hr>
-		<div class="row" style="padding-bottom: 40px;">
-			<div class="col-md-4">
-				<img src="img/tea.png" width="100%" alt="">
-			</div>
-			<div class="col-md-8">
-				<h3 style="margin-top: 0px;"><strong>Майстер-клас по ДЕКУПАЖУ</strong></h3>
-				
-				<p style="margin-bottom: 60px;">Lorem ipsum — классическая панграмма, условный, зачастую бессмысленный текст-заполнитель, вставляемый в макет страницы. Является искажённым отрывком из философского трактата Марка Туллия Цицерона «О пределах добра и зла», написанного в 45 году до н. э. на латинском языке.</p>
-				<div class="row" style="height: 46px;">
-					<div class="col-md-8" style="height: 100%; display: flex;">
-						<span style="align-self: flex-end;"><strong>Відбудеться 01.06.2017 у ТЦ "SkyPark"</strong></span>
-					</div>
-					<div class="col-md-4">
-						<a href="#" class="btn btn-default waves-effect waves-light btn-lg text-uppercase pull-right" style="text-decoration: none;">Записатись</a>
-					</div>
-				</div>
-			</div>
-		</div>
-		<hr>
+		
 		<div class="row" style="padding-top: 20px;">
 			<div class="col-md-12 text-center">
 				<nav aria-label="Page navigation example">
@@ -104,4 +67,5 @@
 		</div>
 	</div>
 </div>
+@include('master_classes.formMK')
 @endsection

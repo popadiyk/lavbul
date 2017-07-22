@@ -190,5 +190,9 @@ class HomeController extends Controller
                                                                 )->render());
     }
 
+    public function masterclasses(){
+        return view('master_classes.index');
+    }
+
 
 }

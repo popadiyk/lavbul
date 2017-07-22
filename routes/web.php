@@ -57,6 +57,7 @@ Route::group(['prefix' => '/'], function () {
 	Route::get('products', 'HomeController@products');
 	Route::post('products/group', 'HomeController@products');
 	Route::get('product/{id}', 'HomeController@product');
+	Route::get('master_classes', 'HomeController@masterclasses');
 	
 	Route::get('contacts', function (){
 	    return view('contacts.index');
@@ -66,9 +67,6 @@ Route::group(['prefix' => '/'], function () {
 	});
 	Route::get('one_news', function (){
 	    return view('news.one_news');
-	});
-	Route::get('master_classes', function (){
-	    return view('master_classes.index');
 	});
 
 	Route::get('order', function (){
