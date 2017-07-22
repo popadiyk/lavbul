@@ -169,26 +169,30 @@
                         <!--Body-->
                         <div class="modal-body mb-1">
                             <div class="md-form form-sm">
-                                {{ $errors->has('email') ? ' has-error' : '' }}
+                                
                                 <i class="fa fa-envelope prefix"></i>
                                 {{ Form::email('email', null, ['class' => 'form-control', 'required', 'autofocus']) }}
+                                
+                                <label for="email">Ваш email</label>
+                                {{ $errors->has('email') ? ' has-error' : '' }}
                                 @if ($errors->has('email'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('email') }}</strong>
                                     </span>
                                 @endif 
-                                <label for="email">Ваш email</label>
                             </div>
                             <div class="md-form form-sm">
-                                {{ $errors->has('password') ? ' has-error' : '' }}
+                                
                                 <i class="fa fa-lock prefix"></i>
                                 {{ Form::password('password', array('class' => 'form-control', 'required')) }}
-                                @if ($errors->has('password'))
+                               
+                                <label for="password">Ваш пароль</label>
+                                {{ $errors->has('password') ? ' has-error' : '' }}
+                                 @if ($errors->has('password'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('password') }}</strong>
                                     </span>
                                 @endif
-                                <label for="password">Ваш пароль</label>
                             </div>
                             <div class="text-center mt-2">
                                 <button class="btn btn-info">Увійти <i class="fa fa-sign-in ml-1"></i></button>
@@ -211,17 +215,7 @@
                         <div class="modal-body">
                         <form role="form" method="POST" action="{{ route('register') }}">
                             {{ csrf_field() }}
-                            <div class="md-form form-sm">
-                                {{ $errors->has('email') ? ' has-error' : '' }}
-                                <i class="fa fa-envelope prefix"></i>
-                                {{ Form::email('email', null, ['class' => 'form-control', 'required']) }}
-                                @if ($errors->has('email'))
-                                    <span class="help-block">
-                                        <strong>{{ $errors->first('email') }}</strong>
-                                    </span>
-                                @endif
-                                <label for="email">Ваш email</label>
-                            </div>
+                            
                             <div class="md-form form-sm">
                                 <i class="fa fa-user prefix"></i>
                                 {{ Form::text('name', null, array('class' => 'form-control')) }}
@@ -233,15 +227,30 @@
                                 <label for="phone">Ваш телефон</label>
                             </div>
                             <div class="md-form form-sm">
-                                {{ $errors->has('password') ? ' has-error' : '' }}
+                                
+                                <i class="fa fa-envelope prefix"></i>
+                                {{ Form::email('email', null, ['class' => 'form-control', 'required']) }}
+                               
+                                <label for="email">Ваш email</label>
+                                {{ $errors->has('email') ? ' has-error' : '' }}
+                                 @if ($errors->has('email'))
+                                    <span class="help-block">
+                                        <strong>{{ $errors->first('email') }}</strong>
+                                    </span>
+                                @endif
+                            </div>
+                            <div class="md-form form-sm">
+                                
                                 <i class="fa fa-lock prefix"></i>
                                 {{ Form::password('password', array('class' => 'form-control', 'required')) }}
+                                
+                                <label for="password">Ваш пароль</label>
+                                {{ $errors->has('password') ? ' has-error' : '' }}
                                 @if ($errors->has('password'))
                                     <span class="help-block">
                                         <strong>{{ $errors->first('password') }}</strong>
                                     </span>
                                 @endif
-                                <label for="password">Ваш пароль</label>
                             </div>
                             <div class="md-form form-sm">
                                 <i class="fa fa-lock prefix"></i>
