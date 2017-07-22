@@ -797,7 +797,7 @@ text-align: left;
 
     .social {
       margin-top: 20px;
-      position: absolute;
+      /* position: absolute; */
     }
 
 /* end footer part */
