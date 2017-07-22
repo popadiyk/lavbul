@@ -114,8 +114,8 @@
                             <thead>
                             <tr>
                                 <th style="text-align: center;">Номер</th>
-                                <th style="text-align: center;">Назва</th>
-                                <th style="text-align: center;">Опис</th>
+                                <th style="text-align: center; width: 230px;">Назва</th>
+                                <th style="text-align: center; width: 370px;">Опис</th>
                                 <th style="text-align: center;">Дата створення</th>
                                 <th style="text-align: center;">Фото</th>
                                 <th style="text-align: center;" class="actions"></th>
@@ -124,14 +124,14 @@
                             <tbody>
                             @foreach($dataTypeContent as $data)
                                 <tr>
-                                    <td style="text-align: center;">{{$data->id}}</td>
-                                    <td style="text-align: center;">@if(strlen($data->title) >= 30) {{substr($data->title, 0, 30).'...'}} @else {{$data->title}} @endif</td>
-                                    <td style="text-align: center;">{{substr($data->description, 0, 30).'...'}}</td>
-                                    <td style="text-align: center;">{{ \Carbon\Carbon::parse($data->created_at)->format('d.m.Y | H:i')}} </td>
+                                    <td style="text-align: center; vertical-align: middle;">{{$data->id}}</td>
+                                    <td style="text-align: center; vertical-align: middle;">@if(strlen($data->title) >= 100) {{substr($data->title, 0, 100).'...'}} @else {{$data->title}} @endif</td>
+                                    <td style="text-align: justify;">{{str_limit($data->description, 230, "...")}}</td>
+                                    <td style="text-align: center; vertical-align: middle;">{{ \Carbon\Carbon::parse($data->created_at)->format('d.m.Y | H:i')}} </td>
                                     <td style="text-align: center;">
                                         <img src="{{$data->main_photo}}" alt="{{$data->title}}" style="height: 100px;">
                                     </td>
-                                    <td class="no-sort no-click" style="text-align: center;">
+                                    <td class="no-sort no-click" style="text-align: center; vertical-align: middle;">
                                         @if (Voyager::can('delete_'.$dataType->name))
                                             <div class="btn-sm btn-danger pull-right delete" data-id="{{ $data->id }}" id="delete-{{ $data->id }}" title="Видалити">
                                                 <i class="voyager-trash"></i>

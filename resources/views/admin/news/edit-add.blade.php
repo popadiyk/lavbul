@@ -35,7 +35,7 @@
                     <div class="row">
                             <input type="hidden" name="_token" value="{{ csrf_token() }}">
                             <div class="form-group col-md-12 col-xs-12">
-                                <label for="title">Назва майстер класу:</label>
+                                <label for="title">Назва новини:</label>
                                 <input type="text" name="title" class="form-control" value="{{ $dataTypeContent->title }}" id="title" required>
                             </div>
                             <div class="form-group col-md-12 col-xs-12">
@@ -49,7 +49,7 @@
                                 <div class="col-md-8">
                                     <div class="panel panel-success">
                                         <div class="panel-heading">
-                                            <p style="padding: 10px; margin: 0px;">Інфо про майстер клас:</p>
+                                            <p style="padding: 10px; margin: 0px;">Текст новини:</p>
                                         </div>
                                         <div class="panel-body">
                                             <div class="form-group">
