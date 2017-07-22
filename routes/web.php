@@ -35,6 +35,8 @@ Route::post('/js_cart/get_info_total', 'CartController@getTotalQty');
 Route::post('/products/sorting', 'HomeController@filterSorting');
 //AJAX for pagination
 Route::post('/products/pagination', 'HomeController@pagination');
+//AJAX for MC register
+Route::post('/mc/register', 'HomeController@mcreg');
 
 
 Route::delete('emptyCart', 'CartController@emptyCart');
@@ -57,6 +59,7 @@ Route::group(['prefix' => '/'], function () {
 	Route::get('products', 'HomeController@products');
 	Route::post('products/group', 'HomeController@products');
 	Route::get('product/{id}', 'HomeController@product');
+	Route::get('master_classes', 'HomeController@masterclasses');
 	
 	Route::get('contacts', function (){
 	    return view('contacts.index');
@@ -66,9 +69,6 @@ Route::group(['prefix' => '/'], function () {
 	});
 	Route::get('one_news', function (){
 	    return view('news.one_news');
-	});
-	Route::get('master_classes', function (){
-	    return view('master_classes.index');
 	});
 
 	Route::get('order', function (){

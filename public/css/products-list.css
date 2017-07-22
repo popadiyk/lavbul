@@ -7,6 +7,7 @@
 	padding: 10px;
 	height: 100%;
 	border-radius: 5px;
+	box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .mid-pop .zoom-icon {
 	top: 0px;
@@ -213,4 +214,6 @@ a.item_add {
 	padding: 4px;
 }
 
-
+.page-link{
+		box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+	}

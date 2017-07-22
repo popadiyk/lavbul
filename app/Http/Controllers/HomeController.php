@@ -10,6 +10,7 @@ use Illuminate\Pagination\Paginator;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 use App\MasterClassUser;
+use App\MasterClass;
 
 
 class HomeController extends Controller
@@ -190,5 +191,20 @@ class HomeController extends Controller
                                                                 )->render());
     }
 
+    public function masterclasses(){
+        $masterclasses = MasterClass::all();
+        return view('master_classes.index', ['masterclasses' => $masterclasses]);
+    }
+
+    public function mcreg(Request $request){
+        // dd($request);
+        $reguser = new MasterClassUser;
+        $reguser->mc_id = $request->id;
+        $reguser->phone = $request->phone;
+        $reguser->name = $request->name;
+        $reguser->status = 'new';
+        $reguser->save();
+        return view('master_classes.afterReg');
+    }
 
 }
