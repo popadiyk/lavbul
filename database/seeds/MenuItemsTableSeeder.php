@@ -303,6 +303,21 @@ class MenuItemsTableSeeder extends Seeder
                 ])->save();
             }
 
+            $menuItem = MenuItem::firstOrNew([
+                'menu_id'    => $menu->id,
+                'title'      => 'Новини',
+                'url'        => '/admin/news',
+            ]);
+            if (!$menuItem->exists) {
+                $menuItem->fill([
+                    'target'     => '_self',
+                    'icon_class' => 'voyager-news',
+                    'color'      => null,
+                    'parent_id'  => null,
+                    'order'      => 16,
+                ])->save();
+            }
+
             
         }
     }

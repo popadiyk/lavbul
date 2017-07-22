@@ -52,5 +52,8 @@ class PermissionsTableSeeder extends Seeder
 
         Permission::generateFor('master_class');
 
+        Permission::generateFor('news');
+
+
     }
 }

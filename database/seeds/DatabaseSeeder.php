@@ -32,6 +32,8 @@ class DatabaseSeeder extends Seeder
         $this->call(ClientsSeeder::class);
         $this->call(MasterClassSeeder::class);
         $this->call(MainProductSeeder::class);
+        $this->call(NewsSeeder::class);
+        
 //        $this->call(AdminAboutUsSeeder::class);
 //        $this->call(AdminGroupsSeeder::class);
     }

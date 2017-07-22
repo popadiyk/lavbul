@@ -206,6 +206,20 @@ class DataTypesTableSeeder extends Seeder
             ])->save();
         }
 
+        $dataType = $this->dataType('slug', 'news');
+        if (!$dataType->exists) {
+            $dataType->fill([
+                'name'                  => 'news',
+                'display_name_singular' => 'новину',
+                'display_name_plural'   => 'Новини',
+                'icon'                  => 'voyager-news',
+                'model_name'            => 'App\News',
+                'controller'            => 'Admin\NewsController',
+                'generate_permissions'  => 1,
+                'description'           => '',
+            ])->save();
+        }
+
 
     }
 
