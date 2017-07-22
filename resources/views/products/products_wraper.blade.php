@@ -20,12 +20,12 @@
 		<div class="mid-popular">
 		  	<div class="row">
 				@foreach ($products as $product)
-					<div class="col-md-4 item-grid {{($loop->iteration > 3) ? 'mrgTop' : ''}}">
+					<div class="col-xs-12 col-sm-4 col-md-4 item-grid {{($loop->iteration > 3) ? 'mrgTop' : ''}}">
 						<div class="mid-pop">
 							<div class="pro-img">
 								<img src="{{ $product->main_photo }}" class="img-responsive" alt="">
 								<div class="zoom-icon ">
-									<a class="picture" href="{{ $product->main_photo }}" rel="title" class="b-link-stripe b-animate-go  thickbox" title="{{ $product->title }}" data-toggle="modal" data-target="#productImageModal"><i class="glyphicon glyphicon-search icon "></i></a>
+									<a class="picture" href="{{ $product->main_photo }}" rel="title" class="b-link-stripe b-animate-go  thickbox" title="{{ $product->title }}" data-toggle="modal" data-target="#productImageModal{{$product->id}}"><i class="glyphicon glyphicon-search icon "></i></a>
 									<a href="{{ url('/product/'.$product->id ) }}"><i class="glyphicon glyphicon-menu-right icon"></i></a>
 								</div>
 							</div>
@@ -62,6 +62,7 @@
 							</div>
 						</div>
 					</div>
+					@include('products.showImage', ['product' => $product])
 				@endforeach
 				@foreach ($products_id as $element)
 					<input type="hidden" class="products_id" value="{{$element}}">
@@ -80,6 +81,7 @@
 </div>
 <script>
 $(document).ready(function(){
+
 //BEGIN sorting
 $(document).on('click', '.sorting li a', function (event) {
 	//create array for visible products
@@ -117,7 +119,6 @@ function getProductsSorted(sort_by, products) {
 
 // BEGIN pagination buttons AJAX
 $(document).on('click', '.pagination a', function (event) {
-	
     $('.pagination li').removeClass('active');
     $(this).parent().addClass('active');
     if($(this).hasClass('first')){

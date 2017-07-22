@@ -14,10 +14,24 @@
 	</li>
 </ul>
 <script>
-$('.pagination li a').click(function(){
-    function goToByScroll(id){
-	    $('html,body').animate({scrollTop: $("."+id).offset().top - 30},'slow');
-	};
-	goToByScroll("header_text");
+// BEGIN pagination buttons AJAX
+$(document).on('click', '.pagination a', function (event) {
+	
+    $('.pagination li').removeClass('active');
+    $(this).parent().addClass('active');
+    if($(this).hasClass('first')){
+    	var page = $(this).attr('prevPage');
+    }else if($(this).hasClass('last')){
+    	var page = $(this).attr('nextPage');
+    }else{
+    	var page = $(this).text();
+    }
+    // getProducts(page);
+    goToByScroll("header_text");
+    event.preventDefault();
 });
+
+function goToByScroll(id){
+    $('html,body').animate({scrollTop: $("."+id).offset().top - 30},'slow').delay( 3000 );
+};
 </script>

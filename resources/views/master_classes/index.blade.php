@@ -2,9 +2,15 @@
 @section('content')
 @php($text = "Пориньте разом з нами у світ Hand Made!")
 @include('master_classes.header', ['text' => $text ])
+<style>
+	.modal-dialog.cascading-modal.modal-avatar {
+	    margin-top: 12rem;
+	}
+</style>
 <div class="container-fluid">
-	<div class="container">
-		<div class="row" style="padding-top: 40px; padding-bottom: 40px;">
+	<div class="container" style="padding-top: 40px;">
+	{{-- TO DO SORTING --}}
+{{-- 		<div class="row" style="padding-top: 40px; padding-bottom: 40px;">
 			<div class="col-md-4">
 	            <input class="pull-left" style="width:80%" data-toggle="datepicker" placeholder="Дата">
 				<div data-toggle="datepicker"></div>
@@ -15,57 +21,70 @@
 			<div class="col-md-4">
 			    {{ Form::select('tag', ['1' => 'салфетки', '2' => 'метелики', '3' => 'ляльки мотанки'], null, ['placeholder' => 'Теги...', 'style' => 'width:80%', 'class' => 'pull-right']) }}
 			</div>		
-		</div>
-		<div class="row" style="padding-bottom: 40px;">
-			<div class="col-md-4">
-				<img src="img/tea.png" width="100%" alt="">
-			</div>
-			<div class="col-md-8">
-				<h3 style="margin-top: 0px;"><strong>Майстер-клас по ДЕКУПАЖУ</strong></h3>
-				
-				<p style="margin-bottom: 60px;">Lorem ipsum — классическая панграмма, условный, зачастую бессмысленный текст-заполнитель, вставляемый в макет страницы. Является искажённым отрывком из философского трактата Марка Туллия Цицерона «О пределах добра и зла», написанного в 45 году до н. э. на латинском языке.</p>
-				<div class="row" style="height: 46px;">
-					<div class="col-md-8" style="height: 100%; display: flex;">
-						<span style="align-self: flex-end;"><strong>Відбудеться 01.06.2017 у ТЦ "SkyPark"</strong></span>
-					</div>
-					<div class="col-md-4">
-						<a href="javascript:;" class="btn btn-default waves-effect waves-light btn-lg text-uppercase pull-right" style="text-decoration: none;" data-toggle="modal" data-target="#modalMK" >Записатись</a>
+		</div> --}}
+		@foreach ($masterclasses as $element)
+			<div class="row" id="mkItem{{$element->id}}" style="padding-bottom: 40px;">
+				<div class="col-md-4 imageMK">
+					<img src="{{ $element->main_photo }}" width="100%" style="border-radius: 10px; box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" alt="">
+				</div>
+				<div class="col-md-8 contentMK">
+					<h3 style="margin-top: 0px;"><strong>Майстер-клас#{{$element->id}} {{ $element->title }}</strong></h3>
+					<h5><small>техніка:</small> {{ $element->technology }} / @if ($element->status == 'active') <span style="color:green; margin: 0px;">ТРИВАЄ НАБІР</span> @elseif ($element->status == 'full') <span style="color:blue; margin: 0px;">ГРУПА СФОРМОВАНА</span> @else <span style="color:red; margin: 0px;">ЗАКРИТИЙ</span> @endif <span>({{ $element->paidUser() }} / {{$element->max_seats}})</span></h5>
+					<p style="margin-bottom: 60px; text-align:justify;">{{ $element->description }}</p>
+					<div class="row" style="height: 46px;">
+						<div class="col-md-8" style="height: 100%; display: flex;">
+							<span style="align-self: flex-end;"><strong>Відбудеться {{$element->date_time}} <br> у {{$element->place}}</strong></span>
+						</div>
+						<div class="col-md-4 check-in">
+						@php
+							$regUsers = App\MasterClassUser::where('mc_id', $element->id)->get();
+						@endphp
+						@if ((count($regUsers)<30))
+							<button class="btn btn-default waves-effect waves-light btn-lg text-uppercase pull-right" style="text-decoration: none;" data-toggle="modal" data-target="#modalMC{{$element->id}}" {{(count($regUsers)<30)?"":"disabled"}}>Записатись</button>
+						@endif
+							
+						</div>
 					</div>
 				</div>
 			</div>
-		</div>
-		<hr>
-		
-		<div class="row" style="padding-top: 20px;">
-			<div class="col-md-12 text-center">
-				<nav aria-label="Page navigation example">
-					<ul class="pagination list-inline justify-content-center">
-						<li class="page-item">
-							<a class="page-link" href="#" aria-label="Previous">
-								<span aria-hidden="true">&laquo;</span>
-								<span class="sr-only">Previous</span>
-							</a>
-						</li>
-						<li class="page-item">
-							<a class="page-link" href="#">1</a>
-						</li>
-						<li class="page-item">
-							<a class="page-link active" href="#">2<span class="sr-only">(current)</span></a>
-						</li>
-						<li class="page-item">
-							<a class="page-link" href="#">3</a>
-						</li>
-						<li class="page-item">
-							<a class="page-link" href="#" aria-label="Next">
-								<span aria-hidden="true">&raquo;</span>
-								<span class="sr-only">Next</span>
-							</a>
-						</li>
-					</ul>
+			<hr>
+			@include('master_classes.formMC', ['mk' => $element])
+		@endforeach
+		<div class="row" style="padding-bottom: 20px;">
+			<div class="col-md-12">
+				<nav">
+				{{-- TO DO AJAX PAGINATION --}}
+					{{-- @include('components.pagination',['products'=>$masterclasses]) --}}
 				</nav>
 			</div>
 		</div>
 	</div>
 </div>
-@include('master_classes.formMK')
+<script>
+	$('.submitMC').each(function(){
+        $(this).on('click', function(){
+            registerMC($(this).attr('mc_id'));
+        });
+    });
+    function registerMC(id) {
+        var phone = $('#phone').val();
+        var name = $('#name').val();
+        var mk_id = id;
+        $.ajax({
+            url : '/mc/register',
+            method: 'POST',
+            data: {
+                phone: phone,
+                name: name,
+                id: id
+            },
+        }).done(function (data) {
+            $('#modalMC'+id+' .modal-body').innerHTML = "";
+            $('#modalMC'+id+' .modal-body').html(data);
+        }).fail(function () {
+            $('#modalMC'+id+' .modal-body').innerHTML = "";
+            $('#modalMC'+id+' .modal-body').html(data);
+        });
+    };
+</script>
 @endsection

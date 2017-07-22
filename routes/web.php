@@ -35,6 +35,8 @@ Route::post('/js_cart/get_info_total', 'CartController@getTotalQty');
 Route::post('/products/sorting', 'HomeController@filterSorting');
 //AJAX for pagination
 Route::post('/products/pagination', 'HomeController@pagination');
+//AJAX for MC register
+Route::post('/mc/register', 'HomeController@mcreg');
 
 
 Route::delete('emptyCart', 'CartController@emptyCart');

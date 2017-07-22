@@ -28,7 +28,7 @@
 			<div class="pro-img">
 				<img src="{{ $product->main_photo }}" class="img-responsive" alt="">
 				<div class="zoom-icon ">
-					<a class="picture" href="{{ $product->main_photo }}" rel="title" class="b-link-stripe b-animate-go  thickbox" title="{{ $product->title }}" data-toggle="modal" data-target="#productImageModal"><i class="glyphicon glyphicon-search icon "></i></a>
+					<a class="picture" href="{{ $product->main_photo }}" rel="title" class="b-link-stripe b-animate-go  thickbox" title="{{ $product->title }}" data-toggle="modal" data-target="#productImageModal{{$product->id}}"><i class="glyphicon glyphicon-search icon "></i></a>
 					<a href="{{ url('/product/'.$product->id ) }}"><i class="glyphicon glyphicon-menu-right icon"></i></a>
 				</div>
 			</div>
@@ -72,6 +72,7 @@
     </div>
 </div>
 @endif
+@include('products.showImage', ['product' => $product])
 @endforeach
 @foreach ($products_id as $element)
 	<input type="hidden" class="products_id" value="{{$element}}">
