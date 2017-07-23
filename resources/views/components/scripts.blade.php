@@ -8,51 +8,6 @@ $(document).ready(function(){
         }
     });
 
-    $('.quantity').on('change', function() {
-        var id = $(this).attr('data-id')
-       /* var error_field = $(this).siblings('span.error_qty');*/
-       var error_tooltip = null;
-
-        $.ajax({
-            type: "PATCH",
-            url: '{{ url("/cart") }}' + '/' + id,
-            data: {
-                'quantity': this.value,
-            },
-            success: function(data) {
-
-                if(data.success == false) {
-                    // changing color of the select and add tooltip
-                    error_tooltip = 'Доступно ' + data.allowable_qty + 'шт';
-                    $('[data-id="'  + id + '"]')
-                        .addClass('error_qty')
-                        .prop('title', error_tooltip);
-                        // .tooltip('show');
-
-                    // disable button for checking order
-                    $('#cart_btn_check_order').addClass('disabled');
-
-                } else {
-                    $('[data-id="'  + id + '"]')
-                        .removeClass('error_qty');
-                        // .tooltip('destroy');
-
-                    $('#cart_btn_check_order').removeClass('disabled');
-                }
-                //rewrite price for product
-                $('#' + id).text(data.item.price * data.item.qty + ' грн');
-                //get and set new total info for the cart
-                $.get('js_cart/get_info_total', function(data, status) {
-                    $('#info_basket').text(
-                        'У кошику ' + data.total_qty + ' товарів на сумму ' + data.summ_total + 'грн'
-                    );
-                });
-            },
-            error: function(data) {
-
-            }
-        });
-    });
 
     $(document).on('click', '.dropdown-menu', function(event) {
       if ($(this).hasClass('keep-open-on-click')) {
@@ -70,8 +25,9 @@ $(document).ready(function(){
     //   }
     // });
     // add product to cart //
+    // масив ID продуктів в корзині яких вибрана кількість більша ніж є на складі
+    var checkQty = [];
 
-    
     $('button.to-cart').on('click', function(){
         var id = $(this).attr('data-id');
         var data = {};
@@ -105,13 +61,12 @@ $(document).ready(function(){
                 deleteFromCart(id, function(){
                     $(that).parents('li.list-group-item').remove();
                     updateTotalTitle();
-                })
+                }, checkQty)
             });
             $(".incr-btn").on("click", function (event) {
                 var $button = $(this);
                 var id = $button.parent().attr('data-id');
                 var oldValue = $button.parent().find('input').val();
-
                 $button.parent().find('.incr-btn[data-action="decrease"]').removeClass('inactive');
                 if ($button.data('action') == "increase") {
                     var newVal = parseFloat(oldValue) + 1;
@@ -125,11 +80,12 @@ $(document).ready(function(){
                     }
                 }
                 $button.parent().find('input').val(newVal);
-                updateQty(id, newVal);
+                updateQty(id, newVal, checkQty);
                 changeProductCost(id, newVal);
                 event.preventDefault();
             });
         });
+
     });
     //-------------- for order ---------------------------------------------//
     $('select[name="delivery_id"]').change(function() {
@@ -149,12 +105,22 @@ function changeProductCost(id, newVal){
     var total_cost = (cost_one * newVal).toFixed(2);
     $price.text(total_cost + " грн");
 }
-function deleteFromCart(id,resolve) {
+function deleteFromCart(id,resolve, checkQty) {
+    var index = checkQty.indexOf(id);
+    if(index > -1 ) {
+        checkQty.splice(index, 1);
+    }
     $.post('/delete_product/' + id, function(data){
         resolve();
-    })
+    });
+    if(checkQty.length > 0 ) {
+        $('#cart_btn_check_order').addClass('disabled');
+    } else {
+        $('#cart_btn_check_order').removeClass('disabled');
+        updateTotalTitle();
+    }
 }
-function updateQty(id, qty){
+function updateQty(id, qty, checkQty){
     $.ajax({
         type: "PATCH",
         url: '{{ url("/cart") }}' + '/' + id,
@@ -163,23 +129,30 @@ function updateQty(id, qty){
         },
         success: function (data) {
             if (data.success == false) {
-                error_tooltip = 'Доступно ' + data.allowable_qty + 'шт';
-                $('.quantity [data-id="' + id + '"]')
-                    .addClass('error_qty')
-                    .prop('title', error_tooltip);
-                    // .tooltip('show');
-                // disable button for checking order
+                var index1 = checkQty.indexOf(id);
+
+                if(index1 == -1) {
+                    checkQty.push(id);
+                }
+                $('span[data-id="' + id + '"].control-qty').removeClass('hidden');
+            } else {
+                var index = checkQty.indexOf(id);
+                if(index > -1 ) {
+                    checkQty.splice(index, 1);
+                }
+                $('span[data-id="' + id + '"].control-qty').addClass('hidden');
+            }
+            if(checkQty.length > 0 ) {
                 $('#cart_btn_check_order').addClass('disabled');
             } else {
-                console.log('ajax true' + data.data);
-                $('[data-id="' + id + '"]')
-                    .removeClass('error_qty');
-                    // .tooltip('destroy');
                 $('#cart_btn_check_order').removeClass('disabled');
                 updateTotalTitle();
             }
         }
+
     });
+    console.log('qty in warnig + ' + checkQty.length);
+
 }
 function updateTotalTitle() {
     $.get('js_cart/get_info_total', function(data, status){
@@ -349,17 +322,9 @@ function scrollFunction() {
     }
 }
 
-
 function topFunction() {
     document.body.scrollTop = 0; 
     document.documentElement.scrollTop = 0;
 }
-
-
-
-
-
-
-
 
 </script>

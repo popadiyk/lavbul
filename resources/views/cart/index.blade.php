@@ -46,6 +46,7 @@
                             </div>
 
                         </div>
+                        <span data-id = '{{ $item->rowId }}' class="bg-warning hidden control-qty" style="font-size: 12px;">Не достатня кількість</span>
                     </li>
                     @endforeach
 
