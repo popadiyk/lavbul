@@ -11,6 +11,7 @@ use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 use App\MasterClassUser;
 use App\MasterClass;
+use App\News;
 
 
 class HomeController extends Controller
@@ -205,6 +206,16 @@ class HomeController extends Controller
         $reguser->status = 'new';
         $reguser->save();
         return view('master_classes.afterReg');
+    }
+
+    public function news(){
+        $news = News::all();
+        return view('news.index', ['news' => $news]);
+    }
+
+    public function one_news($id){
+        $news = News::find($id);
+        return view('news.one_news', ['news' => $news]);
     }
 
 }
