@@ -60,13 +60,13 @@ Route::group(['prefix' => '/'], function () {
 	Route::post('products/group', 'HomeController@products');
 	Route::get('product/{id}', 'HomeController@product');
 	Route::get('master_classes', 'HomeController@masterclasses');
+	Route::get('news', 'HomeController@news');
+	Route::get('news/{id}', 'HomeController@one_news');
 	
 	Route::get('contacts', function (){
 	    return view('contacts.index');
 	});
-	Route::get('news', function (){
-	    return view('news.index');
-	});
+	
 	Route::get('one_news', function (){
 	    return view('news.one_news');
 	});
