@@ -105,8 +105,8 @@
     <i class="fa fa-bars navbar-toggler-icon" aria-hidden="true"></i>
     {{-- <span class="navbar-toggler-icon"></span> --}}
   </button>
-  <div class="navbar-collapse justify-content-md-center collapse" id="navbarsExampleCenteredNav" aria-expanded="false" style="">
-    <ul class="navbar-nav">
+  <div class="navbar-collapse justify-content-md-center collapse" id="navbarsExampleCenteredNav" aria-expanded="false">
+    <ul class="navbar-nav d-flex justify-content-around" style="width: 100%; max-width: 960px;">
       <li class="nav-item align-self-center hidden-xs hidden-sm"><img src="/img/min_logo.png" height="88px"></li>
       <li class="nav-item align-self-center"><a class="nav-link" href="{{ url('/') }}">ГОЛОВНА</a></li>
       <li class="nav-item align-self-center"><a class="nav-link" href="{{ url('/products') }}">ПРОДУКЦІЯ</a></li>
