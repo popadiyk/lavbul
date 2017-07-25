@@ -7,8 +7,8 @@
 <div class="container-fluid">
 	<div class="container" style="padding-bottom: 40px;">
 		<div class="row" style="padding-top: 30px; padding-bottom: 30px;">
-			<div class="col-md-11 col-md-offset-2">
-				<div class="col-md-3">
+			<div class="col-md-12">
+				<div class="col-md-4">
 					<figure class="text-center">
 						<img src="img/success_work.png">
 					</figure>
@@ -16,7 +16,7 @@
 						<p class="more_than_years">Більше трьох років успішної роботи</p>
 					</figcaption>
 				</div>
-				<div class="col-md-3">
+				<div class="col-md-4">
 					<figure class="text-center">
 						<img src="img/clients.png">
 					</figure>
@@ -24,7 +24,7 @@
 						<p class="more_than_clients">Більше 3000 задоволених клієнтів<p>
 					</figcaption>
 				</div>
-				<div class="col-md-3">
+				<div class="col-md-4">
 					<figure class="text-center">
 						<img src="img/collegs.png">
 					</figure>
