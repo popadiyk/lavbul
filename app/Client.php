@@ -19,6 +19,7 @@ class Client extends Model
         'card',
         'phone',
         'email',
-        'discount'
+        'discount',
+        'user_id'
     ];
 }

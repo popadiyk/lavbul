@@ -97,12 +97,12 @@ $('button.to-cart').on('click', function(){
         data: data,
         success: function(data){
             if(data.success == true) {
-                $('#total-count-cart').text(data.count_cart);
+                $('#total-count-cart').text((data.total * data.discount).toFixed(2));
                 $('button[data-id=' + id +']')
                     .removeClass('btn-success')
                     .addClass('btn-info');
             }
-        },
+        }
     });
 });
 </script>

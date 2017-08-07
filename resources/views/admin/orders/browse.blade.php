@@ -2,94 +2,6 @@
 
 @section('css')
     <link rel="stylesheet" type="text/css" href="{{ voyager_asset('css/nestable.css') }}">
-    <style>
-        /* Style the Image Used to Trigger the Modal */
-        td img {
-            border-radius: 5px;
-            cursor: pointer;
-            transition: 0.3s;
-        }
-
-        td img:hover {opacity: 0.7;}
-
-        /* The Modal (background) */
-        .modal {
-            display: none; /* Hidden by default */
-            position: fixed; /* Stay in place */
-            z-index: 1000000; /* Sit on top */
-            padding-top: 100px; /* Location of the box */
-            left: 0;
-            top: 0;
-            width: 100%; /* Full width */
-            height: 100%; /* Full height */
-            overflow: auto; /* Enable scroll if needed */
-            background-color: rgb(0,0,0); /* Fallback color */
-            background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
-        }
-
-        /* Modal Content (Image) */
-        .modal-content {
-            margin: auto;
-            display: block;
-            width: 80%;
-            max-width: 700px;
-        }
-
-        /* Caption of Modal Image (Image Text) - Same Width as the Image */
-        #caption {
-            margin: auto;
-            display: block;
-            width: 80%;
-            max-width: 700px;
-            text-align: center;
-            color: #ccc;
-            padding: 10px 0;
-            height: 150px;
-        }
-
-        /* Add Animation - Zoom in the Modal */
-        .modal-content, #caption {
-            -webkit-animation-name: zoom;
-            -webkit-animation-duration: 0.6s;
-            animation-name: zoom;
-            animation-duration: 0.6s;
-        }
-
-        @-webkit-keyframes zoom {
-            from {-webkit-transform:scale(0)}
-            to {-webkit-transform:scale(1)}
-        }
-
-        @keyframes zoom {
-            from {transform:scale(0)}
-            to {transform:scale(1)}
-        }
-
-        /* The Close Button */
-        .close {
-            position: absolute;
-            top: 15px;
-            right: 35px;
-            color: #f1f1f1 !important;
-            font-size: 40px !important;
-            font-weight: bold;
-            transition: 0.3s;
-        }
-
-        .close:hover,
-        .close:focus {
-            color: #bbb;
-            text-decoration: none;
-            cursor: pointer;
-        }
-
-        /* 100% Image Width on Smaller Screens */
-        @media only screen and (max-width: 700px){
-            .modal-content {
-                width: 100%;
-            }
-        }
-    </style>
 @stop
 
 @section('page_header')
@@ -110,38 +22,48 @@
             <div class="col-md-12">
                 <div class="panel panel-bordered">
                     <div class="panel-body">
-                        <table id="dataTable" class="table table-hover">
+                        <table id="dataTable" class="table table-hover" style="font-size: 12px;">
                             <thead>
                             <tr>
                                 <th style="text-align: center;">Номер</th>
-                                <th style="text-align: center; width: 230px;">Назва</th>
-                                <th style="text-align: center; width: 370px;">Опис</th>
-                                <th style="text-align: center;">Дата створення</th>
-                                <th style="text-align: center;">Фото</th>
+                                <th style="text-align: center;">Накладна</th>
+                                <th style="text-align: center;">ФІО</th>
+                                <th style="text-align: center;">Телефон</th>
+                                <th style="text-align: center;">e-mail</th>
+                                <th style="text-align: center;">Тип доставки:</th>
+                                <th style="text-align: center;">Адреса:</th>
+                                <th style="text-align: center;">Тип оплати:</th>
+                                <th style="text-align: center;">Дата:</th>
                                 <th style="text-align: center;" class="actions"></th>
+                                <th style="text-align: center;">Статус</th>
                             </tr>
                             </thead>
                             <tbody>
                             @foreach($dataTypeContent as $data)
                                 <tr>
                                     <td style="text-align: center; vertical-align: middle;">{{$data->id}}</td>
-                                    <td style="text-align: center; vertical-align: middle;">@if(strlen($data->title) >= 100) {{substr($data->title, 0, 100).'...'}} @else {{$data->title}} @endif</td>
-                                    <td style="text-align: justify;">{{str_limit($data->description, 230, "...")}}</td>
+                                    <td style="text-align: center; vertical-align: middle;"><a href="{{ route('voyager.invoices.show', $data->invoice_id) }}">№{{$data->invoice_id}}</a></td>
+                                    <td style="text-align: center; vertical-align: middle;">{{$data->name}}</td>
+                                    <td style="text-align: center; vertical-align: middle;">{{$data->phone}}</td>
+                                    <td style="text-align: center; vertical-align: middle;">{{$data->email}}</td>
+                                    <td style="text-align: center; vertical-align: middle;">@if($data->delivery_id == 1) З магазину @elseif($data->delivery_id == 2) Нова Почта @elseif($data->delivery_id == 3) УкрПочта @endif</td>
+                                    <td style="text-align: center; vertical-align: middle;">{{$data->address}}</td>
+                                    <td style="text-align: center; vertical-align: middle;">@if($data->payment_id == 1) На карту @else В магазині @endif</td>
                                     <td style="text-align: center; vertical-align: middle;">{{ \Carbon\Carbon::parse($data->created_at)->format('d.m.Y | H:i')}} </td>
-                                    <td style="text-align: center;">
-                                        <img src="{{$data->main_photo}}" alt="{{$data->title}}" style="height: 100px;">
-                                    </td>
-                                    <td class="no-sort no-click" style="text-align: center; vertical-align: middle;">
-                                        @if (Voyager::can('delete_'.$dataType->name))
-                                            <div class="btn-sm btn-danger pull-right delete" data-id="{{ $data->id }}" id="delete-{{ $data->id }}" title="Видалити">
-                                                <i class="voyager-trash"></i>
-                                            </div>
-                                        @endif
+                                    <td class="no-sort no-click" style="text-align: center;">
                                         @if (Voyager::can('edit_'.$dataType->name))
                                             <a href="{{ route('voyager.'.$dataType->slug.'.edit', $data->id) }}" class="btn-sm btn-primary pull-right edit" title="Редагувати">
                                                 <i class="voyager-edit"></i>
                                             </a>
                                         @endif
+                                    </td>
+                                    <td style="text-align: center; padding: 8px; @if ($data->status == 'new')background: greenyellow; @elseif($data->status == 'want_to_pay' || $data->status == 'paid') background: deepskyblue; @else background: coral; @endif" >
+                                        <select size="4" class="status-select" name="status" data-id = "{{$data->id}}" required >
+                                            <option value="new" @if ($data->status == 'new') selected @endif>Новий</option>
+                                            <option value="want_to_pay" @if ($data->status == 'want_to_pay') selected @endif>Чекаємо оплату</option>
+                                            <option value="paid" @if ($data->status == 'paid') selected @endif>Записаний</option>
+                                            <option value="failed" @if ($data->status == 'failed') selected @endif>Відмінений</option>
+                                        </select>
                                     </td>
                                 </tr>
                             @endforeach
@@ -186,25 +108,14 @@
         </div><!-- /.modal-dialog -->
     </div><!-- /.modal -->
 
-    <!-- The Modal -->
-    <div id="myModal" class="modal">
-
-        <!-- The Close Button -->
-        <span class="close voyager-close" onclick="document.getElementById('myModal').style.display='none'">&times;</span>
-
-        <!-- Modal Content (The Image) -->
-        <img class="modal-content" id="img01" style="width: 500px">
-
-        <!-- Modal Caption (Image Text) -->
-        <div id="caption"></div>
-    </div>
-
 @stop
 
 @section('javascript')
     @include('admin.cash_widget')
 
     <script>
+
+
         @if (!$dataType->server_side)
             $(document).ready(function () {
             $('#dataTable').DataTable({ "order": [] });
@@ -236,5 +147,43 @@
         span.onclick = function() {
             modal.style.display = "none";
         };
+
+        $('.status-select').change(function () {
+            console.log($(this).val());
+            console.log($(this).attr('data-id'));
+            if ($(this).val() == "new"){
+                $(this).parent().css('background', 'greenyellow');
+            } else if (($(this).val() == "want_to_pay") || ($(this).val() == "paid")) {
+                $(this).parent().css('background', 'deepskyblue');
+            } else {
+                $(this).parent().css('background', 'coral');
+            }
+
+            $('#voyager-loader').css("display","block");
+
+            $.ajax({
+                url: 'change_mc_users_status',
+                type: "post",
+                data: {status : $(this).val(),
+                    id: $(this).attr('data-id')}
+            }).done(function (data) {
+                $('#voyager-loader').css("display","none");
+            }).fail(function (jqXHR, ajaxOptions, thrownError) {
+                alert("No response from server");
+            });
+
+        });
+
+        $(function() {
+            $(".status-select").select2({
+                placeholder: "",
+                language: {
+                    noResults: function () {
+                        return "Співпадінь, не знайдено";
+                    }
+                },
+                width: "100%"
+            });
+        });
     </script>
 @stop

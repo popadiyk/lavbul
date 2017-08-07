@@ -124,6 +124,7 @@
         @stop
 
         @section('javascript')
+            @include('admin.cash_widget')
 
 
             <script>

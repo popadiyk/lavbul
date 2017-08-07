@@ -60,11 +60,11 @@ $(document).ready(function(){
                 //rewrite price for product
                 $('#' + id).text(data.item.price * data.item.qty + ' грн');
                 //get and set new total info for the cart
-                $.get('js_cart/get_info_total', function(data, status) {
-                    $('#info_basket').text(
-                        'У кошику ' + data.total_qty + ' товарів на сумму ' + data.summ_total + 'грн'
-                    );
-                });
+//                $.post('js_cart/get_info_total', function(data, status) {
+//                    $('#info_basket').text(
+//                        'У кошику ' + data.total_qty + ' товарів на сумму ' + data.summ_total + 'грн'
+//                    );
+//                });
             },
             error: function(data) {
 
@@ -102,28 +102,47 @@ $(document).ready(function(){
             data: data,
             success: function(data){
                 if(data.success == true) {
-                    $('#total-count-cart').text(data.count_cart);
+                    $('#total-count-cart').text((data.total * data.discount).toFixed(2));
                     $('button[data-id=' + id +']')
-                        .removeClass('btn-success')
-                        .addClass('btn-info').attr('disabled', 'disabled');
+                            .removeClass('btn-success')
+                            .addClass('btn-info');
                 }
-            },
+            }
         });
     });
     // Open modal in AJAX callback
     $('#testModalBasket').click(function(event) {
         event.preventDefault();
         $.post('/get_cart', function(html) {
+            $(document).click(function(event) {
+                if ($(event.target).is("#fullHeightModalRight") || $(event.target).is("#fullHeightModalRight .btn")) {
+                    var products = [];
+                    $('.list-group-item').each(function (index) {
+                        console.log("----->");
+                        if ($(this).attr('my_id') && $(this).attr('quantity')) {
+                            var product = [];
+                            product[0] = $(this).attr('my_id');
+                            product[1] = $(this).attr('quantity');
+                            products.push(product);
+                        }
+                    });
+                    if (products.length>0)
+                        updateQty(products);
+                        products = null;
+                        $(document).off();
+
+                }
+            });
             $('#fullHeightModalRight').html(html).modal();
-            updateTotalTitle();
             $('a.delete-product').click( function(event){
                 event.preventDefault();
                 var id = $(this).attr('data-id');
                 var that = this;
                 deleteFromCart(id, function(){
                     $(that).parents('li.list-group-item').remove();
-                    updateTotalTitle();
-                })
+                    changeTotal();
+                });
+
             });
             $(".incr-btn").on("click", function (event) {
                 var $button = $(this);
@@ -147,7 +166,8 @@ $(document).ready(function(){
                     }
                 }
                 $button.parent().find('input').val(newVal);
-                updateQty(id, newVal);
+                $(this).parent().parent().parent().parent().attr('my_id', id);
+                $(this).parent().parent().parent().parent().attr('quantity', $(this).parent().find(".quantity").val());
                 changeProductCost(id, newVal);
                 event.preventDefault();
             });
@@ -169,46 +189,48 @@ function changeProductCost(id, newVal){
     var $price =  $('.price [data-id="' + id + '"]');
     var cost_one = $price.attr('price-one');
     var total_cost = (cost_one * newVal).toFixed(2);
+
     $price.text(total_cost + " грн");
+
+    changeTotal();
+}
+
+function changeTotal() {
+    var $totalSumm = $('#footer-total-sum');
+    var total = 0.00;
+    var arr = $('.total_one span').text().split(' грн');
+    var discount = $('#discount').attr('disc');
+    if (discount){
+        for(var i = 0; i < arr.length; i++){
+            if (arr[i])
+                total = total + parseFloat(arr[i]);
+        }
+        $totalSumm.text((total).toFixed(2) + " грн.");
+        $('#footer-total-discount').text((total*discount).toFixed(2) + " грн.")
+        $('#total-count-cart').text((total*discount).toFixed(2));
+    } else {
+        for(var i = 0; i < arr.length; i++){
+            if (arr[i])
+                total = total + parseFloat(arr[i]);
+        }
+        $totalSumm.text(total.toFixed(2) + " грн.");
+        $('#total-count-cart').text(total.toFixed(2));
+    }
 }
 function deleteFromCart(id,resolve) {
+    changeTotal();
     $.post('/delete_product/' + id, function(data){
         resolve();
     })
 }
-function updateQty(id, qty){
-    $.ajax({
-        type: "PATCH",
-        url: '{{ url("/cart") }}' + '/' + id,
-        data: {
-            'quantity': qty,
-        },
-        success: function (data) {
-            if (data.success == false) {
-                error_tooltip = 'Доступно ' + data.allowable_qty + 'шт';
-                $('.quantity [data-id="' + id + '"]')
-                    .addClass('error_qty')
-                    .prop('title', error_tooltip);
-                    // .tooltip('show');
-                // disable button for checking order
-                $('#cart_btn_check_order').addClass('disabled');
-            } else {
-                console.log('ajax true' + data.data);
-                $('[data-id="' + id + '"]')
-                    .removeClass('error_qty');
-                    // .tooltip('destroy');
-                $('#cart_btn_check_order').removeClass('disabled');
-                updateTotalTitle();
+function updateQty(products){
+        $.ajax({
+            type: "POST",
+            url: '{{ url("/cart") }}',
+            data: {
+                'products': products
             }
-        }
-    });
-}
-function updateTotalTitle() {
-    $.post('/js_cart/get_info_total', function(data, status){
-        $('#total-count-cart').text(data.total_products);
-        $('span.total_counter_product').text(data.total_products);
-        $('#footer-total-sum').text(data.summ_total + " грн.");
-    });
+        });
 }
 
 $(document).ready(function(){

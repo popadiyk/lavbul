@@ -8,7 +8,7 @@
 	<div class="container">
 		<div class="row">
 			<div class="col-md-12 text-center">
-				<h3><strong>Ваша корзина</strong></h3>
+				<h3><strong>Оформлення замовлення</strong></h3>
 			</div>
 			<div class="col-md-12">
 				@if (session()->has('success_message'))
@@ -25,14 +25,14 @@
 				<table class="table table-striped">
 					  <thead style="background-color:#f1e4d3 ">
 					    <tr>
-					      <td style="width: 20px;"></td>
+					      <td style="width: 20px; text-align: center;"></td>
 					      <td></td>
-					      <td>Назва</td>
-					      <td>Ціна</td>
-					      <td>Знижка</td>
-					      <td>Ціна зі знижкою</td>
-					      <td>Кількість</td>
-					      <td>Сумма</td>
+					      <td style="text-align: center;">Назва</td>
+					      <td style="text-align: center;">Ціна</td>
+					      <td style="text-align: center;">Знижка</td>
+					      <td style="text-align: center;">Ціна зі знижкою</td>
+					      <td style="text-align: center;">Кількість</td>
+					      <td style="text-align: center;">Сумма</td>
 					    </tr>
 					  </thead>
 					  <tbody>
@@ -45,22 +45,26 @@
 								<button type="submit" class="btn btn-warning btn-sm text-uppercase waves-effect waves-light">Видалити</button>
 							</form>
 						  </td>
-					      <td style="width: 70px;"><img src="{{ App\Product::find($item->id)->main_photo }}" width="100%"></td>
-					      <td style="width: 200px; padding-top: 25px;"> <a href="{{ url('shop', [$item->model->slug]) }}">{{ $item->name }}</td>
-					      <td style="padding-top: 25px;">{{ number_format($item->subtotal / $item->qty , 2).'грн.' }}</td>
-					      <td style="padding-top: 25px;">0%</td>
-					      <td style="padding-top: 25px;">{{ number_format($item->subtotal / $item->qty , 2).'грн.' }}</td>
-						  <td style="padding-top: 25px;"> <p>{{ $item->qty }}</p></td>
-					      <td style="padding-top: 25px;">{{ number_format($item->subtotal, 2) }}</td>
+					      <td style="width: 70px; text-align: center;"><img src="{{ App\Product::find($item->id)->main_photo }}" width="100%"></td>
+					      <td style="width: 200px; padding-top: 25px; text-align: center; color: #00acee;">{{ $item->name }}</td>
+					      <td style="padding-top: 25px; text-align: center;">{{ number_format($item->subtotal / $item->qty , 2) }}</td>
+					      <td style="padding-top: 25px; text-align: center;">@if (Auth::user()) {{ 100 - Auth::user()->getDiscount()*100 }}% @endif</td>
+					      <td style="padding-top: 25px; text-align: center;">@if (Auth::user()) {{ number_format($item->subtotal / $item->qty * Auth::user()->getDiscount(), 2) }} @else{{ number_format($item->subtotal / $item->qty, 2 ).'грн.' }}@endif</td>
+						  <td style="padding-top: 25px; text-align: center;"> <p>{{ $item->qty }}</p></td>
+					      <td style="padding-top: 25px; text-align: center;">@if (Auth::user()) {{ number_format($item->subtotal * Auth::user()->getDiscount(), 2) }} @else {{ number_format($item->subtotal, 2) }} @endif</td>
 					    </tr>
 					  @endforeach
-					  <tr>
-						  <td colspan="7" style="background-color: #e0e0e0; text-align: right;">Доставка:</td>
-						  <td style="background-color: #e0e0e0;">0 грн</td>
+					  <tr style="font-size: 12px;">
+						  <td colspan="7" style="background-color: #e0e0e0; text-align: right; padding: 2px 8px;">Разом:</td>
+						  <td style="background-color: #e0e0e0; padding: 2px 8px; text-align: center;">{{ Cart::total() }} грн.</td>
+					  </tr>
+					  <tr style="font-size: 12px;">
+						  <td colspan="7" style="background-color: #e0e0e0; padding: 2px 8px; text-align: right;">Знижка:</td>
+						  <td style="padding: 2px 8px; background-color: #e0e0e0; text-align: center; color: green;">@if (Auth::user()) {{ 100 - Auth::user()->getDiscount()*100 }}% @else 0%@endif</td>
 					  </tr>
 					  <tr>
-						  <td colspan="7" style="background-color: #e0e0e0; text-align: right;">Ітого:</td>
-						  <td colspan="8" style="background-color: #e0e0e0;">{{ Cart::total() }}</td>
+						  <td colspan="7" style="padding-top: 2px; background-color: #e0e0e0; text-align: right;">Разом зі знижкою:</td>
+						  <td colspan="8" style="padding-top: 2px; background-color: #e0e0e0; text-align: center; color: red;">@if (Auth::user()) {{number_format(Cart::total() * Auth::user()->getDiscount(), 2)}} @else {{ number_format(Cart::total(), 2) }} @endif грн.</td>
 					  </tr>
 					</tbody>
 				</table>
@@ -76,7 +80,7 @@
 					<div class="md-form form-sm">
                         {{ $errors->has('email') ? ' has-error' : '' }}
                         <i class="fa fa-envelope prefix"></i>
-                        {{ Form::email('email', null, ['class' => 'form-control', 'required']) }}
+                        @if(Auth::user()) {{ Form::email('email', Auth::user()->email, ['class' => 'form-control', 'required']) }} @else {{ Form::email('email', null, ['class' => 'form-control', 'required']) }} @endif
                         @if ($errors->has('email'))
                             <span class="help-block">
                                 <strong>{{ $errors->first('email') }}</strong>
@@ -86,31 +90,9 @@
                     </div>
                     <div class="md-form form-sm">
                         <i class="fa fa-user prefix"></i>
-                        {{ Form::text('name', null, array('class' => 'form-control')) }}
+                        @if (Auth::user()) {{ Form::text('name', Auth::user()->name, array('class' => 'form-control')) }} @else{{ Form::text('name', null, array('class' => 'form-control')) }}@endif
                         <label for="name">Ваше ім'я</label>
                     </div>
-					{{-- <div class="col-md-12">
-						<div class="form-group wow fadeInUp">
-							{!! Form::label('name', 'Імʼя', ['class'=>"sr-only"]) !!}
-							{!! Form::text('name', null , [
-								'class' => 'form-control',
-								'required' => 'required',
-								'placeholder'=>"Ваше ім'я",
-								'style'=>"font-style: italic;"
-								]) !!}
-						</div>
-					</div>
-					<div class="col-md-12">
-						<div class="form-group wow fadeInUp" data-wow-delay=".1s">
-							{!! Form::label('email', 'email', ['class' => 'sr-only']) !!}
-							{!! Form::email('email', null, [
-								'class' => 'form-control',
-								'placeholder' => "E-mail",
-								 'style' => "font-style: italic;",
-								 'required' => 'required'
-								 ]) !!}
-						</div>
-					</div> --}}
 				</div>
 				<!-- personal data -->
 				<div class="col-md-7">

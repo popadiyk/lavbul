@@ -137,6 +137,8 @@
         @stop
 
         @section('javascript')
+            @include('admin.cash_widget')
+
             <script>
                 $(function(){
                     $("#group-select").select2({

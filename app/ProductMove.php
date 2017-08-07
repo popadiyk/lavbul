@@ -3,6 +3,7 @@
 namespace App;
 
 use Illuminate\Database\Eloquent\Model;
+use Auth;
 
 /**
  * Class ProductMove
@@ -79,7 +80,11 @@ class ProductMove extends Model
     {
         $this->product_id= $product->id;
         $this->invoice_id = $invoice_id;
-        $this->sum = $product->price;
+        if (Auth::user()){
+            $this->sum = $quantity * $product->price * Auth::user()->getDiscount();
+        } else {
+            $this->sum = $quantity * $product->price;
+        }
 
         if($product->decreaseQty($quantity)) {
             $this->quantity = $quantity;
