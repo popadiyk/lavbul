@@ -4,6 +4,7 @@ namespace App;
 
 use Illuminate\Notifications\Notifiable;
 use Illuminate\Foundation\Auth\User as Authenticatable;
+use Mockery\CountValidator\Exception;
 
 class User extends Authenticatable
 {
@@ -42,6 +43,18 @@ class User extends Authenticatable
         $role = $this->role;
 
         return $role->name == 'super_user' ? true : false;
+    }
+
+    public function getClient(){
+        return $this->hasMany(Client::class);
+    }
+
+    public function getDiscount(){
+        if ($this->hasMany(Client::class)->first() != null){
+            return (100 - $this->hasMany(Client::class)->first()->discount)/100;
+        } else {
+            return 1;
+        }
     }
 
 }

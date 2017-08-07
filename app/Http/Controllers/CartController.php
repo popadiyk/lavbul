@@ -7,6 +7,8 @@ use App\Http\Requests;
 use \Cart as Cart;
 use Validator;
 use App\Facades\OrderingFacade as MakerOrder;
+use Illuminate\Support\Facades\Auth;
+
 class CartController extends Controller
 {
     /**
@@ -26,6 +28,13 @@ class CartController extends Controller
      */
     public function store(Request $request)
     {
+        //dd($request->products);
+        if ($request->products != null){
+            foreach ($request->products as $product)
+            Cart::update($product[0], $product[1]);
+        return 1;
+        }
+
         $duplicates = Cart::search(function ($cartItem, $rowId) use ($request) {
             return $cartItem->id === $request->id;
         });
@@ -47,15 +56,21 @@ class CartController extends Controller
     public function store_js(Request $request)
     {
         $item = $request->all();
-        $duplicates = Cart::search(function ($cartItem, $rowId) use ($item) {
-            return $cartItem->id === $item['id'];
-        });
-        if (!$duplicates->isEmpty()) {
-            return response()->json(['success'=> false, 'data' =>'duplicate']);
-        }
         Cart::add($item['id'], $item['name'], $item['quantity'], $item['price'], ['marking' => $item['marking']])
             ->associate('App\Product');
-        return response()->json(['success'=> true, 'count_cart' => Cart::count()]);
+        if (Auth::user()){
+            if(Auth::user()->getClient())
+                if (Auth::user()->getClient()->first() != null) {
+                    $discount = (100 - Auth::user()->getClient()->first()->discount) / 100;
+                } else {
+                    $discount = 1;
+                }
+            else
+                $discount = 1;
+        } else {
+            $discount = 1;
+        }
+        return response()->json(['success'=> true, 'total' => Cart::total() , 'discount' => $discount]);
     }
 
     /**
@@ -73,7 +88,7 @@ class CartController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\JsonResponse
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
         // Validation on max quantity
         $validator = Validator::make($request->all(), [
@@ -93,6 +108,7 @@ class CartController extends Controller
             ]);
         }
         Cart::update($id, $request->quantity);
+
         session()->flash('success_message', 'Quantity was updated successfully!');
         return response()->json(['success' => true, 'item'=> Cart::get($id)]);
     }
@@ -106,7 +122,7 @@ class CartController extends Controller
     public function destroy($id)
     {
         Cart::remove($id);
-        return back()->withSuccessMessage('Item has been removed!');
+        return back()->withSuccessMessage('Товар успішно видалений із замовлення!');
     }
 
     /**

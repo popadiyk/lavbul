@@ -160,6 +160,8 @@
         @stop
 
         @section('javascript')
+            @include('admin.cash_widget')
+
             <script src="/js/datepickerUA.js"></script>
             <script>
                 var vanillaResult = document.querySelector('.vanilla-result'),

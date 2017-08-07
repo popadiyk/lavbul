@@ -165,6 +165,8 @@
 @stop
 
 @section('javascript')
+    @include('admin.cash_widget')
+
     <!-- DataTables -->
     <script>
         $.ajaxSetup({

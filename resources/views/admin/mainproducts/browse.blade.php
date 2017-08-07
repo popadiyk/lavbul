@@ -191,6 +191,8 @@
 @stop
 
 @section('javascript')
+    @include('admin.cash_widget')
+
     <script>
 
         @if (!$dataType->server_side)

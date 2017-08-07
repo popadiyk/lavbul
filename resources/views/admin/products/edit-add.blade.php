@@ -206,6 +206,8 @@
         @stop
 
         @section('javascript')
+            @include('admin.cash_widget')
+
             <script>
                 {{--!! crop--}}
                 // croppie for news creating/updating

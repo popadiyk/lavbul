@@ -55,6 +55,7 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
+        //dd(Auth::user());
        /* if(!Auth::check()) {
           return back()->with('error_message', 'You need to be authoriseted  in the shop');
         }*/

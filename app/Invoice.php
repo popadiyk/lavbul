@@ -72,7 +72,7 @@ class Invoice extends Model
      */
     public function order()
     {
-        return $this->hasOne(Order::class);
+        return $this->hasOne(Order::class)->first();
     }
 
     /**
@@ -209,4 +209,5 @@ class Invoice extends Model
 
         return $pdf;
     }
+
 }

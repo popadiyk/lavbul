@@ -884,6 +884,7 @@ text-align: left;
         position: relative;
         top: -15px;
         right: 5px;
+        text-shadow: none;
     }
 .footer-block button.accordion {
     /* background-color: white; */

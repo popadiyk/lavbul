@@ -53,6 +53,8 @@
 
 @section('javascript')
     {{-- DataTables --}}
+    @include('admin.cash_widget')
+
     <script>
         $(document).ready(function () {
             @if (!$dataType->server_side)

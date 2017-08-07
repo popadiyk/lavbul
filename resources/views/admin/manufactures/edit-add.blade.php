@@ -113,7 +113,9 @@
         @stop
 
         @section('javascript')
-        <script>
+            @include('admin.cash_widget')
+
+            <script>
             $(function(){
                 $("#group-select").select2({
                     placeholder: "Оберіть тип постачальника",

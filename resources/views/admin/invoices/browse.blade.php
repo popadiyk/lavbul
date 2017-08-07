@@ -124,7 +124,8 @@
                             </thead>
                             <tbody>
                             @foreach($dataTypeContent as $data)
-                                <tr>
+                                <tr @if($data->order()) style="background-color: aliceblue;" @endif>
+
                                     <td>{{ \Carbon\Carbon::parse($data->created_at)->format('d.m.Y | H:i') }}</td>
                                     <td> {{ $data->getType($data->type) }}</td>
                                     <td>{{$data->id}}</td>
@@ -137,15 +138,19 @@
                                     </td>
                                     <td>{{number_format($data->total_account, 2)}}</td>
                                     <td>@if($data->status == 'confirmed')
-                                        <p style="color: blue;">
+                                        <p style="color: blue; margin-bottom: 0px;">
                                             @elseif($data->status == 'unconfirmed')
-                                                <p style="color: orange;">
+                                                <p style="color: orange; margin-bottom: 0px;">
                                                     @elseif($data->status == 'failed')
-                                                        <p style="color: red;">
+                                                        <p style="color: red; margin-bottom: 0px;">
                                                             @else
-                                                                <p style="color: forestgreen;">
+                                                                <p style="color: forestgreen; margin-bottom: 0px;">
                                     @endif
                                             {{$data->getStatus($data->status)}}</p>
+                                        @if ($data->order())
+                                        <p style="margin: 0px; font-size: 12px; position: absolute;">Замовлення:</p>
+                                        <p style="padding-top: 14px; margin: 0px; font-size: 12px; color: firebrick;">@if($data->order()['status_id'] == 2) НА СКЛАДІ @else ВІДПРАВЛЕНО @endif</p>
+                                            @endif
                                     </td>
                                     <td class="no-sort no-click" >
                                         @if (Voyager::can('edit_'.$dataType->name))
@@ -230,6 +235,8 @@
 @stop
 
 @section('javascript')
+    @include('admin.cash_widget')
+
     <!-- DataTables -->
     <script src="/js/datepickerUA.js"></script>
     <script>

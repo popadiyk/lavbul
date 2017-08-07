@@ -79,17 +79,21 @@ class Ordering
      */
     public function makeOrderSaleWithInvoice(Request $request)
     {
-        if(Auth::check()) {
-            $user_id = $author_id =  Auth::id();
+        if(Auth::user()) {
+            if (Auth::user()->getClient()->first() != null)
+                $client_id = $author_id =  Auth::user()->getClient()->first()->id;
+            else
+                $client_id = $author_id = 1;
         }else {
-            $user_id = $author_id = User::where('role_id', 2)->first()->id;
+            $client_id = 1;
+    //        $user_id = $author_id = User::where('role_id', 2)->first()->id;
         }
 
-        $invoice = $this->createInvoice(Invoice::TYPE_SALES, $user_id, $author_id, Cart::total());
+        $invoice = $this->createInvoice(Invoice::TYPE_SALES, $client_id, $author_id, Cart::total());
 
         $order = new Order($request->all());
 
-        $order->user_id = $user_id;
+        $order->user_id = $client_id;
         $order->status_id = OrderStatus::CONFIRMED;
 
         $order->invoice_id = $invoice->id;
@@ -165,7 +169,7 @@ class Ordering
         $invoice->client_id = $client_id;
         $invoice->author_id = $author_id;
         $invoice->status = Invoice::STATUS_CONFIRMED;
-        $invoice->total_account = (integer)$total_account;
+        $invoice->total_account = (integer)$total_account * Auth::user()->getDiscount();
 
         $invoice->save();
 
