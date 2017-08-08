@@ -114,7 +114,7 @@
       <li class="nav-item align-self-center"><a class="nav-link" href="{{ url('/news') }}">НОВИНИ</a></li>
 
       <li class="nav-item align-self-center dropdown">
-        <a class="nav-link dropdown-toggle" href="" id="dropdown03" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">ІНФО</a>
+        <a class="nav-link dropdown-toggle" href="javascript:;" id="dropdown03" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">ІНФО</a>
         <div class="dropdown-menu" aria-labelledby="dropdown03">
           <a class="dropdown-item" href="{{ url('/about') }}">Про нас</a>
           <a class="dropdown-item" href="{{ url('/payments') }}">Оплата і доставка</a>
@@ -125,11 +125,11 @@
         <!-- <a class="nav-link waves-effect waves-light" data-toggle="modal" data-target="#sideModalTR"><i class="fa fa-search fa-2x" aria-hidden="true"></i></a> -->
       </li>
       <li class="nav-item align-self-center">
-        <a class="nav-link waves-effect waves-light" id="testModalBasket" data-target="#fullHeightModalRight"><i class="fa fa-cart-arrow-down fa-2x" aria-hidden="true"></i><span id='total-count-cart' class="cart_counter total_counter_product">@if(Auth::user()){{ number_format(Auth::user()->getDiscount()*str_replace(',', '', Cart::total()), 2) }} @else{{ number_format(str_replace(',', '', Cart::total()), 2) }}@endif</span></a>
+        <a class="nav-link waves-effect waves-light" href="javascript:;" id="testModalBasket" data-target="#fullHeightModalRight"><i class="fa fa-cart-arrow-down fa-2x" aria-hidden="true"></i><span id='total-count-cart' class="cart_counter total_counter_product">@if(Auth::user()){{ number_format(Auth::user()->getDiscount()*str_replace(',', '', Cart::total()), 2) }} @else{{ number_format(str_replace(',', '', Cart::total()), 2) }}@endif</span></a>
       </li>
       <li class="nav-item align-self-center dropdown">
         @if (Auth::user())
-            <a class="nav-link dropdown-toggle" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user-circle-o fa-2x" aria-hidden="true" title="{{ Auth::user()->name }}"></i></a>
+            <a class="nav-link dropdown-toggle" href="javascript:;" id="dropdown05" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><i class="fa fa-user-circle-o fa-2x" aria-hidden="true" title="{{ Auth::user()->name }}"></i></a>
             <div class="dropdown-menu" aria-labelledby="dropdown05">
               <a class="dropdown-item" href="{{ url('/cabinet') }}">Кабінет</a>
               <a class="dropdown-item" href="{{ route('logout') }}" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Вийти</a>
