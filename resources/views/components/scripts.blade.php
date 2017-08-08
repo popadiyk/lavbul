@@ -105,7 +105,8 @@ $(document).ready(function(){
                     $('#total-count-cart').text((data.total * data.discount).toFixed(2));
                     $('button[data-id=' + id +']')
                             .removeClass('btn-success')
-                            .addClass('btn-info');
+                            .addClass('btn-info')
+                            .attr("disabled", "disabled");
                 }
             }
         });
@@ -349,20 +350,6 @@ $(document).ready(function(){
     offset: 100
     });
     wow.init();
-    // accordion
-    var acc = document.getElementsByClassName("accordion");
-    var i;
-    for (i = 0; i < acc.length; i++) {
-        acc[i].onclick = function() {
-            this.classList.toggle("active");
-            var panel = this.nextElementSibling;
-            if (panel.style.maxHeight){
-                panel.style.maxHeight = null;
-            } else {
-                panel.style.maxHeight = panel.scrollHeight + "px";
-            } 
-        }
-    }
 
     //BEGIN sorting
     $(document).on('click', 'a.accordion-title', function (event) {
@@ -390,6 +377,25 @@ $(document).ready(function(){
     };
     //END sorting
 });
+
+$(document).ready(function(){
+// accordion footer
+    var acc = document.getElementsByClassName("accordion_footer");
+    var i;
+    for (i = 0; i < acc.length; i++) {
+        acc[i].onclick = function() {
+            this.classList.toggle("active");
+            var panel = this.nextElementSibling;
+            if (panel.style.maxHeight){
+                panel.style.maxHeight = null;
+            } else {
+                panel.style.maxHeight = panel.scrollHeight + "px";
+            } 
+        }
+    }
+
+});
+
 
 // to_top button
 window.onscroll = function() {scrollFunction()};
