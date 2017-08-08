@@ -1,5 +1,4 @@
-<script src={{ asset('js/tether.min.js') }}></script>
-<script src={{ asset('js/bootstrap.min.js') }}></script>
+
 <script src={{ asset('js/mdb.min.js') }}></script>
 <script src={{ asset('js/datepicker.js') }}></script>
 <script src={{ asset('js/swiper.jquery.min.js')}}></script>
@@ -87,6 +86,7 @@ $(document).ready(function(){
     //     e.stopPropagation();
     //   }
     // });
+    
     // add product to cart //
 
     
@@ -119,7 +119,6 @@ $(document).ready(function(){
                 if ($(event.target).is("#fullHeightModalRight") || $(event.target).is("#fullHeightModalRight .btn")) {
                     var products = [];
                     $('.list-group-item').each(function (index) {
-                        console.log("----->");
                         if ($(this).attr('my_id') && $(this).attr('quantity')) {
                             var product = [];
                             product[0] = $(this).attr('my_id');
@@ -131,7 +130,6 @@ $(document).ready(function(){
                         updateQty(products);
                         products = null;
                         $(document).off();
-
                 }
             });
             $('#fullHeightModalRight').html(html).modal();
