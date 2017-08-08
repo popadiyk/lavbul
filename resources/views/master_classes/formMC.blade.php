@@ -14,11 +14,11 @@
             <div class="modal-body text-center mb-1">
                 <h5 class="mt-1 mb-2">{{$element->title}}</h5>
                 <div class="md-form ml-0 mr-0">
-                    <input type="text" id="name" class="form-control ml-0">
+                    <input type="text" id="name{{$element->id}}" class="form-control ml-0">
                     <label for="name" class="ml-0">Введіть ваше ім'я</label>
                 </div>
                 <div class="md-form ml-0 mr-0">
-                    <input type="text" id="phone" class="form-control ml-0">
+                    <input type="text" id="phone{{$element->id}}" class="form-control ml-0">
                     <label for="phone" class="ml-0">Введіть ваш телефон</label>
                 </div>
                 <div class="text-center">

@@ -67,8 +67,8 @@
         });
     });
     function registerMC(id) {
-        var phone = $('#phone').val();
-        var name = $('#name').val();
+        var phone = $('#phone'+id).val();
+        var name = $('#name'+id).val();
         var mk_id = id;
         $.ajax({
             url : '/mc/register',
