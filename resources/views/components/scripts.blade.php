@@ -104,9 +104,9 @@ $(document).ready(function(){
                 if(data.success == true) {
                     $('#total-count-cart').text((data.total * data.discount).toFixed(2));
                     $('button[data-id=' + id +']')
-                            .removeClass('btn-success')
-                            .addClass('btn-info')
-                            .attr("disabled", "disabled");
+                        .removeClass('btn-success')
+                        .addClass('btn-info')
+                        .attr("disabled", "disabled");
                 }
             }
         });
@@ -126,10 +126,11 @@ $(document).ready(function(){
                             products.push(product);
                         }
                     });
-                    if (products.length>0)
+                    if (products.length>0){
                         updateQty(products);
                         products = null;
                         $(document).off();
+                    }
                 }
             });
             $('#fullHeightModalRight').html(html).modal();
@@ -141,14 +142,12 @@ $(document).ready(function(){
                     $(that).parents('li.list-group-item').remove();
                     changeTotal();
                 });
-
             });
             $(".incr-btn").on("click", function (event) {
                 var $button = $(this);
                 var id = $button.parent().attr('data-id');
                 var oldValue = $button.parent().find('input').val();
                 var maxValue = $button.parent().find('input').attr('max');
-
                 $button.parent().find('.incr-btn[data-action="decrease"]').removeClass('inactive');
                 if ($button.data('action') == "increase") {
                     var newVal = parseFloat(oldValue) + 1;
@@ -188,9 +187,7 @@ function changeProductCost(id, newVal){
     var $price =  $('.price [data-id="' + id + '"]');
     var cost_one = $price.attr('price-one');
     var total_cost = (cost_one * newVal).toFixed(2);
-
     $price.text(total_cost + " грн");
-
     changeTotal();
 }
 
@@ -201,16 +198,18 @@ function changeTotal() {
     var discount = $('#discount').attr('disc');
     if (discount){
         for(var i = 0; i < arr.length; i++){
-            if (arr[i])
+            if (arr[i]){
                 total = total + parseFloat(arr[i]);
+            }
         }
         $totalSumm.text((total).toFixed(2) + " грн.");
-        $('#footer-total-discount').text((total*discount).toFixed(2) + " грн.")
+        $('#footer-total-discount').text((total*discount).toFixed(2) + " грн.");
         $('#total-count-cart').text((total*discount).toFixed(2));
     } else {
         for(var i = 0; i < arr.length; i++){
-            if (arr[i])
+            if (arr[i]){
                 total = total + parseFloat(arr[i]);
+            }
         }
         $totalSumm.text(total.toFixed(2) + " грн.");
         $('#total-count-cart').text(total.toFixed(2));
@@ -220,16 +219,16 @@ function deleteFromCart(id,resolve) {
     changeTotal();
     $.post('/delete_product/' + id, function(data){
         resolve();
-    })
+    });
 }
 function updateQty(products){
-        $.ajax({
-            type: "POST",
-            url: '{{ url("/cart") }}',
-            data: {
-                'products': products
-            }
-        });
+    $.ajax({
+        type: "POST",
+        url: '{{ url("/cart") }}',
+        data: {
+            'products': products
+        }
+    });
 }
 
 $(document).ready(function(){
