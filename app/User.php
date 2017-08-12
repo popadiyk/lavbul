@@ -46,7 +46,7 @@ class User extends Authenticatable
     }
 
     public function getClient(){
-        return $this->hasMany(Client::class);
+        return $this->hasOne(Client::class);
     }
 
     public function getDiscount(){

@@ -59,16 +59,16 @@ class OrderController extends Controller
        /* if(!Auth::check()) {
           return back()->with('error_message', 'You need to be authoriseted  in the shop');
         }*/
-
         if( $request->input('delivery_id') == Delivery::SHOP) {
-           if(! MakerOrder::makeOrderSaleWithInvoice($request)) {
-               return back()->with('error_message', 'Maybe the quantity isn\'t enough, try again!!');
-           }
+            if (!empty($request)) {
+                if(! MakerOrder::makeOrderSaleWithInvoice($request)) {
+                    return back()->with('error_message', 'Maybe the quantity isn\'t enough, try again!!');
+                }
+            }
         }
 
         if(Auth::check()) {
             $orders = Order::isConfirmed()->where('user_id', Auth::id())->get();
-
             return view('cabinet.index', compact('orders'));
         }
 

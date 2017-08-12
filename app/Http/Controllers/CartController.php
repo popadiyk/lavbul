@@ -91,6 +91,7 @@ class CartController extends Controller
     public function update(Request $request)
     {
         // Validation on max quantity
+        dd($request);
         $validator = Validator::make($request->all(), [
             'quantity' => 'required|numeric|between:1,100'
         ]);
@@ -98,7 +99,7 @@ class CartController extends Controller
             session()->flash('error_message', 'Quantity must be between 1 and 5.');
             return response()->json(['success' => false]);
         }
-        $checkQty = MakerOrder::checkQtyOne($id, $request->quantity);
+        $checkQty = MakerOrder::checkQtyOne($request->id, $request->quantity);
         if($checkQty !== null) {
             session()->flash('error_message', 'Quantity was too much! Prefer is '.$checkQty );
             return response()->json([
@@ -107,7 +108,7 @@ class CartController extends Controller
                 'allowable_qty' => $checkQty
             ]);
         }
-        Cart::update($id, $request->quantity);
+        Cart::update($request->id, $request->quantity);
 
         session()->flash('success_message', 'Quantity was updated successfully!');
         return response()->json(['success' => true, 'item'=> Cart::get($id)]);

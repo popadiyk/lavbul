@@ -14,6 +14,7 @@ use TCG\Voyager\Http\Controllers\Traits\BreadRelationshipParser;
 use App\ProductMove;
 use HelperForImage;
 use App\Facades\OrderingFacade as MakerOrder;
+use App\Order;
 
 
 class InvoiceController extends Controller
@@ -150,7 +151,9 @@ class InvoiceController extends Controller
             $view = "voyager::$slug.browse";
         }
 
-        return view('admin.invoices.edit', compact('dataType', 'dataTypeContent', 'isModelTranslatable', 'invoice', 'products'));
+        $order = $invoice->order();
+
+        return view('admin.invoices.edit', compact('dataType', 'dataTypeContent', 'isModelTranslatable', 'invoice', 'products', 'order'));
     }
 
     /**
