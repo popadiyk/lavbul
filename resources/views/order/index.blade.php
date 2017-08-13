@@ -76,6 +76,7 @@
 				<h3 class="text-center"><strong>Доставка і оплата</strong></h3>
 			</div>
 			{!! Form::open(['route' =>'order.store', 'id'=>'make_order']) !!}
+			<input type="hidden" name="_token" value="{{ csrf_token() }}">
 				<div class="col-md-5">
 					<div class="md-form form-sm">
                         {{ $errors->has('email') ? ' has-error' : '' }}

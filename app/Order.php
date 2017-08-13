@@ -24,6 +24,7 @@ class Order extends Model
         'delivery_id',
         'address',
         'status_id',
+        'phone'
     ];
 
     /**
@@ -69,5 +70,9 @@ class Order extends Model
     {
         $this->status_id = $status;
         $this->save();
+    }
+
+    public function delivery(){
+        return $this->hasOne(Delivery::class, 'id', 'delivery_id')->first()['title'];
     }
 }

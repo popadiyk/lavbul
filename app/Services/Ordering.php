@@ -85,7 +85,7 @@ class Ordering
             else
                 $client_id = $author_id = 1;
         }else {
-            $client_id = 1;
+            $client_id = $author_id = 1;
     //        $user_id = $author_id = User::where('role_id', 2)->first()->id;
         }
 
@@ -100,19 +100,16 @@ class Ordering
         $order->save();
 
         /* here is place for dispatch() job for sending email with invoice */
-
         if($this->saleProducts($order)) {
             Cart::destroy();
            //Sending email with new Invoice to user
             dispatch(new SendMailInvoice($invoice));
-
             return true;
         }
 
         // delete invoice and order, because the $this->saleProducts return false
         $order->delete();
         $invoice->delete();
-
         return false;
     }
 
@@ -169,7 +166,10 @@ class Ordering
         $invoice->client_id = $client_id;
         $invoice->author_id = $author_id;
         $invoice->status = Invoice::STATUS_CONFIRMED;
-        $invoice->total_account = (integer)$total_account * Auth::user()->getDiscount();
+        if (Auth::user())
+            $invoice->total_account = (float)$total_account * Auth::user()->getDiscount();
+        else
+            $invoice->total_account = (float)$total_account;
 
         $invoice->save();
 
@@ -186,7 +186,6 @@ class Ordering
     private function saleProducts($order)
     {
         $order_decoder = json_decode($order->cart);
-
         // to check on quantity of products
         foreach($order_decoder as $item) {
             $product = Product::find($item->id);

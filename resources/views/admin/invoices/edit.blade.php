@@ -88,7 +88,7 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="name">Контрагент: <strong>
+                                    <label for="name">Клієнт: <strong>
                                             @if ($invoice->type == 'realisation' || $invoice->type == 'purchase')
                                                 {{$invoice->client->title}}
                                             @else
@@ -97,24 +97,46 @@
                                 </div>
 
                                 <div class="form-group">
-                                    <label for="name">Поточний статус:
-                                            @if ($invoice->status == 'closed')
-                                            <strong style="color: limegreen;">УСПІШНА</strong>
-                                            @elseif ($invoice->status == 'confirmed')
-                                            <strong style="color: blue;">СТВОРЕНА</strong>
-                                            @elseif ($invoice->status == 'failed')
-                                            <strong style="color: red;">ВІДМІНЕНА</strong>
-                                            @endif</label>
-                                </div>
-
-                                <div class="form-group">
-                                    <label for="name">Змінити статус накладної:</label>
+                                    <label for="name">Cтатус накладної:</label>
                                     <select size="4" id="group-select" name="status" required >
-                                        <option value="closed">УСПІШНА</option>
-                                        <option value="confirmed">СТВОРЕНА</option>
-                                        <option value="failed">ВІДМІНЕНА</option>
+                                        <option value="closed" @if ($invoice->status == 'closed') selected @endif>УСПІШНА</option>
+                                        <option value="confirmed" @if ($invoice->status == 'confirmed') selected @endif>СТВОРЕНА</option>
+                                        <option value="failed" @if ($invoice->status == 'failed') selected @endif>ВІДМІНЕНА</option>
                                     </select>
                                 </div>
+
+                                @if ($order)
+                                <div class="form-group">
+                                    <label for="status_id">Cтатус відправки:</label>
+                                    <select size="2" id="status-order-select" name="status_id" required >
+                                        <option value="2" @if($order->status_id == 2) selected @endif>НА СКЛАДІ</option>
+                                        <option value="3" @if($order->status_id == 3) selected @endif>ВІДПРАВЛЕНА</option>
+                                    </select>
+                                </div>
+
+                                    <div class="form-group">
+                                        <label for="name">ФІО контрагента:</label>
+                                        <input style="float: right; width: 70%;" type="text" name="name" class="form-control" value="{{ $order->name }}" id="name">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="email">Email контрагента:</label>
+                                        <input style="float: right; width: 70%;" type="email" name="email" class="form-control" value="{{ $order->email }}" id="name">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="phone">Телефон контрагента:</label>
+                                        <input style="float: right; width: 70%;" type="text" name="phone" class="form-control" value="{{ $order->phone }}" id="name">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="post">Пошта: {{$order->delivery()}}</label>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="address">Адреса доставки:</label>
+                                        <input style="float: right; width: 70%;" type="text" name="address" class="form-control" value="{{ $order->address }}" id="address">
+                                    </div>
+
+
+                                @endif
+
                             </form>
                         </div>
                     </div>
@@ -144,6 +166,13 @@
                         width: "100%"
                     });
 
+                })
+
+                $(function(){
+                    $("#status-order-select").select2({
+                        placeholder: "",
+                        width: "100%"
+                    });
                 })
             </script>
 @stop
