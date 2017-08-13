@@ -107,8 +107,8 @@
 
                                 @if ($order)
                                 <div class="form-group">
-                                    <label for="name">Cтатус відправки:</label>
-                                    <select size="2" id="status-order-select" name="order_status" required >
+                                    <label for="status_id">Cтатус відправки:</label>
+                                    <select size="2" id="status-order-select" name="status_id" required >
                                         <option value="2" @if($order->status_id == 2) selected @endif>НА СКЛАДІ</option>
                                         <option value="3" @if($order->status_id == 3) selected @endif>ВІДПРАВЛЕНА</option>
                                     </select>
@@ -130,7 +130,7 @@
                                         <label for="post">Пошта: {{$order->delivery()}}</label>
                                     </div>
                                     <div class="form-group">
-                                        <label for="name">Адреса доставки:</label>
+                                        <label for="address">Адреса доставки:</label>
                                         <input style="float: right; width: 70%;" type="text" name="address" class="form-control" value="{{ $order->address }}" id="address">
                                     </div>
 

@@ -4,7 +4,7 @@ use Illuminate\Support\Facades\Schema;
 use Illuminate\Database\Schema\Blueprint;
 use Illuminate\Database\Migrations\Migration;
 
-class EditClientTable extends Migration
+class OrderPhone extends Migration
 {
     /**
      * Run the migrations.
@@ -13,8 +13,8 @@ class EditClientTable extends Migration
      */
     public function up()
     {
-        Schema::table('clients', function (Blueprint $table) {
-            $table->integer('user_id')->default(1);
+        Schema::table('orders', function (Blueprint $table) {
+            $table->string('phone')->default('+38(0)');
         });
     }
 

@@ -59,13 +59,17 @@ class OrderController extends Controller
        /* if(!Auth::check()) {
           return back()->with('error_message', 'You need to be authoriseted  in the shop');
         }*/
-        if( $request->input('delivery_id') == Delivery::SHOP) {
             if (!empty($request)) {
+ //               dd($request->all());
+                if ($request->cart == '[]')
+                    return back()->with('error_message', '  Ваша корзина - пуста :( Спробуйте ще раз! Або зателефонуйте нам! Ми Вдячні Вам за те, що допомагаєте нам створити найкращій "hand-made" магазин в Україні!');
                 if(! MakerOrder::makeOrderSaleWithInvoice($request)) {
-                    return back()->with('error_message', 'Maybe the quantity isn\'t enough, try again!!');
+                    return back()->with('error_message', '  Щось пішло не так :( Спробуйте ще раз! Або зателефонуйте нам! Ми Вдячні Вам за те, що допомагаєте нам створити найкращій "hand-made" магазин в Україні!');
                 }
             }
-        }
+
+
+        
 
         if(Auth::check()) {
             $orders = Order::isConfirmed()->where('user_id', Auth::id())->get();

@@ -33,7 +33,7 @@ class DatabaseSeeder extends Seeder
         $this->call(MasterClassSeeder::class);
         $this->call(MainProductSeeder::class);
         $this->call(NewsSeeder::class);
-        
+        $this->call(PaymentSeeder::class);
 //        $this->call(AdminAboutUsSeeder::class);
 //        $this->call(AdminGroupsSeeder::class);
     }

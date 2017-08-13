@@ -124,7 +124,7 @@
                             </thead>
                             <tbody>
                             @foreach($dataTypeContent as $data)
-                                <tr @if($data->order()) style="background-color: aliceblue;" @endif>
+                                <tr @if($data->order()->first()) style="background-color: aliceblue;" @endif>
 
                                     <td>{{ \Carbon\Carbon::parse($data->created_at)->format('d.m.Y | H:i') }}</td>
                                     <td> {{ $data->getType($data->type) }}</td>
@@ -147,9 +147,9 @@
                                                                 <p style="color: forestgreen; margin-bottom: 0px;">
                                     @endif
                                             {{$data->getStatus($data->status)}}</p>
-                                        @if ($data->order())
-                                        <p style="margin: 0px; font-size: 12px; position: absolute;">Замовлення:</p>
-                                        <p style="padding-top: 14px; margin: 0px; font-size: 12px; color: firebrick;">@if($data->order()['status_id'] == 2) НА СКЛАДІ @else ВІДПРАВЛЕНО @endif</p>
+                                        @if ($data->order()->first())
+                                        <p style="margin: 0px; font-size: 12px;">Замовлення:</p>
+                                        @if($data->order()->first()['status_id'] == 2)<p class="label label-danger"> НА СКЛАДІ @else <p class="label label-success"> ВІДПРАВЛЕНО @endif</p>
                                             @endif
                                     </td>
                                     <td class="no-sort no-click" >

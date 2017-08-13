@@ -46,7 +46,11 @@ class User extends Authenticatable
     }
 
     public function getClient(){
-        return $this->hasOne(Client::class);
+        $client = Client::all()->where('user_id', $this->id)->first();
+        if ($client != null)
+            return $this->hasOne(Client::class)->get();
+        else
+            return Client::all()->where('id',1);
     }
 
     public function getDiscount(){

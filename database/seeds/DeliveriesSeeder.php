@@ -15,7 +15,7 @@ class DeliveriesSeeder extends Seeder
     public function run()
     {
         Delivery::firstOrCreate([
-            'title' => 'Магазин',
+            'title' => 'Заберу в магазині',
             'price' => null,
             'created_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
@@ -29,12 +29,6 @@ class DeliveriesSeeder extends Seeder
         Delivery::firstOrCreate([
             'title' => 'Нова Почта',
             'price' => 50,
-            'created_at' => Carbon::now()->format('Y-m-d H:i:s')
-        ]);
-
-        Delivery::firstOrCreate([
-            'title' => 'Кур\'єр',
-            'price' => 20,
             'created_at' => Carbon::now()->format('Y-m-d H:i:s')
         ]);
     }

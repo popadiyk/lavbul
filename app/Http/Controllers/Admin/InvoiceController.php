@@ -59,11 +59,7 @@ class InvoiceController extends Controller
         //dd($dataTypeContent);
         // Check if BREAD is Translatable
         $isModelTranslatable = is_bread_translatable($model);
-        $view = 'voyager::bread.browse';
-        if (view()->exists("voyager::$slug.browse")) {
-            $view = "voyager::$slug.browse";
-        }
-        
+
         return view('admin.invoices.browse', compact('dataType', 'dataTypeContent', 'isModelTranslatable', 'manufactures'));
 
     }
@@ -151,7 +147,7 @@ class InvoiceController extends Controller
             $view = "voyager::$slug.browse";
         }
 
-        $order = $invoice->order();
+        $order = $invoice->order()->first();
 
         return view('admin.invoices.edit', compact('dataType', 'dataTypeContent', 'isModelTranslatable', 'invoice', 'products', 'order'));
     }
@@ -288,7 +284,11 @@ class InvoiceController extends Controller
      */
     public function update(Request $request, $id)
     {
+        //dd($request->all());
         $invoice = Invoice::where('id', $id)->first();
+        $order = $invoice->order()->first();
+        //dd($order);
+        $order->update($request->all());
         $result = MakerOrder::changeInvoiceStatus($invoice->id, $request->status, $invoice->type);
         if ($result == -1){
             return redirect()

@@ -4,6 +4,7 @@ namespace App;
 
 use Carbon\Carbon;
 use Illuminate\Database\Eloquent\Model;
+use Mockery\CountValidator\Exception;
 use PDF;
 
 /**
@@ -72,7 +73,7 @@ class Invoice extends Model
      */
     public function order()
     {
-        return $this->hasOne(Order::class)->first();
+        return $this->hasOne(Order::class);
     }
 
     /**
@@ -178,7 +179,12 @@ class Invoice extends Model
     public function getDescription(){
         if ($this->type == 'realisation')
         return '[...]';
-        return '['.$this->productMove[0]->product->marking.'] '.$this->productMove[0]->product->title.'. . .';
+            if ($this->productMove()->first())
+                return '['.$this->productMove[0]->product->marking.'] '.$this->productMove[0]->product->title.'. . .';
+            else {
+                return '### сталась помилка ### повідомити Андрія ###';
+
+            }
     }
 
 
