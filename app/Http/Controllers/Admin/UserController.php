@@ -154,8 +154,24 @@ class UserController extends Controller
             return response()->json(['errors' => $val->messages()]);
         }
         // save in data base
-        $newManufacture = Manufacture::all()->where('id', $id)->first();
-        $newManufacture->update($request->all());
+        $userClients = Client::all()->where('user_id', $id);
+        foreach ($userClients as $userClient){
+            $userClient->user_id = 0;
+            $userClient->save();
+        }
+        $client = Client::all()->where('id', $request->client_id)->first();
+        $client->user_id = $id;
+        $client->save();
+
+        $req = $request->all();
+
+        if ($request->address == null){
+            $req['address'] = '-';
+        }
+        $chengedUser = User::all()->where('id', $id)->first();
+        $chengedUser->update($req);
+
+
 
         return redirect()
             ->route('voyager.'.$dataType->slug.'.index')
@@ -173,49 +189,10 @@ class UserController extends Controller
      */
     public function create(Request $request)
     {
-        $manTypes = ManufactureType::all();
-        $slug = $this->getSlug($request);
-
-        $dataType = Voyager::model('DataType')->where('slug', '=', $slug)->first();
-
-        // Check permission
-        Voyager::canOrFail('add_'.$dataType->name);
-
-        $dataTypeContent = (strlen($dataType->model_name) != 0)
-            ? new $dataType->model_name()
-            : false;
-
-        // Check if BREAD is Translatable
-        $isModelTranslatable = is_bread_translatable($dataTypeContent);
-
-        $view = 'admin.manufactures.edit-add';
-
-        return view($view, compact('dataType', 'dataTypeContent', 'isModelTranslatable', 'manTypes'));
-
     }
     // POST BRE(A)D
     public function store(Request $request)
     {
-        $slug = $this->getSlug($request);
-        $dataType = Voyager::model('DataType')->where('slug', '=', $slug)->first();
-        // Check permission
-        Voyager::canOrFail('add_'.$dataType->name);
-        //Validate fields with ajax
-        $val = $this->validateBread($request->all(), $dataType->addRows);
-        if ($val->fails()) {
-            return response()->json(['errors' => $val->messages()]);
-        }
-        // save in data base
-        $newManufacture = $request->all();
-        $newManufacture = new Manufacture($newManufacture);
-        $newManufacture->save();
-
-        return redirect()
-            ->route('voyager.'.$dataType->slug.'.index', compact('groups'))
-            ->with([
-                'message'    => "Зміни успішно збережені!",
-                'alert-type' => 'success',
-            ]);
     }
 
     /**
@@ -236,20 +213,10 @@ class UserController extends Controller
         if (is_bread_translatable($data)) {
             $data->deleteAttributeTranslations($data->getTranslatableAttributes());
         }
-        foreach ($dataType->deleteRows as $row) {
-            if ($row->type == 'image') {
-                $this->deleteFileIfExists('/uploads/'.$data->{$row->field});
-                $options = json_decode($row->details);
-                if (isset($options->thumbnails)) {
-                    foreach ($options->thumbnails as $thumbnail) {
-                        $ext = explode('.', $data->{$row->field});
-                        $extension = '.'.$ext[count($ext) - 1];
-                        $path = str_replace($extension, '', $data->{$row->field});
-                        $thumb_name = $thumbnail->name;
-                        $this->deleteFileIfExists('/uploads/'.$path.'-'.$thumb_name.$extension);
-                    }
-                }
-            }
+        $userClients = Client::all()->where('user_id', $id);
+        foreach ($userClients as $userClient){
+            $userClient->user_id = 0;
+            $userClient->save();
         }
         $data = $data->destroy($id)
             ? [

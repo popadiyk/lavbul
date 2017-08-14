@@ -7,11 +7,7 @@
 @section('page_header')
     <h1 class="page-title">
         <i class="voyager-list"></i>Зареєстровані користувачі
-        @if (Voyager::can('add_'.$dataType->name))
-            <a href="{{ route('voyager.'.$dataType->slug.'.create') }}" class="btn btn-success">
-                <i class="voyager-plus"></i> Створити нового користувача
-            </a>
-        @endif    </h1>
+     </h1>
     @include('voyager::multilingual.language-selector')
 @stop
 
@@ -44,17 +40,12 @@
                                     <td class="no-sort no-click">
                                         @if (Voyager::can('delete_'.$dataType->name))
                                             <div class="btn-sm btn-danger pull-right delete" data-id="{{ $data->id }}" id="delete-{{ $data->id }}">
-                                                <i class="voyager-trash"></i> Delete
+                                                <i class="voyager-trash"></i>
                                             </div>
                                         @endif
                                         @if (Voyager::can('edit_'.$dataType->name))
                                             <a href="{{ route('voyager.'.$dataType->slug.'.edit', $data->id) }}" class="btn-sm btn-primary pull-right edit">
-                                                <i class="voyager-edit"></i> Edit
-                                            </a>
-                                        @endif
-                                        @if (Voyager::can('read_'.$dataType->name))
-                                            <a href="{{ route('voyager.'.$dataType->slug.'.show', $data->id) }}" class="btn-sm btn-warning pull-right">
-                                                <i class="voyager-eye"></i> View
+                                                <i class="voyager-edit"></i>
                                             </a>
                                         @endif
                                     </td>
@@ -70,9 +61,6 @@
                                 {{ $dataTypeContent->links() }}
                             </div>
                         @endif
-
-
-
                     </div>
                 </div>
             </div>
@@ -115,7 +103,6 @@
 
         $('.delete').on('click', function (e) {
             id = $(e.target).data('id');
-            console.log(1);
             $('#delete_form')[0].action += '/' + id;
 
             $('#delete_modal').modal('show');
