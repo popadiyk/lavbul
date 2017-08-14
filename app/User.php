@@ -15,7 +15,7 @@ class User extends Authenticatable
      * @var array
      */
     protected $fillable = [
-        'name', 'role_id', 'email', 'password', 'phone',
+        'name', 'role_id', 'email', 'password', 'phone', 'address'
     ];
     /**
      * The attributes that should be hidden for arrays.
@@ -46,9 +46,10 @@ class User extends Authenticatable
     }
 
     public function getClient(){
+        //dd($this->id);
         $client = Client::all()->where('user_id', $this->id)->first();
         if ($client != null)
-            return $this->hasOne(Client::class)->get();
+            return $this->hasOne(Client::class);
         else
             return Client::all()->where('id',1);
     }

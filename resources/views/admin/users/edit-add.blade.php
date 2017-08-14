@@ -62,7 +62,7 @@
 
                                 <div class="form-group col-md-12 col-xs-12">
                                     <label for="address">Адресса доставки:</label>
-                                    <input type="text" name="address" class="form-control" id="card" value="{{ $dataTypeContent->card }}">
+                                    <input type="text" name="address" class="form-control" id="card" value="{{ $dataTypeContent->address }}">
                                 </div>
 
 

@@ -42,11 +42,11 @@ class DataTypesTableSeeder extends Seeder
         if (!$dataType->exists) {
             $dataType->fill([
                 'name'                  => 'users',
-                'display_name_singular' => 'User',
-                'display_name_plural'   => 'Users',
+                'display_name_singular' => 'користувача',
+                'display_name_plural'   => 'Користувач',
                 'icon'                  => 'voyager-person',
-                'model_name'            => 'TCG\\Voyager\\Models\\User',
-                'controller'            => '',
+                'model_name'            => 'App\User',
+                'controller'            => 'Admin\UserController',
                 'generate_permissions'  => 1,
                 'description'           => '',
             ])->save();

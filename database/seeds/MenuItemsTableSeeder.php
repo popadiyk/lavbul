@@ -20,7 +20,7 @@ class MenuItemsTableSeeder extends Seeder
 
             $menuItem = MenuItem::firstOrNew([
                 'menu_id'    => $menu->id,
-                'title'      => 'Dashboard',
+                'title'      => 'Дошка новин',
                 'url'        => route('voyager.dashboard', [], false),
             ]);
             if (!$menuItem->exists) {
@@ -65,7 +65,7 @@ class MenuItemsTableSeeder extends Seeder
 
             $menuItem = MenuItem::firstOrNew([
                 'menu_id'    => $menu->id,
-                'title'      => 'Users',
+                'title'      => 'Користувачі',
                 'url'        => route('voyager.users.index', [], false),
             ]);
             if (!$menuItem->exists) {
@@ -110,7 +110,7 @@ class MenuItemsTableSeeder extends Seeder
 
             $menuItem = MenuItem::firstOrNew([
                 'menu_id'    => $menu->id,
-                'title'      => 'Roles',
+                'title'      => 'Ролі',
                 'url'        => route('voyager.roles.index', [], false),
             ]);
             if (!$menuItem->exists) {
@@ -125,7 +125,7 @@ class MenuItemsTableSeeder extends Seeder
 
             $toolsMenuItem = MenuItem::firstOrNew([
                 'menu_id'    => $menu->id,
-                'title'      => 'Tools',
+                'title'      => 'Опції',
                 'url'        => '',
             ]);
             if (!$toolsMenuItem->exists) {
@@ -140,7 +140,7 @@ class MenuItemsTableSeeder extends Seeder
 
             $menuItem = MenuItem::firstOrNew([
                 'menu_id'    => $menu->id,
-                'title'      => 'Menu Builder',
+                'title'      => 'Конструктор меню',
                 'url'        => route('voyager.menus.index', [], false),
             ]);
             if (!$menuItem->exists) {
@@ -155,7 +155,7 @@ class MenuItemsTableSeeder extends Seeder
 
             $menuItem = MenuItem::firstOrNew([
                 'menu_id'    => $menu->id,
-                'title'      => 'Database',
+                'title'      => 'База данних',
                 'url'        => route('voyager.database.index', [], false),
             ]);
             if (!$menuItem->exists) {
@@ -170,7 +170,7 @@ class MenuItemsTableSeeder extends Seeder
 
             $menuItem = MenuItem::firstOrNew([
                 'menu_id'    => $menu->id,
-                'title'      => 'Settings',
+                'title'      => 'Налаштування (voyager)',
                 'url'        => route('voyager.settings.index', [], false),
             ]);
             if (!$menuItem->exists) {
