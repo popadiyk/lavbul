@@ -34,6 +34,7 @@ class Invoice extends Model
         'author_id',
         'status',
         'total_account',
+        'cash_type'
     ];
 
     const TYPE_PURCHASE = 'purchase';

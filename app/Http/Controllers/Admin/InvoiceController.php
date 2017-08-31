@@ -318,9 +318,8 @@ class InvoiceController extends Controller
         $newInvoice = new Invoice();
         $manufacture = $request->manufacture;
         $newInvoice->type = $request->type;
+        $newInvoice->cash_type = $request->cash_type;
         $clients = Client::all();
-
-        //dd($manufacture);
         //dd($request->search);
 
         if($newInvoice->type == "sales" || $newInvoice->type == "writeOf") {
@@ -397,7 +396,6 @@ class InvoiceController extends Controller
                     array_push($invoceRealizations, $oneProductMove->getInvoices());
                 }
             }
-            //dd($invoceRealizations);
         }
 
 //        if ($request->search != null){

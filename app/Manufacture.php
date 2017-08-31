@@ -49,4 +49,7 @@ class Manufacture extends Model
     {
         return $this->belongsTo(ManufactureType::class, 'type_id', 'id');
     }
+
+    public function type(){
+    }
 }

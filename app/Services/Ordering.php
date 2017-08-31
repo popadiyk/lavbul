@@ -19,6 +19,7 @@ use Illuminate\Http\Request;
 use App\ProductMove;
 use App\User;
 use App\Jobs\SendMailInvoice;
+use App\CashHistory;
 
 /**
  * Class Ordering
@@ -251,6 +252,9 @@ class Ordering
                 $currentProduct = Product::where('marking', $good['marking'])->first();
                 $realSumm = $realSumm + $currentProduct->price * $good['qty'];
             }
+            if (!$discount){
+                $discount = 1;
+            }
             return $realSumm * $discount;
         } else if ($type == 'purchase' || $type == 'realisation'){
             foreach ($goods as $good){
@@ -267,7 +271,16 @@ class Ordering
         if ($request->type == 'sales'){
             $invoice = new Invoice();
             $invoice->type = $request->type;
-            $invoice->client_id = $request->client;
+            if ($request->cash_type){
+                $invoice->cash_type = $request->cash_type;
+            } else {
+                $invoice->cash_type = 0;
+            }
+            if ($request->client){
+                $invoice->client_id = $request->client;
+            } else {
+                $invoice->client_id = 1;
+            }
             $invoice->author_id = Auth::user()->id;
             $invoice->status = Invoice::STATUS_FAILED;
             $invoice->total_account = $this->getInvoiceSumm($request->goods, $request->discount, $request->type);
@@ -288,6 +301,11 @@ class Ordering
             $invoice = new Invoice();
             $invoice->type = $request->type;
             $invoice->client_id = $request->manufacture;
+            if ($request->cash_type){
+                $invoice->cash_type = $request->cash_type;
+            } else {
+                $invoice->cash_type = 0;
+            }
             $invoice->author_id = Auth::user()->id;
             $invoice->status = Invoice::STATUS_FAILED;
             $invoice->total_account = $this->getInvoiceSumm($request->goods, $request->discount, $request->type);
@@ -306,6 +324,11 @@ class Ordering
         } else if ($request->type == 'writeOf'){
             $invoice = new Invoice();
             $invoice->type = $request->type;
+            if ($request->cash_type){
+                $invoice->cash_type = $request->cash_type;
+            } else {
+                $invoice->cash_type = 0;
+            }
             $invoice->client_id = Auth::user()->id;
             $invoice->author_id = Auth::user()->id;
             $invoice->status = Invoice::STATUS_FAILED;
@@ -325,6 +348,11 @@ class Ordering
         } else if ($request->type == 'realisation') {
             $invoice = new Invoice();
             $invoice->type = $request->type;
+            if ($request->cash_type){
+                $invoice->cash_type = $request->cash_type;
+            } else {
+                $invoice->cash_type = 0;
+            }
             $invoice->client_id = $request->manufacture;
             $invoice->author_id = Auth::user()->id;
             $invoice->status = Invoice::STATUS_FAILED;
@@ -351,6 +379,41 @@ class Ordering
     public function changeInvoiceStatus($invoice_id, $status, $type){
         $currentInvoice = Invoice::where('id', $invoice_id)->first();
         if ($type == 'sales' || $type == 'writeOf'){
+
+            // для кеш хісторі
+//            if ($type == 'sales'){
+//                if (($currentInvoice->status == Invoice::STATUS_CLOSED) && ($status == Invoice::STATUS_FAILED || $status == Invoice::STATUS_CONFIRMED)){
+//                    $cashHistory = new CashHistory();
+//                    if (CashHistory::orderby('created_at', 'desc')->first()){
+//                        $previousBalance = CashHistory::orderby('created_at', 'desc')->first()->cash_balance;
+//                    } else {
+//                        $previousBalance = 0;
+//                    }
+//                    $cashHistory->sum = $currentInvoice->total_account;
+//                    $cashHistory->cash_type = CashHistory::CASH;
+//                    $cashHistory->cash_balance = $previousBalance - $cashHistory->sum;
+//                    $cashHistory->reason = 'Sales invoice';
+//                    $cashHistory->invoice_id = $invoice_id;
+//                    $cashHistory->save();
+//                }
+//                if (($currentInvoice->status == Invoice::STATUS_CONFIRMED || $currentInvoice->status == Invoice::STATUS_FAILED) && ($status == Invoice::STATUS_CLOSED)){
+//                    $cashHistory = new CashHistory();
+//                    if (CashHistory::orderby('created_at', 'desc')->first()){
+//                        $previousBalance = CashHistory::orderby('created_at', 'desc')->first()->cash_balance;
+//                    } else {
+//                        $previousBalance = 0;
+//                    }
+//                    $cashHistory->sum = $currentInvoice->total_account;
+//                    $cashHistory->cash_type = CashHistory::CASH;
+//                    $cashHistory->cash_balance = $previousBalance + $cashHistory->sum;
+//                    $cashHistory->reason = 'Sales invoice';
+//                    $cashHistory->invoice_id = $invoice_id;
+//                    $cashHistory->save();
+//                }
+//
+//            }
+            // кінець записів для кеш хісторі
+
             if (($currentInvoice->status == Invoice::STATUS_CLOSED || $currentInvoice->status == Invoice::STATUS_CONFIRMED) && $status == Invoice::STATUS_FAILED){
                 $productMoves = ProductMove::all()->where('invoice_id', $invoice_id);
                 foreach ($productMoves as $productMove){
@@ -374,6 +437,41 @@ class Ordering
         }
         
         if ($type == 'purchase'){
+
+            // для кеш хісторі
+//            if ($currentInvoice->client()->manufactureType() == 'fact'){
+//                if (($currentInvoice->status == Invoice::STATUS_CLOSED) && ($status == Invoice::STATUS_FAILED || $status == Invoice::STATUS_CONFIRMED)){
+//                    $cashHistory = new CashHistory();
+//                    if (CashHistory::orderby('created_at', 'desc')->first()){
+//                        $previousBalance = CashHistory::orderby('created_at', 'desc')->first()->cash_balance;
+//                    } else {
+//                        $previousBalance = 0;
+//                    }
+//                    $cashHistory->sum = $currentInvoice->total_account;
+//                    $cashHistory->cash_type = CashHistory::CASH;
+//                    $cashHistory->cash_balance = $previousBalance + $cashHistory->sum;
+//                    $cashHistory->reason = 'Purchase invoice';
+//                    $cashHistory->invoice_id = $invoice_id;
+//                    $cashHistory->save();
+//                }
+//                if (($currentInvoice->status == Invoice::STATUS_CONFIRMED || $currentInvoice->status == Invoice::STATUS_FAILED) && ($status == Invoice::STATUS_CLOSED)){
+//                    $cashHistory = new CashHistory();
+//                    if (CashHistory::orderby('created_at', 'desc')->first()){
+//                        $previousBalance = CashHistory::orderby('created_at', 'desc')->first()->cash_balance;
+//                    } else {
+//                        $previousBalance = 0;
+//                    }
+//                    $cashHistory->sum = $currentInvoice->total_account;
+//                    $cashHistory->cash_type = CashHistory::CASH;
+//                    $cashHistory->cash_balance = $previousBalance - $cashHistory->sum;
+//                    $cashHistory->reason = 'Purchase invoice';
+//                    $cashHistory->invoice_id = $invoice_id;
+//                    $cashHistory->save();
+//                }
+//
+//            }
+            // кінець записів для кеш хісторі
+
             if (($currentInvoice->status == Invoice::STATUS_CLOSED || $currentInvoice->status == Invoice::STATUS_CONFIRMED) && $status == Invoice::STATUS_FAILED){
                 $productMoves = ProductMove::all()->where('invoice_id', $invoice_id);
                 foreach ($productMoves as $productMove){
