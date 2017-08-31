@@ -102,7 +102,7 @@
 @stop
 
 @section('content')
-    <div class="page-content container-fluid" type = "{{$newInvoice->type}}" manufacture = "{{$manufacture}}">
+    <div class="page-content container-fluid" type = "{{$newInvoice->type}}" manufacture = "{{$manufacture}}" cash-type = "{{$newInvoice->cash_type}}">
         <div class="row">
             <div class="col-md-12">
 
@@ -219,6 +219,7 @@
 
 
         $('#create_invoice').click(function () {
+            var type = $(".page-content").attr('type');
             if (type == 'sales'){
                 var discount = (100 - $('#clients').val().split('&')[1])/100;
                 var client = $('#clients').val().split('&')[0];
@@ -233,6 +234,8 @@
                 };
                 goods.push(myProduct);
             });
+            var cash_type = $(".page-content").attr('cash-type'),
+                manufacture = $(".page-content").attr('manufacture');
 
             $.ajax({
                 url: '/admin/invoices',
@@ -240,6 +243,7 @@
                 data: { type : type ,
                         manufacture : manufacture,
                         client : client,
+                        cash_type : cash_type,
                         discount : discount,
                         goods : goods,
                         invoiceSumm : $('#total-sum-discount').val()
@@ -248,7 +252,7 @@
                 window.location.href = '/admin/invoices';
 //                console.log(data);
             }).fail(function (jqXHR, ajaxOptions, thrownError) {
-                alert("No response from server");
+                alert("No response from server" + thrownError);
             });
         });
 
@@ -396,6 +400,7 @@
                 $("#total-sum-discount").val((totalSumm * (1 - $("#discount").val()/100)).toFixed(2));
             }
             var type = $(".page-content").attr('type');
+            var cash_type = $(".page-content").attr('cash-type');
             if (type == "writeOf") {
                 totalSumm = 0;
                 $("#total-sum").val(totalSumm.toFixed(2));

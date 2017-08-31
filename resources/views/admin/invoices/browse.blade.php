@@ -112,32 +112,36 @@
                         <table id="dataTable" class="table table-hover">
                             <thead>
                             <tr>
-                                <th style="width: 150px;">Дата</th>
-                                <th style="width: 100px;">Тип</th>
-                                <th style="width: 50px;">Номер</th>
-                                <th>Опис</th>
-                                <th>Клієнт</th>
-                                <th>Сумма</th>
-                                <th>Статус</th>
-                                <th class="actions" ></th>
+                                <th style="text-align: center;">Дата</th>
+                                <th style="text-align: center;">Тип</th>
+                                <th style="text-align: center; width: 50px;">Номер</th>
+                                <th style="text-align: center;">Опис</th>
+                                <th style="text-align: center;">Клієнт</th>
+                                <th style="text-align: center;">Сумма</th>
+                                <th style="text-align: center;">Статус</th>
+                                <th style="text-align: center;" class="actions" ></th>
                             </tr>
                             </thead>
                             <tbody>
                             @foreach($dataTypeContent as $data)
                                 <tr @if($data->order()->first()) style="background-color: aliceblue;" @endif>
 
-                                    <td>{{ \Carbon\Carbon::parse($data->created_at)->format('d.m.Y | H:i') }}</td>
-                                    <td> {{ $data->getType($data->type) }}</td>
-                                    <td>{{$data->id}}</td>
-                                    <td>{{$data->getDescription()}}</td>
-                                    <td>@if ($data->type == 'realisation' || $data->type == 'purchase')
+                                    <td style="border-right: #eaeaea solid 1px; border-left: #eaeaea solid 1px; width: 140px; text-align: center; vertical-align: middle;">{{ \Carbon\Carbon::parse($data->created_at)->format('d.m.Y | H:i') }}
+                                        <p style="margin: 0px; font-size: 12px; display: inline-block;">Розрахунок:</p>
+                                        @if($data->cash_type == 'card')<p class="label label-success"> картка @elseif ($data->cash_type == 'cash') <p class="label label-info"> готівка @else <p class="label label-danger"> списання @endif</p>
+
+                                    </td>
+                                    <td style="border-right: #eaeaea solid 1px; width: 70px; text-align: center; vertical-align: middle;"> {{ $data->getType($data->type) }}</td>
+                                    <td style="border-right: #eaeaea solid 1px; text-align: center; vertical-align: middle;">{{$data->id}}</td>
+                                    <td style="border-right: #eaeaea solid 1px; vertical-align: middle;">{{$data->getDescription()}}</td>
+                                    <td style="border-right: #eaeaea solid 1px; text-align: center; vertical-align: middle;">@if ($data->type == 'realisation' || $data->type == 'purchase')
                                             {{$data->client->title}}
                                         @else
                                             {{$data->client->name}}
                                         @endif
                                     </td>
-                                    <td>{{number_format($data->total_account, 2)}}</td>
-                                    <td>@if($data->status == 'confirmed')
+                                    <td style="border-right: #eaeaea solid 1px; text-align: center; vertical-align: middle;">{{number_format($data->total_account, 2)}}</td>
+                                    <td style="border-right: #eaeaea solid 1px; text-align: center; vertical-align: middle;">@if($data->status == 'confirmed')
                                         <p style="color: blue; margin-bottom: 0px;">
                                             @elseif($data->status == 'unconfirmed')
                                                 <p style="color: orange; margin-bottom: 0px;">
@@ -152,7 +156,7 @@
                                         @if($data->order()->first()['status_id'] == 2)<p class="label label-danger"> НА СКЛАДІ @else <p class="label label-success"> ВІДПРАВЛЕНО @endif</p>
                                             @endif
                                     </td>
-                                    <td class="no-sort no-click" >
+                                    <td class="no-sort no-click" style="border-right: #eaeaea solid 1px; text-align: center; vertical-align: middle;">
                                         @if (Voyager::can('edit_'.$dataType->name))
                                             <a href="{{ route('voyager.'.$dataType->slug.'.edit', $data->id) }}" class="btn-sm btn-primary pull-right edit">
                                                 <i class="voyager-edit"></i> Edit
@@ -187,7 +191,7 @@
         <span class="close voyager-close" onclick="document.getElementById('myModal').style.display='none'">&times;</span>
         <!-- Modal Content (The Image) -->
         <div class="modal-content" style="width: 500px; padding: 10px;">
-            <form method="get" action="{{ route('voyager.'.$dataType->slug.'.create') }}">
+            <form method="get" action="{{ route('voyager.'.$dataType->slug.'.create') }}" style="margin-bottom: 0px;">
             <select id="type-select-create" name="type" required >
                 <option value="sales">На продаж</option>
                 <option value="purchase">На закупівлю</option>
@@ -203,8 +207,24 @@
                 <select id="manufacture" name="manufacture">
                     <option></option>
                     @foreach($manufactures as $manufacture)
-                        <option value="{{$manufacture->id}}">{{$manufacture->title}}</option>
+                        <option value="{{$manufacture->id}}" type="{{$manufacture->manufactureType->title}}">{{$manufacture->title}} @if($manufacture->manufactureType->title == 'realization') : Реалізація @endif</option>
                     @endforeach
+                </select>
+
+                <select id="realization" name="manufacture">
+                    <option></option>
+                    @foreach($manufactures as $manufacture)
+                        @if($manufacture->manufactureType->title == 'realization')
+                            <option value="{{$manufacture->id}}" >{{$manufacture->title}}</option>
+                        @endif
+                    @endforeach
+                </select>
+
+                <p id="p_cash_type" class="label label-info" style="border-radius: 0px 5px;">Спосіб оплати:</p>
+                    <br>
+                <select id="cash_type" name="cash_type">
+                    <option value="cash">ГОТІВКА</option>
+                    <option value="card">НА КАРТКУ</option>
                 </select>
             </form>
         </div>
@@ -263,8 +283,38 @@
             checkInvoiceType();
         });
 
+        $("#manufacture").change(function () {
+            if ($("#manufacture").select2('data')[0].text.indexOf('Реалізація') != -1){
+                $('#p_cash_type').css("display", "none");
+                $('#cash_type').next().css("display", "none");
+                $('#cash_type').prop('required', false);
+                $('#cash_type').prop('disabled', true);
+            } else {
+                $('#p_cash_type').css("display", "inline");
+                $('#cash_type').next().css("display", "block");
+                $('#cash_type').prop('required', true);
+                $('#cash_type').prop('disabled', false);
+            }
+        });
+
         function checkInvoiceType() {
-            if ($("#type-select-create").val() == "purchase" || $("#type-select-create").val() == "realisation"){
+            $("#realization").next().css("display", "none");
+            $("#realization").prop('required', false);
+            $("#realization").prop('disabled', true);
+
+            if ($("#type-select-create").val() == "writeOf"){
+                $('#p_cash_type').css("display", "none");
+                $('#cash_type').next().css("display", "none");
+                $('#cash_type').prop('required', false);
+                $('#cash_type').prop('disabled', true);
+            } else {
+                $('#p_cash_type').css("display", "inline");
+                $('#cash_type').next().css("display", "block");
+                $('#cash_type').prop('required', true);
+                $('#cash_type').prop('disabled', false);
+            }
+
+            if ($("#type-select-create").val() == "purchase"){
                 $("#manufacture").next().css("display", "block");
                 $("#manufacture").prop('required', true);
                 $("#manufacture").prop('disabled', false);
@@ -273,10 +323,32 @@
                 $("#manufacture").prop('required', false);
                 $("#manufacture").prop('disabled', true);
             }
+
+            if ($("#type-select-create").val() == "realisation"){
+                $("#realization").next().css("display", "block");
+                $("#realization").prop('required', true);
+                $("#realization").prop('disabled', false);
+                $("#manufacture").next().css("display", "none");
+                $("#manufacture").prop('required', false);
+                $("#manufacture").prop('disabled', true);
+            }
         }
 
         $(function() {
             $("#type-select-create").select2({
+                dropdownParent: $('#myModal'),
+                language: {
+                    noResults: function () {
+                        return "Співпадінь, не знайдено";
+                    },
+                },
+                width: "60%"
+
+            });
+        });
+
+        $(function() {
+            $("#cash_type").select2({
                 dropdownParent: $('#myModal'),
                 language: {
                     noResults: function () {
@@ -301,6 +373,21 @@
 
             });
         });
+
+        $(function() {
+            $("#realization").select2({
+                dropdownParent: $('#myModal'),
+                placeholder: "Оберіть реалізатора",
+                language: {
+                    noResults: function () {
+                        return "Співпадінь, не знайдено";
+                    },
+                },
+                width: "60%"
+
+            });
+        });
+
 
         //DATAPICKER
 //        $("#from").datepicker().;
