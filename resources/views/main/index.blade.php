@@ -1,14 +1,17 @@
 @extends('layouts.main')
+@section('pageTitle', 'Перший магазин hand-made подарунків та товарів для рукоділля!')
+@section('metaTitle', '')
+@section('metaKeyword', 'Купити hand-made ! подарунки в Україні ! Купить товары для рукоделия ! Товари для рукоділля ! декупаж ! подарки Украина ! скрапбукинг ! кукла-тильда ! скрап ! валяння ! валяние ! фоамиран ! фом ! бисер')
 @section('content')
     <!-- Swiper -->
     @include('components.swiper')
     <!-- BEGIN CONTENT -->
     <div class="container-fluid advertise-block">
         <div class="container">
-            <!-- begin advertise --> 
+            <!-- begin advertise -->
             @include('main.advertise')
-            <!-- advertise --> 
-            <!-- LIST OF PRODUCTS -->    
+            <!-- advertise -->
+            <!-- LIST OF PRODUCTS -->
             @include('main.products')
             <!-- LIST OF PRODUCTS -->
         </div>

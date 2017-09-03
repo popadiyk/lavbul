@@ -1,4 +1,7 @@
 @extends('layouts.main')
+@section('pageTitle', 'Новини:')
+@section('metaTitle', $news->title)
+@section('metaKeyword', 'hand-made ! новини ')
 @section('content')
 @php($text = $news->title)
 @include('news.header', ['text' => $text ])

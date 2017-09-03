@@ -38,7 +38,9 @@ class Product extends Model implements Buyable
         'quantity',
         'description',
         'marking',
-        'main_photo'
+        'main_photo',
+        'meta_title',
+        'meta_keyword'
     ];
 
     /**

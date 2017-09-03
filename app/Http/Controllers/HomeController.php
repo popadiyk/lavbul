@@ -118,7 +118,8 @@ class HomeController extends Controller
         // }
         $photos = ProductPhoto::where('product_id', $product->id)->get();
 
-        return view('products.product', [ 'product' => $product, 'products_id_in_cart' => $products_id_in_cart, 'photos' => $photos ]);
+        $meta_keywords = preg_split('/\! /', $product->meta_keyword);
+        return view('products.product', [ 'product' => $product, 'products_id_in_cart' => $products_id_in_cart, 'photos' => $photos, 'meta_keywords' => $meta_keywords]);
     }
 
     public function gotomain(Request $request){
