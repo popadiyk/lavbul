@@ -128,7 +128,7 @@
 
                                     <td style="border-right: #eaeaea solid 1px; border-left: #eaeaea solid 1px; width: 140px; text-align: center; vertical-align: middle;">{{ \Carbon\Carbon::parse($data->created_at)->format('d.m.Y | H:i') }}
                                         <p style="margin: 0px; font-size: 12px; display: inline-block;">Розрахунок:</p>
-                                        @if($data->cash_type == 'card')<p class="label label-success"> картка @elseif ($data->cash_type == 'cash') <p class="label label-info"> готівка @else <p class="label label-danger"> списання @endif</p>
+                                        @if($data->cash_type == 'card')<p class="label label-success"> картка @elseif ($data->cash_type == 'cash') <p class="label label-info"> готівка @else <p class="label label-danger"> без роз. @endif</p>
 
                                     </td>
                                     <td style="border-right: #eaeaea solid 1px; width: 70px; text-align: center; vertical-align: middle;"> {{ $data->getType($data->type) }}</td>

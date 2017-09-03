@@ -12,6 +12,7 @@ use Illuminate\Pagination\LengthAwarePaginator;
 use App\MasterClassUser;
 use App\MasterClass;
 use App\News;
+use App\CashHistory;
 
 
 class HomeController extends Controller
@@ -27,6 +28,18 @@ class HomeController extends Controller
     {
         /*$this->middleware('auth');*/
     }
+
+    public function getCashBalance()
+    {
+        $previousBalanceCash = CashHistory::orderby('created_at', 'desc')->where('cash_type', 'cash')->first()->cash_balance;
+        $previousBalanceCard = CashHistory::orderby('created_at', 'desc')->where('cash_type', 'card')->first()->cash_balance;
+        $responce = array();
+        array_push($responce, $previousBalanceCash);
+        array_push($responce, $previousBalanceCard);
+        
+        return $responce;
+    }
+
     /**
      * Show the application dashboard.
      *

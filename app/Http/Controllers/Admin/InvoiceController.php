@@ -286,9 +286,10 @@ class InvoiceController extends Controller
     {
         //dd($request->all());
         $invoice = Invoice::where('id', $id)->first();
-        $order = $invoice->order()->first();
-        //dd($order);
-        $order->update($request->all());
+        if ($invoice->order()->first()){
+            $order = $invoice->order()->first();
+            $order->update($request->all());
+        }
         $result = MakerOrder::changeInvoiceStatus($invoice->id, $request->status, $invoice->type);
         if ($result == -1){
             return redirect()
