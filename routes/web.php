@@ -37,6 +37,9 @@ Route::post('/products/sorting', 'HomeController@filterSorting');
 Route::post('/products/pagination', 'HomeController@pagination');
 //AJAX for MC register
 Route::post('/mc/register', 'HomeController@mcreg');
+// AJAX for Cash_balance_widget
+Route::post('/admin/cash_balance', 'HomeController@getCashBalance');
+
 
 
 Route::delete('emptyCart', 'CartController@emptyCart');

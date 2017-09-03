@@ -26,27 +26,10 @@ class CashHistory extends Model
     const CARD = 'CARD';
     const CASH = 'CASH';
     
-    public function addInvoice(Invoice $invoice){
-        $cashHistory = new CashHistory();
-        $previousBalance = CashHistory::orderby('created_at', 'desc')->first();
-        switch ($invoice->type){
-            case 'sales':
-                $cashHistory->sum = $invoice->total_account;
-                $cashHistory->cash_balance = $previousBalance + $cashHistory->sum;
-                break;
-            case 'purchase':
-                $cashHistory->sum = $invoice->total_account;
-                $cashHistory->cash_balance = $previousBalance - $cashHistory->sum;
-                break;
-            case 'writeOf':
-                $cashHistory->sum = $invoice->total_account;
-                $cashHistory->cash_balance = $previousBalance - $cashHistory->sum;
-                break;
-            case 'realisation':
-                $cashHistory->sum = $invoice->total_account;
-                $cashHistory->cash_balance = $previousBalance - $cashHistory->sum;
-                break;
+    public function plusOrMinus(){
+        echo '<pre>';
+        if (preg_match( '/\+/', $this->reason)){
+            dd($this->reason);
         }
-        $cashHistory->save();
     }
 }

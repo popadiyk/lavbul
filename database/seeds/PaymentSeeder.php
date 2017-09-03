@@ -16,6 +16,9 @@ class PaymentSeeder extends Seeder
         DB::table('payment_types')->insert([
             'title' => 'На картку Приват Банку',
         ]);
+        DB::table('payment_types')->insert([
+            'title' => 'Готвівкою в магазині',
+        ]);
 
     }
 }
