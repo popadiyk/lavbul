@@ -1,4 +1,4 @@
-@extends('voyager::master')
+    @extends('voyager::master')
 
 <style>
     /* Style the Image Used to Trigger the Modal */

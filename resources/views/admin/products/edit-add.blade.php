@@ -103,6 +103,16 @@
                                     <input type="text" name="quantity" class="form-control" value="@if(isset($dataTypeContent->id)){{ $dataTypeContent->quantity }}@endif" id="quantity" required>
                                 </div>
 
+                                <div class="form-group col-md-12 col-xs-12">
+                                    <label for="quantity">SEO (title) мета-назва сторінки:</label>
+                                    <input type="text" name="meta_title" class="form-control" value="@if(isset($dataTypeContent->id)){{ $dataTypeContent->meta_title }}@endif" id="meta_title">
+                                </div>
+
+                                <div class="form-group col-md-12 col-xs-12">
+                                    <label for="quantity">SEO (keyword) мета-слова:</label>
+                                    <input type="text" name="meta_keyword" class="form-control" value="@if(isset($dataTypeContent->id)){{ $dataTypeContent->meta_keyword }}@endif" id="meta_keyword">
+                                </div>
+
                                 <div class="form-group col-xs-12">
                                     <div class="col-md-4">
                                         <div class="panel panel-default">

@@ -1,4 +1,7 @@
 @extends('layouts.main')
+@section('pageTitle', $product->title)
+@section('metaTitle', $product->meta_title)
+@section('metaKeyword', $product->meta_keyword)
 @section('content')
 @include('products.header')
 <div class="container" style="padding-top: 40px; padding-bottom: 40px; max-width: 900px;">
@@ -54,6 +57,11 @@
 			@else
 				<button type="button" class="btn btn-info waves-effect waves-light to-cart" style="background-color: gray !important;" data-id="{{ $product->id }}" disabled>Додати в кошик</button>
 			@endif
+
+			@foreach($meta_keywords as $meta_keyword)
+				<p style="margin-bottom: 5px; display: inline-block; font-size: 11px; font-family: 'Helvetica Neue', Helvetica, Arial, Roboto, courier" class="label label-info">{{$meta_keyword}}</p>
+			@endforeach
+
 		</div>
 	</div>
 	@include('products.recomend')
