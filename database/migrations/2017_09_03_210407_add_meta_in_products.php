@@ -15,7 +15,7 @@ class AddMetaInProducts extends Migration
     {
         Schema::table('products', function (Blueprint $table) {
             $table->string('meta_title')->default('Купити hand-made подарунки в Україні! Купить hand-made товары в Украине! на bulavka.org');
-            $table->string('meta_keyword')->default('Купити hand-made ! подарунки в Україні ! Купить товары для рукоделия ! Товари для рукоділля ! декупаж ! подарки Украина ! скрапбукинг ! кукла-тильда ! скрап ! валяння ! валяние ! фоамиран ! фом ! бисер');
+            $table->string('meta_keyword')->default('декупаж ! подарки Украина ! скрапбукинг ! кукла-тильда ! скрап ! валяння ! валяние ! фоамиран ! фом ! бисер');
         });
     }
 
