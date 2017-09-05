@@ -54,6 +54,10 @@ class User extends Authenticatable
             return Client::all()->where('id',1);
     }
 
+    public function getDiscountInfo(){
+        return Client::where('user_id', $this->id)->first();
+    }
+
     public function getDiscount(){
         if ($this->hasMany(Client::class)->first() != null){
             return (100 - $this->hasMany(Client::class)->first()->discount)/100;
