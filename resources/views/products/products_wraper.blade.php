@@ -20,7 +20,7 @@
 		<div class="mid-popular">
 		  	<div class="row">
 				@foreach ($products as $product)
-					<div class="col-xs-12 col-sm-4 col-md-4 item-grid {{($loop->iteration > 3) ? 'mrgTop' : ''}}">
+					<div class="col-xs-12 col-sm-6 col-md-4 item-grid {{($loop->iteration > 3) ? 'mrgTop' : ''}}">
 						<div class="mid-pop">
 							<div class="pro-img">
 								<img src="{{ $product->main_photo }}" class="img-responsive" alt="">

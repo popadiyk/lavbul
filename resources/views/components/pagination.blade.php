@@ -27,11 +27,17 @@ $(document).on('click', '.pagination a', function (event) {
     	var page = $(this).text();
     }
     // getProducts(page);
+	event.preventDefault();
     goToByScroll("header_text");
-    event.preventDefault();
 });
 
 function goToByScroll(id){
-    $('html,body').animate({scrollTop: $("."+id).offset().top - 30},'slow').delay( 3000 );
-};
+	setTimeout(function () {
+		var body = $("html, body");
+		body.stop().animate({scrollTop:0}, 1000, 'swing', function() {
+		});
+	}, 500);
+
+//    $(window).animate({scrollTop: $("."+id).top - 30},'slow');
+}
 </script>

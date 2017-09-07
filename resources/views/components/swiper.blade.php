@@ -1,27 +1,27 @@
 <style type="text/css">
 	#firstSlide {
-		background-image: url('img/foSl.jpg');
+		background-image: url('img/foSl-min.jpg');
 		 -webkit-background-size: cover;
 	     background-size: cover;
 	     background-position: center;
 }
 
 	#secondSlide {
-		background-image: url('img/forS.jpg');
+		background-image: url('img/fb4.jpg');
 	 	-webkit-background-size: cover;
      	background-size: cover;
     	background-position: center;
 	}
 
 	#thirdSlide {
-		background-image: url('img/forslider.jpg');
+		background-image: url('img/fb2.jpg');
 		 -webkit-background-size: cover;
      	background-size: cover;
      	background-position: center;
 	}
 
 	#fouthSlide {
-		background-image: url('img/forSlider.jpg');
+		background-image: url('img/fb3.jpg');
 		 	-webkit-background-size: cover;
      		background-size: cover;
      		background-position: center;
