@@ -1,22 +1,22 @@
-<div class="col-md-12 partners-image">
+<div class="col-xs-12 partners-image" style="border-radius: 10px;">
     <div class="row">
-        <div class="col-md-12 text-center">
+        <div class="col-xs-12 text-center">
             <span class="why">Чому обирають нас?</span>
         </div>
     </div>
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-xs-12">
             <span>Ми завжди йдемо на зустріч клієнту</span>
         </div>
     </div>
     <div class="row">
-        <div class="col-md-12">
-            <span>Наша команда креативна</span>
+        <div class="col-xs-12">
+            <span>Наша команда відповідальна</span>
         </div>
     </div>
     <div class="row">
-        <div class="col-md-12">
-            <span>Все виконуємо вчасно</span>
+        <div class="col-xs-12">
+            <span>Ми цінуємо Ваш час</span>
         </div>
     </div>
 </div>

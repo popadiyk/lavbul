@@ -804,24 +804,24 @@ text-align: left;
 
 .news_header_container{
   height: 50vh; 
-  background: url('../img/news_header.png') 100% 100% no-repeat; 
+  background: url('../img/news_header-min.png') 100% 100% no-repeat;
     background-size: cover;
 }
 .classes_header_container{
   height: 50vh; 
-  background: url('../img/classes_header.png') 100% 100% no-repeat; 
+  background: url('../img/classes_header-min.png') 100% 100% no-repeat;
     background-size: cover;
 }
 
 .about_header_container{
   height: 50vh; 
-  background: url('../img/about_header.png') 100% 100% no-repeat; 
+  background: url('../img/about_header-min.png') 100% 100% no-repeat;
   background-size: cover;
 }
 
 .black_header_container {
   height: 30vh; 
-  background: url('../img/black.png') 100% 100% no-repeat; 
+  background: url('../img/black-min.png') 100% 100% no-repeat;
   background-size: cover;
   padding: 0;
 }

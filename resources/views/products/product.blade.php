@@ -24,6 +24,9 @@
 		</div>
 	</div>
 	<style>
+		/*nav {*/
+			/*background-color: rgba(107,107,107,0.66);*/
+		/*}*/
 		.product_info { padding: 1rem 0; float: right; width: 100%; }
 		.product_info .title_, .product_info .title { font-weight: 200; }
 		/* .product_info .currency { margin-bottom: 2.4rem; } */

@@ -147,8 +147,8 @@ i.fa.fa-th-large::before {
 }
 
 .products_header_container{
-	height: 50vh; 
-	background: url('../img/products_header.png') 100% 100% no-repeat; 
+	height: 90px;
+	background: url('../img/products_header-min.png') 100% 100% no-repeat;
     background-size: cover;
 }
 

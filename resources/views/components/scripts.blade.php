@@ -129,8 +129,8 @@ $(document).ready(function(){
                     if (products.length>0){
                         updateQty(products);
                         products = null;
-                        $(document).off();
                     }
+                    //$(document).off();
                 }
             });
             $('#fullHeightModalRight').html(html).modal();
