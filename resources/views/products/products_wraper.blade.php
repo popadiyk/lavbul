@@ -1,7 +1,7 @@
 <div class="row">
     <!--Service-->
     <section id="products_list">
-		<div class="row">
+		<div class="row sort-block">
 			<div class="col-md-6 dropdown">
 				<button class="btn btn-default dropdown-toggle" type="button" data-toggle="dropdown" class="sort_by">Сортувати за
 				<span class="caret"></span></button>
@@ -20,7 +20,7 @@
 		<div class="mid-popular">
 		  	<div class="row">
 				@foreach ($products as $product)
-					<div class="col-xs-12 col-sm-6 col-md-4 item-grid {{($loop->iteration > 3) ? 'mrgTop' : ''}}">
+					<div class="col-12 col-sm-4 col-md-4 item-grid {{($loop->iteration > 3) ? 'mrgTop' : ''}}">
 						<div class="mid-pop">
 							<div class="pro-img">
 								<img src="{{ $product->main_photo }}" class="img-responsive" alt="">
@@ -32,7 +32,7 @@
 							<div class="mid-1">
 								<div class="women">
 									<div class="women-top d-flex mx-auto my-auto">
-										<h6 class="align-self-center"><a href="{{ url('/product/'.$product->id ) }}">{{$product->title}}</a></h6>
+										<p class="align-self-center"><a href="{{ url('/product/'.$product->id ) }}">{{$product->title}}</a></p>
 									</div>
 									<div class="clearfix"></div>
 								</div>

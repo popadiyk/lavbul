@@ -18,3 +18,9 @@
 .post {padding-top: 50px;}
 .export, .privat_bank {padding-top: 25px;}
 .paddingTop {padding-top: 40px;}
+
+@media(max-width:568px){
+	.payments_header_container {
+      height: 30vh;
+    }
+}

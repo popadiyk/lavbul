@@ -1,3 +1,14 @@
+<style type="text/css" media="screen">
+@media(max-width:568px){
+    #fullHeightModalRight .modal-dialog {
+        width: 100%;
+    }
+    #fullHeightModalRight .modal-body {
+        max-height: 392px;
+    }
+}
+</style>
+
 <!--Modal: Cart-->
     <div class="modal-dialog modal-full-height modal-right" role="document">
         <!--Content-->
@@ -18,16 +29,16 @@
                     @foreach(Cart::content() as $item)
                     <li class="list-group-item justify-content-around">
                         <div class="row product_row" data-id = '{{ $item->rowId }}' style="font-size: 14px;">
-                            <div class="col-md-1 cart_action my-auto text-center" style="padding: 0;">
+                            <div class="col-xs-1 cart_action my-auto text-center" style="padding: 0;">
                                 <a href="#" class="delete-product" data-id="{{$item->rowId}}" product-id="{{$item->id}}" title="видалити з корзини" style="color: red; font-weight: bolder;">×</a>
                             </div>
                            {{--  <div class="col-md-2 cart_image my-auto">
                                 <img class="img-circle" width="100%;" src="{{ App\Product::find($item->id)->main_photo }}">
                             </div> --}}
-                            <div class="col-md-4 cart_title my-auto text-center" style="padding: 0;">
+                            <div class="col-xs-4 cart_title my-auto text-center" style="padding: 0;">
                                 <a href="{{ url('/product/'.$item->id ) }}"><span style="font-size: 10px;">Арт.{{ $item->options->marking }}</span><br>{{ $item->name }}</a>
                             </div>
-                            <div class="col-md-1 cart_price my-auto text-center" style="padding: 0;">
+                            <div class="col-xs-1 cart_price my-auto text-center" style="padding: 0;">
                                 <div class="price">
                                     <span id="{{ $item->rowId }}">{{  App\Product::find($item->id)->price }} грн</span>
                                 </div>
@@ -49,7 +60,7 @@
                                     -moz-appearance:textfield;
                                 }
                             </style>
-                            <div class="col-md-3 cart_qty my-auto text-center">
+                            <div class="col-xs-3 cart_qty my-auto text-center">
                                 <div class="number quantity count-input space-bottom" data-id="{{ $item->rowId }}" data-toggle="tooltip" title="">
                                     <a class="incr-btn" data-action="decrease" href="#">–</a>
                                     
@@ -57,7 +68,7 @@
                                     <a class="incr-btn" data-action="increase" href="#">&plus;</a>
                                 </div>
                             </div>
-                            <div class="col-md-3 product_total_price my-auto text-center" style="padding: 0;">
+                            <div class="col-xs-3 product_total_price my-auto text-center" style="padding: 0;">
                                 <div class="price total_one">
                                     <span data-id = "{{ $item->rowId }}" price-one="{{ App\Product::find($item->id)->price }}">{{ number_format($item->subtotal, 2) }} грн</span>
                                 </div>

@@ -1,24 +1,22 @@
-  .cart_qty{
-        margin-top:40px
-    }
-    .cart_title{
-        margin-top:40px
-    }
-    .cart_price{
-        margin-top:40px
-    }
-    .cart_image img{
-        width: 100px;
-    }
-    .cart_marking{
-        margin-top:40px
-    }
-    .error_qty{
-        color: red;
-        border-color: red;
-    }
-    .cart_action{
-        margin-top:30px;
-    }
-
-    
+.cart_qty{
+    margin-top:40px
+}
+.cart_title{
+    margin-top:40px
+}
+.cart_price{
+    margin-top:40px
+}
+.cart_image img{
+    width: 100px;
+}
+.cart_marking{
+    margin-top:40px
+}
+.error_qty{
+    color: red;
+    border-color: red;
+}
+.cart_action{
+    margin-top:30px;
+}

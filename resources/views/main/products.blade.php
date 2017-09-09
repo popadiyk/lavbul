@@ -29,7 +29,7 @@
                             <div class="mid-1">
                                 <div class="women">
                                     <div class="women-top d-flex mx-auto my-auto">
-                                        <h7 class="align-self-center"><a href="{{ url('/product/'.$product->id ) }}">{{$product->title}}</a></h7>
+                                        <p class="align-self-center"><a href="{{ url('/product/'.$product->id ) }}">{{$product->title}}</a></p>
                                     </div>
                                     <div class="clearfix"></div>
                                 </div>

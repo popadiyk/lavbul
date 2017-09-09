@@ -938,7 +938,7 @@ text-align: left;
   
 
 }
-@media screen and (max-width: 768px) { 
+@media screen and (max-width: 767px) { 
   .advertise-padding div:nth-child(1){
     padding-top: 40px;
   }
@@ -986,6 +986,29 @@ text-align: left;
     overflow-y: scroll;
     height: 90vh;
   }
+}
+@media(max-width:568px){
+    .black_header_container {
+        height: 13vh;
+    }
+    .news_header_container {
+      height: 37vh;
+    }
+    .classes_header_container {
+      height: 35vh;
+    }
+    .about_header_container {
+      height: 30vh;
+    }
+    .bullets-block .col-md-4 figure > img {
+      width: 90px;
+    }
+    .bullets-block .col-md-4 figure > img {
+      width: 90px;
+    }
+    .delivery-bullets figure > img {
+      width: 100%;
+    }
 }
 @media screen and (max-width: 480px) { 
   .contacts ul > li {
