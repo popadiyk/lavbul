@@ -5,7 +5,7 @@
 
 <div class="container-fluid">
 	<div class="container">
-		<div class="row paddingTop">
+		<div class="row delivery-bullets">
 			<div class="col-md-12">
 				<div class="col-md-4">
 					<div class="new_post">
@@ -30,7 +30,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="row paddingTop">
+		<div class="row delivery-bullets">
 			<div class="col-md-12">
 				<div class="col-md-4">
 					<div class="new_post">
@@ -50,7 +50,7 @@
 				</div>
 			</div>
 		</div>
-		<div class="row paddingTop">
+		<div class="row delivery-bullets">
 			<div class="col-md-12">
 				<div class="col-md-4">
 					<div class="new_post">

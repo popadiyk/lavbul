@@ -67,7 +67,7 @@
             </div>
         </div>
         <div class="row hidden-sm hidden-md hidden-lg">
-            <button class="accordion">Про нас</button>
+            <button class="accordion accordion_footer">Про нас</button>
             <div class="panel">
                 <div class="about_us_footer">
                     <ul style="padding-left: 0px;">
@@ -78,7 +78,7 @@
                     </ul>
                 </div>
             </div>
-            <button class="accordion">Інформація</button>
+            <button class="accordion accordion_footer">Інформація</button>
             <div class="panel">
                 <div class="info_footer">
                     <ul style="padding-left: 0px;">
@@ -89,7 +89,7 @@
                     </ul>
                 </div>
             </div>
-            <button class="accordion text-center">Контакти</button>
+            <button class="accordion accordion_footer text-center">Контакти</button>
             <div class="panel">
                 <div class="contacts">
                     <ul style="text-align: left;">
