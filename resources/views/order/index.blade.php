@@ -1,16 +1,47 @@
 @extends('layouts.main')
+
+	<style type="text/css">
+		@media(max-width:480px){
+			.btn-danger{
+				padding: 3px 5px !important;
+			}
+			thead {
+				font-size: 12px;
+			}
+
+			tbody {
+				font-size: 12px;
+			}
+		}
+
+		@media(max-width:375px){
+			#btn1 {
+				padding: 3px;
+			}
+			thead {
+				font-size: 10px;
+			}
+
+			tbody {
+				font-size: 10px;
+			}
+		}
+
+	</style>
+
 @section('content')
 <div class="container-fluid text-center classes_header_container">
-	<h1 class="header_text"><span></span></h1>
+	<div class="container-fluid text-center black_header_container hidden-xs" style="padding: 0;">
+	</div>
 </div>
 
 <div class="container-fluid" style="padding-top: 30px; padding-bottom: 30px;">
 	<div class="container">
 		<div class="row">
-			<div class="col-md-12 text-center">
+			<div class="col-xs-12 text-center">
 				<h3><strong>Оформлення замовлення</strong></h3>
 			</div>
-			<div class="col-md-12">
+			<div class="col-xs-12">
 				@if (session()->has('success_message'))
 					<div class="alert alert-success">
 						{{ session()->get('success_message') }}
@@ -23,13 +54,13 @@
 					</div>
 				@endif
 				<table class="table table-striped">
-					  <thead style="background-color:#f1e4d3 ">
+					  <thead style="background-color:#f1e4d3;">
 					    <tr>
 					      <td style="width: 20px; text-align: center;"></td>
-					      <td></td>
+					      <td class="hidden-xs"></td>
 					      <td style="text-align: center;">Назва</td>
-					      <td style="text-align: center;">Ціна</td>
-					      <td style="text-align: center;">Знижка</td>
+					      <td class="hidden-xs" style="text-align: center;">Ціна</td>
+					      <td class="hidden-xs" style="text-align: center;">Знижка</td>
 					      <td style="text-align: center;">Ціна зі знижкою</td>
 					      <td style="text-align: center;">Кількість</td>
 					      <td style="text-align: center;">Сумма</td>
@@ -38,33 +69,36 @@
 					  <tbody>
 					  @foreach(Cart::content() as $item)
 					    <tr>
-					      <td>
+					      <td id="btn1">
 							<form action="{{ url('cart', [$item->rowId]) }}" method="POST" class="side-by-side">
 								{!! csrf_field() !!}
 								<input type="hidden" name="_method" value="DELETE">
-								<button type="submit" class="btn btn-warning btn-sm text-uppercase waves-effect waves-light">Видалити</button>
+								<button type="submit" class="btn btn-danger btn-sm text-uppercase waves-effect waves-light">X</button>
 							</form>
 						  </td>
-					      <td style="width: 70px; text-align: center;"><img src="{{ App\Product::find($item->id)->main_photo }}" width="100%"></td>
+					      <td class="hidden-xs" style="width: 70px; text-align: center;"><img src="{{ App\Product::find($item->id)->main_photo }}" width="100%"></td>
 					      <td style="width: 200px; padding-top: 25px; text-align: center; color: #00acee;">{{ $item->name }}</td>
-					      <td style="padding-top: 25px; text-align: center;">{{ number_format($item->subtotal / $item->qty , 2) }}</td>
-					      <td style="padding-top: 25px; text-align: center;">@if (Auth::user()) {{ 100 - Auth::user()->getDiscount()*100 }}% @endif</td>
+					      <td class="hidden-xs" style="padding-top: 25px; text-align: center;">{{ number_format($item->subtotal / $item->qty , 2) }}</td>
+					      <td class="hidden-xs" style="padding-top: 25px; text-align: center;">@if (Auth::user()) {{ 100 - Auth::user()->getDiscount()*100 }}% @endif</td>
 					      <td style="padding-top: 25px; text-align: center;">@if (Auth::user()) {{ number_format($item->subtotal / $item->qty * Auth::user()->getDiscount(), 2) }} @else{{ number_format($item->subtotal / $item->qty, 2 ).'грн.' }}@endif</td>
 						  <td style="padding-top: 25px; text-align: center;"> <p>{{ $item->qty }}</p></td>
 					      <td style="padding-top: 25px; text-align: center;">@if (Auth::user()) {{ number_format($item->subtotal * Auth::user()->getDiscount(), 2) }} @else {{ number_format($item->subtotal, 2) }} @endif</td>
 					    </tr>
 					  @endforeach
 					  <tr style="font-size: 12px;">
-						  <td colspan="7" style="background-color: #e0e0e0; text-align: right; padding: 2px 8px;">Разом:</td>
+						  <td colspan="3" class="hidden-xs" style="padding-top: 2px; background-color: #e0e0e0; text-align: right;"></td>
+						  <td colspan="4" style="background-color: #e0e0e0; text-align: right; padding: 2px 8px;">Разом:</td>
 						  <td style="background-color: #e0e0e0; padding: 2px 8px; text-align: center;">{{ Cart::total() }} грн.</td>
 					  </tr>
 					  <tr style="font-size: 12px;">
-						  <td colspan="7" style="background-color: #e0e0e0; padding: 2px 8px; text-align: right;">Знижка:</td>
+						  <td colspan="3" class="hidden-xs" style="padding-top: 2px; background-color: #e0e0e0; text-align: right;"></td>
+						  <td colspan="4" style="background-color: #e0e0e0; padding: 2px 8px; text-align: right;">Знижка:</td>
 						  <td style="padding: 2px 8px; background-color: #e0e0e0; text-align: center; color: green;">@if (Auth::user()) {{ 100 - Auth::user()->getDiscount()*100 }}% @else 0%@endif</td>
 					  </tr>
 					  <tr>
-						  <td colspan="7" style="padding-top: 2px; background-color: #e0e0e0; text-align: right;">Разом зі знижкою:</td>
-						  <td colspan="8" style="padding-top: 2px; background-color: #e0e0e0; text-align: center; color: red;">@if (Auth::user()) {{number_format(Cart::total() * Auth::user()->getDiscount(), 2)}} @else {{ number_format(Cart::total(), 2) }} @endif грн.</td>
+						  <td colspan="3" class="hidden-xs" style="padding-top: 2px; background-color: #e0e0e0; text-align: right;"></td>
+						  <td colspan="4" style="padding-top: 2px; background-color: #e0e0e0; text-align: right;">Разом зі знижкою:</td>
+						  <td colspan="5" style="padding-top: 2px; background-color: #e0e0e0; text-align: center; color: red;">@if (Auth::user()) {{number_format(Cart::total() * Auth::user()->getDiscount(), 2)}} @else {{ number_format(Cart::total(), 2) }} @endif грн.</td>
 					  </tr>
 					</tbody>
 				</table>

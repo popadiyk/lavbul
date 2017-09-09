@@ -808,7 +808,7 @@ text-align: left;
     background-size: cover;
 }
 .classes_header_container{
-  height: 50vh; 
+  height: 90px;
   background: url('../img/classes_header-min.png') 100% 100% no-repeat;
     background-size: cover;
 }
