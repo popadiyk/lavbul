@@ -29,7 +29,7 @@
 </style>
 
 
-<div class="hidden-xs container-fluid header-block">
+<div class="hidden-xs hidden-sm container-fluid header-block">
 	<div class="swiper-container">
 		@include('main.header')
 		<div class="swiper-wrapper">
