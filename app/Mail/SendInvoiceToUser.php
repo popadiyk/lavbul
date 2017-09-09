@@ -59,7 +59,7 @@ class SendInvoiceToUser extends Mailable
     {
         $base = env('APP_BASE_URL');
 
-        return $base."/invoices/generatePdf/".$this->invoice->id;
+        return "bulavka.org/invoices/generatePdf/".$this->invoice->id;
     }
 
     /**
