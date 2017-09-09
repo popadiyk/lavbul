@@ -15,7 +15,7 @@
                 @endif
                 @if ($loop->first || (($loop->iteration)-1)%4 == 0)
                 <div class="mid-popular">
-                    <div class="row">
+                    <div class="row" style="margin: 0px;">
                 @endif
                     <div class="col-md-3 item-grid {{($loop->iteration > 4) ? 'mrgTop' : ''}}">
                         <div class="mid-pop">
@@ -29,7 +29,7 @@
                             <div class="mid-1">
                                 <div class="women">
                                     <div class="women-top d-flex mx-auto my-auto">
-                                        <h6 class="align-self-center"><a href="{{ url('/product/'.$product->id ) }}">{{$product->title}}</a></h6>
+                                        <h7 class="align-self-center"><a href="{{ url('/product/'.$product->id ) }}">{{$product->title}}</a></h7>
                                     </div>
                                     <div class="clearfix"></div>
                                 </div>

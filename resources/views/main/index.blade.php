@@ -7,6 +7,11 @@
     @include('components.swiper')
     <!-- BEGIN CONTENT -->
     <div class="container-fluid advertise-block">
+        <div class="row"">
+            <div class="col-xs-12 hidden-lg hidden-md" style="padding-top: 50px; margin-bottom: -30px; text-align: center;">
+                <img src="img/max_logo.png" height="300" width="300">
+            </div>
+        </div>
         <div class="container">
             <!-- LIST OF PRODUCTS -->
             @include('main.products')
