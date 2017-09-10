@@ -1,6 +1,6 @@
 @extends('layouts.main')
 @section('content')
-@php($text = "Пориньте разом з нами у світ Hand Made!")
+@php($text = "Навчайся тому, що приносить задоволення!")
 @include('master_classes.header', ['text' => $text ])
 <style>
 	.modal-dialog.cascading-modal.modal-avatar {
@@ -23,12 +23,13 @@
 			</div>		
 		</div> --}}
 		@foreach ($masterclasses as $element)
-			<div class="row" id="mkItem{{$element->id}}" style="padding-bottom: 40px;">
-				<div class="col-md-4 imageMK">
+			<div class="row" id="mkItem{{$element->id}}" style="background: rgba(252, 224, 215, 0.5); border-radius: 20px; padding-bottom: 40px;">
+				<div class="col-md-4 imageMK" style="padding-bottom: 12px; padding-top: 12px;">
 					<img src="{{ $element->main_photo }}" width="100%" style="border-radius: 10px; box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);" alt="">
 				</div>
 				<div class="col-md-8 contentMK">
-					<h3 style="margin-top: 0px;"><strong>Майстер-клас#{{$element->id}} {{ $element->title }}</strong></h3>
+					Майстер-клас#{{$element->id}}
+					<h3 style="margin-top: 0px;">{{ $element->title }}</h3>
 					<h5><small>техніка:</small> {{ $element->technology }} / @if ($element->status == 'active') <span style="color:green; margin: 0px;">ТРИВАЄ НАБІР</span> @elseif ($element->status == 'full') <span style="color:blue; margin: 0px;">ГРУПА СФОРМОВАНА</span> @else <span style="color:red; margin: 0px;">ЗАКРИТИЙ</span> @endif <span>({{ $element->paidUser() }} / {{$element->max_seats}})</span></h5>
 					<p style="margin-bottom: 60px; text-align:justify;">{{ $element->description }}</p>
 					<div class="row" style="height: 46px;">
@@ -40,7 +41,7 @@
 							$regUsers = App\MasterClassUser::where('mc_id', $element->id)->get();
 						@endphp
 						@if ((count($regUsers)<30))
-							<button class="btn btn-default waves-effect waves-light btn-lg text-uppercase pull-right" style="text-decoration: none;" data-toggle="modal" data-target="#modalMC{{$element->id}}" {{(count($regUsers)<30)?"":"disabled"}}>Записатись</button>
+							<button class="btn btn-default waves-effect waves-light btn-lg text-uppercase pull-right" style="text-decoration: none; border-radius: 10px;" data-toggle="modal" data-target="#modalMC{{$element->id}}" {{(count($regUsers)<30)?"":"disabled"}}>Записатись</button>
 						@endif
 							
 						</div>

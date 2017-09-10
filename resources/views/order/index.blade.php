@@ -125,9 +125,15 @@
                     </div>
                     <div class="md-form form-sm">
                         <i class="fa fa-user prefix"></i>
-                        @if (Auth::user()) {{ Form::text('name', Auth::user()->name, array('class' => 'form-control')) }} @else{{ Form::text('name', null, array('class' => 'form-control')) }}@endif
+                        @if (Auth::user()) {{ Form::text('name', Auth::user()->name, array('class' => 'form-control')) }} @else{{ Form::text('name', null, array('class' => 'form-control' , 'required')) }}@endif
                         <label for="name">Ваше ім'я</label>
                     </div>
+					<div class="md-form form-sm">
+						<i class="fa fa-phone prefix"></i>
+							@if (Auth::user()) {{ Form::text('phone', Auth::user()->phone, array('class' => 'form-control')) }} @else{{ Form::text('phone', null, array('class' => 'form-control', 'required')) }}@endif
+						<label for="name">Телефон</label>
+					</div>
+
 				</div>
 				<!-- personal data -->
 				<div class="col-md-7">

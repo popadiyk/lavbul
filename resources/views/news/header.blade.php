@@ -1,5 +1,6 @@
 <div class="container-fluid text-center news_header_container">
+
 	<div class="container-fluid text-center black_header_container">
-		<h1 class="header_text"><span>{{ $text }}</span></h1>
+		<h2 style="top: 50% !important;" class="header_text"><span>{{ $text }}</span></h2>
 	</div>
 </div>
