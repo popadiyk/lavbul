@@ -29,7 +29,11 @@ class OrderController extends Controller
     {
         $user_id = Auth::id();
         $client = App\Client::all()->where('user_id', $user_id)->first();
-        $invoices = Invoice::orderBy('id', 'DESK')->get()->where('client_id', $client->id)->where('status', 'closed')->where('type', 'sales');
+        if ($client){
+            $invoices = Invoice::orderBy('id', 'DESK')->get()->where('client_id', $client->id)->where('status', 'closed')->where('type', 'sales');
+        } else {
+            $invoices = null;
+        }
         return view('cabinet.index', compact('invoices'));
     }
 
