@@ -803,12 +803,12 @@ text-align: left;
 /* end footer part */
 
 .news_header_container{
-  height: 50vh; 
+  height: 200px;
   background: url('../img/news_header-min.png') 100% 100% no-repeat;
     background-size: cover;
 }
 .classes_header_container{
-  height: 90px;
+  height: 200px;
   background: url('../img/classes_header-min.png') 100% 100% no-repeat;
     background-size: cover;
 }
