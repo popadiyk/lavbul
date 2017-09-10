@@ -86,6 +86,7 @@
                 <div class="tab-pane" id="discountInfo" role="tabpanel">
                     <h4 class="text-center" style="margin-left: 12px;">Інформація про вашу знижку</h4>
                     <table class="table table-striped">
+                        @if (Auth::user()->getDiscountInfo())
                         <tbody>
                             <tr>
                                 <td>Картка оформлена на ім'я:</td>
@@ -108,11 +109,28 @@
                                 <td style="font-weight: bolder;">{{Auth::user()->getDiscountInfo()->discount}}%</td>
                             </tr>
                         </tbody>
+                            @else
+                            Зараз у Вас немає знижки!
+                            <br>
+                            <br>
+                            Для того, щоб отримати картку (-10%) потрібно зробити замовлення від 500 грн.
+                            Картку ми надішлемо Вам разом із замовленням. Зареєструємо, та привяжемо її до цього акуанту!
+                            <br>
+                            <br>
+                            Якщо у Вас вже є наша картка, Ви можете зателефонувати нам <br><strong> (063) 153 80 28 </strong>, або надіслати лист в форматі:
+                            <br>
+                            1) На кого зареєстрована картка
+                            <br>
+                            2) Телефона на який зареєстрована картка
+                            <br>
+                            Лист надсилати на admin@bulavka.org.
+                        @endif
                     </table>
                 </div>
                 <div class="tab-pane" id="ordersHistory" role="tabpanel">
                     <h4 class="text-center" style="margin-left: 12px;">Мої замовлення:</h4>
                     <table class="table table-striped">
+                        @if ($invoices)
                         <tbody>
                             @foreach($invoices as $invoice)
                                 <tr>
@@ -122,6 +140,10 @@
                                 </tr>
                             @endforeach
                         </tbody>
+                            @else
+                            Перегляд замовлень стане доступний після отримання картки нашого магазину! Щоб отримати картку
+                            перейдіть в меню "Інформація про знижку".
+                        @endif
                     </table>
 
                 </div>

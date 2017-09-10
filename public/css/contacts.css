@@ -30,7 +30,7 @@ span.fa.fa-envelope-o, span.fa.fa-map-marker, span.fa.fa-phone {
 }
 .contacts_header_container{
 	height: 200px;
-	background: url('../img/contacts_header.png') 100% 100% no-repeat; 
+	background: url('../img/contacts_`header.png') 100% 100% no-repeat;
     background-size: cover;
 }
 .contacts_container{

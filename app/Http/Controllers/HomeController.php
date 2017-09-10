@@ -124,9 +124,14 @@ class HomeController extends Controller
     }
 
     public function editUser(Request $request, $id){
+        $upUser = $request->all();
         $changedUser = User::find($id)->first();
-        $changedUser->update($request->all());
-
+        if ($upUser['password'] == null) {
+            unset($upUser['password']);
+        } else {
+            $upUser['password'] = bcrypt($upUser['password']);
+        }
+        $changedUser->update($upUser);
         return redirect('/cabinet');
     }
 
