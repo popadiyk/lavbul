@@ -38,6 +38,11 @@ class OrderController extends Controller
      */
     public function create()
     {
+        // якщо корзина пуста (при натисканні оформити замовлення) редірект на продукти
+        if (Cart::content()->count() == 0) {
+           return redirect('/products');
+        }
+
         $deliveries = Delivery::all();
         $payments = PaymentType::all();
 
