@@ -13,6 +13,7 @@ use App\MasterClassUser;
 use App\MasterClass;
 use App\News;
 use App\CashHistory;
+use App\User;
 
 
 class HomeController extends Controller
@@ -120,6 +121,13 @@ class HomeController extends Controller
 
         $meta_keywords = preg_split('/\! /', $product->meta_keyword);
         return view('products.product', [ 'product' => $product, 'products_id_in_cart' => $products_id_in_cart, 'photos' => $photos, 'meta_keywords' => $meta_keywords]);
+    }
+
+    public function editUser(Request $request, $id){
+        $changedUser = User::find($id)->first();
+        $changedUser->update($request->all());
+
+        return redirect('/cabinet');
     }
 
     public function gotomain(Request $request){

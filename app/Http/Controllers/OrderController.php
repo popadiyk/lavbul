@@ -11,6 +11,7 @@ use App\OrderStatus;
 use App\PaymentType;
 use App\Facades\OrderingFacade as MakerOrder;
 use Illuminate\Support\Facades\Auth;
+use App\Invoice;
 
 /**
  * Class OrderController
@@ -26,9 +27,10 @@ class OrderController extends Controller
      */
     public function index()
     {
-        $orders = Order::isConfirmed()->where('user_id', Auth::id())->get();
-
-        return view('cabinet.index', compact('orders'));
+        $user_id = Auth::id();
+        $client = App\Client::all()->where('user_id', $user_id)->first();
+        $invoices = Invoice::orderBy('id', 'DESK')->get()->where('client_id', $client->id)->where('status', 'closed')->where('type', 'sales');
+        return view('cabinet.index', compact('invoices'));
     }
 
     /**

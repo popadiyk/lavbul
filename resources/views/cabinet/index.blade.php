@@ -66,10 +66,6 @@
                                 <td>{{Auth::user()->name}}</td>
                             </tr>
                             <tr>
-                                <td>Аватар:</td>
-                                <td><img src="{{Auth::user()->avatar}}" alt=""></td>
-                            </tr>
-                            <tr>
                                 <td>Телефон:</td>
                                 <td>{{Auth::user()->phone}}</td>
                             </tr>
@@ -77,11 +73,15 @@
                                 <td>E-mail:</td>
                                 <td>{{Auth::user()->email}}</td>
                             </tr>
+                            <tr>
+                                <td>Адреса:</td>
+                                <td>{{Auth::user()->address}}</td>
+                            </tr>
                         </tbody>
                     </table>
                 </div>
                 <div class="tab-pane" id="orderInfo" role="tabpanel">
-                    
+                    Замовлення
                 </div>
                 <div class="tab-pane" id="discountInfo" role="tabpanel">
                     <h4 class="text-center" style="margin-left: 12px;">Інформація про вашу знижку</h4>
@@ -110,39 +110,53 @@
                         </tbody>
                     </table>
                 </div>
-                <div class="tab-pane" id="ordersHistory" role="tabpanel">Orders history</div>
+                <div class="tab-pane" id="ordersHistory" role="tabpanel">
+                    <h4 class="text-center" style="margin-left: 12px;">Мої замовлення:</h4>
+                    <table class="table table-striped">
+                        <tbody>
+                            @foreach($invoices as $invoice)
+                                <tr>
+                                    <td>{{$invoice->created_at}}</td>
+                                    <td>Накладна №{{$invoice->id}}</td>
+                                    <td><a target="_blank" href="/invoices/generatePdf/{{$invoice->id}}">Переглянути рахунок</a></td>
+                                </tr>
+                            @endforeach
+                        </tbody>
+                    </table>
+
+                </div>
                 <div class="tab-pane" id="editInfo" role="tabpanel">
                     <h4 class="text-center" style="margin-left: 12px;">Зміна даних</h4>
-                    <form role="form" method="PUT" action="{{ url('/admin/users/'.Auth::user()->id) }}" enctype="multipart/form-data">
+                    <form role="form" method="post" action="{{ url('/user/edit/'.Auth::user()->id) }}" enctype="multipart/form-data">
+                        {{ method_field("POST") }}
                         {{ csrf_field() }}
-                        <div class="form-group text-center">
-                            <label for="avatar">Аватарка</label>
-                            <img src="{{Auth::user()->avatar}}" style="width:200px; height:auto; clear:both; display:block; padding:2px; border:1px solid #ddd; margin-bottom:10px;">
-                            <input name="avatar" type="file">
-                        </div>
-                        <br>
                         <div class="md-form form-sm">
                           <i class="fa fa-user prefix"></i>
                           {{ Form::text('name', Auth::user()->name, array('class' => 'form-control')) }}
-                          <label for="name">Ваше ім'я</label>
+                          <label for="name">Ваше ім'я:</label>
                         </div>
                         <div class="md-form form-sm">
                           <i class="fa fa-phone prefix"></i>
                           {{ Form::tel('phone', Auth::user()->phone, array('class' => 'form-control', 'required')) }}
-                          <label for="phone">Ваш телефон</label>
+                          <label for="phone">Ваш телефон:</label>
+                        </div>
+                        <div class="md-form form-sm">
+                            <i class="fa fa-address-card-o prefix"></i>
+                                {{ Form::text('address', Auth::user()->address, ['class' => 'form-control']) }}
+                            <label for="address">Адреса доставки:</label>
                         </div>
                         <div class="md-form form-sm">
                           <i class="fa fa-envelope prefix"></i>
                           {{ Form::email('email', Auth::user()->email, ['class' => 'form-control', 'required']) }}
-                          <label for="email">Ваш email</label>
+                          <label for="email">Ваш email:</label>
                         </div>
                         <div class="md-form form-sm">
                           <i class="fa fa-lock prefix"></i>
                           {{ Form::password('password', array('class' => 'form-control')) }}
-                          <label for="password">Ваш пароль</label>
+                          <label for="password">Новий пароль:</label>
                         </div>
                         <div class="text-center form-sm mt-2">
-                          <button class="btn btn-info">Змінити! <i class="fa fa-check" aria-hidden="true"></i> </button>
+                          <button class="btn btn-info" type="submit">Змінити! <i class="fa fa-check" aria-hidden="true"></i> </button>
                         </div>
                     </form>
                 </div>

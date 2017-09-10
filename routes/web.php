@@ -16,7 +16,7 @@ Route::get('/test', 'TestController@index');
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
-
+Route::post('/user/edit/{id}', 'HomeController@editUser');
 Route::get('/feedbacks', 'FeedbacksController@index');
 
 Route::resource('/products', 'ProductController');
@@ -90,9 +90,7 @@ Route::group(['prefix' => '/'], function () {
 	    return view('main.index');
 	});
 
-	Route::get('cabinet', function () {
-		return view('cabinet.index');
-	});
+	Route::get('cabinet', 'OrderController@index');
 
 });
 
