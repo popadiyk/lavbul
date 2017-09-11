@@ -33,7 +33,16 @@
 @section('content')
 @include('cabinet.header')
 
+
+
 <div class="container" style="margin-top: 30px; max-width: 960px; min-height: 100vh;">
+    @if ($success_message)
+        <div class="row">
+            <div class="col-xs-12 alert alert-success">
+                {{ $success_message }}
+            </div>
+        </div>
+    @endif
   <div class="row">
       <div class="col-md-12">
         <div class="col-md-4 col-sm-4">
