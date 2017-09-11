@@ -158,7 +158,7 @@
 				<div class="col-md-12">
 					<div class="md-form form-sm">
 					    <i class="fa fa-pencil prefix"></i>
-					    <textarea type="text" id="address" name="address" class="md-textarea">{{Auth::user()->address}}</textarea>
+					    <textarea type="text" id="address" name="address" class="md-textarea">@if (Auth::user()){{Auth::user()->address}}@endif</textarea>
 					    <label for="form8">Адресса</label>
 					</div>
 				</div>
