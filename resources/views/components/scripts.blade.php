@@ -171,6 +171,66 @@ $(document).ready(function(){
             });
         });
     });
+    // Open modal in AJAX callback
+    $('#mobileModalBasket').click(function(event) {
+        event.preventDefault();
+        $.post('/get_cart', function(html) {
+            $(document).click(function(event) {
+                if ($(event.target).is("#fullHeightModalRight") || $(event.target).is("#fullHeightModalRight .btn")) {
+                    var products = [];
+                    $('.list-group-item').each(function (index) {
+                        if ($(this).attr('my_id') && $(this).attr('quantity')) {
+                            var product = [];
+                            product[0] = $(this).attr('my_id');
+                            product[1] = $(this).attr('quantity');
+                            products.push(product);
+                        }
+                    });
+                    if (products.length>0){
+                        updateQty(products);
+                        products = null;
+                    }
+                    //$(document).off();
+                }
+            });
+            $('#fullHeightModalRight').html(html).modal();
+            $('a.delete-product').click( function(event){
+                event.preventDefault();
+                var id = $(this).attr('data-id');
+                var that = this;
+                deleteFromCart(id, function(){
+                    $(that).parents('li.list-group-item').remove();
+                    changeTotal();
+                });
+            });
+            $(".incr-btn").on("click", function (event) {
+                var $button = $(this);
+                var id = $button.parent().attr('data-id');
+                var oldValue = $button.parent().find('input').val();
+                var maxValue = $button.parent().find('input').attr('max');
+                $button.parent().find('.incr-btn[data-action="decrease"]').removeClass('inactive');
+                if ($button.data('action') == "increase") {
+                    var newVal = parseFloat(oldValue) + 1;
+                    if (newVal > maxValue) {
+                        newVal = oldValue;
+                    }
+                } else {
+                    // Don't allow decrementing below 1
+                    if (oldValue > 1) {
+                        var newVal = parseFloat(oldValue) - 1;
+                    } else {
+                        newVal = 1;
+                        $button.addClass('inactive');
+                    }
+                }
+                $button.parent().find('input').val(newVal);
+                $(this).parent().parent().parent().parent().attr('my_id', id);
+                $(this).parent().parent().parent().parent().attr('quantity', $(this).parent().find(".quantity").val());
+                changeProductCost(id, newVal);
+                event.preventDefault();
+            });
+        });
+    });
     //-------------- for order ---------------------------------------------//
     $('select[name="delivery_id"]').change(function() {
         if(this.value != 1) {
