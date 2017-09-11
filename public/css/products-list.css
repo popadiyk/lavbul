@@ -219,6 +219,9 @@ a.item_add {
 	.item-grid .mid-1 button {
 		padding: 0.7rem 2.5rem;
 	}
+    .item-grid .btn.btn-sm .fa {
+        font-size: 1.5rem !important;
+    } 
 }
 
 @media(max-width:390px){

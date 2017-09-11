@@ -1,8 +1,5 @@
 <style>
 @media(max-width:568px){
-    .item-grid .btn.btn-sm .fa {
-        font-size: 1.5rem !important;
-    } 
     .item-grid .women-top{
         justify-content: center;
     }
@@ -58,12 +55,12 @@
                                         {{ Form::hidden('quantity', 1) }}
                                         @if ($product->quantity > 0)
                                             @if(in_array($product->id, $products_id_in_cart))
-                                                <button class="btn btn-sm btn-info pull-right to-cart" data-id="{{ $product->id }}" disabled><i class="fa fa-cart-plus faSize" aria-hidden="true"></i> </button>
+                                                <button class="btn btn-sm btn-info pull-right to-cart" data-id="{{ $product->id }}" disabled><i class="fa fa-cart-plus" aria-hidden="true"></i> </button>
                                             @else
-                                                <button class="btn btn-sm btn-success pull-right to-cart" data-id="{{ $product->id }}"><i class="fa fa-cart-plus faSize" aria-hidden="true"></i> </button>
+                                                <button class="btn btn-sm btn-success pull-right to-cart" data-id="{{ $product->id }}"><i class="fa fa-cart-plus" aria-hidden="true"></i> </button>
                                             @endif
                                         @else
-                                            <button class="btn btn-sm btn-success pull-right to-cart" style="background-color: gray !important;" disabled data-id="{{ $product->id }}"><i class="fa fa-cart-plus faSize" aria-hidden="true"></i> </button>
+                                            <button class="btn btn-sm btn-success pull-right to-cart" style="background-color: gray !important;" disabled data-id="{{ $product->id }}"><i class="fa fa-cart-plus" aria-hidden="true"></i> </button>
                                         @endif
                                         
                                     </p>
