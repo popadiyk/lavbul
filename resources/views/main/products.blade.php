@@ -1,3 +1,13 @@
+<style>
+@media(max-width:568px){
+    .item-grid .btn.btn-sm .fa {
+        font-size: 1.5rem !important;
+    } 
+    .item-grid .women-top{
+        justify-content: center;
+    }
+}
+</style>
 <div class="row text-center">
     <div class="col-xs-12" style="padding-top: 20px;">
         <span class="recommend">Рекомендуємо</span>
@@ -17,7 +27,7 @@
                 <div class="mid-popular">
                     <div class="row" style="margin: 0px;">
                 @endif
-                    <div class="col-md-3 item-grid {{($loop->iteration > 4) ? 'mrgTop' : ''}}">
+                    <div class="col-12 col-md-3 item-grid {{($loop->iteration > 4) ? 'mrgTop' : ''}}">
                         <div class="mid-pop">
                             <div class="pro-img">
                                 <img src="{{ $product->main_photo }}" class="img-responsive" alt="">
@@ -48,12 +58,12 @@
                                         {{ Form::hidden('quantity', 1) }}
                                         @if ($product->quantity > 0)
                                             @if(in_array($product->id, $products_id_in_cart))
-                                                <button class="btn btn-sm btn-info pull-right to-cart" data-id="{{ $product->id }}" disabled><i class="fa fa-cart-plus" aria-hidden="true"></i> </button>
+                                                <button class="btn btn-sm btn-info pull-right to-cart" data-id="{{ $product->id }}" disabled><i class="fa fa-cart-plus faSize" aria-hidden="true"></i> </button>
                                             @else
-                                                <button class="btn btn-sm btn-success pull-right to-cart" data-id="{{ $product->id }}"><i class="fa fa-cart-plus" aria-hidden="true"></i> </button>
+                                                <button class="btn btn-sm btn-success pull-right to-cart" data-id="{{ $product->id }}"><i class="fa fa-cart-plus faSize" aria-hidden="true"></i> </button>
                                             @endif
                                         @else
-                                            <button class="btn btn-sm btn-success pull-right to-cart" style="background-color: gray !important;" disabled data-id="{{ $product->id }}"><i class="fa fa-cart-plus" aria-hidden="true"></i> </button>
+                                            <button class="btn btn-sm btn-success pull-right to-cart" style="background-color: gray !important;" disabled data-id="{{ $product->id }}"><i class="fa fa-cart-plus faSize" aria-hidden="true"></i> </button>
                                         @endif
                                         
                                     </p>

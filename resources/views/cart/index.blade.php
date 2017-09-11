@@ -84,7 +84,6 @@
                 <div class="col-xs-12 justify-content-around" style="border-top: 1px solid rgba(0, 0, 0, 0.125); font-weight: bolder; text-align: right; padding-right: 50px; margin-left: 15px;">
                     @if (Auth::user())
                         <span style="font-size: 10px;">Разом: </span><span style="font-size: 10px;" id="footer-total-sum">{{number_format(str_replace(',', '', Cart::total()), 2)}} грн.</span>
-                        <br>
                         <span style="font-size: 10px;">Знижка: </span><span style="font-size: 10px; color: green;" id="discount" disc="{{ Auth::user()->getDiscount()}}">{{ 100 -Auth::user()->getDiscount()*100 }} %</span>
                         <br>
                         <span style="background: white; padding-left: 5px;">Разом зі знижкою: </span><span id="footer-total-discount" style="background: white; padding-right: 5px;">{{ number_format(Auth::user()->getDiscount()*str_replace(',', '', Cart::total()), 2) }} грн.</span>
@@ -95,7 +94,7 @@
             </div>
             <!--Footer-->
             <div class="modal-footer">
-                <a href="javascript:;" class="btn btn-secondary waves-effect waves-light"  style="padding: 8px;" data-dismiss="modal" aria-label="Close">Продовжиити вибір</a>
+                <a href="javascript:;" class="btn btn-secondary waves-effect waves-light"  style="padding: 8px;" data-dismiss="modal" aria-label="Close">Продовжити вибір</a>
                 <a href="{{ route('order.create') }}" id="cart_btn_check_order" class="btn btn-success waves-effect waves-light" style="padding: 8px;">Оформити замовлення</a>
             </div>
         </div>

@@ -103,6 +103,7 @@ $(document).ready(function(){
             success: function(data){
                 if(data.success == true) {
                     $('#total-count-cart').text((Number(data.total.replace(',','')) * data.discount).toFixed(2));
+                    $('#total-count-cart-modal').text((Number(data.total.replace(',','')) * data.discount).toFixed(2)); 
                     $('button[data-id=' + id +']')
                         .removeClass('btn-success')
                         .addClass('btn-info')

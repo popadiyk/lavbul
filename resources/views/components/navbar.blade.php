@@ -110,7 +110,7 @@
   <button class="navbar-toggler" style="margin-left: -10px; padding-left: 0px;" type="button" data-toggle="collapse" data-target="#navbarsExampleCenteredNav" aria-controls="navbarsExampleCenteredNav" aria-expanded="false" aria-label="Toggle navigation">
     <i class="fa fa-bars navbar-toggler-icon" aria-hidden="true" style="font-size: 1.8rem;"></i>
   </button>
-  <a class="nav-link waves-effect waves-light hidden-md hidden-lg" href="javascript:;" id="mobileModalBasket" data-target="#fullHeightModalRight"><i class="fa fa-cart-arrow-down fa-2x" aria-hidden="true"></i><span id='total-count-cart' class="cart_counter total_counter_product">@if(Auth::user()){{ number_format(Auth::user()->getDiscount()*str_replace(',', '', Cart::total()), 2) }} @else{{ number_format(str_replace(',', '', Cart::total()), 2) }}@endif</span></a>
+  <a class="nav-link waves-effect waves-light hidden-md hidden-lg" href="javascript:;" id="mobileModalBasket" data-target="#fullHeightModalRight"><i class="fa fa-cart-arrow-down fa-2x" aria-hidden="true"></i><span id='total-count-cart-modal' class="cart_counter total_counter_product">@if(Auth::user()){{ number_format(Auth::user()->getDiscount()*str_replace(',', '', Cart::total()), 2) }} @else{{ number_format(str_replace(',', '', Cart::total()), 2) }}@endif</span></a>
   
   <div class="navbar-collapse justify-content-md-center collapse" id="navbarsExampleCenteredNav" aria-expanded="false">
     <ul class="navbar-nav d-flex justify-content-around" style="width: 100%; max-width: 960px;">
