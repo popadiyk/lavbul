@@ -11,7 +11,7 @@ border-radius: 50%;
 </style>
 
 <div class="container-fluid">
-	<div class="container" style="padding-bottom: 40px;">
+	<div class="container about_us_block" style="padding-bottom: 40px;">
 		<div class="row bullets-block" style="padding-top: 30px; padding-bottom: 30px;">
 			<div class="col-xs-12">
 				<div class="col-md-4 col-xs-12">

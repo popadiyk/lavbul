@@ -142,6 +142,26 @@ a.item_add {
 		padding-top: 2em;
 	}
 }
+
+@media screen and (min-width: 768px) {
+	#mobileModalBasket {
+		display: none;
+	}
+}
+
+@media(max-width:767px){
+	#testModalBasket {
+		display: none;
+	}
+	#mobileModalBasket {
+		display: block;
+		position: absolute;
+		top: 0;
+		right: 0;
+		padding: 0;
+	}
+}
+
 @media(max-width:568px){
 	.item-grid{
 		padding: 2em 0.5em 0;
@@ -192,6 +212,12 @@ a.item_add {
 	}
 	#products_list .item-grid .women-top {
 		justify-content: center;
+	}
+	.item-grid p {
+		font-size: 1.5rem;
+	}
+	.item-grid .mid-1 button {
+		padding: 1rem 2.5rem;
 	}
 }
 

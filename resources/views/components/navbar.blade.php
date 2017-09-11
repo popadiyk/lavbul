@@ -5,7 +5,7 @@
         box-shadow: none;
     }
     .navbar.open{
-        height: 90vh !important;
+        height: 70vh !important;
     }
     .navbar-toggler-icon{
         color: #fce0d7;
@@ -99,12 +99,19 @@
         margin-top: 5px !important;
     }
 
+    @media(max-width: 768px) {
+        #navbarsExampleCenteredNav ul.navbar-nav {
+            margin: 0;
+        }
+    }
+
 </style>
 <nav class="navigation navbar navbar-toggleable-md navbar-toggleable-sm navbar-toggleable-xs fixed-top">
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarsExampleCenteredNav" aria-controls="navbarsExampleCenteredNav" aria-expanded="false" aria-label="Toggle navigation">
-    <i class="fa fa-bars navbar-toggler-icon" aria-hidden="true"></i>
-    {{-- <span class="navbar-toggler-icon"></span> --}}
+  <button class="navbar-toggler" style="margin-left: -10px; padding-left: 0px;" type="button" data-toggle="collapse" data-target="#navbarsExampleCenteredNav" aria-controls="navbarsExampleCenteredNav" aria-expanded="false" aria-label="Toggle navigation">
+    <i class="fa fa-bars navbar-toggler-icon" aria-hidden="true" style="font-size: 1.8rem;"></i>
   </button>
+  <a class="nav-link waves-effect waves-light hidden-md hidden-lg" href="javascript:;" id="mobileModalBasket" data-target="#fullHeightModalRight"><i class="fa fa-cart-arrow-down fa-2x" aria-hidden="true"></i><span id='total-count-cart' class="cart_counter total_counter_product">@if(Auth::user()){{ number_format(Auth::user()->getDiscount()*str_replace(',', '', Cart::total()), 2) }} @else{{ number_format(str_replace(',', '', Cart::total()), 2) }}@endif</span></a>
+  
   <div class="navbar-collapse justify-content-md-center collapse" id="navbarsExampleCenteredNav" aria-expanded="false">
     <ul class="navbar-nav d-flex justify-content-around" style="width: 100%; max-width: 960px;">
       <li class="nav-item align-self-center hidden-xs hidden-sm"><img src="/img/min_logo.png" height="88px"></li>
@@ -124,7 +131,7 @@
       <li class="nav-item align-self-center dropdown">
         <!-- <a class="nav-link waves-effect waves-light" data-toggle="modal" data-target="#sideModalTR"><i class="fa fa-search fa-2x" aria-hidden="true"></i></a> -->
       </li>
-      <li class="nav-item align-self-center">
+      <li class="nav-item align-self-center hidden-xs">
         <a class="nav-link waves-effect waves-light" href="javascript:;" id="testModalBasket" data-target="#fullHeightModalRight"><i class="fa fa-cart-arrow-down fa-2x" aria-hidden="true"></i><span id='total-count-cart' class="cart_counter total_counter_product">@if(Auth::user()){{ number_format(Auth::user()->getDiscount()*str_replace(',', '', Cart::total()), 2) }} @else{{ number_format(str_replace(',', '', Cart::total()), 2) }}@endif</span></a>
       </li>
       <li class="nav-item align-self-center dropdown">
