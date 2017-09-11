@@ -400,6 +400,14 @@ $(document).ready(function(){
                 header.removeClass("darkHeader").addClass('clearHeader');
             }
         });
+        $(document).ready(function() {    
+            var scroll = $(window).scrollTop();
+            if (scroll >= 1) {
+                header.removeClass('clearHeader').addClass("darkHeader");
+            } else {
+                header.removeClass("darkHeader").addClass('clearHeader');
+            }
+        });
     });
     // animation effects
     wow = new WOW({
