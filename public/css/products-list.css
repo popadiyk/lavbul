@@ -123,7 +123,6 @@ a.item_add {
 	/* height: 384px; */
 }
 
-
 @media(max-width:1220px){
 	.mid-1 h6 {
 		font-size: 1.05em;
@@ -210,9 +209,6 @@ a.item_add {
 	.products_header_container {
 		max-height: 50px;
 	}
-	#products_list .item-grid .women-top {
-		justify-content: center;
-	}
 	.item-grid p {
 		font-size: 1.5rem;
 	}
@@ -285,5 +281,8 @@ a.item_add {
 }
 
 .page-link{
-		box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
-	}
+	box-shadow: 0 8px 17px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+.item-grid .women .women-top {
+	justify-content: center;
+}
