@@ -111,6 +111,7 @@
 			</div>
 			{!! Form::open(['route' =>'order.store', 'id'=>'make_order']) !!}
 			<input type="hidden" name="_token" value="{{ csrf_token() }}">
+			<input name="_check" type="hidden" value="{{ time() }}">
 				<div class="col-md-5">
 					<div class="md-form form-sm">
                         {{ $errors->has('email') ? ' has-error' : '' }}
@@ -157,7 +158,7 @@
 				<div class="col-md-12">
 					<div class="md-form form-sm">
 					    <i class="fa fa-pencil prefix"></i>
-					    <textarea type="text" id="address" name="address" class="md-textarea"></textarea>
+					    <textarea type="text" id="address" name="address" class="md-textarea">{{Auth::user()->address}}</textarea>
 					    <label for="form8">Адресса</label>
 					</div>
 				</div>

@@ -5,65 +5,51 @@
 
 <div class="container-fluid">
 	<div class="container">
-		<div class="row delivery-bullets">
-			<div class="col-md-12">
-				<div class="col-md-4">
+		<div class="row delivery-bullets" style="margin: 30px 0px 15px 0px; background: rgba(252, 224, 215, 0.5); border-radius: 20px;">
+				<div class="col-sm-4 col-xs-12">
 					<div class="new_post">
 						<figure  class="post">
-							<img src="img/new_post.png">
+							<img style="width: 100%;" src="img/new_post.png">
 						</figure>
 					</div>
 				</div>
-				<div class="col-md-8">
+				<div class="col-sm-8 col-xs-12" style="padding-top: 15px;">
 					<h3 class="shipping_head"><strong>Доставка</strong></h3>
 					<div class="new_post">
-						<p>Доставка транспортною компанією "Нова Пошта".
-							Доставка на відділенні Нової Пошти виконується за рахунок одержувача
-						</p>
-						<p>
-							Термін доставки  замовлення 1-2 дня
-						</p>
-						<p>
-							Термін зберігання Вашої посилки на відділенні - 5 днів, після чого посилка повертається відправнику
-						</p>
+						Доставка транспортною компанією "Нова Пошта" або "Укр Пошта".
+						Доставка до 1000 грн. виконується за рахунок одержувача.
+						<br>
+						<br>
+						Термін доставки  замовлення 1-2 дня.
+						<br>
+						<br>
 					</div>
 				</div>
+			<div class="col-xs-12 col-md-8">
+				Якщо Ваше замовлення склало більше 1000 грн., доставка для Вас безкоштовна та виконується за рахунок нашого магазину!
+				<br>
+				<br>
+				Калькулятори розрахунку доствки:
+				<ul>
+					<li><a href="https://novaposhta.ua/ru/delivery"> - Нова Пошта</a></li>
+					<li><a href="http://ukrposhta.ua/ru/kalkulyator-forma-rozraxunku"> - Укр Пошта</a></li>
+				</ul>
+			</div>
+			<div class="col-xs-12 col-md-4">
+				<img style="width: 100%; border-radius: 10px; margin-bottom: 15px;" src="img/ukrpost.png">
 			</div>
 		</div>
-		<div class="row delivery-bullets">
-			<div class="col-md-12">
-				<div class="col-md-4">
-					<div class="new_post">
-						<figure class="export">
-							<img src="img/export.png">
-						</figure>
-					</div>
-				</div>
-				<div class="col-md-8">
-					<h3 class="payments"><strong>Оплата</strong></h3>
-					<div class="C.O.D.">
-						<h4><strong>Накладеним платежем</strong></h4>
-						<p>Ви оплачуєте вартість виробу при отриманні, з урахуванням комісійного збору курʼєрської служби (фіксований платіж 25 грн. + 2-3% від вартості замовлення.</p>
-						<p>При отриманні Ви називаєте номер декларації (повдомляється Вам одразу після відправки) і надаєте документ, що засвідчує особу.
-						</p>
-					</div>
-				</div>
+		<div class="row delivery-bullets" style="margin: 30px 0px 15px 0px; background: rgba(252, 224, 215, 0.5); border-radius: 20px;">
+			<div class="col-md-4" style="padding-top: 15px;">
+				<img src="img/korzinka2.png">
 			</div>
-		</div>
-		<div class="row delivery-bullets">
-			<div class="col-md-12">
-				<div class="col-md-4">
-					<div class="new_post">
-						<figure class="privart_bank">
-							<img src="img/privat.png">
-						</figure>
-					</div>
-				</div>
-				<div class="col-md-8">
-					<div class="privat">
-						<h4><strong>Передоплата на карту ПриватБанк</strong></h4>
-						<p>Ви оплачуєте вартість виробу на карту ПриватБанку. Додатково оплачується 1% від сумми замовлення.</p>
-					</div>
+			<div class="col-md-8" style="padding-top: 15px;">
+				<div class="privat">
+					<h3 class="shipping_head"><strong>Оплата на карту ПриватБанку</strong></h3>
+					Ви оплачуєте вартість замовлення на карту ПриватБанку. Номер картки буде доступний у Вашому рахунку після оформлення замовлення!
+					<h3 class="shipping_head" style="padding-top: 25px;"><strong>Оплата в магазині</strong></h3>
+					Заберіть своє замовлення та розрахуйтесь за нього в нашому магазині, що знаходиться в м. Вінниця,
+					просп. Коцюбинського 70, ТЦ "ПетроЦентр", 2-ий поверх, бутік 7. Чекаємо на Вас!
 				</div>
 			</div>
 		</div>

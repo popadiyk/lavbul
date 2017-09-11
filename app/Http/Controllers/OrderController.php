@@ -34,7 +34,8 @@ class OrderController extends Controller
         } else {
             $invoices = null;
         }
-        return view('cabinet.index', compact('invoices'));
+        $success_message = null;
+        return view('cabinet.index', compact('invoices', 'success_message'));
     }
 
     /**
@@ -66,7 +67,24 @@ class OrderController extends Controller
      */
     public function store(Request $request)
     {
-        //dd(Auth::user());
+        // защита от повторной отправки формы при перезагрузке странице
+        if(!$request->session()->has('check')){
+           $request->session()->put('check',$request->_check);
+            $request->session()->save();
+            $check = true;
+        } else {
+            if($request->_check != $request->session()->get('check')){
+         $request->session()->put('check',$request->_check);
+                $request->session()->save();
+                $check = true;
+            } else {
+                $check = false;
+            }
+        }
+
+        if(!$check){
+            return back()->with('success_message', 'Дякуємо за замовлення! На Вашу почту відправлений рахунок для оплату!');
+        }
        /* if(!Auth::check()) {
           return back()->with('error_message', 'You need to be authoriseted  in the shop');
         }*/
@@ -83,11 +101,18 @@ class OrderController extends Controller
         
 
         if(Auth::check()) {
-            $orders = Order::isConfirmed()->where('user_id', Auth::id())->get();
-            return view('cabinet.index', compact('orders'));
+            $user_id = Auth::id();
+            $client = App\Client::all()->where('user_id', $user_id)->first();
+            if ($client){
+                $invoices = Invoice::orderBy('id', 'DESK')->get()->where('client_id', $client->id)->where('status', 'closed')->where('type', 'sales');
+            } else {
+                $invoices = null;
+            }
+            $success_message = 'Дякуємо за замовлення! На Вашу почту відправлений рахунок для оплату!';
+            return view('cabinet.index', compact('invoices', 'success_message'));
         }
 
-        return back()->with('success_message', 'На Вашу почту відправлений інвойс на проплату');;
+        return back()->with('success_message', 'Дякуємо за замовлення! На Вашу почту відправлений рахунок для оплату!');
 
     }
 
