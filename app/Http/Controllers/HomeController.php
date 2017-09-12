@@ -256,9 +256,6 @@ class HomeController extends Controller
     }
 
     public function sendFeedBack(Request $request){
-//        Mail::queue('mail.blank', $data, function ($message) {
-//            $message->to('apopadiyk@gmail.com', 'John Smith')->subject('Welcome!');
-//        });
 
         Mail::raw('<br>email: '.$request->email.'<br>name: '.$request->name.'<br>msg:'.$request->c_message, function($message)
         {
@@ -266,7 +263,8 @@ class HomeController extends Controller
             $message->to('apopadiyk@gmail.com')->subject('Отзывы');
         });
 
-        dd($request->all());
+        return view('contacts.index')->with('success_message','Дякуємо за відгук! Ми зробимо все, щоб стати найкращим
+         магазином у "hand-made" сфері!');
     }
 
     public function news(){
