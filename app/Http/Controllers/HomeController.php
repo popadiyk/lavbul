@@ -241,7 +241,6 @@ class HomeController extends Controller
 
     public function sendFeedBack(Request $request){
         $data = $request->all();
-        dd($data);
 
 //        Mail::queue('mail.blank', $data, function ($message) {
 //            $message->to('apopadiyk@gmail.com', 'John Smith')->subject('Welcome!');
