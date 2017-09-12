@@ -241,16 +241,16 @@ class HomeController extends Controller
 
     public function sendFeedBack(Request $request){
         $data = $request->all();
-
+        dd($data);
 
 //        Mail::queue('mail.blank', $data, function ($message) {
 //            $message->to('apopadiyk@gmail.com', 'John Smith')->subject('Welcome!');
 //        });
 
-        Mail::raw('Text to e-mail', function($message)
+        Mail::raw('<br>email: '.$data->email.'<br>name: '.$data->name.'<br>msg:'.$data->c_message, function($message)
         {
-            $message->from('admin@bulavka.org', 'Laravel');
-            $message->to('apopadiyk@gmail.com');
+            $message->from('admin@bulavka.org', 'Лавка-Булавка ! Отзыв');
+            $message->to('apopadiyk@gmail.com')->subject('Отзывы');
         });
 
         dd($request->all());
