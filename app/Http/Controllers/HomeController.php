@@ -246,7 +246,7 @@ class HomeController extends Controller
 
         Mail::raw('<br>email: '.$request->email.'<br>name: '.$request->name.'<br>msg:'.$request->c_message, function($message)
         {
-            $message->from('admin@bulavka.org', 'Лавка-Булавка ! Отзыв');
+            $message->from('admin@bulavka.org', 'Лавка-Булавка ! Отзыв ');
             $message->to('apopadiyk@gmail.com')->subject('Отзывы');
         });
 
