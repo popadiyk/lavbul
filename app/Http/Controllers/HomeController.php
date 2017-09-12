@@ -71,6 +71,7 @@ class HomeController extends Controller
     public function products(Request $request){
         $products = Product::all();
         $groups = Group::all();
+        $parentGroups = [];
         
         $products_id_in_cart = array();
         foreach(Cart::content() as $item) {
@@ -80,6 +81,7 @@ class HomeController extends Controller
         if ($request->group_id) {
             $products = collect();
             $parentGroup = Group::find($request->group_id);
+
             if($parentGroup->group_id == 0){
                 $groups = Group::where('group_id', $parentGroup->id)->get();
                 foreach ($groups as $key => $group) {
@@ -87,11 +89,25 @@ class HomeController extends Controller
                     foreach ($temp_products as $product) {
                         $products->push($product);
                     }
+                    $groups = Group::where('group_id', $group->id)->get();
+                    foreach ($groups as $key => $group) {
+                        $temp_products = Product::where('group_id', $group->id)->get();
+                        foreach ($temp_products as $product) {
+                            $products->push($product);
+                        }
+                    }
                 }
-            } else{
+            } else {
                 foreach ($groups as $key => $group) {
                     if($group->id == $request->group_id){
                         $products = Product::where('group_id', $request->group_id)->get();
+                    }
+                    $groups = Group::where('group_id', $group->id)->get();
+                    foreach ($groups as $key => $group) {
+                        $temp_products = Product::where('group_id', $group->id)->get();
+                        foreach ($temp_products as $product) {
+                            $products->push($product);
+                        }
                     }
                 }
             }
