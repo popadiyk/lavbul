@@ -1,4 +1,7 @@
 @extends('layouts.main')
+@section('pageTitle', 'Товари для рукоділля, подарунки "hand-made", торавы для рукоделия, подарки "hand-made"')
+@section('metaTitle', 'купить подарки hand-made')
+@section('metaKeyword', 'скрапбукинг фётр фоамиран куклы-тильды картины фанера декупаж полимерная глина')
 @section('content')
 @include('products.header')
 <style>

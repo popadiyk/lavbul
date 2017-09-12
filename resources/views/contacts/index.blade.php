@@ -4,8 +4,16 @@
 @php($store_name = 'Лавка-Булавка!')
 @include('contacts.header', [ 'text' => $text, 'store_name' => $store_name ])
 
+
 <div class="container-fluid contacts_container">
 	<div class="container">
+		@if ($success_message)
+			<div class="row">
+				<div class="col-xs-12 alert alert-success">
+					{{ $success_message }}
+				</div>
+			</div>
+		@endif
 		<div class="row borderTop">
 			<div class="col-lg-4 mrgTop">
 			  <div class="service_block">

@@ -1,4 +1,7 @@
 @extends('layouts.main')
+@section('pageTitle', 'Записатись на майстер-класи у Вінниці')
+@section('metaTitle', 'Записаться на мастер-классы в Виннице')
+@section('metaKeyword', 'майстер-класи по скрапбукінгу, мастер-класс декупаж, скрапбукинг, кукла-тильда')
 @section('content')
 @php($text = "Навчайся тому, що приносить задоволення!")
 @include('master_classes.header', ['text' => $text ])

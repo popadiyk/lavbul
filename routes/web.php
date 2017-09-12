@@ -67,7 +67,7 @@ Route::group(['prefix' => '/'], function () {
 	Route::get('news/{id}', 'HomeController@one_news');
 	
 	Route::get('contacts', function (){
-	    return view('contacts.index');
+	    return view('contacts.index')->with('success_message','');
 	});
 	
 	Route::get('one_news', function (){
