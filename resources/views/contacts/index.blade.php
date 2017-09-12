@@ -31,12 +31,13 @@
 		</div>
 		<div class="row" style="height: 450px;">
 			<div class="col-md-4 contacts_form">
-				<form id="contact-form" role="form" style="padding-top: 20px;">
+				<form id="contact-form" role="form" method="post" action="/send_feedback" style="padding-top: 20px;">
 					<div class="md-form form-sm">
                         {{ $errors->has('email') ? ' has-error' : '' }}
                         <i class="fa fa-envelope prefix"></i>
                         {{ Form::email('email', null, ['class' => 'form-control', 'required']) }}
-                        @if ($errors->has('email'))
+						{!! Form::token() !!}
+					@if ($errors->has('email'))
                             <span class="help-block">
                                 <strong>{{ $errors->first('email') }}</strong>
                             </span>
