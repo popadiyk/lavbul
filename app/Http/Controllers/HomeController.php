@@ -14,6 +14,10 @@ use App\MasterClass;
 use App\News;
 use App\CashHistory;
 use App\User;
+use App\Mail\SendInvoiceToUser;
+use Illuminate\Support\Facades\Mail;
+use Illuminate\Mail\Mailable;
+
 
 
 class HomeController extends Controller
@@ -233,6 +237,23 @@ class HomeController extends Controller
         $reguser->status = 'new';
         $reguser->save();
         return view('master_classes.afterReg');
+    }
+
+    public function sendFeedBack(Request $request){
+        $data = $request->all();
+
+
+//        Mail::queue('mail.blank', $data, function ($message) {
+//            $message->to('apopadiyk@gmail.com', 'John Smith')->subject('Welcome!');
+//        });
+
+        Mail::raw('Text to e-mail', function($message)
+        {
+            $message->from('admin@bulavka.org', 'Laravel');
+            $message->to('apopadiyk@gmail.com');
+        });
+
+        dd($request->all());
     }
 
     public function news(){
