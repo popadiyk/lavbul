@@ -37,6 +37,9 @@
 	.swiper-pagination{
 		bottom: -35px !important;
 	}
+	.swiper-container-recomend .swiper-wrapper .swiper-slide .mid-pop {
+		box-shadow: initial;
+	}
 </style>
 @php
 	$products_id_in_cart = array();
@@ -58,7 +61,7 @@
 	    <div class="swiper-wrapper">
 	    @foreach ($products as $product)
 	    	<div class="swiper-slide">
-				<div class="mid-pop" style="height: ">
+				<div class="mid-pop">
 					<div class="pro-img">
 						<img src="{{ $product->main_photo }}" class="img-responsive" alt="">
 						<div class="zoom-icon ">

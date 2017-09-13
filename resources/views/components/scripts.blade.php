@@ -7,6 +7,42 @@
 {{-- <script src="http://code.jquery.com/jquery-migrate-3.0.0.js" type="text/javascript" charset="utf-8" async defer></script> --}}
 
 <script>
+window.spaceBetween = 28;
+window.autoplay = 3000;
+
+// Check screen width on load page
+
+if (screen.width >= 1024) {
+    window.slides = 4;
+} else if (screen.width >= 768) {
+    window.slides = 3;
+} else if(screen.width >= 468){
+    window.slides = 2;
+} else {
+    window.slides = 1;
+}
+
+var swiper = new Swiper('.swiper-container-recomend', {
+    pagination: '.swiper-pagination',
+    slidesPerView: window.slides,
+    paginationClickable: true,
+    spaceBetween: window.spaceBetween,
+    autoplay: window.autoplay,
+    loop: true
+});
+
+// Change swiper params on resize
+var onresize = function(e) {
+    width = e.target.innerWidth;
+    if (width < 468) swiper.params.slidesPerView = 1;
+    if (width >= 468) swiper.params.slidesPerView = 2;
+    if (width >= 768) swiper.params.slidesPerView = 3;
+    if (width >= 1024) swiper.params.slidesPerView = 4;
+    
+    swiper.update()
+};
+
+window.addEventListener("resize", onresize);
 //--------------------------- for cart ---------------------------------------//
 $(document).ready(function(){
     $.ajaxSetup({
@@ -18,17 +54,10 @@ $(document).ready(function(){
         animation: "slide",
         controlNav: "thumbnails"
     });
-    var swiper = new Swiper('.swiper-container-recomend', {
-        pagination: '.swiper-pagination',
-        slidesPerView: 4,
-        paginationClickable: true,
-        spaceBetween: 30
-    });
 
     $('.quantity').on('change', function() {
         var id = $(this).attr('data-id')
-       /* var error_field = $(this).siblings('span.error_qty');*/
-       var error_tooltip = null;
+        var error_tooltip = null;
 
         $.ajax({
             type: "PATCH",
@@ -44,7 +73,6 @@ $(document).ready(function(){
                     $('[data-id="'  + id + '"]')
                         .addClass('error_qty')
                         .prop('title', error_tooltip);
-                        // .tooltip('show');
 
                     // disable button for checking order
                     $('#cart_btn_check_order').addClass('disabled');
@@ -52,18 +80,10 @@ $(document).ready(function(){
                 } else {
                     $('[data-id="'  + id + '"]')
                         .removeClass('error_qty');
-                        // .tooltip('destroy');
-
                     $('#cart_btn_check_order').removeClass('disabled');
                 }
                 //rewrite price for product
                 $('#' + id).text(data.item.price * data.item.qty + ' грн');
-                //get and set new total info for the cart
-//                $.post('js_cart/get_info_total', function(data, status) {
-//                    $('#info_basket').text(
-//                        'У кошику ' + data.total_qty + ' товарів на сумму ' + data.summ_total + 'грн'
-//                    );
-//                });
             },
             error: function(data) {
 
@@ -88,8 +108,6 @@ $(document).ready(function(){
     // });
     
     // add product to cart //
-
-    
     $('button.to-cart').on('click', function(){
         var id = $(this).attr('data-id');
         var data = {};
@@ -131,7 +149,6 @@ $(document).ready(function(){
                         updateQty(products);
                         products = null;
                     }
-                    //$(document).off();
                 }
             });
             $('#fullHeightModalRight').html(html).modal();
@@ -191,7 +208,6 @@ $(document).ready(function(){
                         updateQty(products);
                         products = null;
                     }
-                    //$(document).off();
                 }
             });
             $('#fullHeightModalRight').html(html).modal();
@@ -383,13 +399,14 @@ $(document).ready(function(){
         loop: true
     });
 
-    var swiper = new Swiper('.swiper-container-advised', {
-        pagination: '.swiper-pagination',
-        slidesPerView: 4,
-        paginationClickable: true,
-        spaceBetween: 30,
-        freeMode: true
-    });
+    // var swiper = new Swiper('.swiper-container-advised', {
+    //     pagination: '.swiper-pagination',
+    //     slidesPerView: 4,
+    //     paginationClickable: true,
+    //     spaceBetween: 30,
+    //     freeMode: true
+    // });
+
     // navigation menu
     $(function() {
         var header = $(".navigation");
@@ -459,7 +476,6 @@ $(document).ready(function(){
             } 
         }
     }
-
 });
 
 
