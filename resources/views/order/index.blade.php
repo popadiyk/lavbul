@@ -1,5 +1,4 @@
 @extends('layouts.main')
-
 	<style type="text/css">
 		@media(max-width:480px){
 			.btn-danger{
@@ -26,7 +25,17 @@
 				font-size: 10px;
 			}
 		}
-
+		@media (max-width: 767px) {
+			.order_container .maxWidth {
+		    	max-width: none !important;
+		    }
+		}
+		@media (max-width: 568px) {
+		    .order_container .btns-block {
+		       	flex-direction: column;
+		    	align-items: center;
+		    }
+		}
 	</style>
 
 @section('content')
@@ -35,7 +44,7 @@
 	</div>
 </div>
 
-<div class="container-fluid" style="padding-top: 30px; padding-bottom: 30px;">
+<div class="container-fluid order_container" style="padding-top: 30px; padding-bottom: 30px;">
 	<div class="container">
 		<div class="row">
 			<div class="col-xs-12 text-center">
@@ -106,13 +115,13 @@
 		</div>
 		<div class="row">
 			<!-- personal data -->
-			<div class="col-md-12 text-center">
+			<div class="col-12 text-center">
 				<h3 class="text-center"><strong>Доставка і оплата</strong></h3>
 			</div>
-			{!! Form::open(['route' =>'order.store', 'id'=>'make_order']) !!}
+			{!! Form::open(['route' =>'order.store', 'id'=>'make_order', 'style'=>'width:100%']) !!}
 			<input type="hidden" name="_token" value="{{ csrf_token() }}">
 			<input name="_check" type="hidden" value="{{ time() }}">
-				<div class="col-md-5">
+				<div class="maxWidth col-sm-5 col-md-5">
 					<div class="md-form form-sm">
                         {{ $errors->has('email') ? ' has-error' : '' }}
                         <i class="fa fa-envelope prefix"></i>
@@ -137,7 +146,7 @@
 
 				</div>
 				<!-- personal data -->
-				<div class="col-md-7">
+				<div class="maxWidth col-sm-7 col-md-7">
 					<div class="col-md-12 d-flex justify-content-around" style="height: 50px; margin-bottom: 10px;">
 						<div class="col-md-5 d-flex align-items-end justify-content-end">
 							{!! Form::label('delivery_id', "Спосіб доставки", ['style' => "font-size: 14px; color: #757575;", 'class'=>' align-self-end']) !!}
@@ -155,7 +164,7 @@
 						</div>
 					</div>
 				</div>
-				<div class="col-md-12">
+				<div class="col-sm-12 col-md-12">
 					<div class="md-form form-sm">
 					    <i class="fa fa-pencil prefix"></i>
 					    <textarea type="text" id="address" name="address" class="md-textarea">@if (Auth::user()){{Auth::user()->address}}@endif</textarea>
@@ -164,13 +173,13 @@
 				</div>
 				{!! Form::hidden('cart', Cart::content()) !!}
 				{!! Form::token() !!}
-				<div class="col-md-12">
-					<div class="col-md-offset-1 col-md-5">
+				<div class="btns-block d-flex col-12" style="justify-content: space-around;">
+					<div>
 						<a href="{{ url('/products') }}" class="btn btn-success waves-effect waves-light">
 							<i class="fa fa-angle-left" aria-hidden="true" style="padding-right: 5px;"></i><span>Продовжити покупки</span>
 						</a> &nbsp;
 					</div>
-					<div class="col-md-5">
+					<div>
 						<button type="submit" form="make_order" class="btn btn-success waves-effect waves-light" style="font-weight: normal;">
 							<span>Сформувати замовлення<i class="fa fa-angle-right" aria-hidden="true" style="padding-left: 5px;"></i></span>
 						</button>

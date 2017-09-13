@@ -110,3 +110,41 @@
 	    <div class="swiper-pagination"></div>
 	</div>
 </div>
+<script>
+	window.spaceBetween = 28;
+window.autoplay = 3000;
+
+// Check screen width on load page
+
+if (screen.width >= 1024) {
+    window.slides = 4;
+} else if (screen.width >= 768) {
+    window.slides = 3;
+} else if(screen.width >= 468){
+    window.slides = 2;
+} else {
+    window.slides = 1;
+}
+
+var swiper = new Swiper('.swiper-container-recomend', {
+    pagination: '.swiper-pagination',
+    slidesPerView: window.slides,
+    paginationClickable: true,
+    spaceBetween: window.spaceBetween,
+    autoplay: window.autoplay,
+    loop: true
+});
+
+// Change swiper params on resize
+var onresize = function(e) {
+    width = e.target.innerWidth;
+    if (width < 468) swiper.params.slidesPerView = 1;
+    if (width >= 468) swiper.params.slidesPerView = 2;
+    if (width >= 768) swiper.params.slidesPerView = 3;
+    if (width >= 1024) swiper.params.slidesPerView = 4;
+    
+    swiper.update();
+};
+
+window.addEventListener("resize", onresize);
+</script>

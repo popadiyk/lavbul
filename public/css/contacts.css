@@ -109,3 +109,19 @@ textarea#c_message{
     padding: 15px;
     border-radius: 5px;
 }
+@media screen and (max-width: 1023px) { 
+    .borderLeft {
+        border-left: none;
+    }
+}
+@media screen and (max-width: 767px) { 
+    .contacts_container {
+      height: 1700px;
+      min-height: 1700px;
+    }
+}
+@media (max-width: 568px) {
+    .contacts_container .mrgTop {
+        margin-top: 30px;
+    }
+}
