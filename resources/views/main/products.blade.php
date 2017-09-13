@@ -4,6 +4,9 @@
         justify-content: center;
     }
 }
+.item-grid button[disabled].btn, .item-grid button[disabled].btn:hover, .item-grid button[disabled].btn:focus {
+    box-shadow: initial;
+}
 </style>
 <div class="row text-center">
     <div class="col-xs-12" style="padding-top: 20px;">

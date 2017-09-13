@@ -126,6 +126,9 @@
         transform:scale(0.9) rotateX(-60deg);
     }
 }
+.item-grid button[disabled].btn, .item-grid button[disabled].btn:hover, .item-grid button[disabled].btn:focus {
+    box-shadow: initial;
+}
 </style>
 <div class="container-fluid">
 	<div class="container">

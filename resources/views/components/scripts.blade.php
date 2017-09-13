@@ -430,7 +430,7 @@ $(document).ready(function(){
     // animation effects
     wow = new WOW({
     animateClass: 'animated',
-    offset: 100
+    offset: 10
     });
     wow.init();
 

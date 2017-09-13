@@ -1011,7 +1011,7 @@ text-align: left;
     }
 }
 @media screen and (max-width: 480px) { 
-  .contacts ul > li {
-    margin-left: 0;
-  }
+    .contacts ul > li {
+        margin-left: 0;
+    }
 }

@@ -40,6 +40,9 @@
 	.swiper-container-recomend .swiper-wrapper .swiper-slide .mid-pop {
 		box-shadow: initial;
 	}
+	.item-grid button[disabled].btn, .item-grid button[disabled].btn:hover, .item-grid button[disabled].btn:focus {
+	    box-shadow: initial;
+	}
 </style>
 @php
 	$products_id_in_cart = array();

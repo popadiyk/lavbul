@@ -101,7 +101,8 @@ $('button.to-cart').on('click', function(){
                 $('#total-count-cart-modal').text((Number(data.total.replace(',','')) * data.discount).toFixed(2));
                 $('button[data-id=' + id +']')
                     .removeClass('btn-success')
-                    .addClass('btn-info');
+                    .addClass('btn-info')
+                    .attr("disabled", "disabled");
             }
         }
     });
