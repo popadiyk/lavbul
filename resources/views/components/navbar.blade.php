@@ -76,7 +76,7 @@
         text-shadow: none;
         font-weight: bolder !important;
         cursor: pointer !important;
-        height: 100% !important;
+        /* height: 100% !important; */
         margin-top: 0px !important;
     }
     .modal-c-tabs .nav-tabs .btn-outline-info {
@@ -102,6 +102,17 @@
     @media(max-width: 768px) {
         #navbarsExampleCenteredNav ul.navbar-nav {
             margin: 0;
+        }
+        .modal-c-tabs .tab-content .modal-footer {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .modal-c-tabs .tab-content .modal-footer button {
+            margin: 0 auto;
+        }
+        .modal-c-tabs .nav-tabs {
+            flex-direction: column;
         }
     }
 

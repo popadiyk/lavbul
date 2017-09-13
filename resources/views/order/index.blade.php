@@ -62,7 +62,7 @@
 						{{ session()->get('error_message') }}
 					</div>
 				@endif
-				<table class="table table-striped">
+				<table class="table table-striped table-condensed table-responsive">
 					  <thead style="background-color:#f1e4d3;">
 					    <tr>
 					      <td style="width: 20px; text-align: center;"></td>
