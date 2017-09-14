@@ -44,7 +44,7 @@
                             </div>
                             <div class="form-group col-md-6 col-xs-12">
                                 <label for="phone">Телефон:</label>
-                                <input type="text" name="phone" class="form-control" value="{{ $dataTypeContent->phone }}" id="phone">
+                                <input type="text" maxlength="13"  name="phone" class="form-control" value="{{ $dataTypeContent->phone }}" id="phone">
                             </div>
                             <div class="form-group col-md-6 col-xs-12">
                                 <label for="name">E-mail:</label>
@@ -78,7 +78,7 @@
                                     </div>
                                     <div class="form-group col-md-6 col-xs-12" style="margin: 0px;">
                                         <label for="ederpou" style="padding-top: 5px;">ЄДРПОУ:</label>
-                                        <input type="text" name="ederpou" class="form-control" value="{{ $dataTypeContent->ederpou }}" id="ederpou">
+                                        <input type="text" maxlength="10" name="ederpou" class="form-control" value="{{ $dataTypeContent->ederpou }}" id="ederpou">
                                     </div>
                                     <div class="form-group col-md-6 col-xs-12" style="margin: 0px;">
                                         <label for="mfo" style="padding-top: 5px;">МФО:</label>
