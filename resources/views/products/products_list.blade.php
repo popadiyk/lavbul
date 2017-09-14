@@ -29,13 +29,13 @@
 				<img src="{{ $product->main_photo }}" class="img-responsive" alt="">
 				<div class="zoom-icon ">
 					<a class="picture" href="{{ $product->main_photo }}" rel="title" class="b-link-stripe b-animate-go  thickbox" title="{{ $product->title }}" data-toggle="modal" data-target="#productImageModal{{$product->id}}"><i class="glyphicon glyphicon-search icon "></i></a>
-					<a href="{{ url('/product/'.$product->id ) }}"><i class="glyphicon glyphicon-menu-right icon"></i></a>
+					<a href="{{ url('/product/'.$product->id ) }}" target="_blank"><i class="glyphicon glyphicon-menu-right icon"></i></a>
 				</div>
 			</div>
 			<div class="mid-1">
 				<div class="women">
 					<div class="women-top d-flex mx-auto my-auto">
-						<p class="align-self-center"><a href="{{ url('/product/'.$product->id ) }}">{{$product->title}}</a></p>
+						<p class="align-self-center"><a href="{{ url('/product/'.$product->id ) }}" target="_blank">{{$product->title}}</a></p>
 					</div>
 					<div class="clearfix"></div>
 				</div>

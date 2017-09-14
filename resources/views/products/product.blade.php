@@ -43,8 +43,6 @@
 			</div>
 			<p class="pp">{{ $product->description}}</p>
 			<p class="pp">Артикул: {{ $product->marking}}</p>
-			<p class="pp">Розмір: 25 х 25</p>
-			<p class="pp">Матеріал: якісь тряпочки</p>
 			<p class="pp" {{($product->quantity > 0)?'':'style=color:red'}}>Наявність товару: {{($product->quantity > 0)?'є на складі':'відсутній на складі'}}.</p>
 			{{ Form::hidden('id', $product->id ) }}
 			{{ Form::hidden('name', $product->title ) }}
