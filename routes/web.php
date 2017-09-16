@@ -40,7 +40,6 @@ Route::post('/mc/register', 'HomeController@mcreg');
 // AJAX for Cash_balance_widget
 Route::post('/admin/cash_balance', 'HomeController@getCashBalance');
 Route::post('/send_feedback', 'HomeController@sendFeedBack');
-Route::post('/dublicate_product','HomeController@dublicate');
 
 Route::delete('emptyCart', 'CartController@emptyCart');
 

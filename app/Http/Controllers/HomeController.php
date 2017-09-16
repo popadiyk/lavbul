@@ -71,8 +71,7 @@ class HomeController extends Controller
     public function products(Request $request){
         $products = Product::all();
         $groups = Group::all();
-        $parentGroups = [];
-        
+
         $products_id_in_cart = array();
         foreach(Cart::content() as $item) {
             array_push($products_id_in_cart, $item->id);
@@ -83,6 +82,7 @@ class HomeController extends Controller
             $parentGroup = Group::find($request->group_id);
 
             if($parentGroup->group_id == 0){
+                // первое вхождение на выдачу или родительские группы
                 $groups = Group::where('group_id', $parentGroup->id)->get();
                 foreach ($groups as $key => $group) {
                     $temp_products = Product::where('group_id', $group->id)->get();
@@ -98,11 +98,12 @@ class HomeController extends Controller
                     }
                 }
             } else {
+                // дочерние группы
                 foreach ($groups as $key => $group) {
                     if($group->id == $request->group_id){
                         $products = Product::where('group_id', $request->group_id)->get();
                     }
-                    $groups = Group::where('group_id', $group->id)->get();
+                    $groups = Group::where('group_id', $request->group_id)->get();
                     foreach ($groups as $key => $group) {
                         $temp_products = Product::where('group_id', $group->id)->get();
                         foreach ($temp_products as $product) {
@@ -242,30 +243,6 @@ class HomeController extends Controller
     public function masterclasses(){
         $masterclasses = MasterClass::all();
         return view('master_classes.index', ['masterclasses' => $masterclasses]);
-    }
-
-    public function dublicate(Request $request)
-    {
-        $groups = Group::all();
-        $manufactures = Manufacture::all();
-        $slug = $this->getSlug($request);
-
-        $dataType = Voyager::model('DataType')->where('slug', '=', $slug)->first();
-
-        // Check permission
-        Voyager::canOrFail('edit_' . $dataType->name);
-
-        $relationships = $this->getRelationships($dataType);
-
-        $dataTypeContent = Product::last();
-
-        unset($dataTypeContent->id);
-        dd($dataTypeContent);
-        // Check if BREAD is Translatable
-        $isModelTranslatable = is_bread_translatable($dataTypeContent);
-
-        $view = 'admin.products.edit-add';
-        return view($view, compact('dataType', 'dataTypeContent', 'isModelTranslatable', 'groups', 'manufactures'));
     }
 
     public function mcreg(Request $request){
