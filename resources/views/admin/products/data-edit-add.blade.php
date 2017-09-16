@@ -36,7 +36,7 @@
                 @endif
                 <br>
                 @if (Voyager::can('read_'.$dataType->name))
-                    <a title="Перегляд" style="margin-left: 5px; margin-right: 2px;" href="{{ route('voyager.'.$dataType->slug.'.show', $data->id) }}" class="btn btn-warning">
+                    <a title="Перегляд" style="margin-left: 5px; margin-right: 0px;" href="{{ route('voyager.'.$dataType->slug.'.show', $data->id) }}" class="btn btn-warning">
                         <i class="voyager-eye"></i>
                     </a>
                 @endif
