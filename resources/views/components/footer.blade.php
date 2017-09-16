@@ -35,7 +35,7 @@
                     <ul style="padding-left: 0px;">
                         <li><h3>Про нас</h3></li>
                         <hr>
-                        <li class="animated fadeInUp wow animated" style="visibility: visible; animation-name: fadeInUp;"><a href="{{ url('main') }}">Головна</a></li>
+                        <li class="animated fadeInUp wow animated" style="visibility: visible; animation-name: fadeInUp;"><a href="/">Головна</a></li>
                         <li class="animated fadeInUp wow animated" style="visibility: visible; animation-name: fadeInUp;"><a href="{{ url('products') }}">Продукція</a></li>
                         <li class="animated fadeInUp wow animated" style="visibility: visible; animation-name: fadeInUp;"><a href="{{ url('master_classes') }}">Майстер-класи</a></li>
                     </ul>
@@ -72,7 +72,7 @@
                 <div class="about_us_footer">
                     <ul style="padding-left: 0px;">
                         <hr>
-                        <li class="animated fadeInUp wow animated" style="visibility: visible; animation-name: fadeInUp;"><a href="{{ url('main') }}">Головна</a></li>
+                        <li class="animated fadeInUp wow animated" style="visibility: visible; animation-name: fadeInUp;"><a href="/">Головна</a></li>
                         <li class="animated fadeInUp wow animated" style="visibility: visible; animation-name: fadeInUp;"><a href="{{ url('products') }}">Продукція</a></li>
                         <li class="animated fadeInUp wow animated" style="visibility: visible; animation-name: fadeInUp;"><a href="{{ url('master_classes') }}">Майстер-класи</a></li>
                     </ul>
