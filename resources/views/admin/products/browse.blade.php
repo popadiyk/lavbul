@@ -96,6 +96,9 @@
             <a href="{{ route('voyager.'.$dataType->slug.'.create') }}" class="btn btn-success">
                 <i class="voyager-plus"></i> Додати товар
             </a>
+            <a href="{{ route('voyager.'.$dataType->slug.'.create', 'flag') }}" class="btn btn-success">
+                <i class="voyager-forward"></i> Дублювати останній товар
+            </a>
         @endif
     </h1>
 @stop

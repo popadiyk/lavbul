@@ -347,9 +347,16 @@ class ProductsController extends Controller
         // Check permission
         Voyager::canOrFail('add_'.$dataType->name);
 
-        $dataTypeContent = (strlen($dataType->model_name) != 0)
-            ? new $dataType->model_name()
-            : false;
+        if (empty($request->all())){
+            $dataTypeContent = (strlen($dataType->model_name) != 0)
+                ? new $dataType->model_name()
+                : false;
+        } else {
+            $dataTypeContent = Product::all()->last();
+            $dataTypeContent->marking++;
+            unset($dataTypeContent->id);
+            //dd($dataTypeContent);
+        }
 
         // Check if BREAD is Translatable
         $isModelTranslatable = is_bread_translatable($dataTypeContent);

@@ -244,6 +244,30 @@ class HomeController extends Controller
         return view('master_classes.index', ['masterclasses' => $masterclasses]);
     }
 
+    public function dublicate(Request $request)
+    {
+        $groups = Group::all();
+        $manufactures = Manufacture::all();
+        $slug = $this->getSlug($request);
+
+        $dataType = Voyager::model('DataType')->where('slug', '=', $slug)->first();
+
+        // Check permission
+        Voyager::canOrFail('edit_' . $dataType->name);
+
+        $relationships = $this->getRelationships($dataType);
+
+        $dataTypeContent = Product::last();
+
+        unset($dataTypeContent->id);
+        dd($dataTypeContent);
+        // Check if BREAD is Translatable
+        $isModelTranslatable = is_bread_translatable($dataTypeContent);
+
+        $view = 'admin.products.edit-add';
+        return view($view, compact('dataType', 'dataTypeContent', 'isModelTranslatable', 'groups', 'manufactures'));
+    }
+
     public function mcreg(Request $request){
         // dd($request);
         $reguser = new MasterClassUser;
