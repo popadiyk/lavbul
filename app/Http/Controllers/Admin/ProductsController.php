@@ -179,6 +179,7 @@ class ProductsController extends Controller
         }
         // save in data base
         $newProduct = $request->all();
+        $newProduct['purchase_price'] = str_replace(',','.',$newProduct['purchase_price']);
         $newProduct = new Product($newProduct);
 
         if (array_key_exists('main_photo', $request->all()) == true){
