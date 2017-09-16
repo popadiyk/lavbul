@@ -89,13 +89,13 @@
 
                                 <div class="form-group col-md-4 col-xs-12">
                                     <label for="purchase_price">Ціна закупки:</label>
-                                    <input type="text" name="purchase_price" class="form-control" value="@if(isset($dataTypeContent->purchase_price)){{ $dataTypeContent->purchase_price }}@endif" id="purchase_price" required>
+                                    <input type="text" name="purchase_price" class="form-control" value="@if(isset($dataTypeContent->id)){{ $dataTypeContent->purchase_price }}@endif" id="purchase_price" required>
                                 </div>
 
 
                                 <div class="form-group col-md-4 col-xs-12">
                                     <label for="price">Ціна продажу:</label>
-                                    <input type="text" name="price" class="form-control" value="@if(isset($dataTypeContent->price)){{ $dataTypeContent->price }}@endif" id="price" required>
+                                    <input type="text" name="price" class="form-control" value="@if(isset($dataTypeContent->id)){{ $dataTypeContent->price }}@endif" id="price" required>
                                 </div>
 
                                 <div class="form-group col-md-4 col-xs-12">
@@ -105,12 +105,12 @@
 
                                 <div class="form-group col-md-12 col-xs-12">
                                     <label for="quantity">SEO (title) мета-назва сторінки:</label>
-                                    <input type="text" name="meta_title" class="form-control" value="@if(isset($dataTypeContent->meta_title)){{ $dataTypeContent->meta_title }}@endif" id="meta_title">
+                                    <input type="text" name="meta_title" class="form-control" value="{{ $dataTypeContent->meta_title }}" id="meta_title">
                                 </div>
 
                                 <div class="form-group col-md-12 col-xs-12">
                                     <label for="quantity">SEO (keyword) мета-слова:</label>
-                                    <input type="text" name="meta_keyword" class="form-control" value="@if(isset($dataTypeContent->meta_keyword)){{ $dataTypeContent->meta_keyword }}@endif" id="meta_keyword">
+                                    <input type="text" name="meta_keyword" class="form-control" value="{{ $dataTypeContent->meta_keyword }}" id="meta_keyword">
                                 </div>
 
                                 <div class="form-group col-xs-12">
