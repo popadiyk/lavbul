@@ -77,7 +77,7 @@ class ProductsController extends Controller
                 //dd($products);
             }
         } else {
-            $products = Product::paginate(10);
+            $products = Product::orderby('created_at', 'desc')->paginate(10);
             //dd($products);
             //dd($products->currentPage());
             //$products->withPath();
@@ -355,7 +355,6 @@ class ProductsController extends Controller
             $dataTypeContent = Product::all()->last();
             $dataTypeContent->marking++;
             unset($dataTypeContent->id);
-            //dd($dataTypeContent);
         }
 
         // Check if BREAD is Translatable
