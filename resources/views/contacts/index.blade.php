@@ -19,21 +19,21 @@
 			  <div class="service_block">
 			    <div class="service_icon delay-03s animated wow  zoomIn animated" style="visibility: visible; animation-name: zoomIn;"> <span><i class="fa fa-map-marker" aria-hidden="true"></i></span> </div>
 			    <h3 class="animated fadeInUp wow animated" style="visibility: visible; animation-name: fadeInUp;">Адреса</h3>
-			    <p class="animated fadeInDown wow animated" style="visibility: visible; animation-name: fadeInDown;">м.Вінниця, <br>вул.Коцюбинського 70</p>
+			    <p class="animated fadeInDown wow animated" style="visibility: visible; animation-name: fadeInDown;">м.Вінниця, <br>пз.Коцюбинського, 70</p>
 			  </div>
 			</div>
 			<div class="col-lg-4 borderLeft mrgTop">
 			  <div class="service_block">
 			    <div class="service_icon icon2  delay-03s animated wow zoomIn animated" style="visibility: visible; animation-name: zoomIn;"> <span><i class="fa fa-envelope" aria-hidden="true"></i></span> </div>
 			    <h3 class="animated fadeInUp wow animated" style="visibility: visible; animation-name: fadeInUp;">Контактні дані</h3>
-			    <p class="animated fadeInDown wow animated" style="visibility: visible; animation-name: fadeInDown;">E-mail: gmail@gmail.com <br> +38 (063) 000 00 00</p>
+			    <p class="animated fadeInDown wow animated" style="visibility: visible; animation-name: fadeInDown;">E-mail: admin@bulavka.org <br> +38 (093) 295 14 48</p>
 			  </div>
 			</div>
 			<div class="col-lg-4 borderLeft mrgTop">
 			  <div class="service_block">
 			    <div class="service_icon icon3  delay-03s animated wow zoomIn animated" style="visibility: visible; animation-name: zoomIn;"> <span><i class="fa fa-home" aria-hidden="true"></i></span> </div>
 			    <h3 class="animated fadeInUp wow animated" style="visibility: visible; animation-name: fadeInUp;">Час роботи</h3>
-			    <p class="animated fadeInDown wow animated" style="visibility: visible; animation-name: fadeInDown;">ПН-СБ 9:00 - 18:00 <br> НД вихідний</p>
+			    <p class="animated fadeInDown wow animated" style="visibility: visible; animation-name: fadeInDown;">ПН-ПТ 10:00 - 19:00 <br> СБ-НД 11:00 - 18:00</p>
 			  </div>
 			</div>
 		</div>
