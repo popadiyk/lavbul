@@ -36,7 +36,7 @@
 					<p class="label label-success">Дата: {{\Carbon\Carbon::parse($element->date_time)->format('d.m.Y, час: H:i') }}</p>
 					<h3 style="margin-top: 0px;">{{ $element->title }}</h3>
 					<h5><small>техніка:</small> {{ $element->technology }} / @if ($element->status == 'active') <span style="color:green; margin: 0px;">ТРИВАЄ НАБІР</span> @elseif ($element->status == 'full') <span style="color:blue; margin: 0px;">ГРУПА СФОРМОВАНА</span> @else <span style="color:red; margin: 0px;">ЗАКРИТИЙ</span> @endif <span>({{ $element->paidUser() }} / {{$element->max_seats}})</span></h5>
-					<p style="margin-bottom: 15px; text-align:justify;">{{ $element->description }}</p>
+					<p style="margin-bottom: 15px; text-align:justify;">{!! $element->description !!}</p>
 					Мінімальний вік: {{ $element->max_age }} років
 					<br>
 					Тривалість: {{ $element->duration }} год.
