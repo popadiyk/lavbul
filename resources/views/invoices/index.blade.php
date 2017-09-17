@@ -35,7 +35,7 @@
         <span class="bold">Адреса:</span>
         <span> м. Вінниця, проспект Коцюбинського, 70, ТЦ "ПетроЦентр", 2-ий поверх, бутік 7</span>
         <span class="bold">телефон:</span>
-        <span>(063) 153 80 28</span>
+        <span>(093) 295 14 48</span>
     </p>
     <table style="border: black solid 1px;">
         <caption>

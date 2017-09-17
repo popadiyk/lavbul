@@ -51,7 +51,7 @@
               <a class="nav-link active" id="anotherLink" data-toggle="tab" href="#mainInfo" role="tab" class="btn btn-default waves-effect waves-light ">Особиста інформація</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" id="anotherLink" data-toggle="tab" href="#orderInfo" role="tab">Інформація для замовлення</a>
+              <a class="nav-link" id="anotherLink" data-toggle="tab" href="#orderInfo" role="tab">Доставка</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" id="anotherLink" data-toggle="tab" href="#discountInfo" role="tab">Інформація про знижку</a>
@@ -90,7 +90,20 @@
                     </table>
                 </div>
                 <div class="tab-pane" id="orderInfo" role="tabpanel">
-                    Замовлення
+                    Доставка транспортною компанією "Нова Пошта" або "Укр Пошта". Доставка до 1000 грн. виконується за рахунок одержувача.
+                    <br>
+                    <br>
+                    Термін доставки замовлення 1-2 дня.
+                    <br>
+                    <br>
+                    Якщо Ваше замовлення склало більше 1000 грн., доставка для Вас безкоштовна та виконується за рахунок нашого магазину!
+                    <br>
+                    <br>
+                    Калькулятори розрахунку доствки:
+                    <ul>
+                        <li><a href="https://novaposhta.ua/ru/delivery" target="_blank"> - Нова Пошта</a></li>
+                        <li><a href="http://ukrposhta.ua/ru/kalkulyator-forma-rozraxunku" target="_blank"> - Укр Пошта</a></li>
+                    </ul>
                 </div>
                 <div class="tab-pane" id="discountInfo" role="tabpanel">
                     <h4 class="text-center" style="margin-left: 12px;">Інформація про вашу знижку</h4>
