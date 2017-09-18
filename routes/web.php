@@ -47,6 +47,7 @@ Route::group(['prefix' => 'admin'], function () {
 	Route::get('/invoices/create', array('as'=>'pagination', 'uses'=>'InvoiceController@create'));
 	Route::get('products', array('as'=>'pagination', 'uses'=>'ProductsController@index'));
 	Route::post('gotomain', 'HomeController@gotomain');
+	Route::post('products/inc_marking', 'HomeController@incrementMarking');
 	Route::post('masterclasses/change_mc_users_status', 'HomeController@change_mc_users_status');
     Voyager::routes();
 });

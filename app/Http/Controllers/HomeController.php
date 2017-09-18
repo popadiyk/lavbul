@@ -68,6 +68,12 @@ class HomeController extends Controller
         return view('layouts.temp_main');
     }
 
+    public function incrementMarking(Request $request){
+        $groupId = $request->all()['groupId'];
+        $product = Product::all()->where('group_id', $groupId)->last();
+        return $product->marking+1;
+    }
+
     public function products(Request $request){
         $products = Product::all();
         $groups = Group::all();
