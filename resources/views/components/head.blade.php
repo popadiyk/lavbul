@@ -46,7 +46,7 @@
       }
   </style>
   @php($store_name = "Лавка-Булавка!")
-
+  @include('analyticstracking')
 </head>
 <body >
     
