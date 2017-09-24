@@ -108,12 +108,12 @@ class HomeController extends Controller
                 foreach ($groups as $key => $group) {
                     if($group->id == $request->group_id){
                         $products = Product::where('group_id', $request->group_id)->get();
-                    }
-                    $groups = Group::where('group_id', $request->group_id)->get();
-                    foreach ($groups as $key => $group) {
-                        $temp_products = Product::where('group_id', $group->id)->get();
-                        foreach ($temp_products as $product) {
-                            $products->push($product);
+                        $groups = Group::where('group_id', $request->group_id)->get();
+                        foreach ($groups as $key => $group) {
+                            $temp_products = Product::where('group_id', $group->id)->get();
+                            foreach ($temp_products as $product) {
+                                $products->push($product);
+                            }
                         }
                     }
                 }
