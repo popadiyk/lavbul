@@ -334,6 +334,13 @@ $(document).ready(function(){
 
 
             var thisGroupId = $(thisQuestion).attr('groupid');
+            console.log(thisGroupId);
+            if (thisGroupId == 1 || thisGroupId == 2){
+                $('.accordionItem').addClass('is-collapsed');
+                $('.accordionItem').removeClass('is-expanded');
+                $('.accordionItem').removeClass('animateIn');
+                $('.accordionItem').attr('aria-hidden', 'true');
+            }
 
             $.ajax({
                 type: "POST",
