@@ -323,11 +323,13 @@ $(document).ready(function(){
                 setAccordionAria(thisQuestion, thisAnswer, 'false');
             }
 
-            // закрыть все, оставить только активные
-            $('.inner-item .accordionItem').addClass('is-collapsed');
-            $('.inner-item .accordionItem').removeClass('is-expanded');
-            $('.inner-item .accordionItem').removeClass('animateIn');
-            $('.inner-item .accordionItem').attr('aria-hidden', 'true');
+//            // закрыть все, оставить только активные
+//            $('.inner-item .accordionItem').addClass('is-collapsed');
+//            $('.inner-item .accordionItem').removeClass('is-expanded');
+//            $('.inner-item .accordionItem').removeClass('animateIn');
+//            $('.inner-item .accordionItem').attr('aria-hidden', 'true');
+//
+//
             thisQuestion.classList.toggle('is-collapsed');
             thisQuestion.classList.toggle('is-expanded');
                 thisAnswer.classList.toggle('is-collapsed');
