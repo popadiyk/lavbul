@@ -273,6 +273,13 @@ function updateQty(products){
     });
 }
 
+$.ajaxSetup({
+    headers: {
+        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+    }
+});
+
+
 $(document).ready(function(){
 
     // Get the <span> element that closes the modal
@@ -323,19 +330,49 @@ $(document).ready(function(){
                 setAccordionAria(thisQuestion, thisAnswer, 'false');
             }
 
-//            // закрыть все, оставить только активные
-//            $('.inner-item .accordionItem').addClass('is-collapsed');
-//            $('.inner-item .accordionItem').removeClass('is-expanded');
-//            $('.inner-item .accordionItem').removeClass('animateIn');
-//            $('.inner-item .accordionItem').attr('aria-hidden', 'true');
-//
-//
-            thisQuestion.classList.toggle('is-collapsed');
-            thisQuestion.classList.toggle('is-expanded');
-                thisAnswer.classList.toggle('is-collapsed');
-                thisAnswer.classList.toggle('is-expanded');
-            
-            thisAnswer.classList.toggle('animateIn');
+            // закрыть все, оставить только активные
+
+
+            var thisGroupId = $(thisQuestion).attr('groupid');
+
+            $.ajax({
+                type: "POST",
+                url: '{{ url("/is_child") }}',
+                data: {
+                    'id': thisGroupId
+                },
+                success: function(data) {
+//                    console.log('data =>>');
+//                    console.log(data);
+                    if (data != 1){
+                        $('.inner-item .accordionItem').addClass('is-collapsed');
+                        $('.inner-item .accordionItem').removeClass('is-expanded');
+                        $('.inner-item .accordionItem').removeClass('animateIn');
+                        $('.inner-item .accordionItem').attr('aria-hidden', 'true');
+
+                        thisQuestion.classList.toggle('is-collapsed');
+                        thisQuestion.classList.toggle('is-expanded');
+                        thisAnswer.classList.toggle('is-collapsed');
+                        thisAnswer.classList.toggle('is-expanded');
+
+                        thisAnswer.classList.toggle('animateIn');
+
+                    } else {
+                        thisQuestion.classList.toggle('is-collapsed');
+                        thisQuestion.classList.toggle('is-expanded');
+                        thisAnswer.classList.toggle('is-collapsed');
+                        thisAnswer.classList.toggle('is-expanded');
+
+                        thisAnswer.classList.toggle('animateIn');
+
+                    }
+                }
+            });
+
+
+
+
+
             };
             for (var i=0,len=accordionToggles.length; i<len; i++) {
                 if(touchSupported) {

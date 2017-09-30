@@ -133,6 +133,16 @@ class HomeController extends Controller
         return view('products.index', [ 'products' => $products, 'products_id_in_cart' => $products_id_in_cart, 'products_id' => $products_id, 'groups' => $groups ]);
     }
 
+    public function isChild(Request $request){
+        $groupId = $request->id;
+        if (count(Group::all()->where('group_id', $groupId)) != 0){
+            return 0;
+        } else {
+            return 1;
+        }
+
+    }
+
     public function product($id){
         $product = Product::find($id);
         $products_id_in_cart = array();
