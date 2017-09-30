@@ -135,7 +135,8 @@ class HomeController extends Controller
 
     public function isChild(Request $request){
         $groupId = $request->id;
-        if (count(Group::all()->where('group_id', $groupId)) != 0){
+        $myGroup = Group::all()->where('id', $groupId)->first();
+        if ($myGroup->group_id == 0 || $myGroup->group_id == 1 || $myGroup->group_id == 2){
             return 0;
         } else {
             return 1;
