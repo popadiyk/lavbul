@@ -382,12 +382,14 @@ $(document).ready(function(){
 
             };
             for (var i=0,len=accordionToggles.length; i<len; i++) {
-                if(touchSupported) {
-              accordionToggles[i].addEventListener('touchstart', skipClickDelay, false);
-            }
-            if(pointerSupported){
-              accordionToggles[i].addEventListener('pointerdown', skipClickDelay, false);
-            }
+//            if(touchSupported) {
+//                console.log('touch');
+//              accordionToggles[i].addEventListener('touchstart', skipClickDelay, false);
+//            }
+//            if(pointerSupported){
+//                console.log('pointer');
+//              accordionToggles[i].addEventListener('pointerdown', skipClickDelay, false);
+//            }
             accordionToggles[i].addEventListener('click', switchAccordion, false);
         }
     })();
