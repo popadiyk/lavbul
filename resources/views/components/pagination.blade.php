@@ -86,9 +86,19 @@ $(document).on('click', '.pagination a', function (event) {
 });
 
 function goToByScroll(id){
+
+	var top;
+	// высота на которой находиться кнопка сортировки
+	// анимация
+	if (window.innerWidth < 400){
+		top = $('.sort-block').offset().top;
+	} else {
+		top = 0;
+	}
+
 	setTimeout(function () {
 		var body = $("html, body");
-		body.stop().animate({scrollTop:0}, 1000, 'swing', function() {
+		body.stop().animate({scrollTop: top}, 1000, 'swing', function() {
 		});
 	}, 500);
 

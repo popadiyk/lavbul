@@ -135,10 +135,19 @@ class HomeController extends Controller
 
     public function isChild(Request $request){
         $groupId = $request->id;
+        $isLast = count(Group::all()->where('group_id', $groupId));
+
+
         $myGroup = Group::all()->where('id', $groupId)->first();
         if ($myGroup->group_id == 0 || $myGroup->group_id == 1 || $myGroup->group_id == 2){
+            if ($isLast == 0){
+                return 2;
+            }
             return 0;
         } else {
+            if ($isLast == 0){
+                return 3;
+            }
             return 1;
         }
 
