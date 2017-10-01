@@ -321,6 +321,9 @@ $(document).ready(function(){
         //function
         switchAccordion = function(event) {
             console.log("triggered");
+
+
+
             event.preventDefault();
             var thisAnswer = event.target.parentNode.nextElementSibling;
             var thisQuestion = event.target;
@@ -351,7 +354,7 @@ $(document).ready(function(){
                 success: function(data) {
 //                    console.log('data =>>');
 //                    console.log(data);
-                    if (data != 1){
+                    if (data == 0){
                         $('.inner-item .accordionItem').addClass('is-collapsed');
                         $('.inner-item .accordionItem').removeClass('is-expanded');
                         $('.inner-item .accordionItem').removeClass('animateIn');
@@ -363,33 +366,60 @@ $(document).ready(function(){
                         thisAnswer.classList.toggle('is-expanded');
 
                         thisAnswer.classList.toggle('animateIn');
-
-                    } else {
+                    }
+                    if (data == 1){
                         thisQuestion.classList.toggle('is-collapsed');
                         thisQuestion.classList.toggle('is-expanded');
                         thisAnswer.classList.toggle('is-collapsed');
                         thisAnswer.classList.toggle('is-expanded');
 
                         thisAnswer.classList.toggle('animateIn');
+                    }
+                    if (data==2) {
+                        $('.inner-item .accordionItem').addClass('is-collapsed');
+                        $('.inner-item .accordionItem').removeClass('is-expanded');
+                        $('.inner-item .accordionItem').removeClass('animateIn');
+                        $('.inner-item .accordionItem').attr('aria-hidden', 'true');
 
+                        thisQuestion.classList.toggle('is-collapsed');
+                        thisQuestion.classList.toggle('is-expanded');
+                        thisAnswer.classList.toggle('is-collapsed');
+                        thisAnswer.classList.toggle('is-expanded');
+
+                        thisAnswer.classList.toggle('animateIn');
+                        // высота на которой находиться кнопка сортировки
+                        var top = $('.sort-block').offset().top;
+                        // анимация
+                        if (window.innerWidth < 400){
+                            $('body,html').animate({scrollTop: top}, 1000);
+                        } else {
+                            $('body,html').animate({scrollTop: top-110}, 1000);
+                        }
+                    }
+                    if (data == 3){
+                        thisQuestion.classList.toggle('is-collapsed');
+                        thisQuestion.classList.toggle('is-expanded');
+                        thisAnswer.classList.toggle('is-collapsed');
+                        thisAnswer.classList.toggle('is-expanded');
+
+                        thisAnswer.classList.toggle('animateIn');
+                        // высота на которой находиться кнопка сортировки
+                        var top = $('.sort-block').offset().top;
+                        // анимация
+                        if (window.innerWidth < 400){
+                            $('body,html').animate({scrollTop: top}, 1000);
+                        } else {
+                            $('body,html').animate({scrollTop: top-110}, 1000);
+                        }
                     }
                 }
+
+
             });
-
-
-
-
-
             };
+
+
             for (var i=0,len=accordionToggles.length; i<len; i++) {
-//            if(touchSupported) {
-//                console.log('touch');
-//              accordionToggles[i].addEventListener('touchstart', skipClickDelay, false);
-//            }
-//            if(pointerSupported){
-//                console.log('pointer');
-//              accordionToggles[i].addEventListener('pointerdown', skipClickDelay, false);
-//            }
             accordionToggles[i].addEventListener('click', switchAccordion, false);
         }
     })();
