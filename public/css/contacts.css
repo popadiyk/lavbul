@@ -18,6 +18,7 @@ span.fa.fa-envelope-o, span.fa.fa-map-marker, span.fa.fa-phone {
 	font-size: 24px;
 }
 .header_text{
+    font-size: 36px;
 	color: #f5cfc3;
 	/* font-family: Corbel; */
 	font-weight: bolder;

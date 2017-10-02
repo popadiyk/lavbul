@@ -35,17 +35,17 @@
 		<div class="swiper-wrapper">
 			<div class="swiper-slide" id="firstSlide">
 				 <div class="title" data-swiper-parallax="-100">
-				 	<h1 class="header_text"><span>Фантазуйте разом з нами</span><br><span>і отримуйте масу задоволення!</span></h1>
+				 	<p class="header_text"><span>Фантазуйте разом з нами</span><br><span>і отримуйте масу задоволення!</span></p>
 				 </div>
 			</div>
 			<div class="swiper-slide" id="secondSlide">
 				 <div class="title" data-swiper-parallax="-100">
-				 	<h1 class="header_text"><span>Створюйте свій</span><br><span>настрій та атмосферу!</span></h1>
+				 	<p class="header_text"><span>Створюйте свій</span><br><span>настрій та атмосферу!</span></p>
 				 </div>
 			</div>
 			<div class="swiper-slide" id="thirdSlide">
 				<div class="title" data-swiper-parallax="-100">
-				 	<h1 class="header_text"><span>Оточуйте себе</span><br><span>унікальними та оригінальними речами!</span></h1>
+				 	<p class="header_text"><span>Оточуйте себе</span><br><span>унікальними та оригінальними речами!</span></p>
 				 </div>
 			</div>
 			<div class="swiper-slide" id="fouthSlide">
