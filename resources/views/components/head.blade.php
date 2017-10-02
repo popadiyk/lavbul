@@ -8,7 +8,7 @@
   <meta name="csrf-token" content="{{ csrf_token() }}">
   <title>{{'Лавка-Булавка'}} - @yield('pageTitle') @yield('metaTitle')</title>
   <meta name="keywords" content="@yield('metaKeyword')">
-  <meta name="description" content="@yield('pageTitle') – купить на ➦ bulavka.org - купити на ➦ bulavka.org ☎: (063) 153-80-28, . Перший магазин hand-made товарів в Україні!">
+  <meta name="description" content="@yield('pageTitle') – краще на ➦ bulavka.org ☎: (063) 153-80-28, (093) 295-14-48">
   <meta name="robots" content="index,follow">
   <!-- Styles -->
   <link href="{{ asset('css/jumbotron-narrow.css') }}" rel="stylesheet">
