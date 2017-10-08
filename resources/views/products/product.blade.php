@@ -6,6 +6,16 @@
 @section('og_title', 'Магазин Лавка-Булавка - '. $product->title .' - найкраща ціна')
 @section('content')
 @include('products.header')
+
+<div id="fb-root"></div>
+<script>(function(d, s, id) {
+		var js, fjs = d.getElementsByTagName(s)[0];
+		if (d.getElementById(id)) return;
+		js = d.createElement(s); js.id = id;
+		js.src = "//connect.facebook.net/ru_RU/sdk.js#xfbml=1&version=v2.10";
+		fjs.parentNode.insertBefore(js, fjs);
+	}(document, 'script', 'facebook-jssdk'));</script>
+
 <div class="container" style="padding-top: 40px; padding-bottom: 40px; max-width: 900px;">
 	<div class="col-sm-6 col-md-6">		
 		<div class="flexslider">
@@ -60,11 +70,14 @@
 			@else
 				<button type="button" class="btn btn-info waves-effect waves-light to-cart" style="background-color: gray !important;" data-id="{{ $product->id }}" disabled>Додати в кошик</button>
 			@endif
-
-			<script type="text/javascript">
-				document.write(VK.Share.button(false, {type: "round", text: "Зберегти"}));
-			</script>
-
+			<div class="row" style="padding: 15px;">
+				{{--VK button--}}
+				<script type="text/javascript">
+					document.write(VK.Share.button(false, {type: "round", text: "Зберегти"}));
+				</script>
+				{{--FB button--}}
+				<div style="margin-top: -3px; margin-left: 15px;" class="fb-share-button" data-href="" data-layout="button_count" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse"></a></div>
+			</div>
 			@foreach($meta_keywords as $meta_keyword)
 				<p style="margin-bottom: 5px; display: inline-block; font-size: 11px; font-family: 'Helvetica Neue', Helvetica, Arial, Roboto, courier" class="label label-info">{{$meta_keyword}}</p>
 			@endforeach
