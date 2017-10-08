@@ -3,7 +3,7 @@
 @section('metaTitle', $product->meta_title)
 @section('metaKeyword', $product->meta_keyword)
 @section('og_image', 'http://bulavka.org'.$product->main_photo)
-@section('og_title', 'Лавка-Булавка - '. $product->title .' - найкраща ціна в Україні')
+@section('og_title', 'Магазин "Лавка-Булавка" - '. $product->title .' - найкраща ціна в Україні')
 @section('content')
 @include('products.header')
 <div class="container" style="padding-top: 40px; padding-bottom: 40px; max-width: 900px;">
@@ -62,7 +62,7 @@
 			@endif
 
 			<script type="text/javascript">
-				document.write(VK.Share.button());
+				document.write(VK.Share.button(false, {type: "round", text: "Зберегти"}));
 			</script>
 
 			@foreach($meta_keywords as $meta_keyword)
