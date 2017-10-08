@@ -72,11 +72,13 @@
 			@endif
 			<div class="row" style="padding: 15px;">
 				{{--VK button--}}
-				<script type="text/javascript">
-					document.write(VK.Share.button(false, {type: "round", text: "Зберегти"}));
-				</script>
+					<a style="background: rgb(98, 135, 174); margin-top: 3px; padding: 5px; font-family: Helvetica, Arial, sans-serif; font-size: 11px; vertical-align: middle;" class="label label-success" href="https://vk.com/share.php?url={{URL::current()}}" target="_blank"><i class="fa fa-vk fa-1x" style="padding-right: 5px;" aria-hidden="true"></i>Поделиться ВКонтакте</a>
+
+				{{--<script type="text/javascript">--}}
+					{{--document.write(VK.Share.button(false, {type: "round", text: "Зберегти"}));--}}
+				{{--</script>--}}
 				{{--FB button--}}
-				<div style="margin-top: -3px; margin-left: 15px;" class="fb-share-button" data-href="" data-layout="button_count" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse"></a></div>
+				<div style="margin-left: 15px;" class="fb-share-button" data-href="" data-layout="button_count" data-size="small" data-mobile-iframe="true"><a class="fb-xfbml-parse-ignore" target="_blank" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fdevelopers.facebook.com%2Fdocs%2Fplugins%2F&amp;src=sdkpreparse"></a></div>
 			</div>
 			@foreach($meta_keywords as $meta_keyword)
 				<p style="margin-bottom: 5px; display: inline-block; font-size: 11px; font-family: 'Helvetica Neue', Helvetica, Arial, Roboto, courier" class="label label-info">{{$meta_keyword}}</p>
