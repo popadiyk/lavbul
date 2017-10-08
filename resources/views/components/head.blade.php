@@ -39,7 +39,7 @@
   <script src={{ asset('js/tether.min.js') }}></script>
   <script src={{ asset('js/bootstrap.min.js') }}></script>
   <script src={{ asset('js/swiper.jquery.min.js')}}></script>
-  <script type="text/javascript" src={{ asset('js//share.js?93')}} charset="windows-1251"></script>
+  <script type="text/javascript" src={{ asset('js/share.js')}} charset="windows-1251"></script>
 
   <style>
       #our_location{
