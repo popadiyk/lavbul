@@ -9,6 +9,8 @@
   <title>{{'Лавка-Булавка'}} - @yield('pageTitle') @yield('metaTitle')</title>
   <meta name="keywords" content="@yield('metaKeyword')">
   <meta name="description" content="@yield('pageTitle') – краще на ➦ bulavka.org ☎: (063) 153-80-28, (093) 295-14-48">
+  <meta property="og:image" content="@yield('og_image')" />
+  <meta property="og:title" content="@yield('og_title')" />
   <meta name="robots" content="index,follow">
   <!-- Styles -->
   <link href="{{ asset('css/jumbotron-narrow.css') }}" rel="stylesheet">
@@ -37,7 +39,6 @@
   <script src={{ asset('js/tether.min.js') }}></script>
   <script src={{ asset('js/bootstrap.min.js') }}></script>
   <script src={{ asset('js/swiper.jquery.min.js')}}></script>
-  <script type="text/javascript" src="https://vk.com/js/api/share.js?93" charset="windows-1251"></script>
 
   <style>
       #our_location{
