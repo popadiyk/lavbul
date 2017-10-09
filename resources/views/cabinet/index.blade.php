@@ -132,7 +132,7 @@
                                 </tr>
                         </tbody>
                             @else
-                            Наразі у Вас акційна знижка <p class="label label-success" style="font-size: 14px;">3%</p>, що надавалась за реєстрацію на нашому сайті!
+                            Зараз у Вас немає знижки!
                             <br>
                             <br>
                             Для того, щоб отримати картку <p class="label label-success" style="font-size: 14px;">10%</p> потрібно зробити замовлення від 500 грн.
