@@ -110,26 +110,44 @@
                     <table class="table table-striped">
                         @if (Auth::user()->getDiscountInfo())
                         <tbody>
-                            <tr>
-                                <td>Картка оформлена на ім'я:</td>
-                                <td>{{Auth::user()->getDiscountInfo()->name}}</td>
-                            </tr>
-                            <tr>
-                                <td>Картка №:</td>
-                                <td>{{Auth::user()->getDiscountInfo()->card}}</td>
-                            </tr>
-                            <tr>
-                                <td>Телефон:</td>
-                                <td>{{Auth::user()->getDiscountInfo()->phone}}</td>
-                            </tr>
-                            <tr>
-                                <td>E-mail:</td>
-                                <td>{{Auth::user()->getDiscountInfo()->email}}</td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: right;">Ваша знижка:</td>
-                                <td style="font-weight: bolder;">{{Auth::user()->getDiscountInfo()->discount}}%</td>
-                            </tr>
+                            @if(Auth::user()->getDiscountInfo()->card != 3333)
+                                <tr>
+                                    <td>Картка оформлена на ім'я:</td>
+                                    <td>{{Auth::user()->getDiscountInfo()->name}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Картка №:</td>
+                                    <td>{{Auth::user()->getDiscountInfo()->card}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Телефон:</td>
+                                    <td>{{Auth::user()->getDiscountInfo()->phone}}</td>
+                                </tr>
+                                <tr>
+                                    <td>E-mail:</td>
+                                    <td>{{Auth::user()->getDiscountInfo()->email}}</td>
+                                </tr>
+                            @else
+                                Наразі у Вас акційна знижка, що надавалась за реєстрацію на нашому сайті!
+                                <br>
+                                <br>
+                                Для того, щоб отримати картку (-10%) потрібно зробити замовлення від 500 грн.
+                                Картку ми надішлемо Вам разом із замовленням. Зареєструємо, та привяжемо її до цього акуанту!
+                                <br>
+                                <br>
+                                Якщо у Вас вже є наша картка, Ви можете зателефонувати нам <br><strong> (063) 153 80 28 </strong>, або надіслати лист в форматі:
+                                <br>
+                                1) На кого зареєстрована картка
+                                <br>
+                                2) Телефона на який зареєстрована картка
+                                <br>
+                                Лист надсилати на admin@bulavka.org.
+                            @endif
+                                <tr>
+                                    <td style="text-align: right;">Ваша знижка:</td>
+                                    <td style="font-weight: bolder;">{{Auth::user()->getDiscountInfo()->discount}}%</td>
+                                </tr>
+
                         </tbody>
                             @else
                             Зараз у Вас немає знижки!
