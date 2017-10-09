@@ -127,9 +127,17 @@
                                     <td>E-mail:</td>
                                     <td>{{Auth::user()->getDiscountInfo()->email}}</td>
                                 </tr>
+                                <tr>
+                                    <td style="text-align: right;">Ваша знижка:</td>
+                                    <td style="font-weight: bolder;">{{Auth::user()->getDiscountInfo()->discount}}%</td>
+                                </tr>
                             @else
                                 Наразі у Вас акційна знижка, що надавалась за реєстрацію на нашому сайті!
                                 <br>
+                                <tr>
+                                    <td style="text-align: right;">Ваша знижка:</td>
+                                    <td style="font-weight: bolder;">{{Auth::user()->getDiscountInfo()->discount}}%</td>
+                                </tr>
                                 <br>
                                 Для того, щоб отримати картку (-10%) потрібно зробити замовлення від 500 грн.
                                 Картку ми надішлемо Вам разом із замовленням. Зареєструємо, та привяжемо її до цього акуанту!
@@ -143,10 +151,6 @@
                                 <br>
                                 Лист надсилати на admin@bulavka.org.
                             @endif
-                                <tr>
-                                    <td style="text-align: right;">Ваша знижка:</td>
-                                    <td style="font-weight: bolder;">{{Auth::user()->getDiscountInfo()->discount}}%</td>
-                                </tr>
 
                         </tbody>
                             @else
