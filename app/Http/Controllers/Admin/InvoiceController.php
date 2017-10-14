@@ -263,12 +263,11 @@ class InvoiceController extends Controller
 //        $isSummValid = MakerOrder::isValidSumm($realSumm, $request->invoiceSumm);
 //        dd($realSumm.' = '.$request->invoiceSumm.'; isValid = '.$isSummValid);
         if ((int)$realSumm != (int)$request->invoiceSumm){
-            dd(gettype($realSumm).$realSumm.' = '.gettype($request->invoiceSumm).$request->invoiceSumm.'; false');
-            array_push($errMsg, 'Загальна сумма товарів не співпадає з обрахованою на сервері! Перевірте ціни!');
+            array_push($errMsg, 'Загальна сумма товарів не співпадає з обрахованою на сервері! Перевірте ціни!'.
+                gettype($realSumm).$realSumm.' = '.gettype($request->invoiceSumm).$request->invoiceSumm.'; false');
         }
         // якщо накладна пройшла валідність
         if (empty($errMsg)){
-            dd($realSumm.' = '.$request->invoiceSumm.'; true');
             return MakerOrder::createInvoiceAdmin($request);
             //return ;
         }
