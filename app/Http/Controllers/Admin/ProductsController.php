@@ -77,7 +77,7 @@ class ProductsController extends Controller
                 //dd($products);
             }
         } else {
-            $products = Product::paginate(10);
+            $products = Product::orderby('created_at', 'desc')->paginate(10);
             //dd($products);
             //dd($products->currentPage());
             //$products->withPath();
@@ -179,6 +179,7 @@ class ProductsController extends Controller
         }
         // save in data base
         $newProduct = $request->all();
+        $newProduct['purchase_price'] = str_replace(',','.',$newProduct['purchase_price']);
         $newProduct = new Product($newProduct);
 
         if (array_key_exists('main_photo', $request->all()) == true){
@@ -355,7 +356,6 @@ class ProductsController extends Controller
             $dataTypeContent = Product::all()->last();
             $dataTypeContent->marking++;
             unset($dataTypeContent->id);
-            //dd($dataTypeContent);
         }
 
         // Check if BREAD is Translatable

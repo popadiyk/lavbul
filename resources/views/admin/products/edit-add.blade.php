@@ -105,12 +105,12 @@
 
                                 <div class="form-group col-md-12 col-xs-12">
                                     <label for="quantity">SEO (title) мета-назва сторінки:</label>
-                                    <input type="text" name="meta_title" class="form-control" value="{{ $dataTypeContent->meta_title }}" id="meta_title">
+                                    <input type="text" name="meta_title" class="form-control" value="{{ $dataTypeContent->meta_title }}" id="meta_title" required>
                                 </div>
 
                                 <div class="form-group col-md-12 col-xs-12">
                                     <label for="quantity">SEO (keyword) мета-слова:</label>
-                                    <input type="text" name="meta_keyword" class="form-control" value="{{ $dataTypeContent->meta_keyword }}" id="meta_keyword">
+                                    <input type="text" name="meta_keyword" class="form-control" value="{{ $dataTypeContent->meta_keyword }}" id="meta_keyword" required>
                                 </div>
 
                                 <div class="form-group col-xs-12">
@@ -329,11 +329,36 @@
 
                 $(function(){
                     $("#group-select").select2({
-                        placeholder: "Оберіть тип постачальника",
+                        placeholder: "Оберіть групу товарів",
                         language: {noResults: function(){return "Співпадінь, не знайдено";}},
                         width: "100%"
                     });
                 });
+
+                $.ajaxSetup({
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    }
+                });
+
+                // функція для того, щоб коли вибираєш групу товарів, автоінкрементило та підставляло
+                // в маркінг останній код товару з цієї групи або нічого якщо група товарів пуста
+                $(function(){
+                    $("#group-select").on('change', function () {
+                        var groupId = $("#group-select").val();
+                        $.ajax({
+                            url: 'inc_marking',
+                            type: "post",
+                            data: {groupId: groupId}
+                        }).done(function (data) {
+                            $('#marking').val(data);
+//                            $('#voyager-loader').css("display","none");
+                        }).fail(function () {
+                            $('#marking').val('');
+                        });
+                    });
+                });
+
 
                 $(function(){
                     $("#manufacture-select").select2({

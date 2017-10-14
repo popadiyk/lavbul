@@ -48,15 +48,27 @@ border-radius: 50%;
 				</figure>
 			</div>
 			<div class="col-md-6">
-				<h3 style="text-align: center;"><strong>Наша мета</strong></h3>
-				<p>"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.</p>
+				<h3 style="text-align: center;"><strong>Цікаві відомості:</strong></h3>
+				<p>Магазин &quot;Лавка-Булавка&quot;  відкрився 1 лютого 2016р. у
+					м.Вінниця, в ТЦ &quot;ПетроЦентр&quot;.
+					<br><br>
+					Якщо Ви просто у захваті від рукоділля? Ваші руки створенні для народження
+					справжньої краси? Магазин «Лавка Булавка» пропонує великий асортимент товарів для
+					шиття та ручної роботи, а також ексклюзивні вироби ручної роботи від найкращіх
+					майстрів України.
+					<br><br>
+					Зокрема, магазин «Лавка Булавка», проводить майстер-класи з творчої роботи.</p>
 			</div>
 		</div>
 
 		<div class="row text-block" style="padding-top: 30px; padding-bottom: 30px;">
 			<div class="col-md-6">
-			<h3 style="text-align: center;"><strong>Наша ціль</strong></h3>
-				<p>"Sed ut perspiciatis unde omnis iste natus error sit voluptatem accusantium doloremque laudantium, totam rem aperiam, eaque ipsa quae ab illo inventore veritatis et quasi architecto beatae vitae dicta sunt explicabo. Nemo enim ipsam voluptatem quia voluptas sit aspernatur aut odit aut fugit, sed quia consequuntur magni dolores eos qui ratione voluptatem sequi nesciunt. Neque porro quisquam est, qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit, sed quia non numquam eius modi tempora incidunt ut labore et dolore magnam aliquam quaerat voluptatem.</p>
+			<h3 style="text-align: center;"><strong>Наша мета:</strong></h3>
+				<p>Внести яскраві фарби у життя кожної людини, адже ти особливий! Також ми мріємо розвинути та
+					збільшити товарообіг українського виробника зібравши найкращих майстрів України в одному місці!
+					<br><br>Якщо Ви новачок в сфері рукоділля, професійний майстер сувенірів, подарунків, любитель авторських,
+					ексклюзивних виробів або просто хочете зробити близькій людині самий незвичайний
+					подарунок, магазин Лавка-булавка саме для Вас!</p>
 			</div>
 			<div class="col-md-6 align-self-center">
 				<figure>

@@ -31,8 +31,8 @@
 				<br>
 				Калькулятори розрахунку доствки:
 				<ul>
-					<li><a href="https://novaposhta.ua/ru/delivery"> - Нова Пошта</a></li>
-					<li><a href="http://ukrposhta.ua/ru/kalkulyator-forma-rozraxunku"> - Укр Пошта</a></li>
+					<li><a href="https://novaposhta.ua/ru/delivery" target="_blank"> - Нова Пошта</a></li>
+					<li><a href="http://ukrposhta.ua/ru/kalkulyator-forma-rozraxunku" target="_blank"> - Укр Пошта</a></li>
 				</ul>
 			</div>
 			<div class="col-xs-12 col-md-4">

@@ -51,7 +51,7 @@
               <a class="nav-link active" id="anotherLink" data-toggle="tab" href="#mainInfo" role="tab" class="btn btn-default waves-effect waves-light ">Особиста інформація</a>
             </li>
             <li class="nav-item">
-              <a class="nav-link" id="anotherLink" data-toggle="tab" href="#orderInfo" role="tab">Інформація для замовлення</a>
+              <a class="nav-link" id="anotherLink" data-toggle="tab" href="#orderInfo" role="tab">Доставка</a>
             </li>
             <li class="nav-item">
               <a class="nav-link" id="anotherLink" data-toggle="tab" href="#discountInfo" role="tab">Інформація про знижку</a>
@@ -90,39 +90,52 @@
                     </table>
                 </div>
                 <div class="tab-pane" id="orderInfo" role="tabpanel">
-                    Замовлення
+                    Доставка транспортною компанією "Нова Пошта" або "Укр Пошта". Доставка до 1000 грн. виконується за рахунок одержувача.
+                    <br>
+                    <br>
+                    Термін доставки замовлення 1-2 дня.
+                    <br>
+                    <br>
+                    Якщо Ваше замовлення склало більше 1000 грн., доставка для Вас безкоштовна та виконується за рахунок нашого магазину!
+                    <br>
+                    <br>
+                    Калькулятори розрахунку доствки:
+                    <ul>
+                        <li><a href="https://novaposhta.ua/ru/delivery" target="_blank"> - Нова Пошта</a></li>
+                        <li><a href="http://ukrposhta.ua/ru/kalkulyator-forma-rozraxunku" target="_blank"> - Укр Пошта</a></li>
+                    </ul>
                 </div>
                 <div class="tab-pane" id="discountInfo" role="tabpanel">
                     <h4 class="text-center" style="margin-left: 12px;">Інформація про вашу знижку</h4>
                     <table class="table table-striped">
                         @if (Auth::user()->getDiscountInfo())
                         <tbody>
-                            <tr>
-                                <td>Картка оформлена на ім'я:</td>
-                                <td>{{Auth::user()->getDiscountInfo()->name}}</td>
-                            </tr>
-                            <tr>
-                                <td>Картка №:</td>
-                                <td>{{Auth::user()->getDiscountInfo()->card}}</td>
-                            </tr>
-                            <tr>
-                                <td>Телефон:</td>
-                                <td>{{Auth::user()->getDiscountInfo()->phone}}</td>
-                            </tr>
-                            <tr>
-                                <td>E-mail:</td>
-                                <td>{{Auth::user()->getDiscountInfo()->email}}</td>
-                            </tr>
-                            <tr>
-                                <td style="text-align: right;">Ваша знижка:</td>
-                                <td style="font-weight: bolder;">{{Auth::user()->getDiscountInfo()->discount}}%</td>
-                            </tr>
+                                <tr>
+                                    <td>Картка оформлена на ім'я:</td>
+                                    <td>{{Auth::user()->getDiscountInfo()->name}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Картка №:</td>
+                                    <td>{{Auth::user()->getDiscountInfo()->card}}</td>
+                                </tr>
+                                <tr>
+                                    <td>Телефон:</td>
+                                    <td>{{Auth::user()->getDiscountInfo()->phone}}</td>
+                                </tr>
+                                <tr>
+                                    <td>E-mail:</td>
+                                    <td>{{Auth::user()->getDiscountInfo()->email}}</td>
+                                </tr>
+                                <tr>
+                                    <td style="text-align: right;">Ваша знижка:</td>
+                                    <td style="font-weight: bolder;">{{Auth::user()->getDiscountInfo()->discount}}%</td>
+                                </tr>
                         </tbody>
                             @else
                             Зараз у Вас немає знижки!
                             <br>
                             <br>
-                            Для того, щоб отримати картку (-10%) потрібно зробити замовлення від 500 грн.
+                            Для того, щоб отримати картку <p class="label label-success" style="font-size: 14px;">10%</p> потрібно зробити замовлення від 500 грн.
                             Картку ми надішлемо Вам разом із замовленням. Зареєструємо, та привяжемо її до цього акуанту!
                             <br>
                             <br>
