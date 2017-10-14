@@ -260,8 +260,8 @@ class InvoiceController extends Controller
         // Підрахуємо реальну вартість по накладній
         $realSumm = MakerOrder::getInvoiceSumm($request->goods, $request->discount, $request->type);
         // Перевіряємо валідність сумми
-        $fl_realSumm = (string)$realSumm;
-        $fl_invSumm = (string)$request->invoiceSumm;
+        $fl_realSumm = (int)$realSumm;
+        $fl_invSumm = (int)$request->invoiceSumm;
         if ($fl_realSumm === $fl_invSumm) {
             return 'true';
         } else {
