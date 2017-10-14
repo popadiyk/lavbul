@@ -262,7 +262,7 @@ class InvoiceController extends Controller
         // Перевіряємо валідність сумми
         $fl_realSumm = (float)$realSumm;
         $fl_invSumm = (float)$request->invoiceSumm;
-        if ($fl_realSumm == $fl_invSumm) {
+        if ($fl_realSumm === $fl_invSumm) {
             return 'true';
         } else {
             return 'false';
