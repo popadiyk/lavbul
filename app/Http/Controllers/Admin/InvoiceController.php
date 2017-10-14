@@ -265,7 +265,7 @@ class InvoiceController extends Controller
         if ($fl_realSumm === $fl_invSumm) {
             return 'true';
         } else {
-            return 'false';
+            return ($fl_realSumm+1).'false'.($fl_invSumm+1);
         }
         if ($fl_realSumm != $fl_invSumm){
             array_push($errMsg, 'Загальна сумма товарів не співпадає з обрахованою на сервері! Перевірте ціни!'.
