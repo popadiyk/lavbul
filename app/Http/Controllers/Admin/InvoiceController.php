@@ -262,11 +262,6 @@ class InvoiceController extends Controller
         // Перевіряємо валідність сумми
         $fl_realSumm = (int)$realSumm;
         $fl_invSumm = (int)$request->invoiceSumm;
-        if ($fl_realSumm === $fl_invSumm) {
-            return 'true';
-        } else {
-            return ($fl_realSumm).'false'.($fl_invSumm);
-        }
         if ($fl_realSumm != $fl_invSumm){
             array_push($errMsg, 'Загальна сумма товарів не співпадає з обрахованою на сервері! Перевірте ціни!'.
                 gettype($realSumm).$realSumm.' = '.gettype($request->invoiceSumm).$request->invoiceSumm.'; false');
