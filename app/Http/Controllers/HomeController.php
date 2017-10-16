@@ -167,7 +167,8 @@ class HomeController extends Controller
         $photos = ProductPhoto::where('product_id', $product->id)->get();
 
         $meta_keywords = preg_split('/\! /', $product->meta_keyword);
-        return view('products.product', [ 'product' => $product, 'products_id_in_cart' => $products_id_in_cart, 'photos' => $photos, 'meta_keywords' => $meta_keywords]);
+        $group = Group::all()->where('id', $product->group_id)->first();
+        return view('products.product', [ 'product' => $product, 'products_id_in_cart' => $products_id_in_cart, 'photos' => $photos, 'meta_keywords' => $meta_keywords, 'group' => $group]);
     }
 
     public function editUser(Request $request, $id){

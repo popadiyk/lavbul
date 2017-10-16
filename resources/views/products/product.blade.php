@@ -16,8 +16,12 @@
 		fjs.parentNode.insertBefore(js, fjs);
 	}(document, 'script', 'facebook-jssdk'));</script>
 
-<div class="container" style="padding-top: 40px; padding-bottom: 40px; max-width: 900px;">
-	<div class="col-sm-6 col-md-6">		
+<div class="container" style="padding-top: 20px; padding-bottom: 40px; max-width: 900px;">
+	<p class="bread_crumbs" style="padding-left: 20px;">
+		<a href="/products">Продукція</a> <span style="font-size: 10px; padding: 0px 7px 0px 7px;">>></span>
+		<a href="/products/catalogs/{{$group->id}}">{{$group->title}}</a>
+	</p>
+	<div class="col-sm-6 col-md-6">
 		<div class="flexslider">
 			<ul class="slides">
 				<li data-thumb="{{ $product->main_photo}}">
