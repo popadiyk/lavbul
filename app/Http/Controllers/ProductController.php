@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Product;
+use App\Group;
+use Helper;
+use \Cart as Cart;
+use App\Http\Controllers\HomeController;
 
 class ProductController extends Controller
 {
@@ -87,4 +91,52 @@ class ProductController extends Controller
     {
         //
     }
+
+    public function catalogs($id)
+    {
+        $lastGroups = [];
+        $isLast = count(Group::all()->where('group_id', $id));
+
+        $groups = Group::all();
+        foreach ($groups as $group){
+            if (!count(Group::all()->where('group_id', $group->id)) && $id != $group->id){
+                array_push($lastGroups, $group);
+            }
+            if ($id == $group->id && !$isLast) {
+                $catalog = $group;
+            }
+        }
+        // если меньше 5 выводить каталоги которые есть
+        if (count($lastGroups) <= 5) {
+            return view('catalogs.index', compact('catalog', 'lastGroups'));
+        } else {
+            // если больше 5 то рандомом 5 каталогов
+            $top5catalogs = array_rand($lastGroups, 5);
+            $tempArr = [];
+            foreach ($top5catalogs as $item){
+                array_push($tempArr, $lastGroups[$item]);
+            }
+            $lastGroups = $tempArr;
+        }
+        $products_id_in_cart = array();
+        foreach(Cart::content() as $item) {
+            array_push($products_id_in_cart, $item->id);
+        }
+
+
+        $groupProducts = Product::all()->where('group_id', $id);
+        $products = collect();
+
+        $products_id = [];
+
+        foreach ($groupProducts as $groupProduct) {
+            $products->push(Product::find($groupProduct->id));
+            array_push($products_id, $groupProduct->id);
+        }
+        $products = HomeController::paginate($products);
+        //dd($products);
+
+        return view('catalogs.index', compact('catalog', 'lastGroups', 'products', 'products_id_in_cart', 'products_id'));
+    }
+
 }

@@ -197,7 +197,7 @@ class HomeController extends Controller
         $myUser->save();
     }
 
-    public function paginate($items, $perPage = self::PER_PAGE, $page = null, $options = [])
+    public static function paginate($items, $perPage = self::PER_PAGE, $page = null, $options = [])
     {
         $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
         $items = $items instanceof Collection ? $items : Collection::make($items);

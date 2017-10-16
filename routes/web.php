@@ -20,6 +20,7 @@ Route::post('/user/edit/{id}', 'HomeController@editUser');
 Route::get('/feedbacks', 'FeedbacksController@index');
 
 Route::resource('/products', 'ProductController');
+Route::get('/products/catalogs/{id}', 'ProductController@catalogs');
 
 Route::resource('/invoices', 'InvoiceController');
 Route::get('/invoices/generatePdf/{id}', 'InvoiceController@generatePdf');
