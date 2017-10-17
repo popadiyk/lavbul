@@ -1,7 +1,7 @@
 @extends('layouts.main')
 @section('pageTitle', $catalog->title)
-@section('metaTitle', '')
-@section('metaKeyword', 'скрапбукинг фётр фоамиран куклы-тильды картины фанера декупаж полимерная глина')
+@section('metaTitle', $catalog->meta_title)
+@section('metaKeyword', $catalog->meta_keyword)
 @section('content')
     @include('products.header')
     <style>

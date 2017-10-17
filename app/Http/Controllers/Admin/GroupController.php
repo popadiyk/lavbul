@@ -121,6 +121,9 @@ class GroupController extends Controller
         //dd($groupForm);
         $group['title'] = $groupForm['title'];
         $group['group_id'] = $groupForm['parent_id'];
+        $group['meta_title'] = $groupForm['meta_title'];
+        $group['meta_keyword'] = $groupForm['meta_keyword'];
+
         $group->save();
 
         return redirect()

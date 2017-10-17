@@ -51,11 +51,24 @@
                                         @if ($dataTypeContent->title == $group->title)
                                             @continue
                                         @endif
+                                        @if ($group->id == $dataTypeContent->group_id)
+                                            <option value="{{$group->id}}" selected="selected">{{$group->title}}</option>
+                                        @else
                                         <option value="{{$group->id}}">{{$group->title}}</option>
+                                        @endif
                                     @endforeach
 
                                 </select>
                             </div>
+                            <div class="form-group">
+                                <label for="meta_title">Назва категорії:</label>
+                                <input type="text" name="meta_title" class="form-control" value="{{ $dataTypeContent->meta_title }}" id="meta_title">
+                            </div>
+                            <div class="form-group">
+                                <label for="meta_keyword">Назва категорії:</label>
+                                <input type="text" name="meta_keyword" class="form-control" value="{{ $dataTypeContent->meta_keyword }}" id="meta_keyword">
+                            </div>
+
                         </form>
                     </div>
                 </div>
