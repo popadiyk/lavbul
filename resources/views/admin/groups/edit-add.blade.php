@@ -61,11 +61,11 @@
                                 </select>
                             </div>
                             <div class="form-group">
-                                <label for="meta_title">Назва категорії:</label>
+                                <label for="meta_title">SEO мета - назва сторінки:</label>
                                 <input type="text" name="meta_title" class="form-control" value="{{ $dataTypeContent->meta_title }}" id="meta_title">
                             </div>
                             <div class="form-group">
-                                <label for="meta_keyword">Назва категорії:</label>
+                                <label for="meta_keyword">SEO мета - слова сторінки:</label>
                                 <input type="text" name="meta_keyword" class="form-control" value="{{ $dataTypeContent->meta_keyword }}" id="meta_keyword">
                             </div>
 
