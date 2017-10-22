@@ -9,6 +9,7 @@ use Illuminate\Support\Facades\DB;
 use TCG\Voyager\Facades\Voyager;
 use TCG\Voyager\Http\Controllers\Traits\BreadRelationshipParser;
 use Carbon\Carbon;
+use HelperForImage;
 
 class GroupController extends Controller
 {
@@ -123,6 +124,12 @@ class GroupController extends Controller
         $group['group_id'] = $groupForm['parent_id'];
         $group['meta_title'] = $groupForm['meta_title'];
         $group['meta_keyword'] = $groupForm['meta_keyword'];
+
+        $image = $request->all()['main_photo'];
+
+        // сохраняем фото
+        HelperForImage::groupImage($image, $id);
+
 
         $group->save();
 

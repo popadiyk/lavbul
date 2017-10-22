@@ -2,6 +2,9 @@
 @section('pageTitle', $catalog->title)
 @section('metaTitle', $catalog->meta_title)
 @section('metaKeyword', $catalog->meta_keyword)
+@section('og_image', '/group_photo/'.$catalog->id.'.jpg')
+@section('og_title', $catalog->meta_title)
+
 @section('content')
     @include('products.header')
     <style>
