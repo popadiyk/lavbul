@@ -125,10 +125,11 @@ class GroupController extends Controller
         $group['meta_title'] = $groupForm['meta_title'];
         $group['meta_keyword'] = $groupForm['meta_keyword'];
 
-        $image = $request->all()['main_photo'];
-
-        // сохраняем фото
-        HelperForImage::groupImage($image, $id);
+        if ($request->all()['main_photo']) {
+            $image = $request->all()['main_photo'];
+            // сохраняем фото
+            HelperForImage::groupImage($image, $id);
+        }
 
 
         $group->save();
