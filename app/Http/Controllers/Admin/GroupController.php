@@ -62,7 +62,7 @@ class GroupController extends Controller
 
     }
 
-ску    /**
+    /**
      * @param Request $request
      * @param $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
