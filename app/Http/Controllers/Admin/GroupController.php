@@ -62,7 +62,7 @@ class GroupController extends Controller
 
     }
 
-    /**
+ску    /**
      * @param Request $request
      * @param $id
      * @return \Illuminate\Contracts\View\Factory|\Illuminate\View\View
@@ -175,9 +175,12 @@ class GroupController extends Controller
             return response()->json(['errors' => $val->messages()]);
         }
         $formgroup = $request->except(['_token', 'OK']);
+
         DB::table('groups')->insert([
             'title' => $formgroup['title'],
             'group_id' => $formgroup['parent_id'],
+            'meta_title' => $formgroup['meta_title'],
+            'meta_keyword' => $formgroup['meta_keyword'],
             'created_at' => Carbon::now()->format('Y-m-d H:i:s'),
         ]);
 
