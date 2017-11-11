@@ -279,15 +279,10 @@
                                 <button class="btn btn-info">Зареєструватись <i class="fa fa-sign-in ml-1"></i></button>
                             </div>
 
-<!--                             <fieldset class="additional-option">
-                                <input type="checkbox" id="checkbox21">
-                                <label for="checkbox21">Subscribe me to the newsletter</label>
-                            </fieldset> -->
-                        </div>
+                            </div>
                         <!--Footer-->
                         <div class="modal-footer">
                             <div class="options text-right">
-                                <!-- <p class="pt-1">Вже маєте аккаунт? <a href="#" class="blue-text">Увійти</a></p> -->
                             </div>
                             <button type="button" class="btn btn-outline-info waves-effect ml-auto" data-dismiss="modal">Закрити <i class="fa fa-times-circle ml-1"></i></button>
                         </div>
@@ -304,33 +299,3 @@
 
 <div class="modal fade right" id="fullHeightModalRight" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
 </div>
-
-<!-- temporary is hidden -->
-<!--Modal: Search-->
-<!-- <div class="modal fade right" id="sideModalTR" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
-    <div class="modal-dialog modal-side modal-top-right" role="document">
-        Content
-        <div class="modal-content">
-            Header
-            <div class="modal-header">
-                <h4 class="modal-title w-100" id="myModalLabel">Пошук по сайту</h4>
-            </div>
-            Body
-            <div class="modal-body">
-                <div class="md-form form-sm">
-                    <i class="fa fa-search prefix"></i>
-                    <input type="text" name="search" id="searchForm" class="form-control">
-                    <label for="searchForm">введіть текст</label>
-                </div>
-            </div>
-            Footer
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary waves-effect waves-light" data-dismiss="modal">Закрити</button>
-                <button type="button" class="btn btn-primary waves-effect waves-light">Шукати</button>
-            </div>
-        </div>
-        /.Content
-    </div>
-</div> -->
-<!--Modal: Search-->
-

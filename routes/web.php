@@ -33,6 +33,8 @@ Route::post('/delete_product/{id}', 'CartController@deleteProductFromCart');
 Route::post('/js_cart/get_info_total', 'CartController@getTotalQty');
 Route::post('/is_child', 'HomeController@isChild');
 
+Route::get('/get_main_count', 'HomeController@getMainCount');
+
 //AJAX for sorting
 Route::post('/products/sorting', 'HomeController@filterSorting');
 //AJAX for pagination

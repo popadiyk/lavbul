@@ -4,11 +4,11 @@
 @section('metaKeyword', 'Купити hand-made ! подарунки в Україні ! Купить товары для рукоделия ! Товари для рукоділля ! купить подарок на День Рождения ! купить подарок на День Рождения ! подарки для родных ! покарки для детей ! скрапбукинг ! кукла-тильда ! скрап ! валяння ! валяние ! фоамиран ! фом ! бисер')
 @section('content')
     <!-- Swiper -->
-    @include('components.swiper')
+    @include('components.new_header')
     <!-- BEGIN CONTENT -->
     <div class="container-fluid advertise-block">
         <div class="row" style="margin: 0;">
-            <div class="col-xs-12 hidden-lg hidden-md" style="padding-top: 50px; margin-bottom: -30px; text-align: center;">
+            <div class="col-xs-12 hidden-lg hidden-md hidden-sm" style="padding-top: 50px; margin-bottom: -30px; text-align: center;">
                 <img src="img/max_logo.png" height="300" width="300">
             </div>
         </div>

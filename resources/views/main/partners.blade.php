@@ -1,4 +1,4 @@
-<div class="col-xs-12 partners-image" style="border-radius: 10px;">
+<div class="col-xs-12 partners-image" style="border-radius: 10px; border: 2px dashed #f69c55;">
     <div class="row">
         <div class="col-xs-12 text-center">
             <span class="why">Чому обирають нас?</span>

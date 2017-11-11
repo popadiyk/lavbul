@@ -1,5 +1,6 @@
 <?php
 namespace App\Http\Controllers;
+use App\Invoice;
 use Illuminate\Http\Request;
 use App\Product;
 use App\Group;
@@ -17,7 +18,7 @@ use App\User;
 use App\Mail\SendInvoiceToUser;
 use Illuminate\Support\Facades\Mail;
 use Illuminate\Mail\Mailable;
-
+use phpDocumentor\Reflection\Types\Object_;
 
 
 class HomeController extends Controller
@@ -169,6 +170,19 @@ class HomeController extends Controller
         $meta_keywords = preg_split('/\! /', $product->meta_keyword);
         $group = Group::all()->where('id', $product->group_id)->first();
         return view('products.product', [ 'product' => $product, 'products_id_in_cart' => $products_id_in_cart, 'photos' => $photos, 'meta_keywords' => $meta_keywords, 'group' => $group]);
+    }
+
+    public function getMainCount(){
+
+        $productsCount = Product::all()->count();
+        $mastersCount = 32;
+        $salesCount = Invoice::all()->where('type', 'sales')->count();
+
+        $result = array ('productCount' => $productsCount,
+            'mastersCount' => $mastersCount,
+            'salesCount' => $salesCount);
+
+        return $result;
     }
 
     public function editUser(Request $request, $id){
