@@ -99,6 +99,15 @@
         $('#productCount').html(productCount);
         $('#mastersCount').html(mastersCount);
 
+        $('.count').each(function () {
+            var $this = $(this);
+            jQuery({ Counter: 0 }).animate({ Counter: $this.text() }, {
+                duration: 2000,
+                step: function () {
+                    $this.text(Math.ceil(this.Counter));
+                }
+            });
+        });
 
     }).fail(function (jqXHR, ajaxOptions, thrownError) {
         console.log('fail');
