@@ -31,6 +31,18 @@
         vertical-align: middle;
         line-height: normal;
     }
+
+    h1 {
+        font-size: 20px;
+        margin: 2px 0px 5px 0px;
+    }
+
+    .h1title {
+        color: #f69c55;
+        text-align: center;
+        width: 100%;
+        background-color: rgba(252, 224, 215, 0.3);
+    }
 </style>
 
 <div class="hidden-xs container-fluid header-block main_header_container">
@@ -38,6 +50,12 @@
     </div>
 </div>
 
+<div class="hidden-xs container-fluid ny">
+
+</div>
+<div class="container-fluid h1title">
+ <h1 class="middle">Дивуйте своїх рідних авторськими подарунками! Створюйте свій настрій та атмосферу!</h1>
+</div>
 <div class="hidden-xs container-fluid ny">
 
 </div>
