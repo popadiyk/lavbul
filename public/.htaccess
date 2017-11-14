@@ -19,43 +19,41 @@
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
 </IfModule>
 
-# Включаем кэш в браузерах посетителей
-<IfModule mod_headers.c>
-    # Все html и htm файлы будут храниться в кэше браузера один день
-    <FilesMatch "\.(html|htm)$">
-        Header set Cache-Control "max-age=43200"
-    </FilesMatch>
-    # Все css, javascript и текстовые файлы будут храниться в кэше браузера одну неделю
-    <FilesMatch "\.(js|css|txt)$">
-        Header set Cache-Control "max-age=604800"
-    </FilesMatch>
-    # Все флэш файлы и изображения будут храниться в кэше браузера один месяц
-    <FilesMatch "\.(flv|swf|ico|gif|jpg|jpeg|png)$">
-        Header set Cache-Control "max-age=2592000"
-    </FilesMatch>
-    # Отключаем кеширование php и других служебных файлов
-    <FilesMatch "\.(pl|php|cgi|spl|scgi|fcgi)$">
-        Header unset Cache-Control
-    </FilesMatch>
-</IfModule>
+# сжатие text, html, javascript, css, xml:
+<ifModule mod_deflate.c>
+AddOutputFilterByType DEFLATE text/html text/plain text/xml application/xml application/xhtml+xml text/css text/javascript application/javascript application/x-javascript
+</ifModule>
 
+# кеш браузера
 <ifModule mod_expires.c>
-    ExpiresActive On
-    #по умолчанию кеш в 5 секунд
-    ExpiresDefault "access plus 5 seconds"
-    # Включаем кэширование изображений и флэш на месяц
-    ExpiresByType image/x-icon "access plus 1 month"
-    ExpiresByType image/jpeg "access plus 4 weeks"
-    ExpiresByType image/png "access plus 30 days"
-    ExpiresByType image/gif "access plus 43829 minutes"
-    ExpiresByType application/x-shockwave-flash "access plus 2592000 seconds"
-    # Включаем кэширование css, javascript и текстовых файлов на одну неделю
-    ExpiresByType text/css "access plus 604800 seconds"
-    ExpiresByType text/javascript "access plus 604800 seconds"
-    ExpiresByType application/javascript "access plus 604800 seconds"
-    ExpiresByType application/x-javascript "access plus 604800 seconds"
-    # Включаем кэширование html и htm файлов на один день
-    ExpiresByType text/html "access plus 43200 seconds"
-    # Включаем кэширование xml файлов на десять минут
-    ExpiresByType application/xhtml+xml "access plus 600 seconds"
+ExpiresActive On
+
+#по умолчанию кеш в 5 секунд
+ExpiresDefault "access plus 1 days"
+
+# Включаем кэширование изображений и флэш на месяц
+ExpiresByType image/x-icon "access plus 1 month"
+ExpiresByType image/jpeg "access plus 4 weeks"
+ExpiresByType image/png "access plus 30 days"
+ExpiresByType image/gif "access plus 43829 minutes"
+ExpiresByType application/x-shockwave-flash "access plus 2592000 seconds"
+
+# Включаем кэширование css, javascript и текстовых файлоф на одну неделю
+ExpiresByType text/css "access plus 604800 seconds"
+ExpiresByType text/javascript "access plus 604800 seconds"
+ExpiresByType application/javascript "access plus 604800 seconds"
+ExpiresByType application/x-javascript "access plus 604800 seconds"
+
+# Включаем кэширование html и htm файлов на один день
+ExpiresByType text/html "access plus 43200 seconds"
+
+# Включаем кэширование xml файлов на десять минут
+ExpiresByType application/xhtml+xml "access plus 600 seconds"
+
+# Нестандартные шрифты сайта
+ExpiresByType application/x-font-ttf "access plus 1 month"
+ExpiresByType font/opentype "access plus 1 month"
+ExpiresByType application/x-font-woff "access plus 1 month"
+ExpiresByType image/svg+xml "access plus 1 month"
+ExpiresByType application/vnd.ms-fontobject "access plus 1 month"
 </ifModule>
