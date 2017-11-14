@@ -18,3 +18,44 @@
     RewriteCond %{HTTP:Authorization} .
     RewriteRule .* - [E=HTTP_AUTHORIZATION:%{HTTP:Authorization}]
 </IfModule>
+
+# Включаем кэш в браузерах посетителей
+<IfModule mod_headers.c>
+    # Все html и htm файлы будут храниться в кэше браузера один день
+    <FilesMatch "\.(html|htm)$">
+        Header set Cache-Control "max-age=43200"
+    </FilesMatch>
+    # Все css, javascript и текстовые файлы будут храниться в кэше браузера одну неделю
+    <FilesMatch "\.(js|css|txt)$">
+        Header set Cache-Control "max-age=604800"
+    </FilesMatch>
+    # Все флэш файлы и изображения будут храниться в кэше браузера один месяц
+    <FilesMatch "\.(flv|swf|ico|gif|jpg|jpeg|png)$">
+        Header set Cache-Control "max-age=2592000"
+    </FilesMatch>
+    # Отключаем кеширование php и других служебных файлов
+    <FilesMatch "\.(pl|php|cgi|spl|scgi|fcgi)$">
+        Header unset Cache-Control
+    </FilesMatch>
+</IfModule>
+
+<ifModule mod_expires.c>
+    ExpiresActive On
+    #по умолчанию кеш в 5 секунд
+    ExpiresDefault "access plus 5 seconds"
+    # Включаем кэширование изображений и флэш на месяц
+    ExpiresByType image/x-icon "access plus 1 month"
+    ExpiresByType image/jpeg "access plus 4 weeks"
+    ExpiresByType image/png "access plus 30 days"
+    ExpiresByType image/gif "access plus 43829 minutes"
+    ExpiresByType application/x-shockwave-flash "access plus 2592000 seconds"
+    # Включаем кэширование css, javascript и текстовых файлов на одну неделю
+    ExpiresByType text/css "access plus 604800 seconds"
+    ExpiresByType text/javascript "access plus 604800 seconds"
+    ExpiresByType application/javascript "access plus 604800 seconds"
+    ExpiresByType application/x-javascript "access plus 604800 seconds"
+    # Включаем кэширование html и htm файлов на один день
+    ExpiresByType text/html "access plus 43200 seconds"
+    # Включаем кэширование xml файлов на десять минут
+    ExpiresByType application/xhtml+xml "access plus 600 seconds"
+</ifModule>
