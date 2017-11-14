@@ -1,128 +1,28 @@
-.contact {
-	/* font-family: 'Josefin Sans', sans-serif; */
+.contact{}
+.number, .adress, .email{font-size:16px;padding-left:5px;}
+.vk, .fb{width:50px;height:50px;}
+.inst{width:47px;height:47px;}
+span.fa.fa-envelope-o, span.fa.fa-map-marker, span.fa.fa-phone{font-size:24px;}
+.header_text{font-size:36px;color:#f5cfc3;font-weight:bolder;position:relative;top:90%;margin-top:0 !important;margin-bottom:0 !important;text-shadow:2px 2px 4px #000000;}
+.contacts_header_container{height:200px;background:url('../img/contacts_header.png') 100% 100% no-repeat;background-size:cover;}
+.contacts_container{margin-top:40px;margin-bottom:40px;}
+.borderTop{margin-bottom:40px;}
+.mrgTop{margin-top:30px;}
+.service_block{text-align:center;padding-left:15px;padding-right:15px;}
+.service_icon{border:2px solid black;border-radius:50%;width:90px;height:90px;margin:0px auto 25px;opacity:0.5;}
+.service_block{text-align:center;}
+.service_icon span{background:transparent;border-radius:50%;display:block;height:100%;width:100%;}
+.service_icon i{color:black;font-size:40px;margin-top:0;position:relative;top:20px;z-index:20;}
+.service_block h3{font-weight:600;font-size:18px;color:#111111;margin:35px 0 18px;}
+.service_block p{font-size:16px;color:#888888;margin:0px;}
+.borderLeft{border-left:1px solid #DADADA;}
+.contacts_form{border-radius:6px;text-align:center;color:inherit;height:100%}
+.contacts_form button{width:100%;margin:0;}
+.contacts_form .md-form{text-align:left;}
+textarea#c_message{padding:15px;border-radius:5px;}
+@media screen and (max-width:1023px){.borderLeft{border-left:none;}
 }
-
-.number, .adress, .email {
-	/* font-family: 'ABeeZee'; */
-	font-size: 16px;
-	padding-left: 5px;
+@media screen and (max-width:767px){.contacts_container{height:1700px;min-height:1700px;}
 }
-
-.vk, .fb {
-	width: 50px;
-	height: 50px;
-}
-.inst {width: 47px; height: 47px;}
-
-span.fa.fa-envelope-o, span.fa.fa-map-marker, span.fa.fa-phone {
-	font-size: 24px;
-}
-.header_text{
-    font-size: 36px;
-	color: #f5cfc3;
-	/* font-family: Corbel; */
-	font-weight: bolder;
-	position: relative; 
-	top: 90%;
-    /* font-size: 48px; */
-    margin-top: 0 !important;
-    margin-bottom: 0 !important;
-    text-shadow: 2px 2px 4px #000000; 
-}
-.contacts_header_container{
-	height: 200px;
-	background: url('../img/contacts_header.png') 100% 100% no-repeat;
-    background-size: cover;
-}
-.contacts_container{
-	margin-top: 40px; 
-	margin-bottom: 40px;
-}
-.borderTop {
-    margin-bottom: 40px;
-}
-.mrgTop {
-    margin-top: 30px;
-}
-.service_block {
-    text-align: center;
-    padding-left: 15px;
-    padding-right: 15px;
-}
-.service_icon {
-    border: 2px solid black;
-    border-radius: 50%;
-    width: 90px;
-    height: 90px;
-    margin: 0px auto 25px;
-    opacity: 0.5;
-}
-.service_block {
-    text-align: center;
-}
-.service_icon span {
-    background: transparent;
-    border-radius: 50%;
-    display: block;
-    height: 100%;
-    width: 100%;
-}
-.service_icon i {
-    color: black;
-    font-size: 40px;
-    margin-top: 0;
-    position: relative;
-    top: 20px;
-    z-index: 20;
-}
-.service_block h3 {
-    /* font-family: 'Raleway', sans-serif; */
-    font-weight: 600;
-    font-size: 18px;
-    color: #111111;
-    margin: 35px 0 18px;
-}
-.service_block p {
-    font-size: 16px;
-    color: #888888;
-    margin: 0px;
-}
-.borderLeft {
-    border-left: 1px solid #DADADA;
-}
-.contacts_form{
-	border-radius: 6px; 
-	text-align: center; 
-	color: inherit;
-/* 	background-color: #eee;  */
-	/* padding-bottom: 48px;  */
-	height: 100%
-}
-.contacts_form button{
-	/* background-color: #b9f8a8; */
-    width: 100%;
-    margin: 0;
-}
-.contacts_form .md-form{
-    text-align: left;
-}
-textarea#c_message{
-    padding: 15px;
-    border-radius: 5px;
-}
-@media screen and (max-width: 1023px) { 
-    .borderLeft {
-        border-left: none;
-    }
-}
-@media screen and (max-width: 767px) { 
-    .contacts_container {
-      height: 1700px;
-      min-height: 1700px;
-    }
-}
-@media (max-width: 568px) {
-    .contacts_container .mrgTop {
-        margin-top: 30px;
-    }
+@media (max-width:568px){.contacts_container .mrgTop{margin-top:30px;}
 }

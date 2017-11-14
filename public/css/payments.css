@@ -1,26 +1,8 @@
-.payments_header_container{
-	height: 50vh; 
-	background: url('../img/payments_header.png') 100% 100% no-repeat; 
-    background-size: cover;
-}
-
-.shipping_head, .payments{
-	font-family: 'Century';
-	color:  #666666;
-	font-size: 30px;/* Approximation due to font substitution */
-	font-weight: 700;
-	line-height: 30px;/* Approximation due to font substitution */
-	text-align: center;
-	text-indent: -15px;
-}
-
-.new_post, .C.O.D., .privat {font-size: 24px;}
-.post {padding-top: 50px;}
-.export, .privat_bank {padding-top: 25px;}
-.paddingTop {padding-top: 40px;}
-
-@media(max-width:568px){
-	.payments_header_container {
-      height: 30vh;
-    }
+.payments_header_container{height:50vh;background:url('../img/payments_header.png') 100% 100% no-repeat;background-size:cover;}
+.shipping_head, .payments{font-family:'Century';color:#666666;font-size:30px;font-weight:700;line-height:30px;text-align:center;text-indent:-15px;}
+.new_post, .C.O.D., .privat{font-size:24px;}
+.post{padding-top:50px;}
+.export, .privat_bank{padding-top:25px;}
+.paddingTop{padding-top:40px;}
+@media(max-width:568px){.payments_header_container{height:30vh;}
 }
