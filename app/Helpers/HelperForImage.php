@@ -12,7 +12,7 @@ class HelperForImage {
 
         file_put_contents($path, $data);
         $img = Image::make($path);
-        $img->save($path, 88);
+        $img->save($path, 85);
 
         return '/'.$path;
     }
@@ -27,7 +27,7 @@ class HelperForImage {
 
         file_put_contents($path, $data);
         $img = Image::make($path);
-        $img->save($path, 88);
+        $img->save($path, 85);
     }
 
     public static function mkImage($image, $name){
@@ -40,7 +40,7 @@ class HelperForImage {
 
         file_put_contents($path, $data);
         $img = Image::make($path);
-        $img->save($path, 88);
+        $img->save($path, 85);
 
         return '/'.$path;
     }
@@ -55,7 +55,7 @@ class HelperForImage {
 
         file_put_contents($path, $data);
         $img = Image::make($path);
-        $img->save($path, 88);
+        $img->save($path, 85);
 
         return '/'.$path;
     }
