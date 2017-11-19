@@ -1,5 +1,6 @@
 <?php
 
+use SimpleImage;
 
 class HelperForImage {
     public static function storeImage($image, $name){
@@ -15,6 +16,13 @@ class HelperForImage {
         $img->save($path, 80);
 
         return '/'.$path;
+    }
+
+    public static function create180x180($product){
+        $image = new SimpleImage();
+        $image->load('../public'.$product->main_photo);
+        $image->resizeToWidth(200);
+        $image->save('../public/products_photo/'.$product->marking.'sm200.jpg');
     }
 
     public static function groupImage($image, $name) {

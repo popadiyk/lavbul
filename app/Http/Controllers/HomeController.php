@@ -200,6 +200,10 @@ class HomeController extends Controller
     public function gotomain(Request $request){
         $myProduct = Product::all()->where('id', $request->id)->first();
 
+        if ($request->act == "add") {
+            \HelperForImage::create180x180($myProduct);
+        }
+
         // $myProduct->goToMain($request->act);
         // return $request->act;
 
