@@ -1,7 +1,5 @@
 <?php
 
-use SimpleImage;
-
 class HelperForImage {
     public static function storeImage($image, $name){
         $data = $image;
