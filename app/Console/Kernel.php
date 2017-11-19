@@ -13,7 +13,8 @@ class Kernel extends ConsoleKernel
      * @var array
      */
     protected $commands = [
-        Commands\solveReturnOrders::class
+        Commands\solveReturnOrders::class,
+        Commands\XMLSitemap::class
     ];
 
     /**
@@ -26,6 +27,7 @@ class Kernel extends ConsoleKernel
     {
         // $schedule->command('inspire')
         //          ->hourly();
+        $schedule->command('command:xmlsitemap')->dailyAt('01:00');
     }
 
     /**
