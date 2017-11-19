@@ -30,7 +30,8 @@
                     <div class="col-12 col-md-3 item-grid {{($loop->iteration > 4) ? 'mrgTop' : ''}}">
                         <div class="mid-pop">
                             <div class="pro-img">
-                                <img src="{{ 'products_photo/'.$product->marking.'sm200.jpg' }}" class="img-responsive" alt="{{ $product->title }}">
+                                <img src="{{ 'products_photo/'.$product->marking.'sm200.jpg' }}" class="hidden-xs img-responsive" alt="{{ $product->title }}">
+                                <img src="{{ $product->main_photo }}" class="hidden-lg hidden-md hidden-sm img-responsive" alt="{{ $product->title }}">
                                 <div class="zoom-icon ">
                                     <a class="picture" href="{{ $product->main_photo }}" rel="title" class="b-link-stripe b-animate-go  thickbox" alt="{{ $product->title }}" title="{{ $product->title }}" data-toggle="modal" data-target="#productImageModal{{$product->id}}"><i class="glyphicon glyphicon-search icon "></i></a>
                                     <a href="{{ url('/product/'.$product->id ) }}"><i class="glyphicon glyphicon-menu-right icon"></i></a>
