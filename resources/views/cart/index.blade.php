@@ -28,6 +28,15 @@
                     
                     @foreach(Cart::content() as $item)
                     <li class="list-group-item justify-content-around">
+                        @if(App\Product::find($item->id)->quantity == 1)
+                        <div class="label label-info" style="
+                            position: absolute;
+                            top: 0px;
+                            right: 0px;
+                            border-radius: 0px 0px 0px 8px;
+                            background-color: #b579d2;
+                        ">останній</div>
+                        @endif
                         <div class="row product_row" data-id = '{{ $item->rowId }}' style="font-size: 14px;">
                             <div class="col-xs-1 cart_action my-auto text-center" style="padding: 0;">
                                 <a href="#" class="delete-product" data-id="{{$item->rowId}}" product-id="{{$item->id}}" title="видалити з корзини" style="color: red; font-weight: bolder;">×</a>
@@ -111,6 +120,8 @@ $('a.delete-product').click( function(event){
             $(this).removeClass('btn-info').removeAttr('disabled').addClass('btn-success');
         }
     });
+
+
 });
 
 </script>
