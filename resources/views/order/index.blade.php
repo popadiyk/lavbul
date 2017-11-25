@@ -107,7 +107,7 @@
 					  <tr>
 						  <td colspan="3" class="hidden-xs" style="padding-top: 2px; background-color: #e0e0e0; text-align: right;"></td>
 						  <td colspan="4" style="padding-top: 2px; background-color: #e0e0e0; text-align: right;">Разом зі знижкою:</td>
-						  <td colspan="5" style="padding-top: 2px; background-color: #e0e0e0; text-align: center; color: red;">@if (Auth::user()) {{number_format(Cart::total() * Auth::user()->getDiscount(), 2)}} @else {{ number_format(Cart::total(), 2) }} @endif грн.</td>
+						  <td colspan="5" style="padding-top: 2px; background-color: #e0e0e0; text-align: center; color: red;">@if (Auth::user()) {{number_format(number_format(Cart::total()) * number_format(Auth::user()->getDiscount(), 2))}} @else {{ number_format(Cart::total(), 2) }} @endif грн.</td>
 					  </tr>
 					</tbody>
 				</table>
