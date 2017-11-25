@@ -87,11 +87,11 @@
 						  </td>
 					      <td class="hidden-xs" style="width: 70px; text-align: center;"><img src="{{ App\Product::find($item->id)->main_photo }}" width="100%"></td>
 					      <td style="width: 200px; padding-top: 25px; text-align: center; color: #00acee;">{{ $item->name }}</td>
-					      <td class="hidden-xs" style="padding-top: 25px; text-align: center;">{{ number_format($item->subtotal / $item->qty , 2) }}</td>
-					      <td class="hidden-xs" style="padding-top: 25px; text-align: center;">@if (Auth::user()) {{ 100 - Auth::user()->getDiscount()*100 }}% @endif</td>
-					      <td style="padding-top: 25px; text-align: center;">@if (Auth::user()) {{ number_format($item->subtotal / $item->qty * Auth::user()->getDiscount(), 2) }} @else{{ number_format($item->subtotal / $item->qty, 2 ).'грн.' }}@endif</td>
+					      <td class="hidden-xs" style="padding-top: 25px; text-align: center;">{{ number_format(floatval($item->subtotal) / floatval($item->qty) , 2) }}</td>
+					      <td class="hidden-xs" style="padding-top: 25px; text-align: center;">@if (Auth::user()) {{ 100 - floatval(Auth::user()->getDiscount())*100 }}% @endif</td>
+					      <td style="padding-top: 25px; text-align: center;">@if (Auth::user()) {{ number_format(floatval($item->subtotal) / floatval($item->qty) * floatval(Auth::user()->getDiscount()), 2) }} @else{{ number_format(floatval($item->subtotal) / floatval($item->qty), 2).'грн.' }}@endif</td>
 						  <td style="padding-top: 25px; text-align: center;"> <p>{{ $item->qty }}</p></td>
-					      <td style="padding-top: 25px; text-align: center;">@if (Auth::user()) {{ number_format($item->subtotal * Auth::user()->getDiscount(), 2) }} @else {{ number_format($item->subtotal, 2) }} @endif</td>
+					      <td style="padding-top: 25px; text-align: center;">@if (Auth::user()) {{ number_format(floatval($item->subtotal) * floatval(Auth::user()->getDiscount()), 2) }} @else {{ number_format(floatval($item->subtotal), 2) }} @endif</td>
 					    </tr>
 					  @endforeach
 					  <tr style="font-size: 12px;">
@@ -107,7 +107,7 @@
 					  <tr>
 						  <td colspan="3" class="hidden-xs" style="padding-top: 2px; background-color: #e0e0e0; text-align: right;"></td>
 						  <td colspan="4" style="padding-top: 2px; background-color: #e0e0e0; text-align: right;">Разом зі знижкою:</td>
-						  <td colspan="5" style="padding-top: 2px; background-color: #e0e0e0; text-align: center; color: red;">@if (Auth::user()) {{number_format(number_format(Cart::total()) * number_format(Auth::user()->getDiscount(), 2))}} @else {{ number_format(Cart::total(), 2) }} @endif грн.</td>
+						  <td colspan="5" style="padding-top: 2px; background-color: #e0e0e0; text-align: center; color: red;">@if (Auth::user()) {{number_format(floatval(Cart::total()) * floatval(Auth::user()->getDiscount()), 2)}} @else {{ number_format(Cart::total(), 2) }} @endif грн.</td>
 					  </tr>
 					</tbody>
 				</table>
